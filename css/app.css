@@ -1,0 +1,52 @@
+:root {
+  --xs-font-size: 0.6rem;
+  --sm-font-size: 0.7rem;
+  --md-font-size: 0.8rem;
+  --lg-font-size: 0.9rem;
+}
+*, 
+*:before, 
+*:after {
+  -webkit-box-sizing:border-box !important;
+          box-sizing:border-box !important;
+}
+*:not(input):not(textarea) {
+  -webkit-user-select: none !important;
+          user-select: none !important;
+        outline-style: none !important;
+}
+.d-conditional:not(.show) {
+  display: none !important;
+}
+button {
+	width:140px !important;
+}
+.fs-xs {
+  font-size: var(--xs-font-size) !important;
+}
+.fs-sm {
+  font-size: var(--sm-font-size) !important;
+}
+.fs-md {
+  font-size: var(--md-font-size) !important;
+}
+.fs-lg {
+  font-size: var(--lg-font-size) !important;
+}
+main {
+	min-height: calc(100vh - 500px) !important;
+}
+.header-image{
+  min-height: 500px;
+  background-image: url("../img/header.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.header-logo{
+  width: 200px;
+  margin: 100px 50px;
+  background-color: rgba(255, 255, 255, .4);
+}
+
+
