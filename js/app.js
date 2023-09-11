@@ -101,7 +101,7 @@
         // Set model
         $scope.model = {
           email: "djksdjksdjk@dsdsd.dd",
-          password: "12234Aa",
+          password: "1234Aa",
         };
 
         // Get required input elements, accept button, and modal properties
