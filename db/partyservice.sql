@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Sze 24. 16:14
+-- Létrehozás ideje: 2023. Sze 24. 17:01
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -135,6 +135,7 @@ CREATE TABLE `orders` (
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
   `product_name` varchar(50) NOT NULL,
+  `img` varchar(50) NOT NULL,
   `description_hu` text NOT NULL,
   `description_en` text NOT NULL,
   `description_de` text NOT NULL,
