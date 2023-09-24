@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Sze 20. 16:37
--- Kiszolgáló verziója: 10.4.6-MariaDB
--- PHP verzió: 7.3.8
+-- Létrehozás ideje: 2023. Sze 24. 16:14
+-- Kiszolgáló verziója: 10.4.28-MariaDB
+-- PHP verzió: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -34,7 +33,7 @@ CREATE TABLE `events` (
   `user_id` int(10) NOT NULL,
   `event_places_id` int(1) NOT NULL,
   `events_type_id` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -45,7 +44,7 @@ CREATE TABLE `events` (
 CREATE TABLE `events_type` (
   `id` int(10) NOT NULL,
   `name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `events_type`
@@ -69,7 +68,7 @@ CREATE TABLE `event_places` (
   `id` int(1) UNSIGNED NOT NULL,
   `place_name` varchar(50) NOT NULL,
   `capacity` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `event_places`
@@ -90,7 +89,7 @@ INSERT INTO `event_places` (`id`, `place_name`, `capacity`) VALUES
 CREATE TABLE `genders` (
   `id` int(1) UNSIGNED NOT NULL,
   `name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `genders`
@@ -112,7 +111,7 @@ CREATE TABLE `menu` (
   `description` text NOT NULL,
   `category` varchar(50) NOT NULL,
   `price` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -125,7 +124,7 @@ CREATE TABLE `orders` (
   `user_id` int(10) NOT NULL,
   `product_id` int(10) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -136,12 +135,14 @@ CREATE TABLE `orders` (
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
   `product_name` varchar(50) NOT NULL,
-  `description` text NOT NULL,
+  `description_hu` text NOT NULL,
+  `description_en` text NOT NULL,
+  `description_de` text NOT NULL,
   `category` varchar(20) NOT NULL,
   `price` int(10) NOT NULL,
   `stock` int(10) NOT NULL,
   `is_stock` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -155,7 +156,7 @@ CREATE TABLE `ratings` (
   `rating` int(1) NOT NULL,
   `rating_text` text DEFAULT NULL,
   `rating_answer` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -185,7 +186,7 @@ CREATE TABLE `users` (
   `last_login` datetime NOT NULL,
   `wrong_attempts` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
   `valid` tinyint(1) UNSIGNED NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `users`
@@ -203,7 +204,7 @@ INSERT INTO `users` (`id`, `user_role_id`, `first_name`, `last_name`, `born`, `g
 CREATE TABLE `user_roles` (
   `id` int(1) UNSIGNED NOT NULL,
   `name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `user_roles`
