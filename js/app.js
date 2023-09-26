@@ -61,6 +61,39 @@
       },
     ])
 
+    // Cart handle factory
+    /*
+    .factory('cartHandle', [
+      '$rootScope',
+      '$timeout',
+      'util',
+      ($rootScope, $timeout, util) => {
+        let orders = [];
+        let order = {
+          id: 15,
+          name: "Nokia",
+          price: 12323
+        };
+        order.quantity = 1;
+
+
+        let service = {
+          add: (order) => {
+            service.get().add(order);
+          },
+          remove: () => {
+            service.add();
+          },
+          get: () => {
+            return order;
+          } 
+        }
+
+        return service;
+      }
+    ])
+    */
+
     // User factory
     .factory('user', [
       '$rootScope',
