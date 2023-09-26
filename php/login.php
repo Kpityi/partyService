@@ -11,14 +11,10 @@ $db = new Database();
 
 // Set query
 $query = "SELECT 	`id`,
-									`type`,
-									`prefix_name`,
+									`user_role_id`,
 									`first_name`,
-									`middle_name`,
 									`last_name`,
-									`suffix_name`,
-									`nick_name`,
-									`gender`,
+									`gender_id`,
 									IF(`img` IS NULL, `img`, 
 									REPLACE(REPLACE(REPLACE(TO_BASE64(`img`),'\t',''),'\n',''),'\r',''))
 									AS `img`,
@@ -26,7 +22,7 @@ $query = "SELECT 	`id`,
 									`password`,
 									`valid`,
 									`wrong_attempts` 
-					FROM 	`user` 
+					FROM 	`users` 
 					WHERE `email` = ?
 					LIMIT 1;";
 
@@ -61,7 +57,7 @@ if ($result['wrong_attempts'] > 5) {
 if (!password_verify($args['password'], $result['password'])) {
 
 	// Set query
-	$query = 	"UPDATE `user` 
+	$query = 	"UPDATE `users` 
 								SET `wrong_attempts` = `wrong_attempts` + 1
 							WHERE `id` = ?;";
 
@@ -82,7 +78,7 @@ unset(
 );
 
 // Set query
-$query = 	"UPDATE `user` 
+$query = 	"UPDATE `users` 
 							SET `last_login` = :dateNow,
 									`wrong_attempts` = 0
 						WHERE `id` = :id;";

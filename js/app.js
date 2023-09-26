@@ -3,7 +3,12 @@
 
   // Application module
   angular
-    .module("app", ["ui.router", "app.common"])
+    .module("app", [
+      "ui.router", 
+      "app.common",
+      "app.language", 
+      "app.form"
+    ])
 
     // Application config
     .config([
@@ -41,6 +46,11 @@
             templateUrl: "./html/register.html",
             controller: "registerController",
           })
+          .state("profile", {
+            url: "/profile",
+            templateUrl: "./html/profile.html",
+            controller: "profileController",
+          })
           .state("cart", {
             url: "/cart",
             templateUrl: "./html/cart.html",
@@ -51,13 +61,128 @@
       },
     ])
 
+    // User factory
+    .factory('user', [
+      '$rootScope',
+      '$timeout',
+      'util',
+      ($rootScope, $timeout, util) => {
+
+        // Set user default properties
+        let user = {
+          base: {
+            id          : null,
+            type        : null,
+            prefix_name : null,
+            first_name  : null,
+            middle_name : null,
+            last_name   : null,
+            suffix_name : null,
+            nick_name   : null,
+            gender      : null,
+            img         : null,
+            img_type    : null,
+            email       : null
+          },
+          rest: {
+            born        : null,
+            country     : null,
+            country_code: null, 
+            phone       : null,
+            city        : null,
+            postcode    : null,
+            address     : null
+          }
+        };
+
+        // Set service
+        let service = {
+
+          // Initialize 
+          init: () => {
+            service.set(util.objMerge(user.base, {
+              email: window.localStorage.getItem($rootScope.app.id + '_user_email')
+            }, true), false);
+          },
+          
+          // Set
+          set: (data, isSave=true) => {
+            $rootScope.user = util.objMerge(user.base, data, true);
+            if(util.isBoolean(isSave) && isSave) service.save();
+            $timeout(() => {
+              $rootScope.$applyAsync();
+            });
+          },
+
+          // Get
+          get: (filter=null) => { 
+            if (util.isArray(filter))
+                  return Object.keys($rootScope.user)
+                              .filter((k) => !filter.includes(k))
+                              .reduce((o, k) => { 
+                                  return Object.assign(o, {[k]:$rootScope.user[k]})
+                                }, {});
+            else  return $rootScope.user;
+          },
+          
+          // Default
+          def: (filter=null , key=null) => {
+            let prop  = util.isObjectHasKey(user, key) ? user[key] : 
+                        util.objMerge(user.base, user.rest);
+            if (util.isArray(filter))
+                  return Object.keys(prop)
+                              .filter((k) => !filter.includes(k))
+                              .reduce((o, k) => { 
+                                  return Object.assign(o, {[k]:prop[k]})
+                                }, {});
+            else  return prop;
+          },
+
+          // Reset
+          reset: () => {
+            return new Promise((resolve) => {
+              Object.keys(user.base).forEach((k) => {
+                if (k !== 'email') $rootScope.user[k] = null;
+              });
+              $timeout(() => {
+                $rootScope.$applyAsync();
+                resolve();
+              });
+            });
+          },
+
+          // Save
+          save: () => {
+            window.localStorage.setItem(
+              $rootScope.app.id + '_user_email', 
+              $rootScope.user.email
+            );
+          }
+        };
+
+        // Return service
+        return service;
+    }])
+  
     // Application run
     .run([
-      "$rootScope",
-      "util",
-      "trans",
-      function ($rootScope, util, trans) {
+      '$state',
+      '$rootScope',
+      '$timeout',
+      'trans',
+      'lang',
+      'user',
+      function ($state, $rootScope, $timeout, trans, lang, user) {
         console.log("Run...");
+
+        // Transaction events
+			  trans.events('home,services,webshop,contact');
+
+        // Initialize language 
+        lang.init();
+
+        // Initialize user
+        user.init();
       },
     ])
 
@@ -96,65 +221,51 @@
     // Login controller
     .controller("loginController", [
       "$scope",
+      "$rootScope",
       "util",
-      function ($scope, util) {
+      "user",
+      "http",
+      function ($scope, $rootScope, util, user, http) {
         // Set model
         $scope.model = {
-          email: "djksdjksdjk@dsdsd.dd",
-          password: "1234Aa",
+          email: $rootScope.user.email,
+          password: null,
         };
 
         // Get required input elements, accept button, and modal properties
-        let inputs = document.querySelectorAll("input[required]"),
-          showHide = document.getElementById("show-password"),
-          acceptBtn = document.getElementById("accept"),
-          passwords = document.querySelectorAll(".input-password");
-
-        // Add event listener for each required input(s).
-        //inputs.forEach(element => {
-        //  element.addEventListener('input', changed);
-        //});
-
-        // Add event listener to show-hide password.
-        showHide.addEventListener("change", () => {
-          passwords.forEach((element) => {
-            if (showHide.checked) element.type = "text";
-            else element.type = "password";
-          });
-        });
+        let inputs    = document.querySelectorAll("input[required]"),
+            acceptBtn = document.getElementById("accept");  
 
         // Add event listener accept button.
         $scope.accept = () => {
-          //// Crete message
-          //let msg = ``;
-          //
-          //// Each input elements
-          //inputs.forEach((element) => {
-          //
-          //  // Add to message element identifier, and value
-          //  msg += `${element.id.toUpperCase()}: ${element.value}\n`;
-          //});
-
-          // Show message
-          alert(
-            `Email: ${$scope.model.email}\nPassword: ${$scope.model.password}`
-          );
+          // Get only necessary properties
+          let data = {
+            email: $scope.model.email,
+            password: $scope.model.password
+          };
+          // Http request
+          http.request({
+            url   : './php/login.php',
+            method: "GET",
+            data  : data
+          })
+          .then(response => {
+            console.log(response)
+            response.email = $scope.model.email;
+            user.set(response);
+          })
         };
 
         // Input changed
         $scope.changed = () => {
-          // Set auxiliary variable
+
           let isDisabled = false;
 
-          // Each required input(s)
-          //Object.keys($scope.model).forEach(key => {
           inputs.forEach((element) => {
             // Get element identifier, value, belonging to it check mark, and set variable is valid to false
-            let key = element.id,
-              value = $scope.model[key],
-              checkMark = element
-                .closest(".input-row")
-                .querySelector(".check-mark"),
+            let     key = element.id,
+                  value = $scope.model[key],
+              checkMark = element.closest(".input-row").querySelector(".check-mark"),
               isValid = true;
 
             // Switch input identifier
@@ -164,6 +275,7 @@
                 break;
               case "password":
                 isValid = util.isPassword(value);
+                break;
             }
 
             // Check mark
@@ -191,6 +303,14 @@
       },
     ])
 
+     // Profile controller
+     .controller("profileController", [
+      "$scope",
+      function ($scope) {
+        console.log("profile controller...");
+      },
+    ])
+
     // cart controller
     .controller("cartController", [
       "$scope",
@@ -201,16 +321,16 @@
 })(window, angular);
 
 
-  function changeLanguageImage() {
-    console.log("change language image");
-    let language = document.documentElement.lang;
-    let languageImageContainer = document.querySelector(".dropdown-toggle");
-    let img = document.createElement("img");
-    let languageFlag = `./img/${language}.png`;
-    img.src = languageFlag;
-    img.style = "width: 40px";
-    languageImageContainer.innerHTML = "";
-    languageImageContainer.append(img);
-  }
-  changeLanguageImage();
+  // function changeLanguageImage() {
+  //   console.log("change language image");
+  //   let language = document.documentElement.lang;
+  //   let languageImageContainer = document.querySelector(".dropdown-toggle");
+  //   let img = document.createElement("img");
+  //   let languageFlag = `./img/${language}.png`;
+  //   img.src = languageFlag;
+  //   img.style = "width: 40px";
+  //   languageImageContainer.innerHTML = "";
+  //   languageImageContainer.append(img);
+  // }
+  // changeLanguageImage();
 

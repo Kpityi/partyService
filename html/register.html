@@ -16,23 +16,26 @@
 				<!-- Form -->
 				<form class="col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6">
 
-					<!-- Name -->
+					<!-- First name -->
 					<div class="row input-row mb-2">
-						<label for="name" 
+						<label for="first-name" 
 									class="col-form-label col-form-label-sm col-sm-4 text-sm-end">
-							<span class="text-capitalize">név</span>
+							<span class="text-capitalize">Vezetéknév</span>
 							<span class="fw-bold text-danger">*</span>
 							<span>:</span>
 						</label>
 						<div class="col-11 col-sm-7">
-							<input id="name" 
+							<input id="first-name" 
 										type="text"
-										placeholder="név"
+										placeholder="Vezetéknév"
 										class="form-control form-control-sm"
 										spellcheck="false" 
 										autocomplete="off" 
+										ng-model="model.firstName"
+										ng-change="methods.changed()"
 										required
-										maxlength="100">
+										maxlength="100"
+										ng-clear-icon>
 						</div>
 						<div class="col-1 pt-1">
 							<span class="check-mark ms-1 fw-bold text-success d-conditional">
@@ -41,10 +44,42 @@
 						</div>
 					</div>
 
+					<!-- Last name -->
+					<div class="row input-row mb-2">
+						<label for="last-name" 
+									class="col-form-label col-form-label-sm col-sm-4 text-sm-end">
+							<span class="text-capitalize">Keresztnév</span>
+							<span class="fw-bold text-danger">*</span>
+							<span>:</span>
+						</label>
+						<div class="col-11 col-sm-7">
+							<input id="last-name" 
+										type="text"
+										placeholder="Vezetéknév"
+										class="form-control form-control-sm"
+										spellcheck="false" 
+										autocomplete="off" 
+										ng-model="model.lastName"
+										ng-change="methods.changed()"
+										required
+										maxlength="100"
+										ng-clear-icon>
+						</div>
+						<div class="col-1 pt-1">
+							<span class="check-mark ms-1 fw-bold text-success d-conditional">
+								&check;
+							</span>
+						</div>
+					</div>
+
+					<!-- Dividing line -->
+					<hr class="text-muted">
+
 					<!-- Born -->
 					<div class="row input-row mb-2">
 						<label for="born" 
 									class="col-form-label col-form-label-sm col-sm-4 text-sm-end">
+							<i class="fa-solid fa-calendar-days"></i>
 							<span class="text-capitalize">született</span>
 							<span class="fw-bold text-danger">*</span>
 							<span>:</span>
@@ -53,8 +88,11 @@
 							<input id="born" type="date"
 										class="form-control form-control-sm"
 										spellcheck="false" 
-										autocomplete="off" 
-										required>
+										autocomplete="off"
+										ng-model="model.born"
+										ng-change="methods.changed()" 
+										required
+										ng-clear-icon>
 						</div>
 						<div class="col-1 pt-1">
 							<span class="check-mark ms-1 fw-bold text-success d-conditional">
