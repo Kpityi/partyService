@@ -4,7 +4,7 @@
 		"type":"west",
     "name":"german",
     "local":"deutsch",
-    "img":"deu.png",
+    "img":"de.png",
 		"valid": true
   },
   {
@@ -12,7 +12,7 @@
 		"type":"west",
     "name":"english",
     "local":"english",
-    "img":"usa.png",
+    "img":"en.png",
 		"valid": true
   },
   {
@@ -20,7 +20,7 @@
 	  "type":"east",
     "name":"hungarian",
     "local":"magyar",
-    "img":"hun.png",
+    "img":"hu.png",
 		"valid": true
   }
 ]

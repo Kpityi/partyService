@@ -13,9 +13,16 @@
   <link rel="stylesheet" href="./css/app.css">
 </head>
 <body ng-app="app">
+  
+    <!-- Header image -->
   <div class="header-image">
-    <img src="./img/logo.png" alt="logo" class="header-logo rounded">
+    <a 
+      ui-sref="home"
+      ui-sref-active="active">  
+      <img src="./img/logo.png" alt="logo" class="header-logo rounded">
+    </a>
   </div>
+
   <!-- Application container -->
 	<ui-view id="app-container"></ui-view>
 
