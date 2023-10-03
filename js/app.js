@@ -99,7 +99,7 @@
         let user = {
           base: {
             id: null,
-            type: null,
+            user_role_id: null,
             prefix_name: null,
             first_name: null,
             middle_name: null,

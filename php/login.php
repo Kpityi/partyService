@@ -14,7 +14,7 @@ $query = "SELECT 	`id`,
 									`user_role_id`,
 									`first_name`,
 									`last_name`,
-									`gender_id`,
+									`gender_id` As `gender`, 
 									IF(`img` IS NULL, `img`, 
 									REPLACE(REPLACE(REPLACE(TO_BASE64(`img`),'\t',''),'\n',''),'\r',''))
 									AS `img`,
