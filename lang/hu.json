@@ -15,7 +15,7 @@
   "account": "fiók",
   "profile": "profil",
   "search": "keresés",
-  "isnt_account": "Nincs még felhasználói fiókod? Kattints a",
+  "isnt_account": "nincs még felhasználói fiókod? Kattints a",
   "to_button": "gombra",
   "informatics": "informatika",
   "identifier": "azonosító",
@@ -51,7 +51,8 @@
   "save": "mentés",
   "cancel": "mégsem",
   "edit": "szerkeszt",
-  "forgot_password": "elfelejtette a jelszavát",
+  "forgot_password": "elfelejtette a jelszavát? Kattintson",
+  "here": "ide",
   "change_email": "email cím megváltoztatása",
   "change_password": "jelszó módosítása",
   "under_construction": "fejlesztés alatt"

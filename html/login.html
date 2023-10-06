@@ -1,143 +1,162 @@
-<div class="page-container">
+<!-- Navigate -->
+<header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
 
-  <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
+<!-- Modal Login page-->
+<div
+  class="modal fade"
+  id="loginModal"
+  tabindex="-1"
+  aria-labelledby="modalLoginPageLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <!-- Title -->
+        <h4 class="modal-title fs-5" id="modalLoginPageLabel">
+          <span class="fas fa-user"></span>
+          <span class="ms-2 text-capitalize">
+            {{'login' | translate:lang.data}}
+          </span>
+        </h4>
+      </div>
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Form -->
+        <form>
+          <!-- Email -->
+          <div class="mb-2">
+            <label for="email" class="col-form-label">
+              <span class="text-capitalize">
+                {{'email' | translate:lang.data}}
+              </span>
+              <span class="fw-bold text-danger">*</span>
+              <span>:</span>
+            </label>
+            <input
+              id="email"
+              type="text"
+              placeholder="{{'email' | translate:lang.data}}"
+              spellcheck="false"
+              autocomplete="off"
+              ng-model="model.email"
+              ng-change="changed()"
+              maxlength="50"
+            />
+            <div class="pt-1 d-inline">
+              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+                &check;
+              </span>
+            </div>
+          </div>
 
-  <main>
-    
-		<div class="container">
-			<div class="row my-5 justify-content-center">
+          <!-- Password -->
+          <div class="mb-2">
+            <label for="password" class="col-form-label">
+              <span class="text-capitalize">
+                {{'password' | translate:lang.data}}
+              </span>
+              <span class="fw-bold text-danger">*</span>
+              <span>:</span>
+            </label>
+            <input
+              id="password"
+              type="password"
+              placeholder="{{'password' | translate:lang.data}}"                
+              spellcheck="false"
+              autocomplete="off"
+              ng-model="model.password"
+              ng-change="changed()"
+              maxlength="20"
+            />
+            <div class="pt-1 d-inline">
+              <span
+                class="check-mark ms-1 fw-bold text-success d-conditional"
+              >
+                &check;
+              </span>
+            </div>
+          </div>
 
-				<!-- Title -->
-				<h4 class="text-center mb-4">
-					<span><i class="fas fa-user"></i></span>
-					<span class="ms-2 text-capitalize">
-						{{'login' | translate:lang.data}}
-					</span>
-				</h4>
+          <!-- Password rule -->
+          <div class="mb-2">
+            <span class="fs-sm text-muted">
+              {{'password_rule' | translate:lang.data}}
+            </span>
+          </div>
 
-				<!-- Form -->
-				<form class="col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6  text-center">
+          <!-- Show/Hide password -->
+          <div class="mb-3">
+            <div class="form-check form-check-inline small">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="show-password"
+                ng-display-password
+              />
+              <label class="form-check-label" for="show-password">
+                {{'display_password' | translate:lang.data}}
+              </label>
+            </div>
+          </div>
+        </form>
 
-					<!-- Email -->
-					<div class="row input-row mb-2">
-						<label for="email" 
-									class="col-form-label col-form-label-sm col-sm-4 text-sm-end">
-							<span class="text-capitalize">{{'email' | translate:lang.data}}</span>
-							<span class="fw-bold text-danger">*</span>
-							<span>:</span>
-						</label>
-						<div class="col-11 col-sm-7">
-							<input id="email" 
-										type="text"
-										placeholder= "{{'email' | translate:lang.data}}"
-										class="form-control form-control-sm"
-										spellcheck="false" 
-										autocomplete="off" 
-										required
-										ng-model="model.email" 
-										ng-change="changed()"
-										maxlength="50">
-						</div>
-						<div class="col-1 pt-1">
-							<span class="check-mark ms-1 fw-bold text-success d-conditional">
-								&check;
-							</span>
-						</div>
-					</div>
+         <!-- Register -->          
+         <div class="mt-3 px-1 ">
+          <span class="text-capitalize">
+            {{'isnt_account' | translate:lang.data}}
+            <a class="text-small-caps me-2 d-inline" 
+              ui-sref="register"
+              data-bs-dismiss="modal"
+            >
+              {{'register' | translate:lang.data}}
+            </a>
+            {{'to_button' | translate:lang.data}}
+          </span>
+        </div>          
 
-					<!-- Password -->
-					<div class="row input-row mb-0">
-						<label for="password" 
-									class="col-form-label col-form-label-sm col-sm-4 text-sm-end">
-							<span class="text-capitalize">{{'password' | translate:lang.data}}</span>
-							<span class="fw-bold text-danger">*</span>
-							<span>:</span>
-						</label>
-						<div class="col-11 col-sm-7">
-							<input id="password" 
-										type="password"
-										placeholder="{{'password' | translate:lang.data}}"
-										class="form-control form-control-sm input-password"
-										spellcheck="false" 
-										autocomplete="off" 
-										required
-										ng-model="model.password" 
-										ng-change="changed()"
-										maxlength="20">
-						</div>
-						<div class="col-1 pt-1">
-							<span class="check-mark ms-1 fw-bold text-success d-conditional">
-								&check;
-							</span>
-						</div>
-					</div>
+         <!-- forget password -->          
+         <div class="mt-3 px-1 ">
+          <span class="text-capitalize">
+            {{'forgot_password' | translate:lang.data}}
+            <a class="text-small-caps me-2 d-inline" 
+              ui-sref="#"
+              ng-click="cancel()"
+              data-bs-dismiss="modal"
+            >
+              {{'here' | translate:lang.data}}
+            </a>
+          </span>
+        </div>          
+      </div>
+      <!-- Footer-->
+      <div class="modal-footer">
+        <!-- Buttons -->
 
-					<!-- Password rule -->
-					<div class="row mb-2">
-						<div class="col-0 col-sm-4"></div>
-						<div class="col-11 col-sm-7">
-							<span class="fs-sm text-muted">
-								{{'password_rule' | translate:lang.data}}
-							</span>
-						</div>
-					</div>
+        <!-- Accept -->
 
-					<!-- Show/Hide password -->
-					<div class="row mb-3">
-						<div class="col-0 col-sm-4"></div>
-						<div class="col-11 col-sm-7">
-							<div class="form-check form-check-inline small">
-								<input class="form-check-input" 
-											type="checkbox"
-											id="show-password"
-											ng-display-password>
-								<label class="form-check-label" for="show-password">
-									{{'display_password' | translate:lang.data}}
-								</label>
-							</div>
-						</div>
-					</div>
+        <button
+          id="accept"
+          type="button"
+          class="btn btn-primary text-capitalize"
+          ng-click="accept()"
+          data-bs-dismiss="modal"
+          disabled
+        >
+          {{'login' | translate:lang.data}}
+        </button>
 
-					<!-- Buttons -->
-					<div class="row mt-3 mb-3 justify-content-center">
+        <!-- Cancel -->
 
-						<!-- Accept -->
-						<div class="col-6 px-1  text-end">
-							<button id="accept"
-											type="button" 
-											class="btn btn-primary text-capitalize"
-											ng-click="accept()"
-											disabled>
-								{{'login' | translate:lang.data}}
-							</button>
-						</div>
-
-						<!-- Cancel -->
-						<div class="col-6 px-1 text-start d-none">
-							<button type="button" 
-											class="btn btn-secondary text-capitalize"
-											onclick="cancel()">
-								{{'cancel' | translate:lang.data}}
-							</button>
-						</div>
-					</div>
-
-					<!-- Register -->
-					<div class="row mt-3 d-inline ">
-						<div class="col-6 px-1 d-inline">
-							<span class="d-inline ">
-								{{'isnt_account' | translate:lang.data}} 
-								<a class="text-small-caps me-2 d-inline" 
-									ui-sref="register">
-									{{'register' | translate:lang.data}}
-								</a>
-							{{'to_button' | translate:lang.data}}
-							</span>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</main>
-	<footer ng-include src="'./html/footer.html'"></footer>
+        <button
+          type="button"
+          class="btn btn-secondary text-capitalize"
+          ng-click="cancel()"
+          data-bs-dismiss="modal"
+        >
+          {{'cancel' | translate:lang.data}}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

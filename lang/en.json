@@ -15,7 +15,7 @@
   "account": "account",
   "profile": "profile",
   "search": "search",
-  "isnt_account": "Don't have an account yet? Click on the",
+  "isnt_account": "don't have an account yet? Click on the",
   "to_button": "button",
   "informatics": "informatics",
   "identifier": "identifier",
@@ -51,7 +51,8 @@
   "save": "save",
   "cancel": "cancel",
   "edit": "edit",
-  "forgot_password": "forgot your password",
+  "forgot_password": "forgot your password? Click",
+  "here": "here",
   "change_email": "change email address",
   "change_password": "change password",
   "under_construction": "under construction"

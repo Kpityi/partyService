@@ -238,6 +238,7 @@
       },
     ])
 
+    
     // Home controller
     .controller("homeController", [
       "$scope",
@@ -270,6 +271,13 @@
       },
     ])
 
+    .controller('NavController', function ($scope) {
+      $scope.openLoginModal = function () {
+        console.log("modal")
+        $('#loginModal').modal('show');
+      };
+    })
+
     // Login controller
     .controller("loginController", [
       "$scope",
@@ -279,6 +287,14 @@
       "http",
       "$state",
       function ($scope, $rootScope, util, user, http, $state) {
+             
+        let myModal = new bootstrap.Modal(document.getElementById('loginModal'), {
+          keyboard: false,
+          backdrop: 'static'
+        });
+        
+        myModal.show();
+        
         // Set model
         $scope.model = {
           email: $rootScope.user.email,
@@ -310,8 +326,13 @@
               console.log("user.id " + $rootScope.user.id)
               // Go to home page
               $scope.$applyAsync();
-              $state.go('home');
+              window.history.back();              
             });
+        };
+
+        // Add event listener cancel button.
+        $scope.cancel = () => {
+          window.history.back();
         };
 
         // Input changed
