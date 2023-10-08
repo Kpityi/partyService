@@ -69,8 +69,9 @@
           <a
             id="login-button"
             class="nav-link text-capitalize"
-            ui-sref="login"
-            ui-sref-active="active"
+            data-toggle="modal" 
+            data-target="#loginModal"
+            ng-click="loginModal.show()"
           >
             <span class="fa-solid fa-right-to-bracket fa-lg me-1"></span>
             {{'login' | translate:lang.data}}
@@ -236,7 +237,7 @@
       </ul>
       <form class="d-flex me-4" role="search">
         <input class="form-control me-2" type="search" placeholder="{{'search' |
-        translate:lang.data}}"" aria-label="{{'search' | translate:lang.data}}""
+        translate:lang.data}}" aria-label="{{'search' | translate:lang.data}}"
         />
         <button class="btn btn-outline-success text-capitalize" type="submit">
           {{'search' | translate:lang.data}}

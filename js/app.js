@@ -31,11 +31,6 @@
             templateUrl: "./html/contact.html",
             controller: "contactController",
           })
-          .state("login", {
-            url: "/login",
-            templateUrl: "./html/login.html",
-            controller: "loginController",
-          })
           .state("register", {
             url: "/register",
             templateUrl: "./html/register.html",
@@ -224,6 +219,8 @@
         // Get current date
         $rootScope.currentDay = new Date();
 
+        
+
         // Logout
         $rootScope.logout = () => {
           // Confirm
@@ -279,16 +276,16 @@
       "http",
       "$state",
       function ($scope, $rootScope, util, user, http, $state) {
+        
         // handling modal windows
-        let myModal = new bootstrap.Modal(
+        $rootScope.loginModal = new bootstrap.Modal(
           document.getElementById("loginModal"),
           {
             keyboard: false,
             backdrop: "static",
           }
         );
-
-        myModal.show();
+        
 
         $scope.inputType = "password";
 
@@ -336,10 +333,9 @@
             });
         };
 
-        // Add event listener cancel button.
+        /* // Add event listener cancel button.
         $scope.cancel = () => {
-          window.history.back();
-        };
+        }; */
 
         // Input changed
         $scope.changed = () => {
