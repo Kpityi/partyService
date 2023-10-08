@@ -1,3 +1,4 @@
+<div class="header-image-container" ng-include src="'./html/headerimage.html'"></div>
 <!-- Navigate -->
 <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
 
@@ -5,6 +6,8 @@
 <div
   class="modal fade"
   id="loginModal"
+  data-bs-backdrop="static" 
+  data-bs-keyboard="false"
   tabindex="-1"
   aria-labelledby="modalLoginPageLabel"
   aria-hidden="true"
@@ -23,76 +26,94 @@
       <!-- Body -->
       <div class="modal-body">
         <!-- Form -->
-        <form>
+        <form name="loginForm">
           <!-- Email -->
-          <div class="mb-2">
-            <label for="email" class="col-form-label">
-              <span class="text-capitalize">
-                {{'email' | translate:lang.data}}
-              </span>
-              <span class="fw-bold text-danger">*</span>
-              <span>:</span>
-            </label>
-            <input
-              id="email"
-              type="text"
-              placeholder="{{'email' | translate:lang.data}}"
-              spellcheck="false"
-              autocomplete="off"
-              ng-model="model.email"
-              ng-change="changed()"
-              maxlength="50"
-            />
-            <div class="pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
-                &check;
-              </span>
+          <div class="input-group mb-2">
+            <div class="col-4 text-end">
+              <label for="email" class="col-form-label">
+                <span class="text-capitalize">
+                  {{'email' | translate:lang.data}}
+                </span>
+                <span class="fw-bold text-danger">*</span>
+                <span class="me-2">:</span>
+              </label>
+            </div>
+            <div class="col-6">
+              <input
+                id="email"
+                type="text"
+                class="form-control"
+                placeholder="{{'email' | translate:lang.data}}"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="model.email"
+                ng-change="changed()"
+                maxlength="50"    
+                required              
+              />
+            </div>
+            <div class="col-2">
+              <div class="pt-1 d-inline">
+                <span class="check-mark ms-1 fw-bold text-success d-conditional">
+                  &check;
+                </span>
+              </div>
             </div>
           </div>
 
           <!-- Password -->
-          <div class="mb-2">
-            <label for="password" class="col-form-label">
-              <span class="text-capitalize">
-                {{'password' | translate:lang.data}}
-              </span>
-              <span class="fw-bold text-danger">*</span>
-              <span>:</span>
-            </label>
-            <input
+          <div class=" input-group mb-2">
+            <div class="col-4 text-end">
+              <label for="password" class="col-form-label">
+                <span class="text-capitalize">
+                  {{'password' | translate:lang.data}}
+                </span>
+                <span class="fw-bold text-danger">*</span>
+                <span class="me-2">:</span>
+              </label>
+            </div>
+            <div class="col-6">
+              <input
+              name="password"
               id="password"
-              type="password"
+              type="{{inputType}}"
+              class="form-control"
               placeholder="{{'password' | translate:lang.data}}"                
               spellcheck="false"
               autocomplete="off"
               ng-model="model.password"
               ng-change="changed()"
-              maxlength="20"
+              maxlength="20"              
+              required
             />
-            <div class="pt-1 d-inline">
-              <span
-                class="check-mark ms-1 fw-bold text-success d-conditional"
-              >
-                &check;
-              </span>
             </div>
+            <div class="col-2">
+              <div class="pt-1 d-inline">
+                <span 
+                  class=" check-mark ms-1 fw-bold text-success d-conditional"
+                >
+                  &check;
+                </span>
+              </div>
+            </div>            
           </div>
 
           <!-- Password rule -->
-          <div class="mb-2">
+          <div class="mb-2 col-12 text-center">
             <span class="fs-sm text-muted">
               {{'password_rule' | translate:lang.data}}
             </span>
           </div>
 
           <!-- Show/Hide password -->
-          <div class="mb-3">
+          <div class="mb-3 text-center">
             <div class="form-check form-check-inline small">
               <input
                 class="form-check-input"
                 type="checkbox"
                 id="show-password"
-                ng-display-password
+                ng-model="showHidePassword"
+                ng-click="showHide()"
               />
               <label class="form-check-label" for="show-password">
                 {{'display_password' | translate:lang.data}}
@@ -100,6 +121,9 @@
             </div>
           </div>
         </form>
+
+        <!-- Dividing line -->
+					<hr class="text-muted">
 
          <!-- Register -->          
          <div class="mt-3 px-1 ">
@@ -138,6 +162,7 @@
         <button
           id="accept"
           type="button"
+          ng-model="acceptBtn"
           class="btn btn-primary text-capitalize"
           ng-click="accept()"
           data-bs-dismiss="modal"

@@ -217,10 +217,10 @@
 
         // Initialize language
         lang.init();
-        console.log("lang: "+ $rootScope.lang.available[lang.index])
+        console.log("lang: " + $rootScope.lang.available[lang.index]);
         // Initialize user
         user.init();
-        console.log("user.id " + $rootScope.user.id)
+        console.log("user.id " + $rootScope.user.id);
         // Get current date
         $rootScope.currentDay = new Date();
 
@@ -238,7 +238,6 @@
       },
     ])
 
-    
     // Home controller
     .controller("homeController", [
       "$scope",
@@ -271,13 +270,6 @@
       },
     ])
 
-    .controller('NavController', function ($scope) {
-      $scope.openLoginModal = function () {
-        console.log("modal")
-        $('#loginModal').modal('show');
-      };
-    })
-
     // Login controller
     .controller("loginController", [
       "$scope",
@@ -287,14 +279,25 @@
       "http",
       "$state",
       function ($scope, $rootScope, util, user, http, $state) {
-             
-        let myModal = new bootstrap.Modal(document.getElementById('loginModal'), {
-          keyboard: false,
-          backdrop: 'static'
-        });
-        
+        // handling modal windows
+        let myModal = new bootstrap.Modal(
+          document.getElementById("loginModal"),
+          {
+            keyboard: false,
+            backdrop: "static",
+          }
+        );
+
         myModal.show();
-        
+
+        $scope.inputType = "password";
+
+        $scope.showHide = () => {
+          $scope.inputType =
+            $scope.showHidePassword == true ? "password" : "text";
+          $scope.$applyAsync();
+        };
+
         // Set model
         $scope.model = {
           email: $rootScope.user.email,
@@ -304,6 +307,9 @@
         // Get required input elements, accept button, and modal properties
         let inputs = document.querySelectorAll("input[required]"),
           acceptBtn = document.getElementById("accept");
+        console.log(
+          "inputs: " + $scope.model.email + "acceptBTN: " + acceptBtn
+        );
 
         // Add event listener accept button.
         $scope.accept = () => {
@@ -323,10 +329,10 @@
               console.log(response);
               response.email = $scope.model.email;
               user.set(response);
-              console.log("user.id " + $rootScope.user.id)
-              // Go to home page
+              console.log("user.id " + $rootScope.user.id);
+              // Go to previouse page
               $scope.$applyAsync();
-              window.history.back();              
+              window.history.back();
             });
         };
 
@@ -344,7 +350,7 @@
             let key = element.id,
               value = $scope.model[key],
               checkMark = element
-                .closest(".input-row")
+                .closest(".input-group")
                 .querySelector(".check-mark"),
               isValid = true;
 
@@ -379,7 +385,18 @@
     .controller("registerController", [
       "$scope",
       function ($scope) {
-        console.log("Register controller...");
+        console.log("register");
+
+        // handling modal windows
+        let registerModal = new bootstrap.Modal(
+          document.getElementById("registerModal"),
+          {
+            keyboard: false,
+            backdrop: "static",
+          }
+        );
+
+        registerModal.show();
       },
     ])
 
