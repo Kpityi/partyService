@@ -31,11 +31,6 @@
             templateUrl: "./html/contact.html",
             controller: "contactController",
           })
-          .state("register", {
-            url: "/register",
-            templateUrl: "./html/register.html",
-            controller: "registerController",
-          })
           .state("profile", {
             url: "/profile",
             templateUrl: "./html/profile.html",
