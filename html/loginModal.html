@@ -1,4 +1,4 @@
-
+<div ng-include src="'./html/registerModal.html'"></div>
 
 <!-- Modal Login page-->
 <div
@@ -27,8 +27,8 @@
         <!-- Form -->
         <form name="loginForm">
           <!-- Email -->
-          <div class="input-group mb-2">
-            <div class="col-4 text-end">
+          <div class="input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-4 text-start text-sm-end">
               <label for="email" class="col-form-label">
                 <span class="text-capitalize">
                   {{'email' | translate:lang.data}}
@@ -37,7 +37,7 @@
                 <span class="me-2">:</span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-6">
               <input
                 id="email"
                 type="text"
@@ -51,8 +51,8 @@
                 required              
               />
             </div>
-            <div class="col-2">
-              <div class="pt-1 d-inline">
+            <div class="col-2 col-sm-2">
+              <div class="pt-1 d-inline ms-1">
                 <span class="check-mark ms-1 fw-bold text-success d-conditional">
                   &check;
                 </span>
@@ -61,8 +61,8 @@
           </div>
 
           <!-- Password -->
-          <div class=" input-group mb-2">
-            <div class="col-4 text-end">
+          <div class=" input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-4 text-start text-sm-end">
               <label for="password" class="col-form-label">
                 <span class="text-capitalize">
                   {{'password' | translate:lang.data}}
@@ -71,7 +71,7 @@
                 <span class="me-2">:</span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-6">
               <input
               name="password"
               id="password"
@@ -86,8 +86,8 @@
               required
             />
             </div>
-            <div class="col-2">
-              <div class="pt-1 d-inline">
+            <div class="col-2 col-sm-2">
+              <div class="pt-1 d-inline ms-1">
                 <span 
                   class=" check-mark ms-1 fw-bold text-success d-conditional"
                 >
@@ -129,7 +129,9 @@
           <span class="text-capitalize">
             {{'isnt_account' | translate:lang.data}}
             <a class="text-small-caps me-2 d-inline" 
-              ui-sref="register"
+              data-toggle="modal" 
+              data-target="#registerModal"
+              ng-click="registerModal.show()"
               data-bs-dismiss="modal"
             >
               {{'register' | translate:lang.data}}
@@ -140,8 +142,9 @@
 
          <!-- forget password -->          
          <div class="mt-3 px-1 ">
-          <span class="text-capitalize">
-            {{'forgot_password' | translate:lang.data}}
+          <span class="text-capitalize me-1">
+            {{'forgot_password' | translate:lang.data}}?
+            {{click}}
             <a class="text-small-caps me-2 d-inline" 
               ui-sref="#"
               ng-click="cancel()"

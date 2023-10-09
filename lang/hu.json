@@ -17,6 +17,8 @@
   "search": "keresés",
   "isnt_account": "nincs még felhasználói fiókod? Kattints a",
   "to_button": "gombra",
+  "cick": "kattintson",
+  "here": "ide",
   "registration":"regisztráció",
   "informatics": "informatika",
   "identifier": "azonosító",
@@ -53,7 +55,6 @@
   "cancel": "mégsem",
   "edit": "szerkeszt",
   "forgot_password": "elfelejtette a jelszavát? Kattintson",
-  "here": "ide",
   "change_email": "email cím megváltoztatása",
   "change_password": "jelszó módosítása",
   "under_construction": "fejlesztés alatt"

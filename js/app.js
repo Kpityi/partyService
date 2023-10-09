@@ -375,11 +375,11 @@
     // Register controller
     .controller("registerController", [
       "$scope",
-      function ($scope) {
-        console.log("register");
+      "$rootScope",
+      function ($scope, $rootScope) {
 
         // handling modal windows
-        let registerModal = new bootstrap.Modal(
+        $rootScope.registerModal = new bootstrap.Modal(
           document.getElementById("registerModal"),
           {
             keyboard: false,
@@ -387,7 +387,7 @@
           }
         );
 
-        registerModal.show();
+   
       },
     ])
 
