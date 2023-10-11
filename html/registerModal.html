@@ -33,7 +33,7 @@
                 >
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4">
               <input
                 id="last_name"
                 type="text"
@@ -47,8 +47,8 @@
                 required
               />
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
@@ -64,7 +64,7 @@
                 </span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4">
               <input
                 id="first_name"
                 type="text"
@@ -78,8 +78,8 @@
                 required
               />
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
@@ -99,20 +99,22 @@
                 </span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4">
               <input
                 id="born"
                 type="date"
                 class="form-control"
                 spellcheck="false"
                 autocomplete="off"
+                min="{{helper.minBorn}}"
+                max="{{helper.maxBorn}}"
                 ng-model="model.born"
                 ng-change="methods.changed()"
                 required
               />
             </div>
-            <div class="col-2 pt-1">
-              <span class="check-mark ms-1 fw-bold text-success d-hidden">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2">
+              <span class="check-mark ms-2 fw-bold text-success d-hidden">
                 &check;
               </span>
             </div>
@@ -129,7 +131,7 @@
                 </span>
               </legend>
             </div>
-            <div class="col-6 position-relative mt-2 ms-4">
+            <div class="col-4 col-sm-4 col-lg-4 position-relative mt-2 ms-4">
               <div class="form-check form-check-inline small">
                 <input
                   class="form-check-input opacity-100"
@@ -161,8 +163,8 @@
                 </label>
               </div>
             </div>
-            <div class="col-2 pt-1">
-              <span class="check-mark ms-1 fw-bold text-success d-hidden">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2">
+              <span class="check-mark ms-2 fw-bold text-success d-hidden">
                 &check;
               </span>
             </div>
@@ -182,7 +184,7 @@
                 </span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4">
               <select
                 id="country"
                 class="form-select text-capitalize pe-4"
@@ -190,19 +192,18 @@
                 ng-change="methods.changed()"
                 ng-options="x.country for x in helper.countries"
                 required
-              >
-                <option value=""></option>
+              >                
               </select>
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
           </div>
 
-           <!-- Phone -->
-           <div class="input-group mb-2 justify-content-center">
+          <!-- Phone -->
+          <div class="input-group mb-2 justify-content-center">
               <div class="col-8 col-sm-4 text-start text-sm-end">
                 <label for="phone" class="col-form-label">
                   <span class="fw-bold text-danger">*</span>
@@ -213,15 +214,14 @@
                 </label>
               </div>
             <div class="col-8 col-sm-6 d-flex">
-              <span>+</span>
+              <span class="pt-2">+</span>
               <select
                 id="country_code"
                 class="form-select ms-1 d-inline"
-                style="max-width: 40px"
+                style="max-width: 80px"
                 ng-model="model.country_code"
                 ng-change="methods.changed()"
-                ng-options="x for x in helper.countryCodes"
-                ng-disabled="!helper.isEdit || !model.country || !helper.countryCodes || !helper.countryCodes.length || helper.countryCodes.length === 1"
+                ng-options="x for x in helper.country.code"
                 required
               >
                 <option class="" value=""></option>
@@ -235,11 +235,12 @@
                 autocomplete="off"
                 ng-model="model.phone"
                 ng-change="methods.changed()"
+                style="max-width: 800px"
                 required
               />
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
@@ -255,9 +256,9 @@
                 </span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4">
               <input
-                id="citi"
+                id="city"
                 type="text"
                 ng-attr-placeholder="{{'city' | translate:lang.data}}"
                 class="form-control"
@@ -269,8 +270,8 @@
                 maxlength="100"
               />
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
@@ -287,7 +288,7 @@
                 </span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4">
               <input
                 id="postcode"
                 type="text"
@@ -302,13 +303,14 @@
                 required
               />
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
+          </div>
 
-            <!-- Address -->
+          <!-- Address -->
           <div class="input-group mb-2 justify-content-center">
             <div class="col-8 col-sm-4 text-start text-sm-end">
               <label for="address" class="col-form-label">
@@ -319,7 +321,7 @@
                 </span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4">
               <input
                 id="address"
                 type="text"
@@ -333,8 +335,8 @@
                 required
               />
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
@@ -346,7 +348,7 @@
           <!-- Email -->
           <div class="input-group mb-2 justify-content-center">
             <div class="col-8 col-sm-4 text-start text-sm-end">
-              <label for="email" class="col-form-label">
+              <label for="reg_email" class="col-form-label">
                 <span class="fw-bold text-danger">*</span>
                 <i class="fa-solid fa-envelope"></i>
                 <span class="text-capitalize me-2">
@@ -354,22 +356,22 @@
                 </span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4">
               <input
-                id="email"
+                id="reg_email"
                 type="text"
                 ng-attr-placeholder="{{'email' | translate:lang.data}}"
                 class="form-control"
                 spellcheck="false"
                 autocomplete="off"
-                ng-model="model.email"
+                ng-model="model.reg_email"
                 ng-change="methods.changed()"
                 maxlength="50"
                 required
               />
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
@@ -377,34 +379,34 @@
 
           <!-- Email confirm -->
           <div class="input-group mb-2 justify-content-center">
-            <div class="col-8 text-start">
-              <label for="email_confirm" class="col-form-label">
+            <div class="col-8 col-sm-9 col-lg-4 text-start text-lg-end">
+              <label for="reg_email_confirm" class="col-form-label">
                 <span class="fw-bold text-danger">*</span>
                 <i class="fa-solid fa-envelope"></i>
-                <span class="text-capitalize me-2">
+                <span class="text-capitalize ">
                   {{'email' | translate:lang.data}}
                 </span>
-                <span>
+                <span class="me-2">
                   {{'confirmation' | translate:lang.data}}:
                 </span>
               </label>
             </div>
-            <div class="col-6">
+            <div class="col-6 col-sm-7 col-lg-4  ms-sm-5 ps-ms-5 ps-lg-0 ms-lg-0">
               <input
-                id="email_confirm"
+                id="reg_email_confirm"
                 type="text"
                 ng-attr-placeholder="{{'email' | translate:lang.data + ' ' + 'confirmation' | translate:lang.data}}"
                 class="form-control"
                 spellcheck="false"
                 autocomplete="off"
-                ng-model="model.email2"
+                ng-model="model.reg_email_confirm"
                 ng-change="methods.changed()"
                 maxlength="50"
                 required
               />
             </div>
-            <div class="col-2 pt-1 d-inline">
-              <span class="check-mark ms-1 fw-bold text-success d-conditional">
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span class="check-mark ms-2 fw-bold text-success d-conditional">
                 &check;
               </span>
             </div>
@@ -421,29 +423,27 @@
                 </span>
               </label>
             </div>
-            <div class="col-6 col-sm-6">
+            <div class="col-6 col-sm-7 col-lg-4 ">
               <input
-              name="password"
-              id="password"
+              name="reg_password"
+              id="reg_password"
               type="{{inputType}}"
               class="form-control"
               ng-attr-placeholder="{{'password' | translate:lang.data}}"                
               spellcheck="false"
               autocomplete="off"
-              ng-model="model.password"
+              ng-model="model.reg_password"
               ng-change="method.changed()"
               maxlength="20"              
               required
             />
             </div>
-            <div class="col-2 col-sm-2">
-              <div class="pt-1 d-inline ms-1">
-                <span 
-                  class=" check-mark ms-1 fw-bold text-success d-conditional"
-                >
-                  &check;
-                </span>
-              </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span 
+                class="check-mark ms-2 fw-bold text-success d-conditional"
+              >
+                &check;
+              </span>
             </div>            
           </div>
 
@@ -456,39 +456,37 @@
 
           <!-- Password  confirma-->
           <div class=" input-group mb-2 justify-content-center">
-            <div class="col-8  text-start ">
+            <div class="col-8 col-sm-9 col-lg-4 text-start text-lg-end">
               <label for="password_confirm" class="col-form-label">                
                 <span class="fw-bold text-danger">*</span>
                 <i class="fa-solid fa-key"></i>
                 <span class="text-capitalize">
                   {{'password' | translate:lang.data}}
                 </span>
-                <span>{{'confirmation' | translate:lang.data}}:</span>
+                <span class="me-2">{{'confirmation' | translate:lang.data}}:</span>
               </label>
             </div>
-            <div class="col-6 ">
+            <div class="col-6 col-sm-7 col-lg-4 ms-sm-5 ps-sm-5 ps-lg-0 ms-lg-0">
               <input
-              name="password"
-              id="password_confirm"
+              name="reg_password_confirm"
+              id="reg_password_confirm"
               type="{{inputType}}"
               class="form-control"
               ng-attr-placeholder="{{'password' | translate:lang.data  + ' ' + 'confirmation' | translate:lang.data }}"                
               spellcheck="false"
               autocomplete="off"
-              ng-model="model.password"
+              ng-model="model.reg_password_confirm"
               ng-change="method.changed()"
               maxlength="20"              
               required
             />
             </div>
-            <div class="col-2 col-sm-2">
-              <div class="pt-1 d-inline ms-1">
-                <span 
-                  class=" check-mark ms-1 fw-bold text-success d-conditional"
-                >
-                  &check;
-                </span>
-              </div>
+            <div class="col-2 col-sm-1 col-lg-2  pt-2 d-inline">
+              <span 
+                class="check-mark ms-2 fw-bold text-success d-conditional"
+              >
+                &check;
+              </span>
             </div>            
           </div>
 
@@ -508,9 +506,67 @@
             </div>
           </div>
 
+          <!-- Dividing line -->
+					<hr class="text-muted">
 
+          <!-- Test code content -->
+					<div class="row mb-2">
+            <div class="col-form-label col-sm-4 text-sm-end fw-semibold">
+              <span class="fw-bold text-danger">*</span>
+              <i class="fa-regular fa-hand-point-right fa-xl"></i>
+              <span class="ms-1 text-capitalize">
+                {{'code' | translate:lang.data}}:
+              </span>
+            </div>
+            <div class="col-11 col-sm-7 position-relative">
+              <span class="text-start letter-spacing-2 fw-semibold fs-4">
+                {{code}}
+              </span>
+            </div>
+            <div class="col-1"></div>
+          </div>
 
-
+          <!-- Test code input -->
+          <div class="row input-row">
+            <div class="col-form-label d-none d-sm-block col-sm-4"></div>
+            <div class="col-11 col-sm-7 position-relative">
+              <div class="input-group  input-group-sm mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded-0 h-100">
+                    <i class="fas fa-robot"></i>
+                  </span>
+                </div>
+                <input id="testcode"
+                        type="text" 
+                        class="form-control form-control-sm"
+                        spellcheck="false" 
+                        autocomplete="off"
+                        ng-attr-placeholder="{{'code' | translate:lang.data}}"
+                        required
+                        maxlength="5"
+                        ng-model="model.testcode" 
+                        ng-change="methods.changed()"
+                        ng-keyup="methods.testcodeInit($event)"
+                        style="min-width:120px!important;max-width:120px!important;"
+                        ng-clear-icon='{"left":"150px"}'>
+                <div class="input-group-append">
+                  <button class="btn btn-sm btn-light text-capitalize text-small-caps btnClickEffect"
+                          ng-click="methods.testcodeRefresh($event)">
+                    <i class="fas fa-sync-alt"></i>
+                    <span class="ms-1">
+                      {{'refresh' | translate:lang.data}}
+                    </span>
+                  </button>
+                </div>
+                <div class="col-1 pt-1">
+                  <span class="check-mark ms-1 fw-bold text-success d-hidden">
+                    &check;
+                  </span>
+                </div>
+              </div>
+            
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
