@@ -326,13 +326,9 @@
               console.log("user.id " + $rootScope.user.id);
               // Go to previouse page
               $scope.$applyAsync();
-              window.history.back();
+              //window.history.back();
             });
         };
-
-        /* // Add event listener cancel button.
-        $scope.cancel = () => {
-        }; */
 
         // Input changed
         $scope.changed = () => {
@@ -393,6 +389,45 @@
           }
         );
 
+        // Form initial values
+        $scope.values={
+          lastName: "",
+          firstName: "",
+          dateOfBirth: null,
+          gender: null,
+          country: null,
+          countryCode: null,
+          phone: "",
+          postcode: "",
+          city: "",
+          address: "",
+          email: "",
+          emailConfirm: "",
+          password: "",
+          passwordConfirm: "",
+          testcode: ""
+        }
+
+        $scope.handleCountryChange = (country) =>{
+          $scope.values.countryCode=country.code?.[0] || null;
+        };
+
+        $scope.validateEmailConfirm = () => {
+          const {email, emailConfirm} = $scope.values;
+          $scope.registerForm.emailConfirm.$setValidity("emailMismatch", email === emailConfirm)
+        };
+
+        $scope.validatePasswordConfirm = ()  => {
+          const {password, passwordConfirm} = $scope.values;
+          $scope.registerForm.passwordConfirm.$setValidity("passwordMismatch", password === passwordConfirm)
+        };
+
+        $scope.validateTestcode = ()  => {
+          const {testcode} = $scope.values;
+          $scope.registerForm.testcode.$setValidity("testcodeMismatch", testcode === $scope.code)
+        };
+
+
         //set ppasword type and password visibility
         $scope.inputType = "password";
 
@@ -400,126 +435,51 @@
           $scope.inputType =
             $scope.showHidePassword == true ? "password" : "text";
           $scope.$applyAsync();
-        };
+        };      
+
+        // Create new deffered objects
+        let countries = util.deferredObj();
 
         //set helper
-        // Http request
-        http.request($rootScope.app.commonPath+`data/countries.json`)
-        .then(response => {
-          console.log(response)
-          $scope.helper.countries = response;
-          countries.promise.resolve();
-          
-        })
-        .catch(e => {
-
-          // Resolve completed, reset asynchronous, and show error
-          countries.promise.resolve();
-          $timeout(() => alert(e), 50);
-        });
-
-        $scope.helper = util.objMerge({
+        $scope.helper = ({
           maxBorn     : moment().subtract( 18, 'years').format('YYYY-MM-DD'),
-          minBorn     : moment().subtract(120, 'years').format('YYYY-MM-DD'),
-          countryCodes: null
-        }, $scope.helper);
+          minBorn     : moment().subtract(120, 'years').format('YYYY-MM-DD')
+        });
 
         $scope.code = util.getTestCode();
         $scope.testcode = null;
 
 
-        $scope.methods = {
+        // Http request
+        http.request($rootScope.app.commonPath+`data/countries.json`)
+        .then(response => {
+          $scope.helper.countries = response;
+          countries.promise.resolve();
+          
+        })
+        .catch(e => {
+        // Resolve completed, reset asynchronous, and show error
+          countries.promise.resolve();
+          $timeout(() => alert(e), 50);
+        });       
 
-          // Initialize testcode
-          testcodeInit: (event) => {
-            if (event.ctrlKey && event.altKey && event.key.toUpperCase() === 'T') {
-              $scope.testcode = $scope.code;
-              event.currentTarget.parentElement.querySelector('.clear-icon').classList.add('show');
-              $scope.$applyAsync();
-              $timeout(() => $scope.methods.changed());
-            }
-          },
-
-          changed: () => {
-
-                // Get required input elements, accept button. and define variable is disabled
-              let inputs      = document.querySelectorAll(
-                                'form input[required]:not(#email, #password), form textarea[required], form select[required]'),
-                  acceptBtn   = document.getElementById('accept'),
-                  isDisabled  = false;
-  
-                // Each required input elements
-                inputs.forEach((element) => {
-  
-                  // Get element identifier as key, belonging to it check mark, define variable is valid
-                  let key		    = element.id,
-                      checkMark = element.closest('.input-group').querySelector('.check-mark'),
-                      isValid   = false;
-  
-                  // Switch model key		
-                  switch(key) {
-                    case 'reg_email':
-                    case 'reg_email_confirm':
-                      isValid = util.isEmail($scope.model[key]) &&
-                                (key === 'reg_email' || $scope.model.reg_email === $scope.model[key]);
-                      break;
-                    case 'reg_password':
-                    case 'reg_password_confirm':
-                      isValid = util.isPassword($scope.model[key]) &&
-                                (key === 'reg_password' || $scope.model.reg_password === $scope.model[key]);
-                      break;
-                    case 'testcode':
-                      isValid = $scope.model[key] === $scope.code;
-                      break;
-                    case 'phone':
-                      isValid = /^[0-9]{7,14}$/.test($scope.model[key]);
-                      break;
-                    case 'born':
-                      isValid = moment($scope.model[key]).isValid() &&
-                              (moment($scope.model[key]).isSame($scope.helper.maxBorn) ||
-                                moment($scope.model[key]).isBefore($scope.helper.maxBorn)) &&
-                              (moment($scope.model[key]).isSame($scope.helper.minBorn) ||
-                                moment($scope.model[key]).isAfter($scope.helper.minBorn));       
-                      break;
-                    case 'female':
-                    case 'male':
-                      isValid = $scope.model.gender && "12".includes($scope.model.gender);
-                      break;
-                    case 'country':
-                      isValid = $scope.model[key] && util.isObject($scope.model[key]);
-                      if ($scope.helper.element && $scope.helper.element.id === key) {
-                        if (isValid) {
-                          $scope.helper.countryCodes  = $scope.model[key].code;
-                          $scope.model.country_code   = $scope.helper.countryCodes[0];
-                        } else {
-                          $scope.helper.countryCodes  = null;
-                          $scope.model.country_code   = null;
-                        }
-                      }
-                      break;
-                    case 'country_code':
-                      isValid = $scope.helper.countryCodes && 
-                                $scope.helper.countryCodes.includes($scope.model[key]);
-                      break;
-                    default:
-                      isValid = $scope.model[key] && $scope.model[key].trim().length;
-                  }
-  
-                  // Check mark
-                  if (checkMark) {
-                    if (isValid)
-                          checkMark.classList.add('show');
-                    else  checkMark.classList.remove('show');
-                  }
-  
-                  // Check is disabled 
-                  isDisabled = isDisabled || !isValid;
-                });
-  
-                // Set accept button 
-                acceptBtn.disabled = isDisabled;                
-                },
-              };   
+        // Initialize testcode
+        $scope.testcodeInit= (event) => {
+          if (event.ctrlKey && event.altKey && event.key.toUpperCase() === 'T') {
+            $scope.testcode = $scope.code;
+            event.currentTarget.parentElement.querySelector('.clear-icon').classList.add('show');
+            $scope.$applyAsync();
+          }
+        };
+          // Refresh testcode
+        $scope.testcodeRefresh= (event) => {
+          event.preventDefault();
+          $scope.code = util.getTestCode();
+          $scope.values.testcode = null;
+          $scope.$applyAsync();
+          event.currentTarget.closest('.input-group')
+                            .querySelector('input').focus();         
+        }; 
       },
     ])
 
