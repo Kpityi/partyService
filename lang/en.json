@@ -57,5 +57,6 @@
   "forgot_password": "forgot your password? Click",
   "change_email": "change email address",
   "change_password": "change password",
-  "under_construction": "under construction"
+  "under_construction": "under construction",
+  "fill_email": "Fill out the email field!"
 }

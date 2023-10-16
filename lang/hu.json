@@ -57,5 +57,6 @@
   "forgot_password": "elfelejtette a jelszavát? Kattintson",
   "change_email": "email cím megváltoztatása",
   "change_password": "jelszó módosítása",
-  "under_construction": "fejlesztés alatt"
+  "under_construction": "fejlesztés alatt",
+  "fill_email": "Töltse ki az email mezőt!"
 }
