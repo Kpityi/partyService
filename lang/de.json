@@ -15,8 +15,11 @@
   "account": "konto",
   "profile": "profil",
   "search": "suche",
-  "isnt_account": "Hast du noch keinen Benutzeraccount? Klicke auf den",
+  "isnt_account": "sie haben noch kein Benutzerkonto? Klicken Sie auf den",
   "to_button": "schaltfläche",
+  "registration": "registrierung",
+  "cick": "Klicken Sie",
+  "here": "hier",
   "informatics": "Informatik",
   "identifier": "kennung",
   "type": "typ",
@@ -51,8 +54,9 @@
   "save": "sparen",
   "cancel": "abbrechen",
   "edit": "bearbeiten",
-  "forgot_password": "du hast dein passwort vergessen",
+  "forgot_password": "passwort vergessen? Klicken Sie",
   "change_email": "Email adresse ändern",
   "change_password": "kennwort ändern",
-  "under_construction": "bauarbeiten im gange"
+  "under_construction": "bauarbeiten im gange",
+  "fill_email": "Füllen Sie das E-Mail-Feld aus!"
 }
