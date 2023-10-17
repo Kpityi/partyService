@@ -223,7 +223,7 @@
             // Reset user
             user.reset().then(() => {
               // Go to login
-              $state.go("login");
+              $state.go("home");
             });
           }
         };
@@ -290,25 +290,22 @@
           $scope.$applyAsync();
         };
 
+       
+
         // Set model
         $scope.model = {
           email: $rootScope.user.email,
           password: null,
         };
 
-        // Get required input elements, accept button, and modal properties
-        let inputs = document.querySelectorAll("input[required]"),
-          acceptBtn = document.getElementById("accept");
-        console.log(
-          "inputs: " + $scope.model.email + "acceptBTN: " + acceptBtn
-        );
+        
 
         // Add event listener accept button.
         $scope.accept = () => {
           // Get only necessary properties
           let data = {
-            email: $scope.model.email,
-            password: $scope.model.password,
+            email: $scope.email,
+            password: $scope.password,
           };
           // Http request
           http
@@ -324,51 +321,9 @@
               console.log("user.id " + $rootScope.user.id);
               // Go to previouse page
               $scope.$applyAsync();
-              window.history.back();
+              //window.history.back();
             });
-        };
-
-        /* // Add event listener cancel button.
-        $scope.cancel = () => {
-        }; */
-
-        // Input changed
-        $scope.changed = () => {
-          let isDisabled = false;
-
-          inputs.forEach((element) => {
-            // Get element identifier, value, belonging to it check mark, and set variable is valid to false
-            let key = element.id,
-              value = $scope.model[key],
-              checkMark = element
-                .closest(".input-group")
-                .querySelector(".check-mark"),
-              isValid = true;
-
-            // Switch input identifier
-            switch (key) {
-              case "email":
-                isValid = util.isEmail(value);
-                break;
-              case "password":
-                isValid = util.isPassword(value);
-                break;
-            }
-
-            // Check mark
-            if (isValid) checkMark.classList.add("show");
-            else checkMark.classList.remove("show");
-
-            // Check is disabled
-            isDisabled = isDisabled || !isValid;
-          });
-
-          // Set accept button
-          acceptBtn.disabled = isDisabled;
-        };
-
-        // Input changed
-        $scope.changed();
+        };        
       },
     ])
 
@@ -376,7 +331,11 @@
     .controller("registerController", [
       "$scope",
       "$rootScope",
-      function ($scope, $rootScope) {
+      "util",
+      "http",
+      "user",
+      "$timeout",
+      function ($scope, $rootScope, util, http, user, $timeout) {
 
         // handling modal windows
         $rootScope.registerModal = new bootstrap.Modal(
@@ -387,7 +346,133 @@
           }
         );
 
-   
+        // Form initial values
+        $scope.values={
+          lastName: "",
+          firstName: "",
+          dateOfBirth: null,
+          gender: null,
+          country: null,
+          countryCode: null,
+          phone: "",
+          postcode: "",
+          city: "",
+          address: "",
+          email: "",
+          emailConfirm: "",
+          password: "",
+          passwordConfirm: "",
+          testcode: ""
+        }
+
+        $scope.handleCountryChange = (country) =>{
+          $scope.values.countryCode=country.code?.[0] || null;
+        };
+
+        $scope.validateEmailConfirm = () => {
+          const {email, emailConfirm} = $scope.values;
+          $scope.registerForm.emailConfirm.$setValidity("emailMismatch", email === emailConfirm)
+        };
+
+        $scope.validatePasswordConfirm = ()  => {
+          const {password, passwordConfirm} = $scope.values;
+          $scope.registerForm.passwordConfirm.$setValidity("passwordMismatch", password === passwordConfirm)
+        };
+
+        $scope.validateTestcode = ()  => {
+          const {testcode} = $scope.values;
+          $scope.registerForm.testcode.$setValidity("testcodeMismatch", testcode === $scope.code)
+        };
+
+
+        //set ppasword type and password visibility
+        $scope.inputType = "password";
+
+        $scope.showHide = () => {
+          $scope.inputType =
+            $scope.showHidePassword == true ? "password" : "text";
+          $scope.$applyAsync();
+        };      
+
+        // Create new deffered objects
+        $scope.countries = util.deferredObj();
+
+        //set helper
+        $scope.helper = ({
+          maxBorn     : moment().subtract( 18, 'years').format('YYYY-MM-DD'),
+          minBorn     : moment().subtract(120, 'years').format('YYYY-MM-DD')
+        });
+
+        $scope.code = util.getTestCode();
+        $scope.testcode = null;
+
+
+        // Http request
+        http.request($rootScope.app.commonPath+`data/countries.json`)
+        .then(response => {
+          $scope.helper.countries = response;
+          $scope.countries.promise.resolve();
+          
+        })
+        .catch(e => {
+        // Resolve completed, reset asynchronous, and show error
+          countries.promise.resolve();
+          $timeout(() => alert(e), 50);
+        });       
+
+        // Initialize testcode
+        $scope.testcodeInit= (event) => {
+          if (event.ctrlKey && event.altKey && event.key.toUpperCase() === 'T') {
+            $scope.testcode = $scope.code;
+            event.currentTarget.parentElement.querySelector('.clear-icon').classList.add('show');
+            $scope.$applyAsync();
+          }
+        };
+          // Refresh testcode
+        $scope.testcodeRefresh= (event) => {
+          event.preventDefault();
+          $scope.code = util.getTestCode();
+          $scope.values.testcode = null;
+          $scope.$applyAsync();
+          event.currentTarget.closest('.input-group')
+                            .querySelector('input').focus();         
+        }; 
+        $scope.accept = () =>{
+    
+          // Get user data
+         $scope.userData={
+          first_name: $scope.values.firstName,
+          last_name: $scope.values.lastName,
+          born: moment($scope.values.dateOfBirth).format('YYYY-MM-DD'),
+          gender: $scope.values.gender,
+          country: $scope.values.country.country.toUpperCase(),
+          country_code: $scope.values.countryCode,
+          phone: $scope.values.phone,
+          city: $scope.values.city,
+          postcode: $scope.values.postcode,
+          address: $scope.values.address,
+          email: $scope.values.email,
+          password: $scope.values.password
+          }
+          console.log($scope.userData)
+          // Http request for registration
+          http.request({
+            url   : './php/register.php',
+            method: 'POST',
+            data  : $scope.userData
+          })
+          .then(response => {
+  
+            // Check success
+            if (response.affectedRows) {
+                    console.log(response.lastInsertId);
+                    $scope.$applyAsync();
+                    alert(`Registration succesfull, new User identifier: ${response.lastInsertId}`);
+            } else  alert(`Registration unsuccesfull!  ${response}`);
+          })
+          .catch(error => {$timeout(() => alert(error), 50);});
+          
+        }
       },
     ])
 
