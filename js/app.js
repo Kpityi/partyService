@@ -199,7 +199,8 @@
       "trans",
       "lang",
       "user",
-      function ($state, $rootScope, $timeout, trans, lang, user) {
+
+      function ($state, $rootScope, $timeout, trans, lang, user,) {
         console.log("Run...");
 
         // Transaction events
@@ -233,8 +234,30 @@
     // Home controller
     .controller("homeController", [
       "$scope",
-      function ($scope) {
+      "http",
+      function ($scope, http) {
         console.log("Home controller...");
+        
+        $scope.images=[];
+
+        // Http request
+        http.request('./php/carousel.php')
+        .then(response => {
+          $scope.data=response;
+          $scope.data.forEach(image =>{
+            image = image.replace("../", "./")   
+            $scope.images.push(image)       
+            console.log(image)
+          })
+          console.log($scope.images)
+          
+        })
+        .catch(e => {
+          // Resolve completed, and show error
+          
+          $timeout(() => alert(e));
+        }); 
+        
       },
     ])
 

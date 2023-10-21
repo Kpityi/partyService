@@ -7,8 +7,8 @@
   aria-labelledby="modalRegisterPageLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg modal-dialog-scrollable ">
-    <div class="modal-content">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content bg-rice">
       <div class="modal-header justify-content-center">
         <!-- Title -->
         <h4 class="modal-title fs-5" id="modalRegisterPageLabel">
@@ -28,9 +28,7 @@
               <label for="last_name" class="col-form-label">
                 <span class="fw-bold text-danger">*</span>
                 <i class="fa-solid fa-user fa-xl"></i>
-                <span 
-                  class="text-capitalize me-2"
-                >
+                <span class="text-capitalize me-2">
                   {{'last_name' | translate:lang.data}}:
                 </span>
               </label>
@@ -40,7 +38,7 @@
                 id="last_name"
                 type="text"
                 ng-attr-placeholder="{{'last_name' | translate:lang.data}}"
-                class="form-control"
+                class="form-control rounded-pill shadow-sm"
                 spellcheck="false"
                 autocomplete="off"
                 ng-model="values.lastName"
@@ -50,7 +48,7 @@
               />
             </div>
             <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-              <span 
+              <span
                 class="check-mark ms-2 fw-bold text-success"
                 ng-show="registerForm.lastName.$valid"
               >
@@ -74,7 +72,7 @@
                 id="first_name"
                 type="text"
                 ng-attr-placeholder="{{'first_name' | translate:lang.data}}"
-                class="form-control"
+                class="form-control rounded-pill shadow-sm"
                 spellcheck="false"
                 autocomplete="off"
                 ng-model="values.firstName"
@@ -84,7 +82,7 @@
               />
             </div>
             <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-              <span 
+              <span
                 class="check-mark ms-2 fw-bold text-success"
                 ng-show="registerForm.firstName.$valid"
               >
@@ -111,7 +109,7 @@
               <input
                 id="born"
                 type="date"
-                class="form-control"
+                class="form-control rounded-pill shadow-sm"
                 spellcheck="false"
                 autocomplete="off"
                 min="{{helper.minBorn}}"
@@ -122,9 +120,9 @@
               />
             </div>
             <div class="col-2 col-sm-1 col-lg-2 pt-2">
-              <span 
+              <span
                 class="check-mark ms-2 fw-bold text-success"
-                ng-show="registerForm.dateOfBirth.$valid"  
+                ng-show="registerForm.dateOfBirth.$valid"
               >
                 &check;
               </span>
@@ -173,7 +171,7 @@
               </div>
             </div>
             <div class="col-2 col-sm-1 col-lg-2 pt-2">
-              <span 
+              <span
                 class="check-mark ms-2 fw-bold text-success"
                 ng-show="registerForm.gender.$valid"
               >
@@ -199,27 +197,26 @@
             <div class="col-6 col-sm-7 col-lg-4">
               <select
                 id="country"
-                class="form-select text-capitalize pe-4"
+                class="form-select text-capitalize pe-4 rounded-pill shadow-sm"
                 ng-model="values.country"
                 ng-change="handleCountryChange(values.country)"
                 ng-options="x.country for x in helper.countries"
                 name="country"
                 required
-              >           
-              </select>
+              ></select>
             </div>
             <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-              <span 
+              <span
                 class="check-mark ms-2 fw-bold text-success"
-                ng-show="registerForm.country.$valid"  
+                ng-show="registerForm.country.$valid"
               >
                 &check;
               </span>
             </div>
           </div>
 
-           <!-- Phone -->
-           <div class="input-group mb-2 justify-content-center">
+          <!-- Phone -->
+          <div class="input-group mb-2 justify-content-center">
             <div class="col-8 col-sm-4 text-start text-sm-end">
               <label for="phone" class="col-form-label">
                 <span class="fw-bold text-danger">*</span>
@@ -229,372 +226,384 @@
                 </span>
               </label>
             </div>
-          <div class="col-8 col-sm-6 d-flex">
-            <span class="pt-2">+</span>
-            <select
-              id="country_code"
-              class="form-select ms-1 d-inline"
-              style="max-width: 90px"
-              ng-model="values.countryCode"
-              name="countryCode"
-              ng-options="code for code in values.country.code"
-              ng-disabled="!values.country"
-              required
-            >
-            </select>
-            <input
-              id="phone"
-              type="tel"
-              ng-attr-placeholder="{{'phone' | translate:lang.data}}"
-              class="form-control d-inline"
-              spellcheck="false"
-              autocomplete="off"
-              ng-model="values.phone"
-              ng-pattern="/^[0-9]{7,14}$/"
-              name="phone"
-              style="max-width: 750px"
-              required
-            />
-          </div>
-          <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-            <span 
-              class="check-mark ms-2 fw-bold text-success"
-              ng-show="registerForm.phone.$valid"
-            >
-              &check;
-            </span>
-          </div>
-        </div>
-
-         <!-- City -->
-         <div class="input-group mb-2 justify-content-center">
-          <div class="col-8 col-sm-4 text-start text-sm-end">
-            <label for="city" class="col-form-label">
-              <span class="fw-bold text-danger">*</span>
-              <span class="text-capitalize me-2">
-                {{'city' | translate:lang.data}}:
-              </span>
-            </label>
-          </div>
-          <div class="col-6 col-sm-7 col-lg-4">
-            <input
-              id="city"
-              type="text"
-              ng-attr-placeholder="{{'city' | translate:lang.data}}"
-              class="form-control"
-              spellcheck="false"
-              autocomplete="off"
-              ng-model="values.city"
-              name="city"
-              required
-              ng-maxlength="100"
-            />
-          </div>
-          <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-            <span 
-              class="check-mark ms-2 fw-bold text-success"
-              ng-show="registerForm.city.$valid"  
-            >
-              &check;
-            </span>
-          </div>
-        </div>
-
-        <!-- Post code-->
-        <div class="input-group mb-2 justify-content-center">
-          <div class="col-8 col-sm-4 text-start text-sm-end">
-            <label for="postcode" class="col-form-label">
-              <span class="fw-bold text-danger">*</span>
-              <i class="fa-solid fa-list-ol"></i>
-              <span class="text-capitalize me-2">
-                {{'postcode' | translate:lang.data}}:
-              </span>
-            </label>
-          </div>
-          <div class="col-6 col-sm-7 col-lg-4">
-            <input
-              id="postcode"
-              type="text"
-              ng-attr-placeholder="{{'postcode' | translate:lang.data}}"
-              class="form-control"
-              style="max-width:170px;"
-              spellcheck="false"
-              autocomplete="off"
-              ng-model="values.postcode"
-              name="postcode"
-              ng-maxlength="10"
-              required
-            />
-          </div>
-          <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-            <span 
-              class="check-mark ms-2 fw-bold text-success"
-              ng-show="registerForm.postcode.$valid"
-            >
-              &check;
-            </span>
-          </div>
-        </div>
-
-        <!-- Address -->
-        <div class="input-group mb-2 justify-content-center">
-          <div class="col-8 col-sm-4 text-start text-sm-end">
-            <label for="address" class="col-form-label">
-              <span class="fw-bold text-danger">*</span>
-              <i class="fa-solid fa-location-dot"></i>
-              <span class="text-capitalize me-2">
-                {{'address' | translate:lang.data}}:
-              </span>
-            </label>
-          </div>
-          <div class="col-6 col-sm-7 col-lg-4">
-            <input
-              id="address"
-              type="text"
-              ng-attr-placeholder="{{'address' | translate:lang.data}}"
-              class="form-control"
-              spellcheck="false"
-              autocomplete="off"
-              ng-model="values.address"
-              name="address"
-              ng-maxlength="200"
-              required
-            />
-          </div>
-          <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-            <span 
-              class="check-mark ms-2 fw-bold text-success"
-              ng-show="registerForm.address.$valid"
-            >
-              &check;
-            </span>
-          </div>
-        </div>
-
-        <!-- Dividing line -->
-        <hr class="text-muted"/>
-
-        <!-- Email -->
-        <div class="input-group mb-2 justify-content-center">
-          <div class="col-8 col-sm-4 text-start text-sm-end">
-            <label for="reg_email" class="col-form-label">
-              <span class="fw-bold text-danger">*</span>
-              <i class="fa-solid fa-envelope"></i>
-              <span class="text-capitalize me-2">
-                {{'email' | translate:lang.data}}:
-              </span>
-            </label>
-          </div>
-          <div class="col-6 col-sm-7 col-lg-4">
-            <input
-              id="reg_email"
-              type="text"
-              ng-attr-placeholder="{{'email' | translate:lang.data}}"
-              class="form-control"
-              spellcheck="false"
-              autocomplete="off"
-              ng-model="values.email"
-              name="email"
-              ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
-              maxlength="50"
-              required
-            />
-          </div>
-          <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-            <span 
-              class="check-mark ms-2 fw-bold text-success"
-              ng-show="registerForm.email.$valid"
+            <div class="col-8 col-sm-6 d-flex">
+              <span class="pt-2">+</span>
+              <select
+                id="country_code"
+                class="form-select ms-1 d-inline rounded-pill shadow-sm"
+                style="max-width: 90px"
+                ng-model="values.countryCode"
+                name="countryCode"
+                ng-options="code for code in values.country.code"
+                ng-disabled="!values.country"
+                required
+              ></select>
+              <input
+                id="phone"
+                type="tel"
+                ng-attr-placeholder="{{'phone' | translate:lang.data}}"
+                class="form-control rounded-pill shadow-sm d-inline"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="values.phone"
+                ng-pattern="/^[0-9]{7,14}$/"
+                name="phone"
+                style="max-width: 750px"
+                required
+              />
+            </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span
+                class="check-mark ms-2 fw-bold text-success"
+                ng-show="registerForm.phone.$valid"
               >
-              &check;
-            </span>
+                &check;
+              </span>
+            </div>
           </div>
-        </div>
 
-        <!-- Email confirm -->
-        <div class="input-group mb-2 justify-content-center">
-          <div class="col-8 col-sm-9 col-lg-4 text-start text-lg-end">
-            <label for="reg_email_confirm" class="col-form-label">
-              <span class="fw-bold text-danger">*</span>
-              <i class="fa-solid fa-envelope"></i>
-              <span class="text-capitalize ">
-                {{'email' | translate:lang.data}}
+          <!-- City -->
+          <div class="input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-4 text-start text-sm-end">
+              <label for="city" class="col-form-label">
+                <span class="fw-bold text-danger">*</span>
+                <span class="text-capitalize me-2">
+                  {{'city' | translate:lang.data}}:
+                </span>
+              </label>
+            </div>
+            <div class="col-6 col-sm-7 col-lg-4">
+              <input
+                id="city"
+                type="text"
+                ng-attr-placeholder="{{'city' | translate:lang.data}}"
+                class="form-control rounded-pill shadow-sm"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="values.city"
+                name="city"
+                required
+                ng-maxlength="100"
+              />
+            </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span
+                class="check-mark ms-2 fw-bold text-success"
+                ng-show="registerForm.city.$valid"
+              >
+                &check;
               </span>
-              <span class="me-2">
-                {{'confirmation' | translate:lang.data}}:
+            </div>
+          </div>
+
+          <!-- Post code-->
+          <div class="input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-4 text-start text-sm-end">
+              <label for="postcode" class="col-form-label">
+                <span class="fw-bold text-danger">*</span>
+                <i class="fa-solid fa-list-ol"></i>
+                <span class="text-capitalize me-2">
+                  {{'postcode' | translate:lang.data}}:
+                </span>
+              </label>
+            </div>
+            <div class="col-6 col-sm-7 col-lg-4">
+              <input
+                id="postcode"
+                type="text"
+                ng-attr-placeholder="{{'postcode' | translate:lang.data}}"
+                class="form-control rounded-pill shadow-sm"
+                style="max-width: 170px"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="values.postcode"
+                name="postcode"
+                ng-maxlength="10"
+                required
+              />
+            </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span
+                class="check-mark ms-2 fw-bold text-success"
+                ng-show="registerForm.postcode.$valid"
+              >
+                &check;
               </span>
-            </label>
+            </div>
           </div>
-          <div class="col-6 col-sm-7 col-lg-4  ms-sm-5 ps-ms-5 ps-lg-0 ms-lg-0">
-            <input
-              id="reg_email_confirm"
-              type="text"
-              ng-attr-placeholder="{{'email' | translate:lang.data + ' ' + 'confirmation' | translate:lang.data}}"
-              class="form-control"
-              spellcheck="false"
-              autocomplete="off"
-              ng-model="values.emailConfirm"
-              ng-change="validateEmailConfirm()"
-              name="emailConfirm"
-              ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
-              ng-maxlength="50"
-              required
-            />
+
+          <!-- Address -->
+          <div class="input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-4 text-start text-sm-end">
+              <label for="address" class="col-form-label">
+                <span class="fw-bold text-danger">*</span>
+                <i class="fa-solid fa-location-dot"></i>
+                <span class="text-capitalize me-2">
+                  {{'address' | translate:lang.data}}:
+                </span>
+              </label>
+            </div>
+            <div class="col-6 col-sm-7 col-lg-4">
+              <input
+                id="address"
+                type="text"
+                ng-attr-placeholder="{{'address' | translate:lang.data}}"
+                class="form-control rounded-pill shadow-sm"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="values.address"
+                name="address"
+                ng-maxlength="200"
+                required
+              />
+            </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span
+                class="check-mark ms-2 fw-bold text-success"
+                ng-show="registerForm.address.$valid"
+              >
+                &check;
+              </span>
+            </div>
           </div>
-          <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-            <span class="check-mark ms-2 fw-bold text-success"
-              ng-show="registerForm.emailConfirm.$valid"
+
+          <!-- Dividing line -->
+          <hr class="text-muted" />
+
+          <!-- Email -->
+          <div class="input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-4 text-start text-sm-end">
+              <label for="reg_email" class="col-form-label">
+                <span class="fw-bold text-danger">*</span>
+                <i class="fa-solid fa-envelope"></i>
+                <span class="text-capitalize me-2">
+                  {{'email' | translate:lang.data}}:
+                </span>
+              </label>
+            </div>
+            <div class="col-6 col-sm-7 col-lg-4">
+              <input
+                id="reg_email"
+                type="text"
+                ng-attr-placeholder="{{'email' | translate:lang.data}}"
+                class="form-control rounded-pill shadow-sm"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="values.email"
+                name="email"
+                ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
+                maxlength="50"
+                required
+              />
+            </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span
+                class="check-mark ms-2 fw-bold text-success"
+                ng-show="registerForm.email.$valid"
+              >
+                &check;
+              </span>
+            </div>
+          </div>
+
+          <!-- Email confirm -->
+          <div class="input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-9 col-lg-4 text-start text-lg-end">
+              <label for="reg_email_confirm" class="col-form-label">
+                <span class="fw-bold text-danger">*</span>
+                <i class="fa-solid fa-envelope"></i>
+                <span class="text-capitalize">
+                  {{'email' | translate:lang.data}}
+                </span>
+                <span class="me-2">
+                  {{'confirmation' | translate:lang.data}}:
+                </span>
+              </label>
+            </div>
+            <div
+              class="col-6 col-sm-7 col-lg-4 ms-sm-5 ps-ms-5 ps-lg-0 ms-lg-0"
             >
-              &check;
-            </span>
-          </div>
-        </div>
-
-        <!-- Password -->
-        <div class=" input-group mb-2 justify-content-center">
-          <div class="col-8 col-sm-4 text-start text-sm-end">
-            <label for="reg_password" class="col-form-label">                
-              <span class="fw-bold text-danger">*</span>
-              <i class="fa-solid fa-key"></i>
-              <span class="text-capitalize me-1">
-                {{'password' | translate:lang.data}}:
+              <input
+                id="reg_email_confirm"
+                type="text"
+                ng-attr-placeholder="{{'email' | translate:lang.data + ' ' + 'confirmation' | translate:lang.data}}"
+                class="form-control rounded-pill shadow-sm"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="values.emailConfirm"
+                ng-change="validateEmailConfirm()"
+                name="emailConfirm"
+                ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
+                ng-maxlength="50"
+                required
+              />
+            </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span
+                class="check-mark ms-2 fw-bold text-success"
+                ng-show="registerForm.emailConfirm.$valid"
+              >
+                &check;
               </span>
-            </label>
+            </div>
           </div>
-          <div class="col-6 col-sm-7 col-lg-4 ">
-            <input
-            id="reg_password"
-            type="{{inputType}}"
-            class="form-control"
-            ng-attr-placeholder="{{'password' | translate:lang.data}}"                
-            spellcheck="false"
-            autocomplete="off"
-            ng-model="values.password"
-            name="password"
-            ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
-            ng-maxlength="20"              
-            required
-          />
-          </div>
-          <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
-            <span 
-              class="check-mark ms-2 fw-bold text-success"
-              ng-show="registerForm.password.$valid"
-            >
-              &check;
-            </span>
-          </div>            
-        </div>
 
-        <!-- Password rule -->
-        <div class="mb-2 col-12 text-center">
-          <span class="fs-sm text-muted">
-            {{'password_rule' | translate:lang.data}}
-          </span>
-        </div>
-
-        <!-- Password confirm-->
-        <div class=" input-group mb-2 justify-content-center">
-          <div class="col-8 col-sm-9 col-lg-4 text-start text-lg-end">
-            <label for="reg_password_confirm" class="col-form-label">                
-              <span class="fw-bold text-danger">*</span>
-              <i class="fa-solid fa-key"></i>
-              <span class="text-capitalize">
-                {{'password' | translate:lang.data}}
+          <!-- Password -->
+          <div class="input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-4 text-start text-sm-end">
+              <label for="reg_password" class="col-form-label">
+                <span class="fw-bold text-danger">*</span>
+                <i class="fa-solid fa-key"></i>
+                <span class="text-capitalize me-1">
+                  {{'password' | translate:lang.data}}:
+                </span>
+              </label>
+            </div>
+            <div class="col-6 col-sm-7 col-lg-4">
+              <input
+                id="reg_password"
+                type="{{inputType}}"
+                class="form-control rounded-pill shadow-sm"
+                ng-attr-placeholder="{{'password' | translate:lang.data}}"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="values.password"
+                name="password"
+                ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
+                ng-maxlength="20"
+                required
+              />
+            </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span
+                class="check-mark ms-2 fw-bold text-success"
+                ng-show="registerForm.password.$valid"
+              >
+                &check;
               </span>
-              <span class="me-2">{{'confirmation' | translate:lang.data}}:</span>
-            </label>
+            </div>
           </div>
-          <div class="col-6 col-sm-7 col-lg-4 ms-sm-5 ps-sm-5 ps-lg-0 ms-lg-0">
-            <input
-            id="reg_password_confirm"
-            type="{{inputType}}"
-            class="form-control"
-            ng-attr-placeholder="{{'password' | translate:lang.data  + ' ' + 'confirmation' | translate:lang.data }}"                
-            spellcheck="false"
-            autocomplete="off"
-            ng-model="values.passwordConfirm"
-            ng-change="validatePasswordConfirm()"
-            ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
-            name="passwordConfirm"
-            ng-maxlength="20"              
-            required
-          />
-          </div>
-          <div class="col-2 col-sm-1 col-lg-2  pt-2 d-inline">
-            <span 
-              class="check-mark ms-2 fw-bold text-success"
-              ng-show="registerForm.passwordConfirm.$valid"
-            >
-              &check;
+
+          <!-- Password rule -->
+          <div class="mb-2 col-12 text-center">
+            <span class="fs-sm text-muted">
+              {{'password_rule' | translate:lang.data}}
             </span>
-          </div>            
-        </div>
-
-        <!-- Show/Hide password -->
-        <div class="mb-3 text-center">
-          <div class="form-check form-check-inline small">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="show-reg-password"
-              ng-model="showHidePassword"
-              ng-click="showHide()"
-            />
-            <label class="form-check-label" for="show-password">
-              {{'display_password' | translate:lang.data}}
-            </label>
           </div>
-        </div>
 
-        <!-- Dividing line -->
-        <hr class="text-muted">
-        
-        <div class="justify-content-center">
-          <!-- Test code content -->
-            <div class="row mb-2 ms-4 ms-sm-0 ">
-              <div class="col-form-label col-sm-4 text-sm-end fw-semibold ">
+          <!-- Password confirm-->
+          <div class="input-group mb-2 justify-content-center">
+            <div class="col-8 col-sm-9 col-lg-4 text-start text-lg-end">
+              <label for="reg_password_confirm" class="col-form-label">
+                <span class="fw-bold text-danger">*</span>
+                <i class="fa-solid fa-key"></i>
+                <span class="text-capitalize">
+                  {{'password' | translate:lang.data}}
+                </span>
+                <span class="me-2"
+                  >{{'confirmation' | translate:lang.data}}:</span
+                >
+              </label>
+            </div>
+            <div
+              class="col-6 col-sm-7 col-lg-4 ms-sm-5 ps-sm-5 ps-lg-0 ms-lg-0"
+            >
+              <input
+                id="reg_password_confirm"
+                type="{{inputType}}"
+                class="form-control rounded-pill shadow-sm"
+                ng-attr-placeholder="{{'password' | translate:lang.data  + ' ' + 'confirmation' | translate:lang.data }}"
+                spellcheck="false"
+                autocomplete="off"
+                ng-model="values.passwordConfirm"
+                ng-change="validatePasswordConfirm()"
+                ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/"
+                name="passwordConfirm"
+                ng-maxlength="20"
+                required
+              />
+            </div>
+            <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+              <span
+                class="check-mark ms-2 fw-bold text-success"
+                ng-show="registerForm.passwordConfirm.$valid"
+              >
+                &check;
+              </span>
+            </div>
+          </div>
+
+          <!-- Show/Hide password -->
+          <div class="mb-3 text-center">
+            <div class="form-check form-check-inline small">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="show-reg-password"
+                ng-model="showHidePassword"
+                ng-click="showHide()"
+              />
+              <label class="form-check-label" for="show-password">
+                {{'display_password' | translate:lang.data}}
+              </label>
+            </div>
+          </div>
+
+          <!-- Dividing line -->
+          <hr class="text-muted" />
+
+          <div class="justify-content-center">
+            <!-- Test code content -->
+            <div class="row mb-2 ms-4 ms-sm-0">
+              <div class="col-form-label col-sm-4 text-sm-end fw-semibold">
                 <span class="fw-bold text-danger">*</span>
                 <i class="fa-regular fa-hand-point-right fa-xl"></i>
                 <span class="ms-1 text-capitalize">
                   {{'code' | translate:lang.data}}:
                 </span>
               </div>
-              <div class="col-11 col-sm-7 ">
+              <div class="col-11 col-sm-7">
                 <span class="text-start letter-spacing-2 fw-semibold fs-4">
                   {{code}}
                 </span>
               </div>
               <div class="col-1"></div>
             </div>
-  
+
             <!-- Test code input -->
             <div class="row input-row justify-content-center">
               <div class="col-form-label d-none d-sm-block col-sm-4"></div>
-              <div class="col-10 col-sm-8 ">
-                <div class="input-group  input-group-sm mb-4">
+              <div class="col-10 col-sm-8">
+                <div class="input-group input-group-sm mb-4">
                   <div class="input-group-prepend">
                     <span class="input-group-text rounded-0 h-100">
                       <i class="fas fa-robot"></i>
                     </span>
                   </div>
-                  <input id="testcode"
-                          type="text" 
-                          class="form-control form-control-sm"
-                          spellcheck="false" 
-                          autocomplete="off"
-                          ng-attr-placeholder="{{'code' | translate:lang.data}}"
-                          ng-maxlength="5"
-                          name="testcode"
-                          ng-model="values.testcode" 
-                          ng-change="validateTestcode()"
-                          ng-keyup="testcodeInit($event)"
-                          style="min-width:120px!important;max-width:120px!important;"
-                          ng-clear-icon='{"left":"150px"}'
-                          required
-                          >
+                  <input
+                    id="testcode"
+                    type="text"
+                    class="form-control form-control-sm"
+                    spellcheck="false"
+                    autocomplete="off"
+                    ng-attr-placeholder="{{'code' | translate:lang.data}}"
+                    ng-maxlength="5"
+                    name="testcode"
+                    ng-model="values.testcode"
+                    ng-change="validateTestcode()"
+                    ng-keyup="testcodeInit($event)"
+                    style="
+                      min-width: 120px !important;
+                      max-width: 120px !important;
+                    "
+                    ng-clear-icon='{"left":"150px"}'
+                    required
+                  />
                   <div class="input-group-append">
-                    <button class="btn btn-sm btn-light text-capitalize text-small-caps btnClickEffect"
-                            ng-click="testcodeRefresh($event)">
+                    <button
+                      class="btn btn-sm btn-light text-capitalize text-small-caps btnClickEffect"
+                      ng-click="testcodeRefresh($event)"
+                    >
                       <i class="fas fa-sync-alt"></i>
                       <span class="ms-1">
                         {{'refresh' | translate:lang.data}}
@@ -602,7 +611,7 @@
                     </button>
                   </div>
                   <div class="col-1 pt-1">
-                    <span 
+                    <span
                       class="check-mark ms-1 fw-bold text-success"
                       ng-show="registerForm.testcode.$valid"
                     >
@@ -612,8 +621,7 @@
                 </div>
               </div>
             </div>
-        </div>
-
+          </div>
         </form>
       </div>
       <div class="modal-footer">

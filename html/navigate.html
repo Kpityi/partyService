@@ -1,7 +1,8 @@
-
-
 <!-- Navbar -->
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+<nav 
+  class="navbar navbar-expand-xl navbar-dark bg-dark"
+  ng-class="{'sticky': isSticky}
+>
   <!-- container -->
   <div class="container-fluid">
     <!-- hamburger icon -->
@@ -12,7 +13,8 @@
       data-bs-target="#navBar"
       aria-controls="navBar"
       aria-expanded="false"
-      aria-label="Toggle navigation">
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -63,13 +65,12 @@
       </ul>
 
       <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
-      
         <!-- Login -->
         <li class="nav-item nav-underline" ng-if="!user.id">
           <a
             id="login-button"
             class="nav-link text-capitalize"
-            data-toggle="modal" 
+            data-toggle="modal"
             data-target="#loginModal"
             ng-click="loginModal.show()"
           >
@@ -89,17 +90,19 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
             ui-sref="#"
-            ui-sref-active="active">
-
+            ui-sref-active="active"
+          >
             <!-- Image -->
             <div
               class="bg-img bg-img-cover overflow-hidden rounded-circle d-inline-block float-start me-2"
               style="width: 32px; height: 32px"
               ng-style="{'background-image':user.img_type?'url(data:'+user.img_type+';base64,'+user.img+')':'url('+app.commonPath+'media/image/blank/'+(user.gender==='F'?'fe':'')+'male-blank.webp)'}"
-              ng-show="user.img || user.gender">
-            </div>
+              ng-show="user.img || user.gender"
+            ></div>
 
-            <div class="text-capitalize text-small-caps d-inline-block float-start">
+            <div
+              class="text-capitalize text-small-caps d-inline-block float-start"
+            >
               {{'account' | translate:lang.data}}
             </div>
           </a>
@@ -107,20 +110,22 @@
           <!-- Dropdown menu -->
           <ul
             class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="userDropdown">
-
+            aria-labelledby="userDropdown"
+          >
             <!-- User name/Nick name -->
             <li>
               <a class="dropdown-item disabled" href="#">
                 <span
                   class="text-capitalize text-small-caps"
-                  ng-if="user.nick_name">
+                  ng-if="user.nick_name"
+                >
                   {{user.nick_name}}
                 </span>
                 <span
                   class="text-capitalize text-small-caps"
                   ng-repeat="k in lang.rule[lang.type]"
-                  ng-if="!user.nick_name">
+                  ng-if="!user.nick_name"
+                >
                   {{user[k]}}
                 </span>
               </a>
@@ -131,7 +136,8 @@
               <a
                 class="dropdown-item"
                 ng-class="{'disabled': state.id === 'user'}"
-                ui-sref='profile'>
+                ui-sref="profile"
+              >
                 <i class="fa-solid fa-user fa-lg"></i>
                 <span class="text-capitalize text-small-caps">
                   {{'profile' | translate:lang.data}}
@@ -144,7 +150,8 @@
               <a
                 class="dropdown-item"
                 ng-class="{'disabled': state.id === 'user' }"
-                ui-sref="profile">
+                ui-sref="profile"
+              >
                 <i class="fa-solid fa-envelope fa-lg"></i>
                 <span class="text-capitalize text-small-caps">
                   {{'change_email' | translate:lang.data}}
@@ -157,7 +164,8 @@
               <a
                 class="dropdown-item"
                 ng-class="{'disabled': state.id === 'user'}"
-                ui-sref="profile">
+                ui-sref="profile"
+              >
                 <i class="fa-solid fa-key fa-lg"></i>
                 <span class="text-capitalize text-small-caps">
                   {{'change_password' | translate:lang.data}}
@@ -173,7 +181,8 @@
               <a
                 class="dropdown-item"
                 href="javascript:void(0)"
-                ng-click="logout()">
+                ng-click="logout()"
+              >
                 <i class="fa-solid fa-right-from-bracket fa-lg"></i>
                 <span class="text-capitalize text-small-caps">
                   {{'logout' | translate:lang.data}}
@@ -196,19 +205,26 @@
             class="nav-link dropdown-toggle"
             role="button"
             data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img ng-src="{{'./img/'+lang.available[lang.index].img}}" width="40px" alt="flag"/>
+            aria-expanded="false"
+          >
+            <img
+              ng-src="{{'./media/image/'+lang.available[lang.index].img}}"
+              width="40px"
+              alt="flag"
+            />
           </a>
           <ul
             class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="navbarDropdown">
+            aria-labelledby="navbarDropdown"
+          >
             <li
               data-lang-id="en"
               data-lang-type="west"
               class="dropdown-item cursor-pointer"
               ng-class="{'d-none': lang.id === 'en'}"
-              ng-click="changeLanguage($event)">
-              <img src="./img/uk_flag.png" width="40px" />
+              ng-click="changeLanguage($event)"
+            >
+              <img src="./media/image/uk_flag.png" width="40px" />
               <span data-lang="english" class="text-capitalize mx-2"></span>
               <span class="english-name">(english)</span>
             </li>
@@ -217,8 +233,9 @@
               data-lang-type="east"
               class="dropdown-item cursor-pointer"
               ng-class="{'d-none': lang.id === 'hu'}"
-              ng-click="changeLanguage($event)">
-              <img src="./img/hun_flag.png" width="40px" />
+              ng-click="changeLanguage($event)"
+            >
+              <img src="./media/image/hun_flag.png" width="40px" />
               <span data-lang="hungarian" class="text-capitalize mx-2"></span>
               <span class="english-name">(magyar)</span>
             </li>
@@ -227,8 +244,9 @@
               data-lang-type="east"
               class="dropdown-item cursor-pointer"
               ng-class="{'d-none': lang.id === 'de'}"
-              ng-click="changeLanguage($event)">
-              <img src="./img/de_flag.png" width="40px" />
+              ng-click="changeLanguage($event)"
+            >
+              <img src="./media/image/de_flag.png" width="40px" />
               <span data-lang="hungarian" class="text-capitalize mx-2"></span>
               <span class="english-name">(deutsch)</span>
             </li>
@@ -236,8 +254,12 @@
         </li>
       </ul>
       <form class="d-flex me-4" role="search">
-        <input class="form-control me-2" type="search" placeholder="{{'search' |
-        translate:lang.data}}" aria-label="{{'search' | translate:lang.data}}"
+        <input
+          class="form-control rounded-pill shadow-sm me-2"
+          type="search"
+          placeholder="{{'search' |
+        translate:lang.data}}"
+          aria-label="{{'search' | translate:lang.data}}"
         />
         <button class="btn btn-outline-success text-capitalize" type="submit">
           {{'search' | translate:lang.data}}
