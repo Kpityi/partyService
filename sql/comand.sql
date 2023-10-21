@@ -1,15 +1,15 @@
 SELECT  `orders`.`orderId` AS `orderId`,
-		    `orders_item`.`id` AS `ordersItemId`,
+	`orders_item`.`id` AS `ordersItemId`,
         `products`.`product_name` AS `name`,
         `orders_item`.`price`,
         `orders_item`.`quantity`,
         `orders_item`.`price` * `orders_item`.`quantity` AS `total`,
         `users`.`first_name`,
-		    `users`.`last_name`,
+	`users`.`last_name`,
         `users`.`email`
 FROM `orders_item`
 INNER JOIN  (SELECT `orders`.`id` AS `orderId`,
-             		`orders`.`user_id` AS `userId`
+             	`orders`.`user_id` AS `userId`
             FROM `orders`
             INNER JOIN `users`
             ON `users`.`id` = `orders`.`user_id`
