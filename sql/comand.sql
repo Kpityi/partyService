@@ -21,3 +21,23 @@ ON `users`.`id` = `orders`.`userId`
 INNER JOIN `products`
 ON `products`.`id` = `orders_item`.`product_id`
 ORDER BY `orders`.`orderId`, `orders_item`.`id`;
+
+/* Menü lekérdezés */
+
+SELECT menus.name AS menu, dish_categories.type As category, dishes.name As name, dishes.description AS description, dishes.price As price
+FROM dishes 
+INNER JOIN dish_categories
+      ON dishes.dish_category_id=dish_categories.id
+INNER JOIN menu_dishes
+      ON dishes.id=menu_dishes.dish_id
+INNER JOIN menus
+      ON menus.id=menu_dishes.menu_id
+	
+/* menünként*/
+ WHERE menus.id=1;	
+
+
+/* tábla hossza*/
+
+SELECT COUNT(*)
+FROM menus;
