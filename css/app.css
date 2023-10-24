@@ -1,14 +1,48 @@
+/*import Google Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+/* Basic fonts (Open Sans) body bg image */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-image: url(../media/image/background.jpg);
+}
+
+/* Header fonts (Poppins) */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.nav-bar{
+  height: 60px !important;
+}
+
+.letter-capitalize:first-letter{
+  text-transform: capitalize !important;
+}
+
 main {
-	min-height: calc(100vh - 420px) !important;
+	min-height: calc(100vh - 410px) !important;
+} 
+
+.container{
+  background-color: rgba(255, 255, 255, .5);
 }
 .header-image{
   height: 300px;
-  background-image: url("../img/header.png");
+  background-image: url("../media/image//header.png");
 }
 .header-logo{
   max-width: 100px;
   margin: 80px 70px;
   background-color: rgba(255, 255, 255, .4);
+}
+.bg-rice{
+  background-color: rgb(231, 247, 226);
+}
+.bg-rio{
+  background-color: rgb(191, 210, 2);
 }
 a{
   cursor: pointer;

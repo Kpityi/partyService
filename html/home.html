@@ -6,8 +6,45 @@
   
   <div ng-include src="'./html/loginModal.html'"></div>
 
-  <main>
-    <h1 class="text-center my-4">Home</h1>
+  <main class="container mt-4">
+
+    <h1 class="text-center py-4">Party Service  Your Party - Your day</h1>
+    <!-- Card  (CTA)-->
+    <div class="card bg-rio mb-3 mx-auto" >
+      <div class="row g-0">
+        <div class="col-12 col-lg-5 col-xl-4 m-auto">
+          <img src="./media/image/img-vtm.jpeg" class="img-fluid rounded-start ms-md-3 ms-lg-0 p-2 mx-auto" alt="party image">
+        </div>
+        <div class="col-12 col-lg-7 col-xl-8">
+          <div class="card-body ms-3">
+            <h3 class="card-title mb-4">{{'imagine' | translate:lang.data}}</h3>
+            <p class="card-text fw-bold">{{'offer' | translate:lang.data}}</p>
+            <a href="#" class="btn btn-primary mt-3 text-capitalize">{{'lets_see' | translate:lang.data}}!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- carusel -->
+    <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel" >
+      <div class="carousel-inner">
+        <div 
+          class="carousel-item" 
+          ng-class= "{active: $index===0}" 
+          ng-repeat="image in images track by $index">
+          <img ng-src="{{image}}" class="d-block w-100" alt="{{image}}" >
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
   </main>
 
   <footer ng-include src="'./html/footer.html'"></footer>
