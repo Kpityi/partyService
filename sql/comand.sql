@@ -41,3 +41,17 @@ INNER JOIN menus
 
 SELECT COUNT(*)
 FROM menus;
+
+
+
+SELECT `menus`.`mame` AS menu, 
+`dish_categories`.`type` As category, `dishes`.`name` As name, `dishes`.`description` AS description, `dishes`.`price` As price
+GROUP_CONCAT(DISTINCT `menus`.`name`
+        ORDER BY `menus`.`name`)
+FROM `dishes` 
+INNER JOIN `dish_categories`
+      ON `dishes`.`dish_category_id` = `dish_categories`.`id`
+INNER JOIN `menu_dishes`
+      ON `dishes`.`id` = `menu_dishes`.`dish_id`
+INNER JOIN `menus`
+      ON `menus`.`id` = `menu_dishes`.`menu_id`;
