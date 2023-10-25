@@ -1,0 +1,84 @@
+main {
+	min-height: calc(100vh - 420px) !important;
+}
+.header-image{
+  height: 150px;
+  background-image: url("../img/header.png");
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.header-logo{
+  max-width: 100px;
+  margin: 80px 70px;
+  background-color: rgba(255, 255, 255, .4);
+}
+.login-bg-img{
+  height: 800px;
+  background-image: url(../img/BackGroundHdImages/ppexels-photo-8014699.jpeg);
+  background-position: center !important;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.home-bg-img{
+  height: 100%;
+  background-image: url(../img/BackGroundHdImages/pexels-photo-8014699.jpeg);
+  background-position: center !important;
+  background-repeat: no-repeat;
+  background-size:cover;
+  box-sizing: border-box;
+}
+.contact-bg-img{
+  height: 800px;
+  background-image: url(../img/BackGroundHdImages/pexels-photo-3171770.jpeg);
+  background-position: center !important;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.cart-bg-img{
+  height: 800px;
+  background-image: url(../img/BackGroundHdImages/pexels-photo-2454095.jpeg);
+  background-position: center !important;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.profile-bg-img{
+  height: 800px;
+  background-image: url();
+  background-position: center !important;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.register-bg-img{
+  height: 800px;
+  background-image: url(../img/IPPageImages/pexels-edoardo-tommasini-3249760.jpg);
+  background-position: center !important;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.services-bg-img{
+  height: 800px;
+  background-image: url(../img/IPPageImages/pexels-fauxels-3184183.jpg);
+  background-position: center !important;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.webshop-bg-img{
+  height: 800px;
+  background-image: url(../img/IPPageImages/pexels-christian-fridell-3417441.jpg);
+  background-position: center !important;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+.carousel-item{
+  opacity: 0.2;
+}
+.text-backgroung-home{
+  background-color: gold;
+  opacity: 0.2;
+}
+.font-style-hp{
+  text-align: center;
+  font-weight: bolder;
+}  
+
