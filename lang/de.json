@@ -63,7 +63,7 @@
   "offer": "Weil auch dir ein Tag gebührt, der nur dir gewidmet ist. Lass nicht zu, dass die Komplikationen der Planung die wichtigsten Momente deines Lebens verderben! Vertrau uns die Organisation an, und wir nehmen dir die Last von den Schultern, damit du deine größten Träume in die Realität umsetzen kannst!",
   "lets_see": "lass uns sehen!",
   "finger_foods":"fingerfood",
-  "appatizer" : "vorspeise",
+  "appetizer" : "vorspeise",
   "main_course": "hauptgericht",
   "dessert": "nachtisch",
   "cold_platter": "buffet",
@@ -72,8 +72,8 @@
   "salad": "salat",
   "midnight_dinner": "Mitternachtsessen",
   "pastries": "savaroy pastries",
-  "des_pasries": "Herzhafte und süße Mini-Gebäckstücke: Scones, Brezeln, Salzstangen, Linzer Plätzchen, Isler-Gebäck, Macarons.",
-  "chicken_soup": "Chicken soup with plenty of spiral pasta",
+  "des_pastries": "Herzhafte und süße Mini-Gebäckstücke: Scones, Brezeln, Salzstangen, Linzer Plätzchen, Isler-Gebäck, Macarons.",
+  "chicken_soup": "Hühnersuppe mit reichlich Spiralen-Nudeln",
   "des_chicken_soup": "Hühnersuppe mit Spiralen-Nudeln, Gemüse und gekochtem Huhn",
   "ragout_soup": "Kerbel-Kalbsragout-Suppe",
   "des_ragout_soup": "Kalbsrahmsuppe mit Gemüse, Pilzen und Estragon gewürzt",
@@ -101,5 +101,7 @@
   "des_cold_fruit_soup":"cremige Fruchtsuppe mit gemischten Waldbeeren",
   "des_cold_platter": "Französischer Salat, Schinkenrolle mit Meerrettichcreme, Csabai Schweinelende, Pute gefüllt mit getrockneten Früchten, Casino Eier",
   "sandwich":"Sandwich",
-  "des_sanwich": "Thunfischcreme-Sandwich mit schwarzen Oliven, Mangalitza Schinken-Sandwich mit hausgemachtem Hüttenkäse, Auberginencreme-Sandwich, Paprika Salami-Sandwich mit Frischkäse und Ei"
+  "des_sanwich": "Thunfischcreme-Sandwich mit schwarzen Oliven, Mangalitza Schinken-Sandwich mit hausgemachtem Hüttenkäse, Auberginencreme-Sandwich, Paprika Salami-Sandwich mit Frischkäse und Ei",
+  "basic_menu": "Speisekarten",
+  "basic_menu_description": "Diese Menüs sind Beispielmänner, sie können auf Anfrage angepasst werden, und es besteht die Möglichkeit, individuelle Menüs nach den Wünschen des Kunden zu erstellen."
 }

@@ -10,6 +10,151 @@
 
   <main class="container">
     
+    <!-- Row -->
+    <div class="row mt-3">
+     
+      <!-- Tab buttons -->
+      <ul id="form-tab" 
+          class="nav nav-tabs nav-pills  justify-content-center mt-3 "
+          role="tablist"
+      >
+        
+        <!-- tab1 -->
+        <li class="nav-item nav-item-pills"
+            role="presentation"
+        >
+          <!-- Button -->
+          <button id="tab-1-tab" 
+                  class="btn btn-outline-secondary active ms-2 mb-2 btn-pills-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#tab-1"
+                  role="tab" 
+                  type="button" 
+                  aria-controls="tab-1"
+                  aria-selected="true">
+              Menük
+          </button>  
+        </li>
+          
+        <!-- tab2 -->
+        <li class="nav-item nav-item-pills"
+            role="presentation"
+        >
+          <!-- Button -->
+          <button id="tab-2-tab" 
+                  class="btn btn-outline-secondary ms-2 mb-2 btn-pills-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#tab-2"
+                  role="tab" 
+                  type="button" 
+                  aria-controls="tab-1"
+                  aria-selected="true">
+              Időpont foglalás
+          </button>  
+        </li>        
+      </ul>
+    </div>
+
+    <!-- Row -->
+    <div class="row">
+
+      <!-- Tab content -->
+      <div class="tab-content">
+
+        <!-- Tab1 panel -->
+        <div id="tab-1" 
+              class="tab-pane fade show active  p-3 text-center"
+              role="tabpanel"
+              aria-labelledby="tab-1-tab"
+        >
+
+          <div class="p-52 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+              <h2 class="display-5 capitalize fw-bold">{{'basic_menu' | translate:lang.data}}</h2>
+              <p class="fs-4">{{'basic_menu_description' | translate:lang.data}}</p>
+            </div>            
+          </div>  
+
+          <div ng-repeat="menu in menus track by $index" 
+               class="row"
+               ng-class="{'odds': $index % 2 === 1, 'evens': $index % 2 === 0}"
+          >
+
+            <!-- carousel -->
+            <div class="carousel-container d-none d-md-block col-md-6" 
+                ng-class="{'float-start': $index % 2 === 1, 'float-end': $index % 2 === 0}"
+            >
+              
+              <div id="menuCarousel" class="carousel slide" data-bs-ride="carousel" >
+                <div class="carousel-inner">
+                  <div 
+                    class="carousel-item" 
+                    ng-class= "{active: $index===0}" 
+                    ng-repeat="image in images track by $index">
+                    <img ng-src="{{image}}" class="d-block w-100" alt="{{image}}" >
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>                
+            </div>
+
+            <!-- menus card -->
+            <div class="card-container col-12 col-md-6"
+                 ng-class="{'float-start': $index % 2 === 1, 'float-end': $index % 2 === 0}"
+            >
+              <div class="card" >
+                <div class="card-header fw-bold">
+                  {{ menu.menu_name | translate:lang.data}}
+                </div>
+                <ul class="list-group list-group-flush" 
+                    ng-repeat="items in menu.menu_items"                    
+                >
+                  <li class="list-group-item fw-bold text-start">{{ items.type | translate:lang.data}}:</li>
+                  <li class="list-group-item">{{ items.name | translate:lang.data}}</li>
+                  <li class="list-group-item">{{ items.description | translate:lang.data}}</li>                               
+                </ul>
+                <ul>
+                  <li class="list-group-item d-flex justify-content-around">
+                    <span class="col-6 col-md-3 text-start" >
+                      Ár:
+                    </span>
+                    <span class="col-6 col-md-3 text-end"
+                    > {{menu.menu_items.total}}Ft</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          
+            <hr class="text-muted m-2">
+
+          </div>
+          
+
+        </div>
+
+        <!-- Tab2 panel -->
+        <div id="tab-2" 
+              class="tab-pane fade p-3 text-center"
+              role="tabpanel"
+              aria-labelledby="tab-1-tab"
+        >
+
+          <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+              
+            </div>
+          </div>                    
+        </div>
+      </div>
+    </div>
+    
     
   </main>
 
