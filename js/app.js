@@ -246,11 +246,8 @@
           $scope.data=response;
           $scope.data.forEach(image =>{
             image = image.replace("../", "./")   
-            $scope.images.push(image)       
-            console.log(image)
-          })
-          console.log($scope.images)
-          
+            $scope.images.push(image)                  
+          })   
         })
         .catch(e => {
           // Resolve completed, and show error
@@ -264,8 +261,28 @@
     // Services controller
     .controller("servicesController", [
       "$scope",
-      function ($scope) {
+      "http",
+      "$timeout",
+      function ($scope, http, $timeout) {
         console.log("Service controller...");
+        
+        $scope.menus=[];  
+        
+        // Http request
+        http.request('./php/menus.php')
+        .then(response => {
+          $scope.menus=response;
+          $scope.menus.forEach(menu =>{
+            menu.menu_items = JSON.parse(`${menu.menu_items}`)
+          })
+          console.log($scope.menus) 
+                              
+        })
+        .catch(e => {
+          // Resolve completed, and show error
+          
+          $timeout(() => alert(e));
+        });
       },
     ])
 

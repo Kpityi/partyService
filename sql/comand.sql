@@ -43,6 +43,16 @@ SELECT COUNT(*)
 FROM menus;
 
 
+SELECT menu.name AS menu_name, 
+CONCAT
+( '[', GROUP_CONCAT( JSON_OBJECT('name', dish.name, 'type', dish_category.type, 'price', dish.price) ), ']' ) AS menu_items 
+FROM menus AS menu 
+JOIN menu_dishes AS menu_dish ON menu.id = menu_dish.menu_id 
+JOIN dishes AS dish ON menu_dish.dish_id = dish.id 
+JOIN dish_categories AS dish_category ON dish.dish_category_id = dish_category.id 
+GROUP BY menu.id, menu.name;
+
+
 
 SELECT `menus`.`mame` AS menu, 
 `dish_categories`.`type` As category, `dishes`.`name` As name, `dishes`.`description` AS description, `dishes`.`price` As price
@@ -55,3 +65,13 @@ INNER JOIN `menu_dishes`
       ON `dishes`.`id` = `menu_dishes`.`dish_id`
 INNER JOIN `menus`
       ON `menus`.`id` = `menu_dishes`.`menu_id`;
+
+
+
+
+SELECT menu.name AS menu_name, 
+CONCAT( '[', GROUP_CONCAT( 
+JSON_OBJECT('name', dish.name, 'type', dish_category.type, 'price', dish.price) ), ']' ) AS menu_items 
+FROM menus AS menu 
+JOIN menu_dishes AS menu_dish ON menu.id = menu_dish.menu_id 
+JOIN dishes AS dish ON menu_dish.dish_id = menu_dish.id JOIN dish_categories AS dish_cyategory ON dish.dish_category_id = dish_categor.id GROUP BY menu.id, menu.name; 
