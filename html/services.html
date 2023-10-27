@@ -76,7 +76,7 @@
           </div>  
 
           <div ng-repeat="menu in menus track by $index" 
-               class="row"
+               class="row m-2 p-2 clearfix"
                ng-class="{'odds': $index % 2 === 1, 'evens': $index % 2 === 0}"
           >
 
@@ -85,7 +85,7 @@
                 ng-class="{'float-start': $index % 2 === 1, 'float-end': $index % 2 === 0}"
             >
               
-              <div id="menuCarousel" class="carousel slide" data-bs-ride="carousel" >
+              <div id="menuCarousel{{$index}}" class="carousel slide" data-bs-ride="carousel" >
                 <div class="carousel-inner">
                   <div 
                     class="carousel-item" 
@@ -94,11 +94,11 @@
                     <img ng-src="{{image}}" class="d-block w-100" alt="{{image}}" >
                   </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#menuCarousel{{$index}}" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#menuCarousel{{$index}}" data-bs-slide="next">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
@@ -116,7 +116,7 @@
                 <ul class="list-group list-group-flush" 
                     ng-repeat="items in menu.menu_items"                    
                 >
-                  <li class="list-group-item fw-bold text-start">{{ items.type | translate:lang.data}}:</li>
+                  <li class="list-group-item fw-bold text-start">{{ items.category | translate:lang.data}}:</li>
                   <li class="list-group-item">{{ items.name | translate:lang.data}}</li>
                   <li class="list-group-item">{{ items.description | translate:lang.data}}</li>                               
                 </ul>
@@ -126,15 +126,14 @@
                       Ár:
                     </span>
                     <span class="col-6 col-md-3 text-end"
-                    > {{menu.menu_items.total}}Ft</span>
+                    > {{menu.total_price}}Ft</span>
                   </li>
                 </ul>
               </div>
-            </div>
-          
-            <hr class="text-muted m-2">
-
+            </div>   
           </div>
+
+          <hr class="text-muted m-2">
           
 
         </div>

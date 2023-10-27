@@ -270,21 +270,22 @@
         $scope.images=[];  
         
         // Http request MySQL
-        http.request('./php/menus.php')
+        http.request('./php/menus2.php')
         .then(response => {
+          console.log(response)
           $scope.menus=response;
-          $scope.menus.forEach(menu =>{
-            menu.menu_items = JSON.parse(`${menu.menu_items}`)
-          })
-          $scope.menus.forEach(item=>{
-            let item2=item.menu_items;
-            let totalPrice=0;
-            item2.forEach(x=>{
-              totalPrice+=x.price
-            })
-            item2.total=totalPrice;
-            console.log($scope.menus)
-          })                              
+          // $scope.menus.forEach(menu =>{
+          //   menu.menu_items = JSON.parse(`${menu.menu_items}`)
+          // })
+          // $scope.menus.forEach(item=>{
+          //   let item2=item.menu_items;
+          //   let totalPrice=0;
+          //   item2.forEach(x=>{
+          //     totalPrice+=x.price
+          //   })
+          //   item2.total=totalPrice;
+          //   console.log($scope.menus)
+          // })                              
         })
         .catch(e => {
           // Resolve completed, and show error

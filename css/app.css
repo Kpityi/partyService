@@ -2,17 +2,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
+
+:root{
+  --color-primary: #011f4b;
+  --color-secondary: #03396c;
+  --color-tertiary: #005b96;
+  --color-quaternary: #6497b1;
+  --color-quinary: #D1D1FF;
+}
+
 /* Basic fonts (Open Sans) body bg image */
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif !important;
+    color: var(--color-primary) !important;
     background-image: url(../media/image/background.jpg);
 }
 
 /* Header fonts (Poppins) */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
+    color: var(--color-primary);
 }
 
+.bg-quinary{
+  background-color:  var(--color-quinary);
+}
 
 .nav-bar{
   height: 60px !important;
@@ -27,7 +41,7 @@ main {
 } 
 
 .container{
-  background-color: rgba(255, 255, 255, .6);
+  background-color: rgba(255, 255, 255, .8);
 }
 .header-image{
   height: 300px;
@@ -38,12 +52,7 @@ main {
   margin: 80px 70px;
   background-color: rgba(255, 255, 255, .4);
 }
-.bg-rice{
-  background-color: rgb(231, 247, 226);
-}
-.bg-rio{
-  background-color: rgb(191, 210, 2);
-}
+
 a{
   cursor: pointer;
 
@@ -53,10 +62,10 @@ a[disabled] {
   cursor: not-allowed; 
 }
 .odds{
-  background-color: rgba(177, 120, 230, 0.4);
+  background-color: var(--color-quaternary);
 }
 .evens{
-  background-color: rgba(233, 211, 183, 0.4);
+  background-color: var(--color-quinary);
 }
 
 
