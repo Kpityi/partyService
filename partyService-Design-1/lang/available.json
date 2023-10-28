@@ -1,0 +1,26 @@
+[
+	{
+    "id":"de",
+		"type":"west",
+    "name":"german",
+    "local":"deutsch",
+    "img":"de.png",
+		"valid": true
+  },
+  {
+    "id":"en",
+		"type":"west",
+    "name":"english",
+    "local":"english",
+    "img":"en.png",
+		"valid": true
+  },
+  {
+    "id":"hu",
+	  "type":"east",
+    "name":"hungarian",
+    "local":"magyar",
+    "img":"hu.png",
+		"valid": true
+  }
+]

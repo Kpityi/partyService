@@ -1,0 +1,120 @@
+<div class="page-container">
+
+  <div class="header-image-container" ng-include src="'./html/headerimage.html'"></div>
+  
+  <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
+
+  <main>
+
+    <!--background image-->
+    <div class="services-bg-img">
+
+            <!-- Row -->
+            <div class="row mt-3">
+
+              <!-- Carousel -->
+              <div id="carouselCarCaptions" 
+                   class="carousel slide" 
+                   data-bs-ride="carousel">
+    
+                <!--- Indicators -->
+                <div class="carousel-indicators">
+                  <button type="button" 
+                          data-bs-target="#carouselCarCaptions" 
+                          data-bs-slide-to="0" 
+                          class="active" 
+                          aria-current="true" 
+                          aria-label="Slide 1">
+                  </button>
+                  <button type="button" 
+                          data-bs-target="#carouselCarCaptions" 
+                          data-bs-slide-to="1" 
+                          aria-label="Slide 2">
+                  </button>
+                  <button type="button" 
+                          data-bs-target="#carouselCarCaptions" 
+                          data-bs-slide-to="2" 
+                          aria-label="Slide 3">
+                  </button>
+                  <button type="button" 
+                          data-bs-target="#carouselCarCaptions" 
+                          data-bs-slide-to="3" 
+                          aria-label="Slide 4">
+                  </button>
+                  <button type="button" 
+                          data-bs-target="#carouselCarCaptions" 
+                          data-bs-slide-to="4" 
+                          aria-label="Slide 5">
+                  </button>
+                </div>
+              
+                <!-- Carousel images -->
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="https://dummyimage.com/1600x600" 
+                         class="d-block w-100 op" 
+                         alt="img">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5 class="mb-4">Lorem ipsum 1</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://dummyimage.com/1600x600" 
+                         class="d-block w-100" 
+                         alt="img">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5 class="mb-3">Lorem ipsum 2</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://dummyimage.com/1600x600" 
+                         class="d-block w-100" 
+                         alt="img">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5 class="mb-4">Lorem ipsum 3</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://dummyimage.com/1600x600" 
+                         class="d-block w-100" 
+                         alt="img">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5 class="mb-4">Lorem ipsum 4</h5>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img src="https://dummyimage.com/1600x600" 
+                         class="d-block w-100" 
+                         alt="img">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5 class="mb-4">Lorem ipsum 5</h5>
+                    </div>
+                  </div>
+                </div>
+              
+                <!-- Previous -->
+                <button class="carousel-control-prev" 
+                        type="button" 
+                        data-bs-target="#carouselCarCaptions" 
+                        data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+              
+                <!-- Next -->
+                <button class="carousel-control-next" 
+                        type="button" 
+                        data-bs-target="#carouselCarCaptions" 
+                        data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>  
+    
+  
+  </main>
+
+  <footer ng-include src="'./html/footer.html'"></footer>
+</div>
