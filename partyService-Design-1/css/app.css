@@ -22,7 +22,7 @@ main {
 }
 .home-bg-img{
   height: 100%;
-  background-image: url(../img/BackGroundHdImages/pexels-photo-8014699.jpeg);
+  background-image: url(../img/BackGroundHdImages/pexels-melissa-698907.jpg);
   background-position: center !important;
   background-repeat: no-repeat;
   background-size:cover;
@@ -74,11 +74,46 @@ main {
   opacity: 0.2;
 }
 .text-backgroung-home{
-  background-color: gold;
-  opacity: 0.2;
+  background-color: color-mix(in srgb-linear, grey 20%, gold 50%) !important;
+  fill-opacity: initial;
+  opacity: 0.8;
 }
 .font-style-hp{
   text-align: center;
-  font-weight: bolder;
-}  
+  font-variant: small-caps;
+  color: white !important; 
+  text-shadow: 3px 3px black;
+}
+.font-style-welcome{
+font-family: 'Brush Script MT', cursive;
+text-align: center;
+color: azure;
+text-shadow: 2px 2px black;
+} 
+.font-style-ci{
+font-family: 'Times New Roman', Times, serif;
+font-style: normal;
+color: darkgray;
+text-shadow: 2px 2px black;
+} 
+.font-style-ci-border{
+  border-style: groove;
+  border-color: coral;
+  border-width: 7px;
+}
+.p-e-t-colors-fonts{
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  text-shadow: 4px 4px white;
+  font-size: large; 
+  font-weight: bolder bold;
+  background-color: color-mix(in srgb-linear, grey 0%, gold 80%);
+  opacity: 0.6;
+}
+.p-e-t-c-font{ 
+  text-align: center;
+  font-size: large; 
+  font-weight: bolder bold;
+
+}
 
