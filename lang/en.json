@@ -63,7 +63,7 @@
   "offer": "Because you deserve a day that's all about you too, don't let the complexities of planning spoil the most important moments of your life! Entrust us with the organization, and we'll take the burden off your shoulders, so you can turn your biggest dreams into reality!",
   "lets_see": "let's see!",
   "finger_foods": " finger foods",
-  "appatizer": " appatizer",
+  "appetizer": " appatizer",
   "main_course": "main course",
   "dessert": "dessert",
   "cold_platter": "cold platter",
@@ -72,7 +72,7 @@
   "salad": "salad",
   "midnight_dinner": "midnight dinner",
   "pastries": "savaroy pastries",
-  "des_pasries": "savory and sweet bite-sized pastries: scones, pretzels, salt sticks, Linzer cookies, Isler cookies, macarons.",
+  "des_pastries": "savory and sweet bite-sized pastries: scones, pretzels, salt sticks, Linzer cookies, Isler cookies, macarons.",
   "chicken_soup": "Chicken soup with plenty of spiral pasta",
   "des_chicken_soup": "chicken soup with spiral pasta, vegetables, and boiled chicken",
   "ragout_soup": "Tarragon veal ragout soup",
@@ -101,6 +101,8 @@
   "des_cold_fruit_soup":"creamy fruit soup with mixed forest berries",
   "des_cold_platter": "French salad, Ham roll filled with horseradish cream, Csabai pork loin, Turkey filled with dried fruits, Casino eggs",
   "sandwich":"sandwich",
-  "des_sanwich": "Tuna spread sandwich with black olives, Mangalica ham sandwich with homemade cottage cheese, Eggplant spread sandwich, Paprika salami sandwich with cream cheese and egg"
+  "des_sanwich": "Tuna spread sandwich with black olives, Mangalica ham sandwich with homemade cottage cheese, Eggplant spread sandwich, Paprika salami sandwich with cream cheese and egg",
+  "basic_menu": "menus",
+  "basic_menu_description": "These menus are sample menus, they can be modified upon request, and it is possible to create custom menus according to the customer's preferences."
 
 }

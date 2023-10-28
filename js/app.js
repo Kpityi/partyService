@@ -241,7 +241,7 @@
         $scope.images=[];
 
         // Http request
-        http.request('./php/carousel.php')
+        http.request("./php/carousel.php")
         .then(response => {
           $scope.data=response;
           $scope.data.forEach(image =>{
@@ -266,23 +266,49 @@
       function ($scope, http, $timeout) {
         console.log("Service controller...");
         
-        $scope.menus=[];  
+        $scope.menus=[];
+        $scope.images=[];  
         
-        // Http request
-        http.request('./php/menus.php')
+        // Http request MySQL
+        http.request('./php/menus2.php')
         .then(response => {
+          console.log(response)
           $scope.menus=response;
-          $scope.menus.forEach(menu =>{
-            menu.menu_items = JSON.parse(`${menu.menu_items}`)
-          })
-          console.log($scope.menus) 
-                              
+          // $scope.menus.forEach(menu =>{
+          //   menu.menu_items = JSON.parse(`${menu.menu_items}`)
+          // })
+          // $scope.menus.forEach(item=>{
+          //   let item2=item.menu_items;
+          //   let totalPrice=0;
+          //   item2.forEach(x=>{
+          //     totalPrice+=x.price
+          //   })
+          //   item2.total=totalPrice;
+          //   console.log($scope.menus)
+          // })                              
         })
         .catch(e => {
           // Resolve completed, and show error
           
           $timeout(() => alert(e));
         });
+
+        // Http request carousel
+        http.request("./php/carousel_foods.php")
+        .then(response => {
+          $scope.data=response;
+          $scope.data.forEach(image =>{
+            image = image.replace("../", "./")   
+            $scope.images.push(image)                  
+          })   
+        })
+        .catch(e => {
+          // Resolve completed, and show error
+          
+          $timeout(() => alert(e));
+        }); 
+
+      
       },
     ])
 

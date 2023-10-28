@@ -1,7 +1,7 @@
 <?php
 
 // Set arguments
-$_GET['data'] = '{"email":"kertesz.istvan-e2022@keri.mako.hu","password":"1234Aa"}';
+$_GET['data'] = '{"path":"../media/image/carousel/*.*"}';
 
 // Call php file to debug
-require_once('login.php');
+require_once('carousel.php');
