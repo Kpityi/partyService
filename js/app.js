@@ -208,10 +208,10 @@
 
         // Initialize language
         lang.init();
-        console.log("lang: " + $rootScope.lang.available[lang.index]);
+
         // Initialize user
         user.init();
-        console.log("user.id " + $rootScope.user.id);
+        console.log("user.id " + $rootScope.user.id)
         // Get current date
         $rootScope.currentDay = new Date();
 
@@ -265,10 +265,16 @@
       "$timeout",
       function ($scope, http, $timeout) {
         console.log("Service controller...");
+
+        const myCarouselElement = document.querySelector('#menuCarousel')
+        const carousel = new bootstrap.Carousel(myCarouselElement, {
+          interval: 2000
+        });
+        carousel.to(1)
         
         $scope.menus=[];
         $scope.images=[];  
-        
+        //console.log($rootScope.user.nick_name)
         // Http request MySQL
         http.request('./php/menus2.php')
         .then(response => {
@@ -373,6 +379,7 @@
             email: $scope.email,
             password: $scope.password,
           };
+
           // Http request
           http
             .request({
@@ -382,12 +389,10 @@
             })
             .then((response) => {
               console.log(response);
-              response.email = $scope.model.email;
+              $scope.model.email = response.email;
               user.set(response);
               console.log("user.id " + $rootScope.user.id);
-              // Go to previouse page
               $scope.$applyAsync();
-              //window.history.back();
             });
         };        
       },

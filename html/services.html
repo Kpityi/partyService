@@ -1,11 +1,12 @@
 <div class="page-container">
-  <div
-    class="header-image-container"
-    ng-include
-    src="'./html/headerimage.html'"
-  ></div>
 
+  <!-- header image -->
+  <div class="header-image-container" ng-include src="'./html/headerimage.html'"></div>
+
+  <!-- menu -->
   <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
+  
+  <!-- include login page -->
   <div ng-include src="'./html/loginModal.html'"></div>
 
   <main class="container">
@@ -31,8 +32,9 @@
                   role="tab" 
                   type="button" 
                   aria-controls="tab-1"
-                  aria-selected="true">
-              Menük
+                  aria-selected="true"
+          >
+            {{'basic_menu' | translate:lang.data}}
           </button>  
         </li>
           
@@ -48,8 +50,9 @@
                   role="tab" 
                   type="button" 
                   aria-controls="tab-1"
-                  aria-selected="true">
-              Időpont foglalás
+                  aria-selected="true"
+          >
+            {{'reservation' | translate:lang.data}}
           </button>  
         </li>        
       </ul>
@@ -70,71 +73,116 @@
 
           <div class="p-52 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
-              <h2 class="display-5 capitalize fw-bold">{{'basic_menu' | translate:lang.data}}</h2>
+              <h2 class="display-5 letter-capitalize fw-bold">{{'basic_menu' | translate:lang.data}}</h2>
               <p class="fs-4">{{'basic_menu_description' | translate:lang.data}}</p>
             </div>            
           </div>  
+          
+          <div class="row justify-content-center">
 
-          <div ng-repeat="menu in menus track by $index" 
-               class="row m-2 p-2 clearfix"
-               ng-class="{'odds': $index % 2 === 1, 'evens': $index % 2 === 0}"
-          >
+            <div class="d-none col-md-2 col-lg-3"></div>
 
-            <!-- carousel -->
-            <div class="carousel-container d-none d-md-block col-md-6" 
-                ng-class="{'float-start': $index % 2 === 1, 'float-end': $index % 2 === 0}"
-            >
-              
-              <div id="menuCarousel{{$index}}" class="carousel slide" data-bs-ride="carousel" >
-                <div class="carousel-inner">
-                  <div 
-                    class="carousel-item" 
-                    ng-class= "{active: $index===0}" 
-                    ng-repeat="image in images track by $index">
-                    <img ng-src="{{image}}" class="d-block w-100" alt="{{image}}" >
+            <div class="col-12 col-md-8 col-lg-6 mx-auto" >
+
+               <!-- carousel -->
+              <div class="carousel-container overflow-hidden" >
+          
+                <div id="menuCarousel" class="carousel slide" data-bs-ride="carousel" >
+                  <div class="carousel-inner">
+                    <div 
+                      class="carousel-item" 
+                      ng-class= "{active: $index===0}" 
+                      ng-repeat="image in images track by $index">
+                      <img ng-src="{{image}}" 
+                          class="d-block w-100" 
+                          alt="{{image}}" 
+                          style="max-height: 300px; width: 100%;"  >
+                    </div>
                   </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#menuCarousel{{$index}}" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#menuCarousel{{$index}}" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>                
+                  <button class="carousel-control-prev" 
+                          type="button" 
+                          data-bs-target="#menuCarousel" 
+                          data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" 
+                          aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" 
+                          type="button" 
+                          data-bs-target="#menuCarousel" 
+                          data-bs-slide="next">
+                    <span class="carousel-control-next-icon" 
+                          aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>                
+              </div>
             </div>
 
-            <!-- menus card -->
-            <div class="card-container col-12 col-md-6"
-                 ng-class="{'float-start': $index % 2 === 1, 'float-end': $index % 2 === 0}"
-            >
-              <div class="card" >
-                <div class="card-header fw-bold">
-                  {{ menu.menu_name | translate:lang.data}}
-                </div>
-                <ul class="list-group list-group-flush" 
-                    ng-repeat="items in menu.menu_items"                    
-                >
-                  <li class="list-group-item fw-bold text-start">{{ items.category | translate:lang.data}}:</li>
-                  <li class="list-group-item">{{ items.name | translate:lang.data}}</li>
-                  <li class="list-group-item">{{ items.description | translate:lang.data}}</li>                               
-                </ul>
-                <ul>
-                  <li class="list-group-item d-flex justify-content-around">
-                    <span class="col-6 col-md-3 text-start" >
-                      Ár:
-                    </span>
-                    <span class="col-6 col-md-3 text-end"
-                    > {{menu.total_price}}Ft</span>
-                  </li>
-                </ul>
-              </div>
-            </div>   
-          </div>
+            <div class="d-none col-md-2 col-lg-3 "></div>
 
-          <hr class="text-muted m-2">
-          
+          </div>
+        
+          <!-- menus card -->
+          <div class="card-container  ">
+
+            <div ng-repeat="menu in menus track by $index" 
+                  class="my-3"
+                  ng-class="{'bg-light': $index % 2 === 1, 'evens': $index % 2 === 0}"
+            >    
+
+                <div class="col-12 py-2">
+                  <div class="card w-75 mx-auto" >
+                    <div class="card-header fw-bold letter-capitalize">
+                      {{ menu.menu_name | translate:lang.data}}
+                    </div>
+                    <ul class="list-group list-group-flush" 
+                        ng-repeat="items in menu.menu_items track by $index"                    
+                    >
+                      <li class="list-group-item fw-bold text-start">
+                        
+                        <!-- accordion of menus -->
+                        <div class="accordion" id="accordionMenu">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{$index}}">
+                              <button class="accordion-button" 
+                                      type="button" 
+                                      data-bs-toggle="collapse" 
+                                      data-bs-target="#collapse{{$index}}" 
+                                      aria-expanded="true" 
+                                      aria-controls="collapse{{$index}}">
+                                <span class="col-5 ms-1 fw-bold ">{{ items.category | translate:lang.data}}:</span>
+                                <span class="col-5 text-end">{{ items.name | translate:lang.data}}</span>
+                              </button>
+                            </h2>
+                            <div id="collapse{{$index}}" 
+                                class="accordion-collapse collapse" 
+                                ng-class="{show: $index===-1}"
+                                aria-labelledby="heading{{$index}}" 
+                                data-bs-parent="#accordionMenu">
+                              <div class="accordion-body">
+                                {{ items.description | translate:lang.data}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>                                        
+                      </li>                              
+                    </ul>
+                    <ul>
+                      <li class="list-group-item card-footer d-flex justify-content-around mt-2">
+                        <span class="col-6 text-start" >
+                          Ár:
+                        </span>
+                        <span class="col-6 text-end pe-4"> 
+                          {{menu.total_price}}Ft
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+              </div>
+            </div>
+
+          </div>          
 
         </div>
 
@@ -145,13 +193,51 @@
               aria-labelledby="tab-1-tab"
         >
 
-          <div class="p-5 mb-4 bg-light rounded-3">
-            <div class="container-fluid py-5">
+        <div class="p-52 mb-4 bg-light rounded-3">
+          <div class="container-fluid py-5">
+
+            <!-- if user not logged in -->
+            <h3 class="text-center letter-capitalize" 
+                ng-if="!user.id"
+            >
+             {{'please_login' | translate:lang.data}}!
+            </h3>  
+
+            <!-- if user logged in -->
+            <div ng-if="user.id"> 
+              <h2 class="letter-capitalize text-underline text-center">{{'reservation' | translate:lang.data}}</h2>
+
+              <div class="row mt-3">
+                <div class="col-6 text-end">{{'name' | translate:lang.data}}:</div>
+                <div class="col-6 text-start "> <span
+                  class="text-capitalize"
+                  ng-repeat="k in lang.rule[lang.type]"
+                >
+                  {{user[k]}}
+                </span></div>
+              </div>
+              <!-- reservation form -->
+              <form class="mt-2 col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6" name="reservationForm">
+                <div class="row iunput-group">
               
+                  <div class="col-6">
+                   
+                  </div>
+                </div>
+                
+                
+  
+              </form>
             </div>
-          </div>                    
+
+
+          </div>
+        </div> 
+                              
         </div>
+
       </div>
+    
     </div>
     
     
