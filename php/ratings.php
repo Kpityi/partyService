@@ -11,7 +11,7 @@ $query = "SELECT `rating`,
                  `rating_text`, 
                  `rating_answer`,
                  `date`, 
-                 `users`.`last_name`, 
+                 `users`.`first_name`, 
                   BASE64_ENCODE(`users`.`img`) AS `img`, 
                  `users`.`img_type`, 
                  `users`.`gender_id`  
