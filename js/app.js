@@ -235,10 +235,12 @@
     .controller("homeController", [
       "$scope",
       "http",
-      function ($scope, http) {
+      "$timeout",
+      function ($scope, http, $timeout) {
         console.log("Home controller...");
         
         $scope.images=[];
+        $scope.ratings=[];
 
         // Http request
         http.request("./php/carousel.php")
@@ -248,6 +250,18 @@
             image = image.replace("../", "./")   
             $scope.images.push(image)                  
           })   
+        })
+        .catch(e => {
+          // Resolve completed, and show error
+          
+          $timeout(() => alert(e));
+        });
+
+        // Http request
+        http.request("./php/ratings.php")
+        .then(response => {
+          $scope.ratings = response;
+          console.log(response);                    
         })
         .catch(e => {
           // Resolve completed, and show error
