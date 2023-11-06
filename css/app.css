@@ -67,6 +67,21 @@ a[disabled] {
 .evens{
   background-color: var(--color-quinary);
 }
+.wrapper:nth-child(odd){
+  background-color: var(--color-quinary);
+}
+.wrapper:nth-child(even){
+  background-color:white;
+}
+.small-ratings{
+    
+  color:#cecece;
+  
+}
+
+.rating-color{
+  color:#fbc634 !important;
+}
 
 
 
