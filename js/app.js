@@ -275,9 +275,10 @@
     // Services controller
     .controller("servicesController", [
       "$scope",
+      "$rootScope",
       "http",
       "$timeout",
-      function ($scope, http, $timeout) {
+      function ($scope, $rootScope, http, $timeout) {
         console.log("Service controller...");
 
         // Menues tab
@@ -371,7 +372,7 @@
         $scope.dayReservation= ()=> {
           alert("sikeres foglalás")
           $scope.reservation={
-            userId: 1,
+            userId: $rootScope.user.id,
             date: moment($scope.reservationData.date).format('YYYY-MM-DD'),
             eventPlaceId: $scope.reservationData.event_place.id,
             eventTypeId: $scope.reservationData.event.id,
