@@ -104,5 +104,16 @@
   "des_sanwich": "Tonhalkrémes szendvics fekete olivával, Mangalicasonkás szendvics házi túróval, Padlizsánkrémes szendvics, Paprikás szalámis szendvics sajtkrémmel, tojással",
   "basic_menu": "menük",
   "basic_menu_description": "Ezek a menük példa menük, kérés esetén módosíthatók, lehetőség van egyedi menük elkészítésére a megrendelő igénye szerint.",
-  "wedding_menu_I": "Esküvői menü I"
+  "wedding_menu_I": "Esküvői menü I",
+  "opinions": "vélemények",
+  "welcoming": "Üdvözöljük a PartyService-nél!",
+  "welcome_text":"Az Ön rendezvényének és minden kellékének szakértője. Ha Ön életének legfontosabb pillanatait szeretné feldobni, ha eljött a buli ideje, akkor jó helyen jár! A PartyService egyedülálló buliszerviz, ami mindenféle rendezvény és ünnepség szervezését és kivitelezését szakmai precizitással végzi. Legyen szó születésnapi zsúrról, esküvőről, céges rendezvényről vagy bármilyen egyedi eseményről, mi mindent megteszünk azért, hogy az Ön bulija emlékezetes és kifogástalan legyen.",
+  "why_choose_us": "Mért válasszon minket?",
+  "wcu_p1": "PartyService egy olyan csapat, akik évek óta a szórakoztatás és rendezvényszervezés területén tevékenykednek. Kínálatunkban megtalál mindent, amire egy bulihoz szüksége lehet, kezdve az asztaldíszektől és lufiktól a hang- és fénytechnikai berendezésekig. A legfrissebb trendeket követve mindig az újításokra törekszünk. Rugalmasan alkalmazkodunk az Ön igényeihez, és testre szabott megoldásokat kínálunk. Legyen szó gyermekszületésnapról vagy felnőttbuliról, mi minden kiegészítőt és dekorációt biztosítunk, hogy a vendégek még sokáig emlékezzenek a napra.",
+  "offer_p2": "Van egy egyedi ötlete vagy kérése? Mi készségesen vesszük a kihívást, és együtt megtervezzük az eseményt a részletekig. Nem csupán termékeket árulunk, hanem élményeket és emlékeket teremtünk. Keresse fel üzletünket, vagy vegye fel velünk a kapcsolatot, hogy együtt tervezzük meg a következő nagy eseményt! Tegye felejthetetlenné a pillanatokat a PartyService segítségével, és csatlakozzon azokhoz, akik már megtapasztalták, hogy nálunk minden buli tökéletes.",
+  "about_us_p1": "Cégünk egy megbízható és sokoldalú rendezvényszervező szolgáltató, amely magas színvonalú szolgáltatásokat nyújt különböző eseményekhez, ezáltal minden rendezvényt különlegessé varázsolunk. Büszkék vagyunk arra, hogy kiváló szolgáltatásokkal és sokféle helyszínnel állunk ügyfeleink rendelkezésére. Emellett lehetőség van arra, hogy a kiválasztott helyszínen szervezze rendezvényét, és mi gondoskodunk a személyzetről, hogy Önnek semmi dolga ne maradjon.",
+  "about_us_p2": "A kreatív és elkötelezett személyzetünk minden ügyfelünk igényeit szem előtt tartja, és az Ön által választott helyen is készségesen állunk szolgálatára. Legyen szó esküvőről, születésnapról, céges rendezvényről vagy bármilyen különleges alkalomról, mi mindent megteszünk azért, hogy az eseménye kifogástalanul sikerüljön. Étlapjainkon megtalálhatók alkalomhoz illő alap menük, melyek kombinálhatók is, de szívesen segítünk egyedi menü összeállításában is, hogy az étkezés is emlékezetessé váljon. Ezenkívül rendelkezünk egy online áruházzal, ahol party kellékeket és dekorációkat vásárolhat, így mindenki megtalálhatja az ideális kiegészítőket a rendezvényéhez, hogy eseménye még színesebb legyen.",
+  "wcu_p3": "Bízunk benne, hogy hamarosan találkozunk Önnel, és lehetőséget kapunk arra, hogy segíthessünk rendezvénye tervezésében és megvalósításában. Amennyiben további információra van szüksége, ne habozzon kapcsolatba lépni velünk!",
+  "rating": "értékelés"
+
 }
