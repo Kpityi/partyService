@@ -134,7 +134,12 @@
   "drink_package": "italcsomag",
   "event_place": "helyszín",
   "event_menu": "menü",
-  "send": "küldés"
+  "send": "küldés",
+  "external_location": "külső helyszín",
+  "small_room": "kisterem",
+  "grand_hall": "Nagyterem",
+  "outdoor": "szabadtéri",
+  "person":"fő"
 
 
 }

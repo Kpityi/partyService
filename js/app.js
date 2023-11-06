@@ -282,20 +282,22 @@
           drinkPackage: null,
           guests: null
         };
-        $scope.menus={};
-        $scope.eventMenus={};
-        $scope.drinkPackage={}
+        $scope.originalReservationData = angular.copy($scope.reservationData);
+
+        $scope.menus=[];
+        $scope.eventMenus=[];
+        $scope.drinkPackages=[];
+        $scope.eventsData=[];
         $scope.images=[];  
 
-        // Http request MySQL
+        // Http request menus
         http.request('./php/menus2.php')
         .then(response => {
-          console.log(response)
           $scope.menus=response;
           $scope.eventMenus=response.slice(0, -3);
-          $scope.eventMenus.push({menu_name:"custom_menu"},{menu_name:"none"});
-          $scope.drinkPackage=response.slice(-3);
-          $scope.drinkPackage.push({menu_name:"none"});
+          $scope.eventMenus.push({menu_name:"custom_menu", id: 0} , {menu_name:"none", id: null});
+          $scope.drinkPackages=response.slice(-3);
+          $scope.drinkPackages.push({menu_name:"none", id: null});
 
           // $scope.menus.forEach(menu =>{
           //   menu.menu_items = JSON.parse(`${menu.menu_items}`)
@@ -316,7 +318,7 @@
           $timeout(() => alert(e));
         });
 
-        // Http request carousel
+        // Http request carousel food pictures
         http.request("./php/carousel_foods.php")
         .then(response => {
           $scope.data=response;
@@ -332,6 +334,20 @@
         }); 
 
         // reservation tab
+
+        // Http request event types & event places
+        http.request('./php/services.php')
+        .then(response => {
+          $scope.eventsData=response;
+          console.log($scope.eventsData)
+
+        })
+        .catch(e => {
+          // Resolve completed, and show error
+          
+          $timeout(() => alert(e));
+        });
+
         //set min & max data
         $scope.reservDate = ({
           max     : moment().add( 2, 'years').format('YYYY-MM-DD'),
@@ -339,21 +355,37 @@
         });
 
         $scope.dayReservation= ()=> {
-          console.log("sikeres foglalás")
-          $scope.reservationData={
+          alert("sikeres foglalás")
+          $scope.reservation={
             userId: 1,
             date: moment($scope.reservationData.date).format('YYYY-MM-DD'),
             eventPlaceId: $scope.reservationData.event_place.id,
             eventTypeId: $scope.reservationData.event.id,
-            menuId: $scope.reservationData.event_menu.menu_name == "none" ? null : $scope.reservationData.event_menu.id,
-            drinkPackage: $scope.reservationData.drink_package.menu_name == "none" ? null : $scope.reservationData.drink_package.id,
+            menuId: $scope.reservationData.event_menu.id,
+            drinkPackageId: $scope.reservationData.drink_package.id,
             guests: $scope.reservationData.guests
           };
-          console.log($scope.reservationData)
+          //$scope.reservationData = angular.copy($scope.originalReservationData);
+          console.log($scope.reservation)
 
+          // Http request reservation
+          http.request({
+            url   : './php/reservation.php',
+            method: 'POST',
+            data  : $scope.reservation
+          })
+          .then(response => {
+  
+            // Check success
+            if (response.affectedRows) {
+                    console.log(response.lastInsertId);
+                    $scope.$applyAsync();
+                    alert(`Reservation succesfull,  ${response.lastInsertId}`);
+            } else  alert(`Reservation unsuccesfull!  ${response}`);
+          })
+          .catch(error => {$timeout(() => alert(error), 50);});
         }
 
-      
       },
     ])
 

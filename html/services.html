@@ -249,35 +249,7 @@
                            required
                     >
                   </div>
-                </div>
-
-                <!-- Date of event -->
-                <div class="row iunput-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-6 text-start text-sm-end">
-                    <label for="date" 
-                           class="col-form-label letter-capitalize ms-1 ms-sm-0"
-                    >
-                      <span>
-                        {{'date' | translate:lang.data}}:
-                      </span>
-                    </label>
-                  </div>
-                  <div class="col-8 col-sm-6 letter-capitalize">
-                    <input type="date" 
-                           name="date" 
-                           id="date"
-                           class="form-control rounded-pill shadow-sm"
-                           min="{{reservDate.min}}"
-                           max="{{reservDate.max}}"                          
-                           spellcheck="false"
-                           autocomplete="off"
-                           ng-model="reservationData.date"                           
-                           style="width: 200px;"
-                           ng-disabled="reservationForm.guests.$invalid"
-                           required
-                    >
-                  </div>
-                </div>
+                </div>               
 
                 <!-- Event -->
                 <div class="row iunput-group mb-2 justify-content-center">
@@ -296,9 +268,9 @@
                             id="event"
                             class="form-select rounded-pill shadow-sm"
                             spellcheck="false"
-                            ng-options="{{'menu.menu_name' | translate:lang.data}}  for menu in menus"
+                            ng-options="event.event_types | translate:lang.data  for event in eventsData.eventTypes"
                             style="width: 200px;"
-                            ng-disabled="reservationForm.date.$invalid"
+                            ng-disabled="reservationForm.guests.$invalid"
                             required
                     >
                       <option value=""
@@ -326,7 +298,7 @@
                             id="event_place"
                             class="form-select rounded-pill shadow-sm"
                             spellcheck="false"
-                            ng-options="{{'menu.menu_name' | translate:lang.data}}  for menu in menus"
+                            ng-options="(place.place_name | translate:lang.data) +' (max.: '+ place.capacity +' '+ ('person' | translate:lang.data) + ')' for place in eventsData.eventPlaces"
                             style="width: 200px;"
                             ng-disabled="reservationForm.event.$invalid"
                             required
@@ -336,6 +308,34 @@
                         -- {{'select' | translate:lang.data}} --
                       </option>
                     </select>
+                  </div>
+                </div>
+
+                 <!-- Date of event -->
+                 <div class="row iunput-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-6 text-start text-sm-end">
+                    <label for="date" 
+                           class="col-form-label letter-capitalize ms-1 ms-sm-0"
+                    >
+                      <span>
+                        {{'date' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-8 col-sm-6 letter-capitalize">
+                    <input type="date" 
+                           name="date" 
+                           id="date"
+                           class="form-control rounded-pill shadow-sm"
+                           min="{{reservDate.min}}"
+                           max="{{reservDate.max}}"                          
+                           spellcheck="false"
+                           autocomplete="off"
+                           ng-model="reservationData.date"                           
+                           style="width: 200px;"
+                           ng-disabled="reservationForm.event_place.$invalid"
+                           required
+                    >
                   </div>
                 </div>
 
@@ -358,7 +358,7 @@
                             spellcheck="false"
                             ng-options="menu.menu_name | translate:lang.data  for menu in eventMenus"
                             style="width: 200px;"
-                            ng-disabled="reservationForm.event_place.$invalid"
+                            ng-disabled="reservationForm.date.$invalid"
                             required
                     >
                       <option value=""
@@ -386,9 +386,9 @@
                             id="drink_package"
                             class="form-select rounded-pill shadow-sm"
                             spellcheck="false"
-                            ng-options="drink.menu_name | translate:lang.data  for drink in drinkPackage"
+                            ng-options="drink.menu_name | translate:lang.data  for drink in drinkPackages"
                             style="width: 200px;"
-                            ng-disabled="reservationForm.event_place.$invalid"
+                            ng-disabled="reservationForm.date.$invalid"
                             required
                     >
                       <option value=""
@@ -399,10 +399,10 @@
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-auto">
+                <div class="row ">
+                  <div class="col-auto mx-auto my-3">
                     <button type="submit" 
-                            class="btn btn-primary mb-3"
+                            class="btn btn-primary"
                             ng-click="dayReservation()"
                             ng-disabled="reservationForm.$invalid"
                     >
@@ -412,15 +412,7 @@
                 </div>
 
               </form>
-              <pre>
-
-                <p>vendégek: {{reservationData.guests}}</p>
-                <p>dátum: {{reservationData.date}}</p>
-                <p>esemény:{{reservationData.event.id}}</p>
-                <p>helyszín: {{reservationData.event_place.id}}</p>
-                <p>menu: {{reservationData.event_menu.menu_name}}</p>
-                <p>drink: {{reservationData.drink_package.menu_name}}</p>
-              </pre>
+              
             </div>
 
 

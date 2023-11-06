@@ -131,7 +131,13 @@
   "select": "auswählen",
   "custom_menu": "individuelles Menü",
   "none": "kein",
-  "send": "senden"
+  "send": "senden",
+  "external_location": "externe Veranstaltungsort",
+  "small_room": "kleiner Raum",
+  "grand_hall": "Festsaa",
+  "outdoor": "im Freien",
+  "person":"Person"
+
   
 
 }

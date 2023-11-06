@@ -131,7 +131,11 @@
   "select": "select",
   "custom_menu":"custom menu",
   "none": "none",
-  "send": "send"
-
+  "send": "send",
+  "external_location": "external location",
+  "small_room": "small room",
+  "grand_hall": "grand hall",
+  "outdoor": "outdoor",
+  "person":"person"
 
 }
