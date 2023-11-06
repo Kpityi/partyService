@@ -116,5 +116,25 @@
   "new_year_menu": "új évi menü",
   "graduation_menu": "ballagási menü",
   "please_login": "Az időpont foglaláshoz kérjük jelentkezzen be",
-  "reservation": "időpont foglalás"
+  "reservation": "időpont foglalás",
+  "number_of_guests": "vendégek száma", 
+  "date": "dátum",
+  "event": "esemény",
+  "birthday":"születésnap",
+  "wedding": "esküvő",
+  "hen_party": "lánybúcsú",
+  "stag_party": "legénybúcú",
+  "kids_party": "gyerekzsúr",
+  "other_party": "egyéb rendezvény (pl.: állófogadás)",
+  "new_year_party": "szilveszteri party",
+  "graduation": "ballagás",
+  "select": "válasszon",
+  "custom_menu": "egyedi menü",
+  "none": "nincs",
+  "drink_package": "italcsomag",
+  "event_place": "helyszín",
+  "event_menu": "menü",
+  "send": "küldés"
+
+
 }

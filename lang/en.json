@@ -116,6 +116,22 @@
   "new_year_menu": "New Year's menu",
   "graduation_menu": "graduation menu",
   "please_login": "Please log in to make a reservation",
-  "reservation": "reservation"
+  "reservation": "reservation",
+  "number_of_guests": "number of guests",
+  "date": "date",
+  "event": "event",
+  "birthday":"birthday",
+  "wedding": "wedding",
+  "hen_party": "hen party",
+  "stag_party": "stag party",
+  "kids_party": "children's party",
+  "other_party": "other event (e.g., cocktail reception)",
+  "new_year_party": "New Year's Eve party",
+  "graduation": "graduation",
+  "select": "select",
+  "custom_menu":"custom menu",
+  "none": "none",
+  "send": "send"
+
 
 }

@@ -266,20 +266,37 @@
       function ($scope, http, $timeout) {
         console.log("Service controller...");
 
+        // Menues tab
         const myCarouselElement = document.querySelector('#menuCarousel')
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 2000
         });
         carousel.to(1)
         
-        $scope.menus=[];
+        $scope.reservationData={
+          userId: null,
+          date:null,
+          eventPlaceId: null,
+          eventTypeId: null,
+          menuId: null,
+          drinkPackage: null,
+          guests: null
+        };
+        $scope.menus={};
+        $scope.eventMenus={};
+        $scope.drinkPackage={}
         $scope.images=[];  
-        //console.log($rootScope.user.nick_name)
+
         // Http request MySQL
         http.request('./php/menus2.php')
         .then(response => {
           console.log(response)
           $scope.menus=response;
+          $scope.eventMenus=response.slice(0, -3);
+          $scope.eventMenus.push({menu_name:"custom_menu"},{menu_name:"none"});
+          $scope.drinkPackage=response.slice(-3);
+          $scope.drinkPackage.push({menu_name:"none"});
+
           // $scope.menus.forEach(menu =>{
           //   menu.menu_items = JSON.parse(`${menu.menu_items}`)
           // })
@@ -313,6 +330,28 @@
           
           $timeout(() => alert(e));
         }); 
+
+        // reservation tab
+        //set min & max data
+        $scope.reservDate = ({
+          max     : moment().add( 2, 'years').format('YYYY-MM-DD'),
+          min     : moment().add(1, 'days').format('YYYY-MM-DD')
+        });
+
+        $scope.dayReservation= ()=> {
+          console.log("sikeres foglalás")
+          $scope.reservationData={
+            userId: 1,
+            date: moment($scope.reservationData.date).format('YYYY-MM-DD'),
+            eventPlaceId: $scope.reservationData.event_place.id,
+            eventTypeId: $scope.reservationData.event.id,
+            menuId: $scope.reservationData.event_menu.menu_name == "none" ? null : $scope.reservationData.event_menu.id,
+            drinkPackage: $scope.reservationData.drink_package.menu_name == "none" ? null : $scope.reservationData.drink_package.id,
+            guests: $scope.reservationData.guests
+          };
+          console.log($scope.reservationData)
+
+        }
 
       
       },

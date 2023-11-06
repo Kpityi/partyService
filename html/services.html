@@ -204,30 +204,223 @@
             </h3>  
 
             <!-- if user logged in -->
-            <div ng-if="user.id"> 
+            <div ng-if="!user.id"> 
               <h2 class="letter-capitalize text-underline text-center">{{'reservation' | translate:lang.data}}</h2>
 
               <div class="row mt-3">
-                <div class="col-6 text-end">{{'name' | translate:lang.data}}:</div>
-                <div class="col-6 text-start "> <span
+                <div class="col-6 text-end text-capitalize">{{'name' | translate:lang.data}}:</div>
+                <div class="col-6 text-start "> 
+                  <span
                   class="text-capitalize"
                   ng-repeat="k in lang.rule[lang.type]"
-                >
-                  {{user[k]}}
-                </span></div>
+                  >
+                    {{user[k]}}
+                  </span>
+                </div>
               </div>
+
               <!-- reservation form -->
-              <form class="mt-2 col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6" name="reservationForm">
-                <div class="row iunput-group">
-              
-                  <div class="col-6">
-                   
+              <form class="mt-2 text-center justify-content-center" 
+                    name="reservationForm"
+              >
+
+                <!-- Number of guests -->
+                <div class="row iunput-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-6 text-start text-sm-end">
+                    <label for="guests" 
+                           class="col-form-label letter-capitalize ms-1 ms-sm-0"
+                    >
+                      <span class="text-nowrap">
+                        {{'number_of_guests' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-8 col-sm-6  letter-capitalize">
+                    <input type="number" 
+                           name="guests" 
+                           id="guests"
+                           class="form-control rounded-pill shadow-sm"
+                           placeholder="{{'number_of_guests' | translate:lang.data}}"
+                           spellcheck="false"
+                           autocomplete="off"
+                           ng-model="reservationData.guests"                           
+                           maxlength="10"
+                           style="width: 200px;"
+                           required
+                    >
+                  </div>
+                </div>
+
+                <!-- Date of event -->
+                <div class="row iunput-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-6 text-start text-sm-end">
+                    <label for="date" 
+                           class="col-form-label letter-capitalize ms-1 ms-sm-0"
+                    >
+                      <span>
+                        {{'date' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-8 col-sm-6 letter-capitalize">
+                    <input type="date" 
+                           name="date" 
+                           id="date"
+                           class="form-control rounded-pill shadow-sm"
+                           min="{{reservDate.min}}"
+                           max="{{reservDate.max}}"                          
+                           spellcheck="false"
+                           autocomplete="off"
+                           ng-model="reservationData.date"                           
+                           style="width: 200px;"
+                           ng-disabled="reservationForm.guests.$invalid"
+                           required
+                    >
+                  </div>
+                </div>
+
+                <!-- Event -->
+                <div class="row iunput-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-6 text-start text-sm-end">
+                    <label for="event" 
+                           class="col-form-label letter-capitalize ms-1 ms-sm-0"
+                    >
+                      <span>
+                        {{'event' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-8 col-sm-6 letter-capitalize">
+                    <select ng-model="reservationData.event" 
+                            name="event" 
+                            id="event"
+                            class="form-select rounded-pill shadow-sm"
+                            spellcheck="false"
+                            ng-options="{{'menu.menu_name' | translate:lang.data}}  for menu in menus"
+                            style="width: 200px;"
+                            ng-disabled="reservationForm.date.$invalid"
+                            required
+                    >
+                      <option value=""
+                              class="text-capitalize">
+                        -- {{'select' | translate:lang.data}} --
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Event place -->
+                <div class="row iunput-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-6 text-start text-sm-end">
+                    <label for="event_place" 
+                           class="col-form-label letter-capitalize ms-1 ms-sm-0"
+                    >
+                      <span>
+                        {{'event_place' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-8 col-sm-6 letter-capitalize">
+                    <select ng-model="reservationData.event_place" 
+                            name="event_place" 
+                            id="event_place"
+                            class="form-select rounded-pill shadow-sm"
+                            spellcheck="false"
+                            ng-options="{{'menu.menu_name' | translate:lang.data}}  for menu in menus"
+                            style="width: 200px;"
+                            ng-disabled="reservationForm.event.$invalid"
+                            required
+                    >
+                      <option value=""
+                              class="text-capitalize">
+                        -- {{'select' | translate:lang.data}} --
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Event menu-->
+                <div class="row iunput-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-6 text-start text-sm-end">
+                    <label for="event_menu" 
+                           class="col-form-label letter-capitalize ms-1 ms-sm-0"
+                    >
+                      <span>
+                        {{'event_menu' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-8 col-sm-6 letter-capitalize" >
+                    <select ng-model="reservationData.event_menu" 
+                            name="event_menu" 
+                            id="event_menu"
+                            class="form-select rounded-pill shadow-sm"
+                            spellcheck="false"
+                            ng-options="menu.menu_name | translate:lang.data  for menu in eventMenus"
+                            style="width: 200px;"
+                            ng-disabled="reservationForm.event_place.$invalid"
+                            required
+                    >
+                      <option value=""
+                              class="text-capitalize">
+                        -- {{'select' | translate:lang.data}} --
+                      </option>
+                    </select>
                   </div>
                 </div>
                 
-                
-  
+                <!-- drink package-->
+                <div class="row iunput-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-6 text-start text-sm-end">
+                    <label for="event_menu" 
+                           class="col-form-label letter-capitalize ms-1 ms-sm-0"
+                    >
+                      <span>
+                        {{'drink_package' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-8 col-sm-6 letter-capitalize" >
+                    <select ng-model="reservationData.drink_package" 
+                            name="drink_package" 
+                            id="drink_package"
+                            class="form-select rounded-pill shadow-sm"
+                            spellcheck="false"
+                            ng-options="drink.menu_name | translate:lang.data  for drink in drinkPackage"
+                            style="width: 200px;"
+                            ng-disabled="reservationForm.event_place.$invalid"
+                            required
+                    >
+                      <option value=""
+                              class="text-capitalize">
+                        -- {{'select' | translate:lang.data}} --
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-auto">
+                    <button type="submit" 
+                            class="btn btn-primary mb-3"
+                            ng-click="dayReservation()"
+                            ng-disabled="reservationForm.$invalid"
+                    >
+                      {{'send' | translate:lang.data}}
+                    </button>
+                  </div>
+                </div>
+
               </form>
+              <pre>
+
+                <p>vendégek: {{reservationData.guests}}</p>
+                <p>dátum: {{reservationData.date}}</p>
+                <p>esemény:{{reservationData.event.id}}</p>
+                <p>helyszín: {{reservationData.event_place.id}}</p>
+                <p>menu: {{reservationData.event_menu.menu_name}}</p>
+                <p>drink: {{reservationData.drink_package.menu_name}}</p>
+              </pre>
             </div>
 
 

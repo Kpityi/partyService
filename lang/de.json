@@ -116,5 +116,22 @@
   "new_year_menu": "Silvester-Menü",
   "graduation_menu": "Abschlussmenü",
   "please_login": "Bitte melden Sie sich an, um einen Termin zu vereinbaren",
-  "reservation": "Terminbuchung"
+  "reservation": "Terminbuchung",
+  "number_of_guests": "Anzahl der Gäste",
+  "date": "Datum",
+  "event": "Ereignis",
+  "birthday":"Geburtstag",
+  "wedding": "Hochzeit",
+  "hen_party": "Junggesellinnenabschied",
+  "stag_party": "Junggesellenabschied",
+  "kids_party": "Kinderparty",
+  "other_party": "andere Veranstaltung (z.B. Empfang)",
+  "new_year_party": "Silvesterparty",
+  "graduation": "Schulabschluss",
+  "select": "auswählen",
+  "custom_menu": "individuelles Menü",
+  "none": "kein",
+  "send": "senden"
+  
+
 }
