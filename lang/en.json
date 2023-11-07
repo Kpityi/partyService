@@ -103,8 +103,6 @@
   "sandwich":"sandwich",
   "des_sandwich": "Tuna spread sandwich with black olives, Mangalica ham sandwich with homemade cottage cheese, Eggplant spread sandwich, Paprika salami sandwich with cream cheese and egg",
   "basic_menu": "menus",
-  "basic_menu_description": "These menus are sample menus, they can be modified upon request, and it is possible to create custom menus according to the customer's preferences.",
-  "wedding_menu_I": "Wedding menu I",
   "wedding_menu_II": "Wedding menu I",
   "birthday_menu": "birthday menu",
   "hen_party_menu": "hen party menu",
@@ -136,7 +134,7 @@
   "small_room": "small room",
   "grand_hall": "grand hall",
   "outdoor": "outdoor",
-  "person":"person"
+  "person":"person",
   "basic_menu_description": "These menus are sample menus, they can be modified upon request, and it is possible to create custom menus according to the customer's preferences.",
   "wedding_menu_I": "Wedding menu I",
   "opinions": "opinions",

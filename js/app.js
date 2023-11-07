@@ -380,9 +380,8 @@
             drinkPackageId: $scope.reservationData.drink_package.id,
             guests: $scope.reservationData.guests
           };
-          //$scope.reservationData = angular.copy($scope.originalReservationData);
-          console.log($scope.reservation)
-
+          
+          
           // Http request reservation
           http.request({
             url   : './php/reservation.php',
@@ -390,17 +389,18 @@
             data  : $scope.reservation
           })
           .then(response => {
-  
+            
             // Check success
             if (response.affectedRows) {
-                    console.log(response.lastInsertId);
-                    $scope.$applyAsync();
-                    alert(`Reservation succesfull,  ${response.lastInsertId}`);
+              console.log(response.lastInsertId);
+              $scope.$applyAsync();
+              alert(`Reservation succesfull,  ${response.lastInsertId}`);
             } else  alert(`Reservation unsuccesfull!  ${response}`);
           })
           .catch(error => {$timeout(() => alert(error), 50);});
         }
-
+        
+        $scope.reservationData = angular.copy($scope.originalReservationData);
       },
     ])
 
