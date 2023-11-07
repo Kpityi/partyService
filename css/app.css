@@ -4,7 +4,7 @@
 
 
 :root{
-  --color-primary: #011f4b;
+  --color-primary: rgb(1, 31, 75);
   --color-secondary: #03396c;
   --color-tertiary: #005b96;
   --color-quaternary: #6497b1;
@@ -17,29 +17,23 @@ body {
     color: var(--color-primary) !important;
     background-image: url(../media/image/background.jpg);
 }
-
 /* Header fonts (Poppins) */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', sans-serif !important;
     color: var(--color-primary);
 }
-
 .bg-quinary{
   background-color:  var(--color-quinary);
 }
-
 .nav-bar{
   height: 60px !important;
 }
-
 .letter-capitalize:first-letter{
   text-transform: capitalize !important;
 }
-
 main {
 	min-height: calc(100vh - 410px) !important;
-} 
-
+}
 .container{
   background-color: rgba(255, 255, 255, .8);
 }
@@ -52,10 +46,8 @@ main {
   margin: 80px 70px;
   background-color: rgba(255, 255, 255, .4);
 }
-
-a{
+a, input::-webkit-calendar-picker-indicator {
   cursor: pointer;
-
 }
 a[disabled] {
   opacity: 0.5;

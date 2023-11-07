@@ -17,6 +17,7 @@ $query = "SELECT 	`id`,
 									`gender_id` As `gender`, 
 									BASE64_ENCODE(`img`) AS `img`,
 									`img_type`,
+									`email`,
 									`password`,
 									`valid`,
 									`wrong_attempts` 
