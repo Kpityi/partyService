@@ -104,7 +104,8 @@
                           data-bs-target="#menuCarousel" 
                           data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" 
-                          aria-hidden="true"></span>
+                          aria-hidden="true">
+                    </span>
                     <span class="visually-hidden">Previous</span>
                   </button>
                   <button class="carousel-control-next" 
@@ -126,65 +127,64 @@
           <!-- menus card -->
           <div class="card-container  ">
 
-            <div ng-repeat="menu in menus track by $index" 
-                  class="my-3"
+            <div class="col-12 py-2my-3"
+                  ng-repeat="menu in menus track by $index" 
                   ng-class="{'bg-light': $index % 2 === 1, 'evens': $index % 2 === 0}"
-            >    
-
-                <div class="col-12 py-2">
-                  <div class="card w-75 mx-auto" >
-                    <div class="card-header fw-bold letter-capitalize">
-                      {{ menu.menu_name | translate:lang.data}}
-                    </div>
-                    <ul class="list-group list-group-flush" 
-                        ng-repeat="items in menu.menu_items track by $index"                    
-                    >
-                      <li class="list-group-item fw-bold text-start">
-                        
-                        <!-- accordion of menus -->
-                        <div class="accordion" id="accordionMenu">
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading{{$index}}">
-                              <button class="accordion-button" 
-                                      type="button" 
-                                      data-bs-toggle="collapse" 
-                                      data-bs-target="#collapse{{$index}}" 
-                                      aria-expanded="true" 
-                                      aria-controls="collapse{{$index}}">
-                                <span class="col-5 ms-1 fw-bold ">{{ items.category | translate:lang.data}}:</span>
-                                <span class="col-5 text-end">{{ items.name | translate:lang.data}}</span>
-                              </button>
-                            </h2>
-                            <div id="collapse{{$index}}" 
-                                class="accordion-collapse collapse" 
-                                ng-class="{show: $index===-1}"
-                                aria-labelledby="heading{{$index}}" 
-                                data-bs-parent="#accordionMenu">
-                              <div class="accordion-body">
-                                {{ items.description | translate:lang.data}}
-                              </div>
-                            </div>
+            >
+              <div class="card w-75 mx-auto" >
+                <div class="card-header fw-bold letter-capitalize">
+                  {{ menu.menu_name | translate:lang.data}}
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item fw-bold text-start"
+                      ng-repeat="items in menu.menu_items track by $index"
+                  >
+                    
+                    <!-- accordion of menus -->
+                    <div class="accordion" id="accordionMenu{{$parent.$index}}_{{$index}}">
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{$parent.$index}}_{{$index}}">
+                          <button class="accordion-button" 
+                                  type="button" 
+                                  data-bs-toggle="collapse" 
+                                  data-bs-target="#collapse{{$parent.$index}}_{{$index}}" 
+                                  aria-expanded="true" 
+                                  aria-controls="collapse{{$parent.$index}}_{{$index}}">
+                            <span class="col-5 ms-1 fw-bold ">{{ items.category | translate:lang.data}}:</span>
+                            <span class="col-5 text-end">{{ items.name | translate:lang.data}}</span>
+                          </button>
+                        </h2>
+                        <div id="collapse{{$parent.$index}}_{{$index}}" 
+                            class="accordion-collapse collapse" 
+                            ng-class="{show: $index===-1}"
+                            aria-labelledby="heading{{$parent.$index}}_{{$index}}" 
+                            data-bs-parent="#accordionMenu{{$parent.$index}}_{{$index}}">
+                          <div class="accordion-body">
+                            {{ items.description | translate:lang.data}}
                           </div>
-                        </div>                                        
-                      </li>                              
-                    </ul>
-                    <ul>
-                      <li class="list-group-item card-footer d-flex justify-content-around mt-2">
-                        <span class="col-6 text-start" >
-                          Ár:
-                        </span>
-                        <span class="col-6 text-end pe-4"> 
-                          {{menu.total_price}}Ft
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
+                        </div>
+                      </div>
+                    </div>                                        
+                  </li>                              
+                </ul>
+                <ul>
+                  <li class="list-group-item card-footer d-flex justify-content-around mt-2">
+                    <span class="col-6 text-start" >
+                      Ár:
+                    </span>
+                    <span class="col-6 text-end pe-4"> 
+                      {{menu.total_price}}Ft
+                    </span>
+                  </li>
+                </ul>
               </div>
             </div>
+               
+          </div>
 
-          </div>          
+        </div>          
 
-        </div>
+
 
         <!-- Tab2 panel -->
         <div id="tab-2" 
@@ -298,7 +298,7 @@
                             id="event_place"
                             class="form-select rounded-pill shadow-sm"
                             spellcheck="false"
-                            ng-options="(place.place_name | translate:lang.data) +' (max.: '+ place.capacity +' '+ ('person' | translate:lang.data) + ')' for place in eventsData.eventPlaces"
+                            ng-options="(place.place_name | translate:lang.data) +' (max.: '+ place.capacity +' '+ ('person' | translate:lang.data) + ')' disable when place.capacity < reservationData.guests  for place in eventsData.eventPlaces"
                             style="width: 200px;"
                             ng-disabled="reservationForm.event.$invalid"
                             required

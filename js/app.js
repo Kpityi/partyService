@@ -310,7 +310,7 @@
         .then(response => {
           $scope.menus=response;
           $scope.eventMenus=response.slice(0, -3);
-          $scope.eventMenus.push({menu_name:"custom_menu", id: 0} , {menu_name:"none", id: null});
+          $scope.eventMenus.push({menu_name:"none", id: null});
           $scope.drinkPackages=response.slice(-3);
           $scope.drinkPackages.push({menu_name:"none", id: null});
 
