@@ -46,7 +46,7 @@ main {
   margin: 80px 70px;
   background-color: rgba(255, 255, 255, .4);
 }
-a, input::-webkit-calendar-picker-indicator {
+a, input::-webkit-calendar-picker-indicator, #date, select {
   cursor: pointer;
 }
 a[disabled] {

@@ -353,8 +353,8 @@
 
         //set min & max data
          $scope.reservDate = {
-           max: moment().add(2, 'years').format('MM/DD/YYYY'),
-           min: moment().add(1, 'days').format('MM/DD/YYYY'),
+           max: moment().add(2, 'years').format('YYYY-MM-DD'),
+           min: moment().add(1, 'days').format('YYYY-MM-DD'),
            placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
          };
          console.log($scope.reservDate)
@@ -373,8 +373,10 @@
               $('#date').datepicker({
                 changeMonth: true,
                 changeYear: true,
-                minDate: '+1D',
-                maxDate: '+2Y',
+                minDate: new Date($scope.reservDate.min),
+                maxDate: new Date($scope.reservDate.max),
+                firstDay: 1,
+                dayNamesMin: $rootScope.lang.id=== "hu" ? [ "V", "H", "K", "Sze", "Cs", "P", "Szo" ] : $rootScope.lang.id === "en" ? [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ] : [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                   const dateString = jQuery.datepicker.formatDate(
@@ -494,7 +496,6 @@
               console.log(response);
               $scope.model.email = response.email;
               user.set(response);
-              console.log('user.id ' + $rootScope.user.id);
               $scope.$applyAsync();
             });
         };
