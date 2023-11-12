@@ -342,13 +342,13 @@
                         <span> {{'date' | translate:lang.data}}: </span>
                       </label>
                     </div>
-                    <div class="col-8 col-sm-6 letter-capitalize">
+                    <div class="col-8 col-sm-6 letter-capitalize position-relative">
                       <input
                         type="text"
                         name="date"
                         id="date"
                         placeholder="{{reservDate.placeholder}}"
-                        class="form-control rounded-pill shadow-sm"
+                        class="form-control rounded-pill shadow-sm text-center"
                         spellcheck="false"
                         autocomplete="off"
                         ng-model="reservationData.date"
@@ -356,6 +356,7 @@
                         ng-disabled="reservationForm.event_place.$invalid "
                         required
                       />
+                      <span class="fa-regular fa-calendar-days position-absolute top-50 start-0 translate-middle-y ms-4" ></span>
                     </div>
                   </div>
 

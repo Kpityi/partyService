@@ -417,14 +417,13 @@
                 console.log(response.lastInsertId);
                 $scope.$applyAsync();
                 alert(`Reservation succesfull,  ${response.lastInsertId}`);
+                $scope.reservationData = angular.copy($scope.originalReservationData);
               } else alert(`Reservation unsuccesfull!  ${response}`);
             })
             .catch((error) => {
               $timeout(() => alert(error), 50);
             });
-        };
-
-        $scope.reservationData = angular.copy($scope.originalReservationData);
+        };        
       },
     ])
 
