@@ -373,7 +373,9 @@
               data: { id: $scope.reservationData.event_place.id },
             })
             .then((response) => {
-              const disabledDates = response.map((date) => date.date);
+              if (response) {
+                const disabledDates = response.map((date) => date.date);
+              }
 
               $('#date').datepicker({
                 changeMonth: true,
