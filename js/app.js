@@ -26,6 +26,11 @@
             templateUrl: './html/webshop.html',
             controller: 'webshopController',
           })
+          .state('reating', {
+            url: '/reating',
+            templateUrl: './html/reating.html',
+            controller: 'reatingController'
+          })
           .state('contact', {
             url: '/contact',
             templateUrl: './html/contact.html',
@@ -681,5 +686,25 @@
       function ($scope) {
         console.log('cart controller...');
       },
+    ])
+
+    // Reating controller
+    .controller('reatingController', [
+      '$scope',
+      function ($scope) {
+        $scope.reating = null;
+        $scope.clicked = (event) => {
+          $scope.reating = event.currentTarget.dataset.reating;
+        }
+        
+        $scope.send = () => {
+          alert($scope.reating);
+        }
+
+        $scope.reset = () => {
+          $scope.reating = null;
+        }
+      }
     ]);
+
 })(window, angular);
