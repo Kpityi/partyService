@@ -242,11 +242,7 @@
       '$state',
       function ($scope, http, $timeout, $state) {
         console.log('Home controller...');
-        $scope.openReserveTab= ()=>{
-          var triggerEl = document.querySelector('#tab-2 ui-s[href="services"]')
-bootstrap.Tab.getInstance(triggerEl).show() // Select tab by name
-        }
-
+      
         const myCarouselElement = document.querySelector('#homeCarousel');
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 4000,
