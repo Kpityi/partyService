@@ -222,7 +222,7 @@
 
         // Logout
         $rootScope.logout = () => {
-          // Confirm
+          // Confirmf
           if (confirm('Biztosan kijelentkezik?')) {
             // Reset user
             user.reset().then(() => {
@@ -239,8 +239,19 @@
       '$scope',
       'http',
       '$timeout',
-      function ($scope, http, $timeout) {
+      '$state',
+      function ($scope, http, $timeout, $state) {
         console.log('Home controller...');
+        $scope.openReserveTab= ()=>{
+          var triggerEl = document.querySelector('#tab-2 ui-s[href="services"]')
+bootstrap.Tab.getInstance(triggerEl).show() // Select tab by name
+        }
+
+        const myCarouselElement = document.querySelector('#homeCarousel');
+        const carousel = new bootstrap.Carousel(myCarouselElement, {
+          interval: 4000,
+        });
+        carousel.to(1);
 
         $scope.images = [];
         $scope.ratings = [];
@@ -286,6 +297,8 @@
         console.log('Service controller...');
 
         // Menues tab
+
+        //carouusel
         const myCarouselElement = document.querySelector('#menuCarousel');
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 2000,
