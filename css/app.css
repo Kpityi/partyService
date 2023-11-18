@@ -70,10 +70,21 @@ a[disabled] {
   color:#cecece;
   
 }
-
 .rating-color{
   color:#fbc634 !important;
 }
+.star {
+  display: inline-block;
+  color: darkblue;
+  cursor: pointer;
+}
+.star.selected {
+  color: gold;
+}
+.star:hover {
+  color: lightblue;
+}
+
 
 
 

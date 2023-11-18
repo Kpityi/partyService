@@ -268,8 +268,23 @@
           
           $timeout(() => alert(e));
         }); 
-        
       },
+          // Rating controller
+        function ($scope) {
+        $scope.rating = null;
+        $scope.clicked = (event) => {
+          $scope.rating = event.currentTarget.dataset.rating;
+        }
+
+        $scope.send = () => {
+          alert($scope.rating);
+        }
+
+        $scope.reset = () => {
+          $scope.rating = null;
+        }
+      }
+      
     ])
 
     // Services controller
