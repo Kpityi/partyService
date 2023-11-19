@@ -117,6 +117,8 @@
   "graduation_menu": "ballagási menü",
   "please_login": "Az időpont foglaláshoz kérjük jelentkezzen be",
   "reservation": "időpont foglalás",
+  "reservations": "időpont foglalások",
+  "orders":"rendelések",
   "number_of_guests": "vendégek száma", 
   "date": "dátum",
   "event": "esemény",

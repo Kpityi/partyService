@@ -115,6 +115,8 @@
   "graduation_menu": "graduation menu",
   "please_login": "Please log in to make a reservation",
   "reservation": "reservation",
+  "reservations": "reservations",
+  "orders":"orders",
   "number_of_guests": "number of guests",
   "date": "date",
   "event": "event",
