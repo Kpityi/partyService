@@ -9,12 +9,12 @@
   <div ng-include src="'./html/loginModal.html'"></div>
 
   <main>
-    <h1 class="text-center py-4">Kapcsolat</h1>
+    <h1 class="text-center py-3">Kapcsolat</h1>
 
-      <!-- Modal Navigation -->
+      <!-- Navigation -->
       <section> 
-        <form class="card text-center">
-          <!-- Navigation Card -->
+        <form class="card text-justify">
+          <!-- Navigation Tab Card -->
           <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
               <!-- Nav Item #1 Contact -->
@@ -22,20 +22,30 @@
                 <a class="nav-link active" 
                    aria-current="true">Kapcsolat</a>
                </li>
-               <!-- Nav Item #2 Droplinks -->
+                <!-- Nav Item #2 Team -->
               <li class="nav-item">
-                <a class="nav-link">Link</a>
+                <a class="nav-link"
+                   href="https://www.keri.mako.hu/""
+                   title="web" target="_blank">Team</a>
               </li>
-              <!-- Nav Item #3 GoogleMap -->
+               <!-- Nav Item #3 Droplinks -->
               <li class="nav-item">
-                <a class="nav-link">Térkép</a>
-                
+                <a class="nav-link"
+                   href="https://www.keri.mako.hu/" 
+                   title="web" target="_blank">Link</a>
+              </li>
+              <!-- Nav Item #4 GoogleMap -->
+              <li class="nav-item">
+                <a class="nav-link"
+                  href="https://www.google.com/maps/place/HSZC+Mak%C3%B3i+N%C3%A1vay+Lajos+Technikum+%C3%A9s+Koll%C3%A9gium/@46.2136337,20.4733232,17z/data=!3m1!4b1!4m5!3m4!1s0x4744f602b445c0b9:0x6ecc2b88ac500ef!8m2!3d46.21363!4d20.4755119"
+                  title="google maps" target="_blank"> Térkép</a>
               </li>
             </ul>
           </div>
+
+          <!--  Address  -->
           <div class="card-body">
-            <!--  Address  -->
-            <h5 class="card-title">Címünk:</h5>
+            <h4 class="card-title mt-0">Címünk:</h4>
             <div class="col col-12 col-md-6 col-xl-3 ps-5 ps-md-0 text-lg-start mt-3 mt-xl-0">
               <ul class="text-start list-unstyled mb-0 ms-md-5">
                 <li>
@@ -51,12 +61,13 @@
            </div>
            
           <!-- Button trigger modal -->
+          <div class="text-justify ms-md-5 ms-3"> 
           <a href="contact_button" 
              class="btn btn-primary" 
              data-bs-toggle="modal" 
              data-bs-target="#staticBackdrop"
-             >Contact us!
-            </a>
+             >Contact us!</a>
+          </div>
       
           <!-- Contact Nav Image -->
           <div class=""col-12 col-lg-5 col-xl-4 m-auto"">
@@ -76,7 +87,8 @@
               aria-labelledby="staticBackdropLabel" 
               aria-hidden="true"
               >
-        <!-- Modal Dialog -->
+
+        <!-- Contact Modal Dialog -->
         <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
@@ -92,23 +104,58 @@
                 </button>
             </div>
 
-            <!-- Body Card Group -->
+            <!-- Contact Card Group -->
             <form class="modal-body">
               <div class="card-group">
+
+                <!-- Email Card -->
                 <div class="card">
                   <img src="../partyService/media/image/Contact_Imgs/contact_email_card.jpg" class="card-img-top" alt="...">
                   <div class="card-body">
                     <h5 class="card-title">Email</h5>
-                    <p class="card-text">Lorem ipsum..</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <div>
+                     <div>
+                      <a class="text-decoration-none text-muted" 
+                         href="https://www.keri.mako.hu/" 
+                         title="web" 
+                         target="_blank">
+                         <i class="fas fa-globe me-2"></i>
+                        <span>www.keri.mako.hu</span>
+                        </a>
+                       </div>
+                      <div>
+                       <a class="text-decoration-none text-muted" 
+                          target="_blank" 
+                          title="email" 
+                          href="mailto:kerititkarsag@gmail.com">
+                          <i class="fas fa-envelope me-2"></i>
+                          <span>kerititkarsag@gmail.com</span>
+                       </a>
+                     </div>
+                    </div>
                   </div>
                 </div>
+
+                <!-- Phone Card -->
                 <div class="card">
-                  <img src="../partyService/media/image/Contact_Imgs/contact_phone_card.jpg" class="card-img-top" alt="...">
+                  <img src="../partyService/media/image/Contact_Imgs/contact_phone_card.jpg" 
+                       class="card-img-top" 
+                       alt="contact_phone_card">
                   <div class="card-body">
                     <h5 class="card-title">Phone</h5>
-                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      <div>
+                        <a class="text-decoration-none text-muted" 
+                           title="phone">
+                           <h5 class="mb-1">
+                            Hódmezővásárhelyi SZC
+                          </h5> 
+                          <h6 class="mb-1">
+                            Makói Návay Lajos Technikum és Kollégium
+                          </h6>
+                          <i class="fas fa-phone me-2"></i>
+                          <span>(+36 62) 510-917</span>
+                        </a>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -117,11 +164,25 @@
               <!-- Navigate in Modal Footer -->
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="button" class="btn btn-primary">Send message!</button>
               </div>
           </div>
         </div>
       </section>
+
+      <!-- Google Map -->
+      <section>
+        <div class="text-center">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2760.8365828424653!2d20.473138776184843!3d46.21370577109606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4744f602b445c0b9%3A0x6ecc2b88ac500ef!2sHSZC%20Mak%C3%B3i%20N%C3%A1vay%20Lajos%20Technikum%20%C3%A9s%20Koll%C3%A9gium!5e0!3m2!1shu!2shu!4v1700420242175!5m2!1shu!2shu" 
+          width="1350" height="350" 
+          style="border: 1px;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </section>
+
   </main>
 
   <footer ng-include src="'./html/footer.html'"></footer>
