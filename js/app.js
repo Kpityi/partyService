@@ -240,7 +240,8 @@
       'http',
       '$timeout',
       '$state',
-      function ($scope, http, $timeout, $state) {
+      '$rootScope',
+      function ($scope, http, $timeout, $state, $rootScope) {
         console.log('Home controller...');
       
         const myCarouselElement = document.querySelector('#homeCarousel');
@@ -251,6 +252,8 @@
 
         $scope.images = [];
         $scope.ratings = [];
+        $scope.rating = null;
+        $scope.rating_text = '';
 
         // Http request
         http
@@ -268,6 +271,8 @@
             $timeout(() => alert(e));
           });
 
+
+
         // Http request
         http
           .request('./php/ratings.php')
@@ -280,8 +285,33 @@
 
             $timeout(() => alert(e));
           });
+          
+        // Send Rating
+          $scope.clicked = (event) => {
+            $scope.rating = event.currentTarget.dataset.rating;
+            console.log($scope.rating);
+          }
+          $scope.send = () => {
+            
+            $scope.rating_data = {user_id:$rootScope.user.id, rating:$scope.rating, rating_text:$scope.rating_text};
+            http
+            .request({
+              url: './php/send_rating.php',
+              method: 'POST',
+              data: $scope.rating_data
+            })
+            .then((response) => {
+              
+            })
+            .catch((e) => {
+              // Resolve completed, and show error
+
+              $timeout(() => alert(e));
+            });  
+          }
       },
     ])
+
 
     // Services controller
     .controller('servicesController', [

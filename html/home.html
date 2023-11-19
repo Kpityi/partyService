@@ -125,54 +125,58 @@
     <hr class="text-muted py-1">
 
     <!-- Rate Us! -->
-    <form name="ratingForm">
-      <section>
-      <div class="card border-primary mt-1 mb-4 max-width: 100%">
-        <h2 class="card-header">{{'rate_us' | translate:lang.data}}</h2>
+    <section ng-if="user.id">
+      <form name="ratingForm">
+          <div class="card border-primary mt-1 mb-4 w-100">
+          <h2 class="card-header">{{'rate_us' | translate:lang.data}}</h2>
 
-        <!-- Rated Stars -->
-        <div class="row justify-content-center">
-          <ul class="list-unstiled w-auto">
-            <li data-reating="{{$index+1}}"
-                class="d-inline-block mx-2"
-                ng-repeat="x in [].constructor(5) track by $index"
-                ng-click="clicked($event)"
-                ng-class="{'text-warning': $index + 1 &lt;= reating}">
-                <i class="fa-solid fa-star fa-2xl"></i>
-            </li>
-          </ul>
-        </div>
-        
-        <!-- Text -->
-        <div class="card-body text-primary">
-          <p class="justify-content-center">{{'from_your_point_of_view' | translate:lang.data}}</p>
-          
-          <!-- Description Label -->
-          <div class="mb-3 row">
-            <label for="input-rating" 
-                   class="col-sm-2 col-form-label"
-                   >{{'r_u_description' | translate:lang.data}}
-            </label>
-            <div class="col-sm-10">
-              <input type="text" 
-                     class="form-control" 
-                     id="input-rating"
-                     name="inputRating"
-                     required
-              >
+          <!-- Rated Stars -->
+          <div class="row justify-content-center mt-3">
+            <ul class="list-unstiled w-auto">
+              <li data-rating="{{$index+1}}"
+                  class="d-inline-block mx-2"
+                  ng-repeat="x in [].constructor(5) track by $index"
+                  ng-click="clicked($event)"
+                  ng-class="{'rating-color': $index + 1 &lt;= rating}">
+                  <i class="fa-solid fa-star fa-2xl"></i>
+              </li>
+            </ul>
           </div>
-        </div>
-        
-        <!-- Send Rate Button -->
-        <button class="btn btn-primary text-capitalize mt-2 mb-1" 
-                ng-disabled="ratingForm.inputRating.$invalid"
-                ng-click="send()">
-          {{'send' | translate:lang.data}}
-        </button>
+          
+          Text
+          <div class="card-body text-primary">
+            <p class="justify-content-center">{{'from_your_point_of_view' | translate:lang.data}}</p>
+            
+            <!-- Description Label -->
+            <div class="mb-3 row">
+              <!-- <label for="inputrating" 
+                    class="col-sm-2 col-form-label"
+                    >{{'r_u_description' | translate:lang.data}}
+              </label> -->
+              <div class="col-sm-10">
+                <textarea ng-model="rating_text"
+                      rows="4"
+                      class="form-control" 
+                      id="ratinginput"
+                      name="input-rating"
+                      required
+                      ><?php echo htmlspecialchars($message); ?>
+                  </textarea>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Send Rate Button -->
+          <button class="btn btn-primary text-capitalize mt-2 mb-1" 
+                  ng-disabled="((ratingForm.inputRating.$invalid) || (!rating))"
+                  ng-click="send()">
+            {{'send' | translate:lang.data}}
+          </button>
 
-      </div>
-      </section>
-    </form>
+        </div>
+      
+      </form>
+    </section>
 
     <hr class="text-muted py-2">
 
