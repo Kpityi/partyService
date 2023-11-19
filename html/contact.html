@@ -10,6 +10,118 @@
 
   <main>
     <h1 class="text-center py-4">Kapcsolat</h1>
+
+      <!-- Modal Navigation -->
+      <section> 
+        <form class="card text-center">
+          <!-- Navigation Card -->
+          <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+              <!-- Nav Item #1 Contact -->
+              <li class="nav-item">
+                <a class="nav-link active" 
+                   aria-current="true">Kapcsolat</a>
+               </li>
+               <!-- Nav Item #2 Droplinks -->
+              <li class="nav-item">
+                <a class="nav-link">Link</a>
+              </li>
+              <!-- Nav Item #3 GoogleMap -->
+              <li class="nav-item">
+                <a class="nav-link">Térkép</a>
+                
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <!--  Address  -->
+            <h5 class="card-title">Címünk:</h5>
+            <div class="col col-12 col-md-6 col-xl-3 ps-5 ps-md-0 text-lg-start mt-3 mt-xl-0">
+              <ul class="text-start list-unstyled mb-0 ms-md-5">
+                <li>
+                  <a class="text-decoration-none m-auto" 
+                      target="_blank" title="google maps"
+                      href="https://www.google.com/maps/place/HSZC+Mak%C3%B3i+N%C3%A1vay+Lajos+Technikum+%C3%A9s+Koll%C3%A9gium/@46.2136337,20.4733232,17z/data=!3m1!4b1!4m5!3m4!1s0x4744f602b445c0b9:0x6ecc2b88ac500ef!8m2!3d46.21363!4d20.4755119">
+                    <i class="fas fa-location-arrow me-2"></i>
+                    <span>6900 Makó, Posta u. 4-6</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+           </div>
+           
+          <!-- Button trigger modal -->
+          <a href="contact_button" 
+             class="btn btn-primary" 
+             data-bs-toggle="modal" 
+             data-bs-target="#staticBackdrop"
+             >Contact us!
+            </a>
+      
+          <!-- Contact Nav Image -->
+          <div class=""col-12 col-lg-5 col-xl-4 m-auto"">
+            <img src="../partyService/media/image/Contact_Imgs/contact_nav_cover.jpg" 
+                 alt="contact_nav_cover" 
+                 class="img-fluid rounded p-2 d-md-none d-lg-block">
+           </div>
+        </form>
+      </section> 
+
+      <!-- Horizontal Contact Modal -->
+      <section class="modal fade modal-lg" 
+              id="staticBackdrop" 
+              data-bs-backdrop="static" 
+              data-bs-keyboard="false" 
+              tabindex="-1" 
+              aria-labelledby="staticBackdropLabel" 
+              aria-hidden="true"
+              >
+        <!-- Modal Dialog -->
+        <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" 
+                  id="staticBackdropLabel"
+                  >Elérhetőségeink:
+                </h1>
+              <!-- Close Button -->
+              <button type="button" 
+                      class="btn-close" 
+                      data-bs-dismiss="modal" 
+                      aria-label="Close">
+                </button>
+            </div>
+
+            <!-- Body Card Group -->
+            <form class="modal-body">
+              <div class="card-group">
+                <div class="card">
+                  <img src="../partyService/media/image/Contact_Imgs/contact_email_card.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Email</h5>
+                    <p class="card-text">Lorem ipsum..</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../partyService/media/image/Contact_Imgs/contact_phone_card.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Phone</h5>
+                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+              <!-- Navigate in Modal Footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+              </div>
+          </div>
+        </div>
+      </section>
   </main>
 
   <footer ng-include src="'./html/footer.html'"></footer>

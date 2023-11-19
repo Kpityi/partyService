@@ -26,11 +26,6 @@
             templateUrl: './html/webshop.html',
             controller: 'webshopController',
           })
-          .state('reating', {
-            url: '/reating',
-            templateUrl: './html/reating.html',
-            controller: 'reatingController'
-          })
           .state('contact', {
             url: '/contact',
             templateUrl: './html/contact.html',
@@ -239,9 +234,8 @@
       '$scope',
       'http',
       '$timeout',
-      '$state',
       '$rootScope',
-      function ($scope, http, $timeout, $state, $rootScope) {
+      function ($scope, http, $timeout, $rootScope) {
         console.log('Home controller...');
       
         const myCarouselElement = document.querySelector('#homeCarousel');
@@ -253,7 +247,11 @@
         $scope.images = [];
         $scope.ratings = [];
         $scope.rating = null;
-        $scope.rating_text = '';
+        $scope.ratingData = {
+          rating : null,
+          ratingText : '',
+        };
+
 
         // Http request
         http
@@ -288,12 +286,14 @@
           
         // Send Rating
           $scope.clicked = (event) => {
-            $scope.rating = event.currentTarget.dataset.rating;
-            console.log($scope.rating);
+            $scope.ratingData.rating = event.currentTarget.dataset.rating;
+
           }
+         
           $scope.send = () => {
             
-            $scope.rating_data = {user_id:$rootScope.user.id, rating:$scope.rating, rating_text:$scope.rating_text};
+            
+            $scope.rating_data = {user_id:$rootScope.user.id, rating:$scope.ratingData.rating, rating_text:$scope.ratingData.ratingText};
             http
             .request({
               url: './php/send_rating.php',
@@ -307,7 +307,8 @@
               // Resolve completed, and show error
 
               $timeout(() => alert(e));
-            });  
+            });
+            console.log($scope.rating_data);  
           }
       },
     ])
@@ -727,25 +728,6 @@
       function ($scope) {
         console.log('cart controller...');
       },
-    ])
-
-    // Reating controller
-    .controller('reatingController', [
-      '$scope',
-      function ($scope) {
-        $scope.reating = null;
-        $scope.clicked = (event) => {
-          $scope.reating = event.currentTarget.dataset.reating;
-        }
-        
-        $scope.send = () => {
-          alert($scope.reating);
-        }
-
-        $scope.reset = () => {
-          $scope.reating = null;
-        }
-      }
     ]);
 
 })(window, angular);

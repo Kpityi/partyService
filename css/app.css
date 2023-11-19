@@ -72,6 +72,7 @@ a[disabled] {
 }
 .rating-color{
   color:#fbc634 !important;
+  opacity: 1 !important;
 }
 option[disabled]{
   background-color: rgb(239, 236, 236);

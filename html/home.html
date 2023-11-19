@@ -125,7 +125,7 @@
     <hr class="text-muted py-1">
 
     <!-- Rate Us! -->
-    <section ng-if="user.id">
+    <section ng-if="!user.id">
       <form name="ratingForm">
           <div class="card border-primary mt-1 mb-4 w-100">
           <h2 class="card-header">{{'rate_us' | translate:lang.data}}</h2>
@@ -134,41 +134,42 @@
           <div class="row justify-content-center mt-3">
             <ul class="list-unstiled w-auto">
               <li data-rating="{{$index+1}}"
-                  class="d-inline-block mx-2"
+                  class="d-inline-block mx-2  opacity-25"
                   ng-repeat="x in [].constructor(5) track by $index"
                   ng-click="clicked($event)"
-                  ng-class="{'rating-color': $index + 1 &lt;= rating}">
+                  ng-class="{'rating-color': $index + 1 <= ratingData.rating}">
                   <i class="fa-solid fa-star fa-2xl"></i>
               </li>
             </ul>
           </div>
-          
-          Text
+
           <div class="card-body text-primary">
             <p class="justify-content-center">{{'from_your_point_of_view' | translate:lang.data}}</p>
             
             <!-- Description Label -->
             <div class="mb-3 row">
-              <!-- <label for="inputrating" 
+              <label for="inputrating" 
                     class="col-sm-2 col-form-label"
                     >{{'r_u_description' | translate:lang.data}}
-              </label> -->
+              </label>
               <div class="col-sm-10">
-                <textarea ng-model="rating_text"
+                <textarea ng-model="ratingData.ratingText"
                       rows="4"
                       class="form-control" 
-                      id="ratinginput"
-                      name="input-rating"
+                      id="inputrating"
+                      name="ratingText"
                       required
-                      ><?php echo htmlspecialchars($message); ?>
+                      >
                   </textarea>
+                  {{test}}
+                  
               </div>
             </div>
           </div>
           
           <!-- Send Rate Button -->
           <button class="btn btn-primary text-capitalize mt-2 mb-1" 
-                  ng-disabled="((ratingForm.inputRating.$invalid) || (!rating))"
+                  ng-disabled="((ratingForm.ratingText.$invalid) || (!ratingData.rating))"
                   ng-click="send()">
             {{'send' | translate:lang.data}}
           </button>
