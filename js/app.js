@@ -413,9 +413,8 @@
               data: { id: $scope.reservationData.event_place.id },
             })
             .then((response) => {
-              if (response) {
-                const disabledDates = response.map((date) => date.date);
-              }
+              const disabledDates =response ? response.map((date) => date.date) : [];
+                           
 
               $('#date').datepicker({
                 changeMonth: true,
@@ -433,6 +432,7 @@
                   return [disabledDates.indexOf(dateString) === -1];
                 },
               });
+              $scope.$applyAsync(); 
             })
             .catch((e) => {
               // Resolve completed, and show error
