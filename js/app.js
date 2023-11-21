@@ -686,8 +686,55 @@
     // Profile controller
     .controller('profileController', [
       '$scope',
-      function ($scope) {
+      '$rootScope',
+      'util',
+      'http',
+      'user',
+      '$timeout',
+      function ($scope, $rootScope, util, http, user, $timeout) {
         console.log('profile controller...');
+        
+        //set helper variables
+        $scope.helper={
+          isEdit:true,
+          maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
+          minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),};
+
+        // Form initial values
+        $scope.values = {
+          lastName: '',
+          firstName: '',
+          img: null,
+          img_type: null,
+          dateOfBirth: null,
+          gender: null,
+          country: null,
+          countryCode: null,
+          phone: '',
+          postcode: '',
+          city: '',
+          address: '',
+        };
+
+        // Create new deffered objects
+        $scope.countries = util.deferredObj();
+
+        // Http request
+        http
+          .request($rootScope.app.commonPath + `data/countries.json`)
+          .then((response) => {
+            //$scope.helper.countries = response;
+            $scope.countries.promise.resolve();
+          })
+          .catch((e) => {
+            // Resolve completed, reset asynchronous, and show error
+            countries.promise.resolve();
+            $timeout(() => alert(e), 50);
+          });
+
+        $scope.handleCountryChange = (country) => {
+          $scope.values.countryCode = country.code?.[0] || null;
+        };
       },
     ])
 

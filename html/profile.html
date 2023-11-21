@@ -12,6 +12,8 @@
     <div class="container">
       <!-- Profile Page navigation tab -->
       <div class="d-flex align-items-start mt-3 p-4">
+
+        <!-- Navigaation buttons -->
         <div
           class="nav flex-column nav-pills me-3"
           id="v-pills-tab"
@@ -20,7 +22,7 @@
         >
           <!-- Profile button -->
           <button
-            class="nav-link  active text-capitalize border-bottom "
+            class="nav-link active text-capitalize border-bottom"
             id="v-pills-profile-tab"
             data-bs-toggle="pill"
             data-bs-target="#v-pills-profile"
@@ -63,7 +65,7 @@
 
         <!-- tab content -->
         <div class="tab-content w-100" id="v-pills-tabContent">
-          
+
           <!-- Profile Tab -->
           <div
             class="tab-pane fade show active"
@@ -71,347 +73,443 @@
             role="tabpanel"
             aria-labelledby="v-pills-profile-tab"
           >
-          
             <div class="row my-3 justify-content-center">
               <!-- Title -->
-              <h4 class="text-center mb-4">
+              <h2 class="text-center mb-4">
                 <span><i class="fas fa-users"></i></span>
-                <span class="text-capitalize ms-2"> {{'profile' | translate:lang.data}} </span>
-              </h4>
-      
-              <!-- Form -->
-              <form class="col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6">
-                <!-- Name -->
-                <div class="row input-row mb-2">
-                  <label
-                    for="name"
-                    class="col-form-label col-form-label-sm col-sm-4 text-sm-end"
-                  >
-                    <span class="text-capitalize">név</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </label>
-                  <div class="col-11 col-sm-7">
+                <span class="text-capitalize ms-2">
+                  {{'profile' | translate:lang.data}}
+                </span>
+              </h2>             
+            </div>
+             <!-- Form -->
+            <div class="row my-3 justify-content-center">
+              <form
+                class="col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6"
+                name="profileForm"
+              >
+                <!-- User Name -->
+                <!-- LasttName -->
+                <div class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="last_name" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <i class="fa-solid fa-user fa-xl"></i>
+                      <span class="text-capitalize me-2">
+                        {{'last_name' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-6 col-sm-7 col-lg-4">
                     <input
-                      id="name"
+                      id="last_name"
                       type="text"
-                      placeholder="név"
-                      class="form-control form-control-sm"
+                      ng-value="user.last_name"
+                      class="form-control rounded-pill shadow-sm"
                       spellcheck="false"
                       autocomplete="off"
+                      ng-model="values.lastName"
+                      ng-maxlength="60"
+                      name="lastName"
+                      ng-disabled="helper.isEdit"
                       required
-                      maxlength="100"
                     />
                   </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="profileForm.lastName.$valid"
+                    >
                       &check;
                     </span>
                   </div>
                 </div>
-      
+
+                <!-- FirstName -->
+                <div class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="first_name" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <span class="text-capitalize me-2">
+                        {{'first_name' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-6 col-sm-7 col-lg-4">
+                    <input
+                      id="first_name"
+                      type="text"                      
+                      ng-value="user.first_name"
+                      class="form-control rounded-pill shadow-sm"
+                      spellcheck="false"
+                      autocomplete="off"
+                      ng-model="values.firstName"
+                      ng-maxlength="60"
+                      name="firstName"
+                      ng-disabled="helper.isEdit"
+                      required
+                    />
+                  </div>
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="profileForm.firstName.$valid && !helper.isEdit"
+                    >
+                      &check;
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Dividing line -->
+                <hr class="text-muted" />
+
+                <!-- image -->
+                <div class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="avatar" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <span class="text-capitalize me-2">
+                        {{'profile' | translate:lang.data}} {{'image' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-6 col-sm-7 col-lg-4">
+                    <input
+                      id="avatar"
+                      type="file"
+                      class="form-control rounded-pill shadow-sm"
+                      spellcheck="false"
+                      autocomplete="off"
+                      ng-model="values.img"
+                      ng-maxlength="60"
+                      name="firstName"
+                      required
+                    />
+                  </div>
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="registerForm.firstName.$valid"
+                    >
+                      &check;
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Dividing line -->
+                <hr class="text-muted" />
+
                 <!-- Born -->
-                <div class="row input-row mb-2">
-                  <label
-                    for="born"
-                    class="col-form-label col-form-label-sm col-sm-4 text-sm-end"
-                  >
-                    <span class="text-capitalize">született</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </label>
-                  <div class="col-11 col-sm-7">
+                <div class="input-group justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="born" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <i class="fa-solid fa-calendar-days"></i>
+                      <span class="ms-1 text-capitalize me-2">
+                        {{'born' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-6 col-sm-7 col-lg-4">
                     <input
                       id="born"
                       type="date"
-                      class="form-control form-control-sm"
+                      ng-value="user.born"
+                      class="form-control rounded-pill shadow-sm"
                       spellcheck="false"
                       autocomplete="off"
+                      min="{{helper.minBorn}}"
+                      max="{{helper.maxBorn}}"
+                      ng-model="values.dateOfBirth"
+                      name="dateOfBirth"
                       required
                     />
                   </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="registerForm.dateOfBirth.$valid"
+                    >
                       &check;
                     </span>
                   </div>
                 </div>
-      
+
                 <!-- Gender -->
-                <fieldset class="row input-row mb-2">
-                  <legend
-                    class="col-form-label col-form-label-sm col-sm-4 pt-0 text-sm-end"
+                <fieldset class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <legend class="col-form-label text-sm-end">
+                      <span class="fw-bold text-danger">*</span>
+                      <i class="fa-solid fa-venus-mars"></i>
+                      <span class="ms-1 text-capitalize me-2">
+                        {{'gender' | translate:lang.data}}:
+                      </span>
+                    </legend>
+                  </div>
+                  <div
+                    class="col-4 col-sm-4 col-lg-4 position-relative mt-2 ms-4"
                   >
-                    <span class="text-capitalize">neme</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </legend>
-                  <div class="col-11 col-sm-7">
                     <div class="form-check form-check-inline small">
                       <input
-                        class="form-check-input"
+                        class="form-check-input opacity-100"
                         type="radio"
                         name="gender"
                         id="female"
-                        value="F"
+                        value="2"
+                        ng-model="values.gender"
                         required
                       />
-                      <label class="form-check-label" for="female">nő</label>
+                      <label
+                        for="female"
+                        class="form-check-label opacity-100"
+                      >
+                        {{'female' | translate:lang.data}}
+                      </label>
                     </div>
                     <div class="form-check form-check-inline small">
                       <input
-                        class="form-check-input"
+                        class="form-check-input opacity-100"
                         type="radio"
                         name="gender"
                         id="male"
-                        value="M"
+                        value="1"
+                        ng-model="values.gender"
+                        required
                       />
-                      <label class="form-check-label" for="male">férfi</label>
+                      <label for="male" class="form-check-label opacity-100">
+                        {{'male' | translate:lang.data}}
+                      </label>
                     </div>
                   </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="registerForm.gender.$valid"
+                    >
                       &check;
                     </span>
                   </div>
                 </fieldset>
-      
-                <!-- Address -->
-                <div class="row input-row mb-2">
-                  <label
-                    for="address"
-                    class="col-form-label col-form-label-sm col-sm-4 text-sm-end"
-                  >
-                    <span class="text-capitalize">cím</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </label>
-                  <div class="col-11 col-sm-7">
-                    <textarea
-                      id="address"
-                      placeholder="cím"
-                      class="form-control form-control-sm"
-                      spellcheck="false"
-                      autocomplete="off"
-                      required
-                    >
-                    </textarea>
+
+                <!-- Dividing line -->
+                <hr class="text-muted" />
+
+                <!-- Country -->
+                <div class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="country" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <i class="fa-solid fa-flag"></i>
+                      <span class="text-capitalize me-2">
+                        {{'country' | translate:lang.data}}:
+                      </span>
+                    </label>
                   </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
+                  <div class="col-6 col-sm-7 col-lg-4">
+                    <select
+                      id="country"
+                      class="form-select text-capitalize pe-4 rounded-pill shadow-sm"
+                      ng-model="values.country"
+                      ng-change="handleCountryChange(values.country)"
+                      ng-options="x.country for x in helper.countries"
+                      name="country"
+                      required
+                    ></select>
+                  </div>
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="registerForm.country.$valid"
+                    >
                       &check;
                     </span>
                   </div>
                 </div>
-      
+
                 <!-- Phone -->
-                <div class="row input-row mb-2">
-                  <label
-                    for="tel"
-                    class="col-form-label col-form-label-sm col-sm-4 text-sm-end"
-                  >
-                    <span class="text-capitalize">telefon</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </label>
-                  <div class="col-11 col-sm-7">
+                <div class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="phone" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <i class="fa-solid fa-mobile-screen"></i>
+                      <span class="text-capitalize me-2">
+                        {{'phone' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-8 col-sm-6 d-flex">
+                    <span class="pt-2">+</span>
+                    <select
+                      id="country_code"
+                      class="form-select ms-1 d-inline rounded-pill shadow-sm"
+                      style="max-width: 90px"
+                      ng-model="values.countryCode"
+                      name="countryCode"
+                      ng-options="code for code in values.country.code"
+                      ng-disabled="!values.country"
+                      required
+                    ></select>
                     <input
-                      id="tel"
+                      id="phone"
                       type="tel"
-                      placeholder="telefon"
-                      class="form-control form-control-sm"
+                      ng-attr-placeholder="{{'phone' | translate:lang.data}}"
+                      class="form-control rounded-pill shadow-sm d-inline"
                       spellcheck="false"
                       autocomplete="off"
+                      ng-model="values.phone"
+                      ng-pattern="/^[0-9]{7,14}$/"
+                      name="phone"
+                      style="max-width: 750px"
                       required
                     />
                   </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
-                      &check;
-                    </span>
-                  </div>
-                </div>
-      
-                <!-- Dividing line -->
-                <div class="row my-3 border-bottom"></div>
-      
-                <!-- Email -->
-                <div class="row input-row mb-2">
-                  <label
-                    for="email"
-                    class="col-form-label col-form-label-sm col-sm-4 text-sm-end"
-                  >
-                    <span class="text-capitalize">email</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </label>
-                  <div class="col-11 col-sm-7">
-                    <input
-                      id="email"
-                      type="email"
-                      placeholder="email"
-                      class="form-control form-control-sm"
-                      spellcheck="false"
-                      autocomplete="off"
-                      required
-                      maxlength="50"
-                    />
-                  </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
-                      &check;
-                    </span>
-                  </div>
-                </div>
-      
-                <!-- Email confirm -->
-                <div class="row input-row mb-2">
-                  <label
-                    for="email2"
-                    class="col-form-label col-form-label-sm col-sm-4 text-sm-end"
-                  >
-                    <span class="text-capitalize">email</span>
-                    <span>megerősítése</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </label>
-                  <div class="col-11 col-sm-7">
-                    <input
-                      id="email2"
-                      type="email"
-                      placeholder="email megerősítése"
-                      class="form-control form-control-sm"
-                      spellcheck="false"
-                      autocomplete="off"
-                      required
-                      maxlength="50"
-                    />
-                  </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
-                      &check;
-                    </span>
-                  </div>
-                </div>
-      
-                <!-- Password -->
-                <div class="row input-row mb-0">
-                  <label
-                    for="password"
-                    class="col-form-label col-form-label-sm col-sm-4 text-sm-end"
-                  >
-                    <span class="text-capitalize">jelszó</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </label>
-                  <div class="col-11 col-sm-7">
-                    <input
-                      id="password"
-                      type="password"
-                      placeholder="jelszó"
-                      class="form-control form-control-sm input-password"
-                      spellcheck="false"
-                      autocomplete="off"
-                      required
-                      maxlength="20"
-                    />
-                  </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
-                      &check;
-                    </span>
-                  </div>
-                </div>
-      
-                <!-- Password rule -->
-                <div class="row mb-2">
-                  <div class="col-0 col-sm-4"></div>
-                  <div class="col-11 col-sm-7">
-                    <span class="fs-sm text-muted">
-                      6-20 karakter (kis-nagy betűt, és számot tartalmaz).
-                    </span>
-                  </div>
-                </div>
-      
-                <!-- Password confirm -->
-                <div class="row input-row mb-2">
-                  <label
-                    for="password2"
-                    class="col-form-label col-form-label-sm col-sm-4 text-sm-end"
-                  >
-                    <span class="text-capitalize">jelszó</span>
-                    <span>megerősítése</span>
-                    <span class="fw-bold text-danger">*</span>
-                    <span>:</span>
-                  </label>
-                  <div class="col-11 col-sm-7">
-                    <input
-                      id="password2"
-                      type="password"
-                      placeholder="jelszó megerősítése"
-                      class="form-control form-control-sm input-password"
-                      spellcheck="false"
-                      autocomplete="off"
-                      required
-                      maxlength="20"
-                    />
-                  </div>
-                  <div class="col-1 pt-1">
-                    <span class="check-mark ms-1 fw-bold text-success d-conditional">
-                      &check;
-                    </span>
-                  </div>
-                </div>
-      
-                <!-- Show/Hide password -->
-                <div class="row mb-3">
-                  <div class="col-0 col-sm-4"></div>
-                  <div class="col-11 col-sm-7">
-                    <div class="form-check form-check-inline small">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="show-password"
-                      />
-                      <label class="form-check-label" for="show-password">
-                        jelszót megjelenít
-                      </label>
-                    </div>
-                  </div>
-                </div>
-      
-                <!-- Dividing line -->
-                <div class="row my-3 border-bottom"></div>
-      
-                <!-- Buttons -->
-                <div class="row mb-2">
-                  <!-- Accept -->
-                  <div class="col-6 px-1 text-end">
-                    <button
-                      id="accept"
-                      type="button"
-                      class="btn btn-primary"
-                      disabled
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="registerForm.phone.$valid"
                     >
-                      Regisztráció
-                    </button>
+                      &check;
+                    </span>
                   </div>
-      
-                  <!-- Cancel -->
-                  <div class="col-6 px-1 text-start">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      onclick="cancel()"
+                </div>
+
+                <!-- City -->
+                <div class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="city" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <span class="text-capitalize me-2">
+                        {{'city' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-6 col-sm-7 col-lg-4">
+                    <input
+                      id="city"
+                      type="text"
+                      ng-attr-placeholder="{{'city' | translate:lang.data}}"
+                      class="form-control rounded-pill shadow-sm"
+                      spellcheck="false"
+                      autocomplete="off"
+                      ng-model="values.city"
+                      name="city"
+                      required
+                      ng-maxlength="100"
+                    />
+                  </div>
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="registerForm.city.$valid"
                     >
-                      Mégsem
-                    </button>
+                      &check;
+                    </span>
                   </div>
-                </div>  
+                </div>
+
+                <!-- Post code-->
+                <div class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="postcode" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <i class="fa-solid fa-list-ol"></i>
+                      <span class="text-capitalize me-2">
+                        {{'postcode' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-6 col-sm-7 col-lg-4">
+                    <input
+                      id="postcode"
+                      type="text"
+                      ng-attr-placeholder="{{'postcode' | translate:lang.data}}"
+                      class="form-control rounded-pill shadow-sm"
+                      style="max-width: 170px"
+                      spellcheck="false"
+                      autocomplete="off"
+                      ng-model="values.postcode"
+                      name="postcode"
+                      ng-maxlength="10"
+                      required
+                    />
+                  </div>
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="registerForm.postcode.$valid"
+                    >
+                      &check;
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Address -->
+                <div class="input-group mb-2 justify-content-center">
+                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="address" class="col-form-label">
+                      <span class="fw-bold text-danger">*</span>
+                      <i class="fa-solid fa-location-dot"></i>
+                      <span class="text-capitalize me-2">
+                        {{'address' | translate:lang.data}}:
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-6 col-sm-7 col-lg-4">
+                    <input
+                      id="address"
+                      type="text"
+                      ng-attr-placeholder="{{'address' | translate:lang.data}}"
+                      class="form-control rounded-pill shadow-sm"
+                      spellcheck="false"
+                      autocomplete="off"
+                      ng-model="values.address"
+                      name="address"
+                      ng-maxlength="200"
+                      required
+                    />
+                  </div>
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="registerForm.address.$valid"
+                    >
+                      &check;
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Dividing line -->
+                <hr class="text-muted" />
               </form>
             </div>
-          
+
+            <!-- buttons -->
+            <div class="row my-3 justify-content-center">
+              <!-- Cancel -->
+              <button
+                type="button"
+                class="btn btn-secondary text-capitalize"
+                ng-click="cancel()"
+                data-bs-dismiss="modal"
+              >
+                {{'cancel' | translate:lang.data}}
+              </button>
+
+              <!-- Accept -->
+              <button
+                id="accept"
+                type="button"
+                class="btn btn-primary text-capitalize"
+                data-bs-dismiss="modal"
+                ng-click="accept()"
+                ng-disabled="registerForm.$invalid"
+              >
+                {{'registration' | translate:lang.data}}
+              </button>
+            </div>
+
           </div>
+
           <!-- Reservation Tab  -->
           <div
             class="tab-pane fade"
@@ -421,6 +519,8 @@
           >
             ...
           </div>
+
+          <!-- Orders Tab -->
           <div
             class="tab-pane fade"
             id="v-pills-orders"
@@ -429,10 +529,9 @@
           >
             ...
           </div>
+
         </div>
       </div>
-
-      
     </div>
   </main>
 
