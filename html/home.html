@@ -12,6 +12,7 @@
 
     <!-- Welcome Text -->
     <h1 class="text-center pt-4 mb-2">{{'welcoming' | translate:lang.data}}</h1>
+    
     <!-- Slogan -->
     <h3 class="text-center mb-4">Your Party - Your day</h3>
 
@@ -43,45 +44,47 @@
     </section>
 
     <!-- Carousel -->
-    <div id="homeCarousel" 
-         class="carousel slide" 
-         data-bs-ride="carousel" 
-    >
-      <div class="carousel-inner">
-        <div 
-          class="carousel-item" 
-          ng-class= "{active: $index===0}" 
-          ng-repeat="image in images track by $index">
-          <img ng-src="{{image}}" 
-               class="d-block w-100" 
-               alt="{{image}}" 
-          >
+    <section>
+      <div id="homeCarousel" 
+          class="carousel slide" 
+          data-bs-ride="carousel" 
+      >
+        <div class="carousel-inner">
+          <div 
+            class="carousel-item" 
+            ng-class= "{active: $index===0}" 
+            ng-repeat="image in images track by $index">
+            <img ng-src="{{image}}" 
+                class="d-block w-100" 
+                alt="{{image}}" 
+            >
+          </div>
         </div>
+
+        <!-- Buttons -->
+        <button class="carousel-control-prev" 
+                type="button" 
+                data-bs-target="#homeCarousel" 
+                data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" 
+                aria-hidden="true">
+          </span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" 
+                type="button" 
+                data-bs-target="#homeCarousel" 
+                data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" 
+                aria-hidden="true">
+          </span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-
-      <!-- Buttons -->
-      <button class="carousel-control-prev" 
-              type="button" 
-              data-bs-target="#homeCarousel" 
-              data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" 
-              aria-hidden="true">
-        </span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-
-      <button class="carousel-control-next" 
-              type="button" 
-              data-bs-target="#homeCarousel" 
-              data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" 
-              aria-hidden="true">
-        </span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
+    </section>  
     
     <!-- About Us -->
     <section class="wrapper">
@@ -127,7 +130,7 @@
     <!-- Rate Us! -->
     <section ng-if="!user.id">
       <form name="ratingForm">
-          <div class="card border-primary mt-1 mb-4 w-100">
+        <div class="card border-primary mt-1 mb-4 w-100">
           <h2 class="card-header">{{'rate_us' | translate:lang.data}}</h2>
 
           <!-- Rated Stars -->
@@ -143,37 +146,37 @@
             </ul>
           </div>
 
-          <div class="card-body text-primary">
-            <p class="justify-content-center">{{'from_your_point_of_view' | translate:lang.data}}</p>
-            
-            <!-- Description Label -->
-            <div class="mb-3 row">
-              <label for="inputrating" 
-                    class="col-sm-2 col-form-label"
-                    >{{'r_u_description' | translate:lang.data}}
-              </label>
-              <div class="col-sm-10">
-                <textarea ng-model="ratingData.ratingText"
-                      rows="4"
-                      class="form-control" 
-                      id="inputrating"
-                      name="ratingText"
-                      required
-                      >
-                  </textarea>
-                  {{test}}
-                  
+            <!-- Description Card -->
+            <div class="card-body text-primary">
+              <p class="justify-content-center">{{'from_your_point_of_view' | translate:lang.data}}</p>
+              
+              <!-- Description Label -->
+              <div class="mb-3 row">
+                <label for="inputrating" 
+                      class="col-sm-2 col-form-label"
+                      >{{'r_u_description' | translate:lang.data}}
+                </label>
+                <div class="col-sm-10">
+                  <textarea ng-model="ratingData.ratingText"
+                        rows="4"
+                        class="form-control" 
+                        id="inputrating"
+                        name="ratingText"
+                        required
+                        >
+                    </textarea>
+                    {{test}}
+                    
+                </div>
               </div>
             </div>
-          </div>
           
-          <!-- Send Rate Button -->
-          <button class="btn btn-primary text-capitalize mt-2 mb-1" 
-                  ng-disabled="((ratingForm.ratingText.$invalid) || (!ratingData.rating))"
-                  ng-click="send()">
-            {{'send' | translate:lang.data}}
-          </button>
-
+            <!-- Send Rate Button -->
+            <button class="btn btn-primary text-capitalize mt-2 mb-1" 
+                    ng-disabled="((ratingForm.ratingText.$invalid) || (!ratingData.rating))"
+                    ng-click="send()">
+                    {{'send' | translate:lang.data}}
+            </button>
         </div>
       
       </form>
@@ -181,21 +184,24 @@
 
     <hr class="text-muted py-2">
 
-    <!-- rating card with footers -->
+    <!-- Rating Card with Footers -->
     <section class="wrapper px-2 mb-2 pb-2"> 
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" 
              ng-repeat = "rating in ratings"
-        > 
+             >
+
+          <!-- Delivered Rating -->
           <div class="card h-100">
 
             <!-- Image -->
             <div
               class="bg-img bg-img-cover overflow-hidden rounded-circle card-img-top mx-auto mt-2"
               style="width: 80px; height: 80px"
-              ng-style="{'background-image':rating.img_type?'url(data:'+rating.img_type+';base64,'+rating.img+')':'url('+app.commonPath+'media/image/blank/'+(rating.gender_id===2?'fe':'')+'male-blank.webp)'}"
-            ></div>
+              ng-style="{'background-image':rating.img_type?'url(data:'+rating.img_type+';base64,'+rating.img+')':'url('+app.commonPath+'media/image/blank/'+(rating.gender_id===2?'fe':'')+'male-blank.webp)'}">
+            </div>
 
+            <!-- Del.Rat. from php -->
             <div class="card-body">
               <h6 class="card-title text-center text-capitalize">{{'rating' | translate:lang.data}}: {{rating.rating}}/5</h6>
 
@@ -207,7 +213,7 @@
                          ng-repeat="star in stars" 
                          ng-class="{'rating-color': rating.rating >= star}"></i>
                   </div>
-              </div>
+                </div>
               
               <!-- Rating Text -->
               <p class="fw-bold mb-0">{{rating.first_name}}:</p>
