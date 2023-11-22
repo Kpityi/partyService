@@ -414,8 +414,7 @@
             })
             .then((response) => {
               const disabledDates =response ? response.map((date) => date.date) : [];
-                           
-
+              $('#date').datepicker("destroy");
               $('#date').datepicker({
                 changeMonth: true,
                 changeYear: true,
@@ -432,7 +431,6 @@
                   return [disabledDates.indexOf(dateString) === -1];
                 },
               });
-              $scope.$applyAsync(); 
             })
             .catch((e) => {
               // Resolve completed, and show error
@@ -518,18 +516,18 @@
           $scope.$applyAsync();
         };
 
-        // Set model
+        // Set model 
         $scope.model = {
-          email: $rootScope.user.email,
-          password: null,
+          email: "kertesz.istvan-e2022@keri.mako.hu", //$rootScope.user.email,
+          password: "1234Aa",
         };
 
         // Add event listener accept button.
         $scope.accept = () => {
           // Get only necessary properties
           let data = {
-            email: $scope.email,
-            password: $scope.password,
+            email: $scope.model.email,
+            password: $scope.model.password,
           };
 
           // Http request

@@ -105,7 +105,7 @@
             </div>
 
             <!-- Contact Card Group -->
-            <form class="modal-body">
+            <div class="modal-body">
               <div class="card-group">
 
                 <!-- Email Card -->
@@ -159,12 +159,23 @@
                   </div>
                 </div>
               </div>
-            </form>
+
+              <form class="row justify-content-center mt-3">
+                <div class="input-group">
+                  <label for="email" class="col-2 text-end mb-3 me-2 col-form-label col-form-label-sm">Email:</label>
+                  <input type="email" class="col-8 mb-3 form-control form-control-sm">
+                </div>
+                <div class="input-group">
+                  <label for="text" class="col-2 text-end mb-3 me-2 col-form-label col-form-label-sm">Text:</label>
+                  <textarea name="text" id="text" cols="30" rows="3" class="col-8 mb-3 form-control form-control-sm"></textarea>
+                </div>
+              </form>
+            </div>
 
               <!-- Navigate in Modal Footer -->
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message!</button>
+                <button type="button" class="btn btn-primary" disabled>Send message!</button>
               </div>
           </div>
         </div>
