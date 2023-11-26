@@ -29,7 +29,7 @@
           .state('reating', {
             url: '/reating',
             templateUrl: './html/reating.html',
-            controller: 'reatingController'
+            controller: 'reatingController',
           })
           .state('contact', {
             url: '/contact',
@@ -95,12 +95,8 @@
           base: {
             id: null,
             type: null,
-            prefix_name: null,
             first_name: null,
-            middle_name: null,
             last_name: null,
-            suffix_name: null,
-            nick_name: null,
             gender: null,
             img: null,
             img_type: null,
@@ -242,7 +238,7 @@
       '$state',
       function ($scope, http, $timeout, $state) {
         console.log('Home controller...');
-      
+
         const myCarouselElement = document.querySelector('#homeCarousel');
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 4000,
@@ -366,12 +362,12 @@
           });
 
         //set min & max data
-         $scope.reservDate = {
-           max: moment().add(2, 'years').format('YYYY-MM-DD'),
-           min: moment().add(1, 'days').format('YYYY-MM-DD'),
-           placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
-         };
-         console.log($scope.reservDate)
+        $scope.reservDate = {
+          max: moment().add(2, 'years').format('YYYY-MM-DD'),
+          min: moment().add(1, 'days').format('YYYY-MM-DD'),
+          placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
+        };
+        console.log($scope.reservDate);
 
         $scope.checkDays = () => {
           // Http request check available days
@@ -392,7 +388,12 @@
                 minDate: new Date($scope.reservDate.min),
                 maxDate: new Date($scope.reservDate.max),
                 firstDay: 1,
-                dayNamesMin: $rootScope.lang.id=== "hu" ? [ "V", "H", "K", "Sze", "Cs", "P", "Szo" ] : $rootScope.lang.id === "en" ? [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ] : [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
+                dayNamesMin:
+                  $rootScope.lang.id === 'hu'
+                    ? ['V', 'H', 'K', 'Sze', 'Cs', 'P', 'Szo']
+                    : $rootScope.lang.id === 'en'
+                    ? ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+                    : ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                   const dateString = jQuery.datepicker.formatDate(
@@ -435,13 +436,15 @@
                 console.log(response.lastInsertId);
                 $scope.$applyAsync();
                 alert(`Reservation succesfull,  ${response.lastInsertId}`);
-                $scope.reservationData = angular.copy($scope.originalReservationData);
+                $scope.reservationData = angular.copy(
+                  $scope.originalReservationData
+                );
               } else alert(`Reservation unsuccesfull!  ${response}`);
             })
             .catch((error) => {
               $timeout(() => alert(error), 50);
             });
-        };        
+        };
       },
     ])
 
@@ -489,16 +492,16 @@
 
         // Set model
         $scope.model = {
-          email: $rootScope.user.email,
-          password: null,
+          email: 'kertesz.istvan-e2022@keri.mako.hu',
+          password: '1234Aa',
         };
 
         // Add event listener accept button.
         $scope.accept = () => {
           // Get only necessary properties
           let data = {
-            email: $scope.email,
-            password: $scope.password,
+            email: $scope.model.email,
+            password: $scope.model.password,
           };
 
           // Http request
@@ -691,30 +694,35 @@
       'http',
       'user',
       '$timeout',
-      function ($scope, $rootScope, util, http, user, $timeout) {
+      '$state',
+      function ($scope, $rootScope, util, http, user, $timeout, $state) {
         console.log('profile controller...');
-        
+
         //set helper variables
-        $scope.helper={
-          isEdit:true,
+        $scope.helper = {
+          isEdit: true,
           maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
-          minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),};
+          minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
+        };
 
         // Form initial values
         $scope.values = {
-          lastName: '',
-          firstName: '',
-          img: null,
-          img_type: null,
+          lastName: $rootScope.user.last_name,
+          firstName: $rootScope.user.first_name,
+          img: $rootScope.user.img,
+          img_type: $rootScope.user.img_type,
           dateOfBirth: null,
-          gender: null,
-          country: null,
-          countryCode: null,
+          gender: $rootScope.user.gender == 1 ? 'male' : 'female',
+          country: "hungary",
+          country_code: null,
           phone: '',
           postcode: '',
           city: '',
           address: '',
         };
+
+        //save original user data
+        $scope.UserData={}
 
         // Create new deffered objects
         $scope.countries = util.deferredObj();
@@ -723,7 +731,7 @@
         http
           .request($rootScope.app.commonPath + `data/countries.json`)
           .then((response) => {
-            //$scope.helper.countries = response;
+            $scope.helper.countries = response;
             $scope.countries.promise.resolve();
           })
           .catch((e) => {
@@ -733,8 +741,50 @@
           });
 
         $scope.handleCountryChange = (country) => {
-          $scope.values.countryCode = country.code?.[0] || null;
+          $scope.values.country_code = country.code?.[0] || null;
         };
+
+        //Http request user data
+        http
+            .request({
+              url: './php/get_profile.php',
+              method: 'POST',
+              data: {id: $rootScope.user.id},
+            })
+            .then((response) => {
+              console.log(response)
+              $scope.values.dateOfBirth = moment(response.born).toDate();
+
+              $scope.values.phone = response.phone;
+              $scope.values.city = response.city;
+              $scope.values.postcode = response.postcode;
+              $scope.values.address = response.address;
+              
+              // Get user country index from contries
+              let index = util.indexByKeyValue(
+                $scope.helper.countries, 
+                'country', 
+                response.country
+              );
+
+              // Check exist
+              if (index !== -1) {
+                let codeIndex= $scope.helper.countries[index].code.indexOf(response.country_code)
+                $scope.values.country        = $scope.helper.countries[index];
+                $scope.values.country_code  = $scope.helper.countries[index].code[codeIndex];
+              }
+              $scope.userData= angular.copy($scope.values);
+              $scope.$applyAsync
+            })
+            .catch((error) => {
+              $timeout(() => alert(error), 50);
+            });
+
+            $scope.cancel= ()=>{
+              $scope.values=angular.copy($scope.UserData);
+              $scope.helper.isEdit=true;
+              $state.reload() ;
+            }
       },
     ])
 
@@ -753,16 +803,15 @@
         $scope.reating = null;
         $scope.clicked = (event) => {
           $scope.reating = event.currentTarget.dataset.reating;
-        }
-        
+        };
+
         $scope.send = () => {
           alert($scope.reating);
-        }
+        };
 
         $scope.reset = () => {
           $scope.reating = null;
-        }
-      }
+        };
+      },
     ]);
-
 })(window, angular);
