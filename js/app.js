@@ -329,6 +329,7 @@
         const myCarouselElement = document.querySelector('#menuCarousel');
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 2000,
+          ride: "carousel"
         });
         carousel.to(1);
 
