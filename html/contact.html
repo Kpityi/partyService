@@ -9,7 +9,7 @@
   <div ng-include src="'./html/loginModal.html'"></div>
 
   <main>
-    <h1 class="text-center py-3">Kapcsolat</h1>
+    <h1 class="text-center py-3">{{'contact' | translate:lang.data}}</h1>
 
       <!-- Navigation -->
       <section> 
@@ -23,16 +23,16 @@
               <li class="nav-item">
                 <a class="nav-link active" 
                    aria-current="true"
-                   >Kapcsolat</a>
+                   >{{'contact' | translate:lang.data}}</a>
               </li>
                 <!-- Nav Item #2 Team -->
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a class="nav-link"
                    href="https://www.keri.mako.hu/""
                    title="web" 
                    target="_blank"
-                   >Team</a>
-              </li>
+                   >{{'contact_team' | translate:lang.data}}</a>
+              </li>-->
                <!-- Nav Item #3 Droplinks -->
               <li class="nav-item">
                 <a class="nav-link"
@@ -47,14 +47,14 @@
                   href="https://www.google.com/maps/place/HSZC+Mak%C3%B3i+N%C3%A1vay+Lajos+Technikum+%C3%A9s+Koll%C3%A9gium/@46.2136337,20.4733232,17z/data=!3m1!4b1!4m5!3m4!1s0x4744f602b445c0b9:0x6ecc2b88ac500ef!8m2!3d46.21363!4d20.4755119"
                   title="google maps" 
                   target="_blank"
-                  >Térkép</a>
+                  >{{'contact_map' | translate:lang.data}}</a>
               </li>
             </ul>
           </div>
 
           <!--  Address  -->
           <div class="card-body">
-            <h4 class="card-title mt-0">Címünk:</h4>
+            <h4 class="card-title mt-0">{{'contact_address' | translate:lang.data}}</h4>
             <div class="col col-12 col-md-6 col-xl-3 ps-5 ps-md-0 text-lg-start mt-3 mt-xl-0">
               <ul class="text-start list-unstyled mb-0 ms-md-5">
                 <li>
@@ -75,14 +75,14 @@
              class="btn btn-primary" 
              data-bs-toggle="modal" 
              data-bs-target="#staticBackdrop"
-             >Contact us!</a>
+             >{{'contact_us' | translate:lang.data}}</a>
           </div>
       
           <!-- Contact Nav Image -->
           <div class="content_iframe">
             <img src="../partyService/media/image/Contact_Imgs/contact_nav_cover.jpg" 
                  alt="contact_nav_cover" 
-                 class="img-fluid rounded p-2 d-md-none d-lg-block">
+                 class="img-fluid rounded p-2">
            </div>
         </form>
       </section> 
@@ -103,7 +103,7 @@
               <div class="modal-header">
                 <h1 class="modal-title fs-5" 
                   id="staticBackdropLabel"
-                  >Elérhetőségeink:
+                  >{{'contact_us' | translate:lang.data}}:
                 </h1>
                 <!-- Close Button -->
                 <button type="button" 
@@ -201,7 +201,7 @@
                 </button>
               <button type="button" 
                       class="btn btn-primary" 
-                      disabled>Send message!
+                      disabled>{{'send' | translate:lang.data}}
                 </button>
             </div>
           </div>
@@ -222,39 +222,78 @@
       <section>
         <form class="center">
           <div class="row">
-            <h2> A csapat: </h2>
-            <div class="row">
+            <h2 class="text-center py-3"> {{'contact_team' | translate:lang.data}} </h2>
+            <div class="row ms-3">
+
+              <!-- Heading 1 -->
               <div class="col-lg-4">
                 <svg class="bd-placeholder-img rounded-circle" 
-                    width="140" 
-                    height="140" 
+                    width="120" 
+                    height="120" 
                     xmlns="http://www.w3.org/2000/svg" 
                     role="img" 
-                    aria-label="Placeholder: 140x140"
+                    aria-label="Placeholder: 120x120"
                     preserveAspectRatio="xMidYMid slice"
-                      focusable="false"><title>Placeholder</title>
+                      focusable="false">
+                      <title>Placeholder</title>
                       <rect width="100%" 
-                      height="100%" 
-                      fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                            height="100%" 
+                            fill="#777">
+                        </rect>
+                      <text x="50%" y="50%" fill="#777" dy=".3em">120x120</text>
+                  </svg>
         
                 <h2>Heading</h2>
                 <p>LOREMKA.</p>
                 <p><a class="btn btn-secondary" href="#">View details »</a></p>
-              </div><!-- /.col-lg-4 -->
+              </div>
+
+              <!-- Heading 2 -->
               <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-        
+                <svg class="bd-placeholder-img rounded-circle" 
+                     width="120" 
+                     height="120" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    role="img" 
+                    aria-label="Placeholder: 120x120" 
+                    preserveAspectRatio="xMidYMid slice" 
+                    focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" 
+                          height="100%" 
+                          fill="#777">
+                      </rect>
+                    <text x="50%" y="50%" fill="#777" dy=".3em">120x120</text>
+                  </svg>
+                  
                 <h2>Heading</h2>
                 <p>LOREMKA.</p>
                 <p><a class="btn btn-secondary" href="#">View details »</a></p>
-              </div><!-- /.col-lg-4 -->
+              </div>
+
+              <!-- Heading 3 -->
               <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                <svg class="bd-placeholder-img rounded-circle" 
+                     width="120" 
+                     height="120" 
+                     xmlns="http://www.w3.org/2000/svg" 
+                     role="img" 
+                     aria-label="Placeholder: 120x120" 
+                     preserveAspectRatio="xMidYMid slice" 
+                     focusable="false">
+                     <title>Placeholder</title>
+                     <rect width="100%" 
+                           height="100%" 
+                           fill="#777">
+                        </rect>
+                      <text x="50%" y="50%" fill="#777" dy=".3em">120x120</text>
+                  </svg>
         
                 <h2>Heading</h2>
                 <p>LOREMKA.</p>
                 <p><a class="btn btn-secondary" href="#">View details »</a></p>
-              </div><!-- /.col-lg-4 -->
+              </div>
+
             </div>  
           </div>
         </form>

@@ -153,6 +153,10 @@
   "rating": "rating",
   "rate_us":"Rate Us!",
   "from_your_point_of_view": "From your point of view:",
-  "r_u_description": "Description:"
+  "r_u_description": "Description:",
+  "contact_team": "Team:",
+  "contact_us": "Contact us",
+  "contact_address": "Address:",
+  "contact_map": "Map"
 
 }
