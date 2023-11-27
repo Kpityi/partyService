@@ -780,10 +780,16 @@
               $timeout(() => alert(error), 50);
             });
 
+            $scope.accept= ()=>{
+              console.log($scope.values)
+              $scope.helper.isEdit=true;
+              $state.reload();
+            }
+
             $scope.cancel= ()=>{
               $scope.values=angular.copy($scope.UserData);
               $scope.helper.isEdit=true;
-              $state.reload() ;
+              $state.reload();
             }
       },
     ])
