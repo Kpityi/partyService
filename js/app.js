@@ -699,11 +699,51 @@
       function ($scope, $rootScope, util, http, user, $timeout, $state) {
         console.log('profile controller...');
 
+        // Watch user image changed
+        $scope.$watch('helper.image', (newValue, oldValue) => {
+
+          // Check is changed
+          if(!angular.equals(newValue, oldValue)) {
+
+            // Restore value, apply change, and show error when exist
+            let restore = (error=null) => {
+              $scope.helper.image = oldValue;
+              $scope.$applyAsync();
+              if (error) $timeout(() => alert(error), 50);
+            };
+
+            // Check has property
+            if (newValue) {
+
+              // Check accept file types property
+              util.fileAllowedTypes(newValue, $scope.helper.fileInput.accept).then(() => {
+
+                // File reader
+                util.fileReader(newValue, {
+                  method  : 'readAsDataURL',
+                  limit   : 64
+                }).then((data) => {
+
+                  // Set image
+                  $scope.values.img      = util.getBase64UrlData(data);
+                  $scope.values.img_type = newValue.type;
+                  $scope.$applyAsync();
+
+                // Restore
+                }).catch(error => restore(error));
+              }).catch(error => restore(error));
+            }
+          }
+        });
+
+
         //set helper variables
         $scope.helper = {
           isEdit: true,
           maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
           minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
+          fileInput: document.querySelector('input#avatar[type="file"]'),
+          image: null
         };
 
         // Form initial values
@@ -714,8 +754,8 @@
           img_type: $rootScope.user.img_type,
           dateOfBirth: null,
           gender: $rootScope.user.gender == 1 ? 'male' : 'female',
-          //country: null,
-          //country_code: null,
+          country: null,
+          country_code: null,
           phone: '',
           postcode: '',
           city: '',
