@@ -128,7 +128,7 @@
     <hr class="text-muted py-1">
 
     <!-- Rate Us! -->
-    <section ng-if="!user.id">
+    <section ng-if="user.id">
       <form name="ratingForm">
         <div class="card border-primary mt-1 mb-4 w-100">
           <h2 class="card-header">{{'rate_us' | translate:lang.data}}</h2>
@@ -192,12 +192,12 @@
              >
 
           <!-- Delivered Rating -->
-          <div class="card h-100">
+          <div class="card h-80">
 
             <!-- Image -->
             <div
               class="bg-img bg-img-cover overflow-hidden rounded-circle card-img-top mx-auto mt-2"
-              style="width: 80px; height: 80px"
+              style="width: 50px; height: 50px"
               ng-style="{'background-image':rating.img_type?'url(data:'+rating.img_type+';base64,'+rating.img+')':'url('+app.commonPath+'media/image/blank/'+(rating.gender_id===2?'fe':'')+'male-blank.webp)'}">
             </div>
 
