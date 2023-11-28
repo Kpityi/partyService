@@ -596,7 +596,7 @@
         };
 
         // Create new deffered objects
-        $scope.countries = util.deferredObj();
+        //$scope.countries = util.deferredObj();
 
         //set helper
         $scope.helper = {
@@ -612,7 +612,8 @@
           .request($rootScope.app.commonPath + `data/countries.json`)
           .then((response) => {
             $scope.helper.countries = response;
-            $scope.countries.promise.resolve();
+            //$scope.countries.promise.resolve();
+            $scope.$applyAsync();
           })
           .catch((e) => {
             // Resolve completed, reset asynchronous, and show error
@@ -713,8 +714,8 @@
           img_type: $rootScope.user.img_type,
           dateOfBirth: null,
           gender: $rootScope.user.gender == 1 ? 'male' : 'female',
-          country: "hungary",
-          country_code: null,
+          //country: null,
+          //country_code: null,
           phone: '',
           postcode: '',
           city: '',
@@ -725,14 +726,16 @@
         $scope.UserData={}
 
         // Create new deffered objects
-        $scope.countries = util.deferredObj();
+        //$scope.countries = util.deferredObj();
 
         // Http request
         http
           .request($rootScope.app.commonPath + `data/countries.json`)
           .then((response) => {
             $scope.helper.countries = response;
-            $scope.countries.promise.resolve();
+            $scope.$applyAsync();
+            //$scope.countries.promise.resolve();
+
           })
           .catch((e) => {
             // Resolve completed, reset asynchronous, and show error
@@ -774,7 +777,7 @@
                 $scope.values.country_code  = $scope.helper.countries[index].code[codeIndex];
               }
               $scope.userData= angular.copy($scope.values);
-              $scope.$applyAsync
+              $scope.$applyAsync();
             })
             .catch((error) => {
               $timeout(() => alert(error), 50);
