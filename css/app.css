@@ -83,6 +83,14 @@ option[disabled]{
   flex-flow: column;
   border: 1px;
 }
+.fluss_head_col
+{
+  background-color: #377dabb1;
+}
+.fluss_span
+{
+  background-color: rgba(112, 152, 181, 0.678);
+}
 
 
 

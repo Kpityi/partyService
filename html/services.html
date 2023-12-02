@@ -15,14 +15,17 @@
   <main class="container">
     <!-- Row -->
     <div class="row mt-3">
+
       <!-- Tab buttons -->
       <ul
         id="form-tab"
         class="nav nav-tabs nav-pills justify-content-center mt-3"
         role="tablist"
       >
+
         <!-- tab1 -->
         <li class="nav-item nav-item-pills" role="presentation">
+
           <!-- Button -->
           <button
             id="tab-1-tab"
@@ -40,6 +43,7 @@
 
         <!-- tab2 -->
         <li class="nav-item nav-item-pills" role="presentation">
+
           <!-- Button -->
           <button
             id="tab-2-tab"
@@ -71,17 +75,18 @@
         >
           <div class="p-52 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
-              <h2 class="display-5 letter-capitalize fw-bold">
+              <h2 class="display-3 letter-capitalize fw-bold">
                 {{'basic_menu' | translate:lang.data}}
               </h2>
-              <p class="fs-4">
+              <p class="fs-4 m-2">
                 {{'basic_menu_description' | translate:lang.data}}
               </p>
             </div>
           </div>
 
-          <div class="row justify-content-center ">
-            <div class="col-12 col-md-8 col-lg-6 mx-auto">
+          <div class="row content_iframe">
+            <div>
+
               <!-- carousel -->
               <div class="carousel-container overflow-hidden">
                 <div
@@ -95,11 +100,12 @@
                       ng-class="{active: $index===0}"
                       ng-repeat="image in images track by $index"
                     >
+                    <!-- Resolution 960x720 -->
                       <img
                         ng-src="{{image}}"
                         class="d-block w-100"
                         alt="{{image}}"
-                        style="max-height: 300px; width: 100%"
+                       
                       />
                     </div>
                   </div>
@@ -140,7 +146,7 @@
               ng-class="{'bg-light': $index % 2 === 1, 'evens': $index % 2 === 0}"
             >
               <div class="card w-75 mx-auto">
-                <div class="card-header fw-bold letter-capitalize">
+                <div class="card-header fw-bold letter-capitalize fluss_head_col">
                   {{ menu.menu_name | translate:lang.data}}
                 </div>
                 <ul class="list-group list-group-flush">
@@ -176,7 +182,7 @@
                         </h2>
                         <div
                           id="collapse{{$parent.$index}}_{{$index}}"
-                          class="accordion-collapse collapse"
+                          class="accordion-collapse collapse fluss_span"
                           ng-class="{show: $index===-1}"
                           aria-labelledby="heading{{$parent.$index}}_{{$index}}"
                           data-bs-parent="#accordionMenu{{$parent.$index}}_{{$index}}"
@@ -324,7 +330,8 @@
                         ng-disabled="reservationForm.event.$invalid"
                         required
                       >
-                        <option value="" class="text-capitalize">
+                        <option value="" 
+                                class="text-capitalize">
                           -- {{'select' | translate:lang.data}} --
                         </option>
                       </select>
