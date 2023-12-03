@@ -237,7 +237,7 @@
       '$rootScope',
       function ($scope, http, $timeout, $rootScope) {
         console.log('Home controller...');
-      
+
         const myCarouselElement = document.querySelector('#homeCarousel');
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 4000,
@@ -248,10 +248,9 @@
         $scope.ratings = [];
         $scope.rating = null;
         $scope.ratingData = {
-          rating : null,
-          ratingText : '',
+          rating: null,
+          ratingText: '',
         };
-
 
         // Http request
         http
@@ -269,8 +268,6 @@
             $timeout(() => alert(e));
           });
 
-
-
         // Http request
         http
           .request('./php/ratings.php')
@@ -283,36 +280,34 @@
 
             $timeout(() => alert(e));
           });
-          
-        // Send Rating
-          $scope.clicked = (event) => {
-            $scope.ratingData.rating = event.currentTarget.dataset.rating;
 
-          }
-         
-          $scope.send = () => {
-            
-            
-            $scope.rating_data = {user_id:$rootScope.user.id, rating:$scope.ratingData.rating, rating_text:$scope.ratingData.ratingText};
-            http
+        // Send Rating
+        $scope.clicked = (event) => {
+          $scope.ratingData.rating = event.currentTarget.dataset.rating;
+        };
+
+        $scope.send = () => {
+          $scope.rating_data = {
+            user_id: $rootScope.user.id,
+            rating: $scope.ratingData.rating,
+            rating_text: $scope.ratingData.ratingText,
+          };
+          http
             .request({
               url: './php/send_rating.php',
               method: 'POST',
-              data: $scope.rating_data
+              data: $scope.rating_data,
             })
-            .then((response) => {
-              
-            })
+            .then((response) => {})
             .catch((e) => {
               // Resolve completed, and show error
 
               $timeout(() => alert(e));
             });
-            console.log($scope.rating_data);  
-          }
+          console.log($scope.rating_data);
+        };
       },
     ])
-
 
     // Services controller
     .controller('servicesController', [
@@ -329,7 +324,7 @@
         const myCarouselElement = document.querySelector('#menuCarousel');
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 2000,
-          ride: "carousel"
+          ride: 'carousel',
         });
         carousel.to(1);
 
@@ -398,12 +393,12 @@
           });
 
         //set min & max data
-         $scope.reservDate = {
-           max: moment().add(2, 'years').format('YYYY-MM-DD'),
-           min: moment().add(1, 'days').format('YYYY-MM-DD'),
-           placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
-         };
-         console.log($scope.reservDate)
+        $scope.reservDate = {
+          max: moment().add(2, 'years').format('YYYY-MM-DD'),
+          min: moment().add(1, 'days').format('YYYY-MM-DD'),
+          placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
+        };
+        console.log($scope.reservDate);
 
         $scope.checkDays = () => {
           // Http request check available days
@@ -414,15 +409,22 @@
               data: { id: $scope.reservationData.event_place.id },
             })
             .then((response) => {
-              const disabledDates =response ? response.map((date) => date.date) : [];
-              $('#date').datepicker("destroy");
+              const disabledDates = response
+                ? response.map((date) => date.date)
+                : [];
+              $('#date').datepicker('destroy');
               $('#date').datepicker({
                 changeMonth: true,
                 changeYear: true,
                 minDate: new Date($scope.reservDate.min),
                 maxDate: new Date($scope.reservDate.max),
                 firstDay: 1,
-                dayNamesMin: $rootScope.lang.id=== "hu" ? [ "V", "H", "K", "Sze", "Cs", "P", "Szo" ] : $rootScope.lang.id === "en" ? [ "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" ] : [ "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa" ],
+                dayNamesMin:
+                  $rootScope.lang.id === 'hu'
+                    ? ['V', 'H', 'K', 'Sze', 'Cs', 'P', 'Szo']
+                    : $rootScope.lang.id === 'en'
+                    ? ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+                    : ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                   const dateString = jQuery.datepicker.formatDate(
@@ -464,14 +466,36 @@
               if (response.affectedRows) {
                 console.log(response.lastInsertId);
                 $scope.$applyAsync();
+                http
+                  .request({
+                    url: './php/reservation_email.php',
+                    method: 'POST',
+                    data: {
+                      email: 'kpityi83@gmail.com',
+                      subject: 'Sikeres foglalás',
+                      message:
+                        `<h2>Kedves ${$rootScope.user.first_name}</h2><p>Köszönjük a foglalást!</p> <p>Kollégánk hamarosan felveszi önnel a kapcsolatot.</p> <p>Amennyiben szeretné megtekinteni foglalásait azt megteheti a profiljában a foglalások menüpont alatt.</p>`,
+                    },
+                  })
+                  .then((response) => {
+                    // Check success
+                    if (response == 'Succes') {
+                      alert(`Reservation succesfull PHP`);
+                    } else alert(`Reservation unsuccesfull! PHP ${response}`);
+                  })
+                  .catch((error) => {
+                    $timeout(() => alert(error), 50);
+                  });
                 alert(`Reservation succesfull,  ${response.lastInsertId}`);
-                $scope.reservationData = angular.copy($scope.originalReservationData);
+                $scope.reservationData = angular.copy(
+                  $scope.originalReservationData
+                );
               } else alert(`Reservation unsuccesfull!  ${response}`);
             })
             .catch((error) => {
               $timeout(() => alert(error), 50);
             });
-        };        
+        };
       },
     ])
 
@@ -517,10 +541,10 @@
           $scope.$applyAsync();
         };
 
-        // Set model 
+        // Set model
         $scope.model = {
-          email: "kertesz.istvan-e2022@keri.mako.hu", //$rootScope.user.email,
-          password: "1234Aa",
+          email: 'kertesz.istvan-e2022@keri.mako.hu', //$rootScope.user.email,
+          password: '1234Aa',
         };
 
         // Add event listener accept button.
@@ -728,5 +752,4 @@
         console.log('cart controller...');
       },
     ]);
-
 })(window, angular);
