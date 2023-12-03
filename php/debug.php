@@ -1,9 +1,7 @@
 <?php
 
 // Set arguments
-$_GET['data'] = '{"userId":1,"date":"2023-11-15","eventPlaceId":1,"eventTypeId":1,"menuId":7,"drinkPackageId":12,"guests":50}';
+$_POST['data'] = '{"name":"Kertész István","email":"kpityi83@gmail.com","subject":"Szeva","message":"Örülök hogy itt vagy"}';
 
 // Call php file to debug
-require_once('reservation.php');
-
-
+require_once('email.php');
