@@ -44,5 +44,3 @@ $name =
       
     // Success sent message alert
     $mail->send();
-
-    echo "Succes";
