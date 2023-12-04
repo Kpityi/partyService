@@ -502,8 +502,25 @@
     // webshop controller
     .controller('webshopController', [
       '$scope',
-      function ($scope) {
+      'http', 
+      '$timeout',
+      function ($scope, http, $timeout ) {
         console.log('webshop controller...');
+
+        $scope.products = [];
+
+        // Http request products
+        http
+        .request("./php/products.php")
+        .then((response) => {
+          $scope.products = response;
+          $scope.$applyAsync();
+          console.log($scope.products)
+        })
+        .catch((error) => {
+          $timeout(() => alert(error), 50);
+        });
+
       },
     ])
 

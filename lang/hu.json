@@ -206,7 +206,7 @@
   "floot_candle_silver_6db": "úszógyertya 6 db-os (ezüst)",
   "glass_footed_floating_candle_holder": "lebegő gyertyatartó",
   
-  "desc_balloon": "Számos méretben és színben elérhető lufik, hogy tökéletesen illeszkedjenek minden alkalomhoz. Legyen szó születésnapról, esküvőről vagy bármilyen ünnepről, válaszd a kedvenc színedet és méretedet, hogy feldobd a hangulatot!",
+  "desc_balloon": "Számos méretben és színben elérhető lufik, hogy tökéletesen illeszkedjenek minden alkalomhoz. Legyen szó születésnapról, esküvőről vagy bármilyen ünnepről. Válaszd a kedvenc színedet és méretedet, hogy feldobd a hangulatot!",
   "balloon_birthday_with_message": "léggömb születésnap felirattal",
   "desc_paper_plate": "A papírtányér egy könnyű, lapos és kerek tárgy, melyet általában papírból készítenek. Leggyakrabban étkezések során, hogy az ételt könnyen tudjuk szállítani és fogyasztani. most egyszer használatosak, könnyen eldobhatók, ami praktikussá teszi őket piknikeken, bulikon vagy otthoni használatra.",
   "desc_straw": "A szívószál egy hosszú, vékony cső, amelyet általában műanyagból vagy papírból készítenek. Célja, hogy folyadékot lehet vele felszívni és inni anélkül, hogy közvetlenül a pohárból vagy a palackból kellene kortyolni.",
@@ -221,5 +221,6 @@
   "desc_wig": "A paróka mesterséges vagy természetes hajból készült haj utánzata, amelyet különféle célokra, például divatra, szórakozásra vagy vallási gyakorlatra használnak. A parókák különböző hosszúságúak, színűek és stílusúak lehetnek, és általában hálóval vagy sállal rögzítik a fejhez.",
   "desc_hair_coloring_h": "A hajkréta egy speciális kozmetikai termék, amely színes pigmenteket tartalmaz, amelyek átmeneti színezést biztosítanak a hajnak. Általában kréta vagy viasz formájában kapható, és alkalmi vagy kreatív célokra használják, mivel könnyen felvihető és kimosható a hajból.",
   "desc_floot_candle": "Az úszó gyertya egy speciális gyertya, amelyet vízben való használatra terveztek, például medencékben vagy fürdőkádakban. Kialakításuk lehetővé teszi, hogy a víz felszínén lebegjenek, és környezeti világítást biztosítanak különféle vízi körülmények között.",
-  "desc_glassFFCH": "A lebegő gyertyatartó olyan tárgy vagy eszköz, amelyet arra terveztek és használnak, hogy lebegő gyertyákat tartsanak a víz felszínén. Jellemzően úgy tervezték, hogy biztonságosan a helyén tartsa az úszó gyertyát, így biztosítja a helyzetét és biztonságát használat közben."
+  "desc_glassFFCH": "A lebegő gyertyatartó olyan tárgy vagy eszköz, amelyet arra terveztek és használnak, hogy lebegő gyertyákat tartsanak a víz felszínén. Jellemzően úgy tervezték, hogy biztonságosan a helyén tartsa az úszó gyertyát, így biztosítja a helyzetét és biztonságát használat közben.",
+  "products": "termékek"
 }

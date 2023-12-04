@@ -9,8 +9,24 @@
   <div ng-include src="'./html/loginModal.html'"></div>
 
   <main>
-    <h1 class="text-center py-4">Webshop</h1>
-    <body class="bg-light"> 
+    <h1 class="text-center py-4 text-capitalize">{{'products' | translate:lang.data}}</h1>
+    
+    <!-- Products card -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" ng-repeat = "product in products track by $index">
+        <div class="card h-100">
+          <img src="./media/image/products/{{product.image}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Lufi-kék</h5>
+            <p class="card-text">Számos méretben és színben elérhető lufik, hogy tökéletesen illeszkedjenek minden alkalomhoz. Legyen szó születésnapról, esküvőről vagy bármilyen ünnepről. Válaszd a kedvenc színedet és méretedet, hogy feldobd a hangulatot!</p>
+          </div>
+          <div class="mx-auto mb-2">
+            <button class="btn btn-primary text-center" value = "{{product.id}}" ng-click = "addToCart(product)">kosárba</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
   </main>
 
   <footer ng-include src="'./html/footer.html'"></footer>
