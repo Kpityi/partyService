@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Dec 03. 18:38
+-- Létrehozás ideje: 2023. Dec 04. 18:14
 -- Kiszolgáló verziója: 10.4.27-MariaDB
 -- PHP verzió: 8.1.12
 
@@ -20,6 +20,406 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `partyservice`
 --
+
+DELIMITER $$
+--
+-- Függvények
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `BASE64_ENCODE` (`textIn` LONGBLOB) RETURNS LONGTEXT CHARSET utf8mb4 COLLATE utf8mb4_general_ci NO SQL BEGIN
+/*
+	Convert blob to base64 text, remove start, end spaces,
+	newline, carriage return, and tab characters from text 
+*/
+DECLARE textOut LONGTEXT CHARSET utf8mb4 DEFAULT '';
+IF (textIn IS NOT NULL) THEN
+	SET textOut = TO_BASE64(textIn);
+    SET textOut = TRIM(textOut);
+    IF (LENGTH(textOut) > 0) THEN
+    	SET textOut = REPLACE(textOut,"\n","");
+    	SET textOut = REPLACE(textOut,"\r","");
+    	SET textOut = REPLACE(textOut,"\t","");
+    END IF;
+END IF;
+RETURN textOut;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `dishes`
+--
+
+CREATE TABLE `dishes` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(20) NOT NULL,
+  `dish_category_id` int(11) NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `dishes`
+--
+
+INSERT INTO `dishes` (`id`, `name`, `description`, `dish_category_id`, `price`) VALUES
+(1, 'pastries', 'des_pastries', 1, 800),
+(2, 'chicken_soup', 'des_chicken_soup', 2, 2200),
+(3, 'ragout_soup', 'des_ragout_soup', 2, 2200),
+(4, 'roast_platter1', 'des_roast_platter1', 3, 3500),
+(5, 'roast_platter2', 'des_roast_platter2', 3, 4500),
+(6, 'slide_dish', 'des_slide_dish', 7, 1000),
+(7, 'salad', 'des_salad', 8, 800),
+(8, 'cabbage_rolls', 'des_cabbage_rolls', 9, 2000),
+(9, 'boiled_sausag', 'des_boiled_sausage', 9, 1000),
+(10, 'cheese_platter', 'des_cheese_platter', 9, 4500),
+(11, 'cheese_platter', 'des_cheese_platter', 5, 4500),
+(12, 'chocolate_cake', 'des_chocolate_cake', 4, 1400),
+(13, 'drink_package_1', 'des_drink_package_1', 6, 12000),
+(14, 'cold_fruit_soup', 'des_cold_fruit_soup', 2, 1000),
+(15, 'cold_platter', 'des_cold_platter', 5, 3000),
+(16, 'drink_package_2', 'des_drink_package_2', 6, 10000),
+(17, 'sandwich', 'des_sandwich', 5, 2000),
+(18, 'drink_package_3', 'des_drink_package_3', 6, 4000),
+(19, 'custom', 'des_custom', 10, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `dish_categories`
+--
+
+CREATE TABLE `dish_categories` (
+  `id` int(1) UNSIGNED NOT NULL,
+  `type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `dish_categories`
+--
+
+INSERT INTO `dish_categories` (`id`, `type`) VALUES
+(1, 'finger_foods'),
+(2, 'appetizer'),
+(3, 'main_course'),
+(4, 'dessert'),
+(5, 'cold_platter'),
+(6, 'drinks'),
+(7, 'slide_dish'),
+(8, 'salad'),
+(9, 'midnight_dinner'),
+(10, 'custom');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `date` date NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `event_places_id` int(1) NOT NULL,
+  `event_type_id` int(1) NOT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `drink_package_id` int(1) DEFAULT NULL,
+  `guests` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `events`
+--
+
+INSERT INTO `events` (`id`, `date`, `user_id`, `event_places_id`, `event_type_id`, `menu_id`, `drink_package_id`, `guests`) VALUES
+(1, '2023-11-25', 2, 2, 2, 2, 14, 40),
+(3, '2023-12-01', 1, 1, 4, 9, 12, 50),
+(4, '2023-11-15', 1, 1, 1, 9, 12, 50),
+(5, '2023-11-08', 1, 1, 1, 0, 12, 50),
+(6, '2024-06-21', 1, 3, 2, 1, 12, 100),
+(7, '2021-10-12', 1, 1, 4, 9, 12, 38),
+(8, '2024-05-16', 9, 2, 1, 3, 14, 80),
+(9, '2023-12-15', 32, 2, 1, 3, 15, 25),
+(10, '2023-11-18', 5, 2, 4, 4, 14, 25),
+(11, '2023-12-09', 23, 1, 6, 8, 14, 100),
+(12, '2023-11-15', 1, 1, 1, 7, 12, 50),
+(13, '2024-06-22', 1, 2, 1, 3, 14, 66),
+(14, '2025-07-09', 1, 2, 8, 11, 15, 20),
+(15, '2024-03-08', 1, 2, 3, 5, 14, 50),
+(16, '2024-01-19', 1, 1, 6, 12, 14, 30),
+(17, '2025-07-19', 1, 3, 2, 1, 13, 150),
+(18, '2023-12-31', 1, 3, 7, 10, 13, 115),
+(19, '2024-05-10', 1, 1, 5, 6, 15, 10),
+(20, '2024-06-21', 1, 4, 1, 3, 14, 55),
+(21, '2024-05-18', 1, 1, 1, 6, 15, 30),
+(22, '2024-06-22', 1, 4, 8, 11, 15, 20),
+(23, '2024-06-15', 1, 4, 6, 12, 14, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `event_places`
+--
+
+CREATE TABLE `event_places` (
+  `id` int(1) UNSIGNED NOT NULL,
+  `place_name` varchar(50) NOT NULL,
+  `capacity` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `event_places`
+--
+
+INSERT INTO `event_places` (`id`, `place_name`, `capacity`) VALUES
+(1, 'external_location', 500),
+(2, 'small_room', 80),
+(3, 'grand_hall', 150),
+(4, 'outdoor', 300);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `event_types`
+--
+
+CREATE TABLE `event_types` (
+  `id` int(10) NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `event_types`
+--
+
+INSERT INTO `event_types` (`id`, `name`) VALUES
+(1, 'birthday'),
+(2, 'wedding'),
+(3, 'stag_party'),
+(4, 'hen_party'),
+(5, 'kids_party'),
+(6, 'other_party'),
+(7, 'new_year_party'),
+(8, 'graduation');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `genders`
+--
+
+CREATE TABLE `genders` (
+  `id` int(1) UNSIGNED NOT NULL,
+  `name` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `genders`
+--
+
+INSERT INTO `genders` (`id`, `name`) VALUES
+(1, 'male'),
+(2, 'female');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `menus`
+--
+
+CREATE TABLE `menus` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `event_type_id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `menus`
+--
+
+INSERT INTO `menus` (`id`, `name`, `event_type_id`) VALUES
+(1, 'wedding_menu_I', '2'),
+(2, 'wedding_menu_II', '2'),
+(3, 'birthday_menu', '1'),
+(4, 'hen_party_menu', '4'),
+(5, 'stag_party_menu', '3'),
+(6, 'kids_party_menu', '5'),
+(7, 'other_menu_I', '6'),
+(8, 'other_menu_II', '6'),
+(9, 'other_menu_III', '6'),
+(10, 'new_year_menu', '7'),
+(11, 'graduation_menu', '8'),
+(12, 'custom_menu', ''),
+(13, 'drink_package_1', ''),
+(14, 'drink_package_2', ''),
+(15, 'drink_package_3', '');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `menu_dishes`
+--
+
+CREATE TABLE `menu_dishes` (
+  `id` int(3) UNSIGNED NOT NULL,
+  `menu_id` int(3) NOT NULL,
+  `dish_id` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `menu_dishes`
+--
+
+INSERT INTO `menu_dishes` (`id`, `menu_id`, `dish_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 4),
+(4, 1, 6),
+(5, 1, 7),
+(6, 1, 12),
+(7, 1, 8),
+(8, 2, 1),
+(9, 2, 3),
+(10, 2, 5),
+(11, 2, 6),
+(12, 2, 7),
+(13, 2, 12),
+(14, 2, 8),
+(15, 3, 1),
+(16, 3, 2),
+(17, 3, 1),
+(18, 3, 6),
+(19, 3, 7),
+(20, 3, 12),
+(21, 4, 17),
+(22, 5, 11),
+(23, 6, 1),
+(24, 6, 17),
+(25, 7, 1),
+(26, 7, 11),
+(27, 8, 1),
+(28, 8, 15),
+(29, 9, 1),
+(30, 9, 17),
+(31, 10, 1),
+(32, 10, 4),
+(33, 10, 6),
+(34, 10, 7),
+(35, 11, 1),
+(36, 11, 14),
+(37, 11, 5),
+(38, 11, 6),
+(39, 11, 7),
+(79, 12, 19),
+(80, 13, 13),
+(81, 14, 16),
+(82, 15, 18);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `product_id` int(10) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_name` varchar(50) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `description` varchar(20) NOT NULL,
+  `category` varchar(20) NOT NULL,
+  `price` int(10) NOT NULL,
+  `stock` int(10) NOT NULL,
+  `is_stock` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `products`
+--
+
+INSERT INTO `products` (`id`, `product_name`, `image`, `description`, `category`, `price`, `stock`, `is_stock`) VALUES
+(1, 'balloon_red', 'lufi_szines.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
+(2, 'balloon_blue', 'lufi_szines.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
+(3, 'balloon_green', 'lufi_szines.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
+(4, 'balloon_yellow', 'lufi_szines.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
+(5, 'balloon_bd_red', 'lufi_szulinapos.pjg', 'desc_balloon', 'decoration', 500, 998, 1),
+(6, 'balloon_birthday_blue', 'lufi_szulinapos.pjg', 'desc_balloon', 'decoration', 500, 998, 1),
+(7, 'ballon_birtday_yellow', 'lufi_szulinapos.pjg', 'desc_balloon', 'decoration', 500, 998, 1),
+(8, 'ballon_birtday_green', 'lufi_szulinapos.pjg', 'desc_balloon', 'decoration', 500, 998, 1),
+(9, 'ballon_heart_shaped_red', 'lufi_sziv.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
+(10, 'balloon_heart-shaped with red lettering', 'lufi_sziv_feliratos.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
+(11, 'balloon_smile', 'lufi_smile.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
+(12, 'paper-plate', 'papirtanyer.jpg', 'desc_paper_plate', 'tableware', 125, 1200, 1),
+(13, 'paper_plate_blue', 'papirtanyer-kek.jpg', 'desc_paper_plate', 'tableware', 125, 1225, 1),
+(14, 'straw_red', 'szivoszal_piros.jpg', 'desc_straw', 'tableware', 95, 1500, 1),
+(15, 'straw_yellow', 'szivoszal_sarga.jpg', 'desc_straw', 'tableware', 95, 1525, 1),
+(16, 'straw_pink', 'szivoszal_tobb szin.jpg', 'desc_straw', 'tableware', 95, 1615, 1),
+(17, 'straw_blue', 'szivoszal_tobb szin2.jpg', 'desc_straw', 'tableware', 95, 1600, 1),
+(18, 'balloon_weight', 'lufi_suly.jpg', 'desc_balloon_weight', 'decoration', 450, 625, 1),
+(19, 'party_hat_glitter', 'kalap1.jpg', 'desc_party_hat', 'decoration', 500, 990, 1),
+(20, 'party_hat_yellow', 'kalap2.jpg', 'desc_party_hat', 'decoration', 500, 990, 1),
+(21, 'party_hat_blue', 'kalap3.jpg', 'desc_party_hat', 'decoration', 500, 990, 1),
+(22, 'helium_bottle_without_balloons', 'helium.jpg', 'desc_helium_bottle_w', 'decoration', 325, 13200, 1),
+(23, 'helium_spray_without_balloons', 'helium.jpg', 'desc_helium_spray_w', 'decoration', 415, 4200, 1),
+(24, 'biding_tape_orange_225m', 'bidingtape.jpg', 'desc_biding_tape_ora', 'decoration', 187, 915, 1),
+(25, 'napkin', 'szalveta.jpg', 'desc_napkin', 'tableware', 135, 1640, 1),
+(26, 'party_glasses_red', 'partyszemuveg.jpg', 'desc_party_glasses', 'decoration', 517, 785, 1),
+(27, 'party_glasses_gold', 'partyszemuveg.jpg', 'desc_party_glasses', 'decoration', 330, 780, 1),
+(28, 'tablecloth_gold', 'asztalterito.jpg', 'desc_tablecloth', 'tablecloth', 465, 1500, 1),
+(29, 'tablecloth_silver', 'asztalterito.jpg', 'desc_tablecloth', 'tableware', 465, 1500, 1),
+(30, 'tablecloth_white_gold', 'asztalterito.jpg', 'desc_tablecloth', 'tableware', 465, 1500, 1),
+(31, 'tablecloth_chrome_silver', 'asztalterito.jpg', 'desc_tablecloth', 'tableware', 514, 980, 1),
+(32, 'tablecloth_white', 'asztalterito.jpg', 'desc_tablecloth', 'tableware', 565, 950, 1),
+(33, 'wig_blue_short', 'paroka1.jpg', 'desc_wig', 'decoration', 265, 4400, 1),
+(34, 'wig_orange_short', 'paroka.jpg', 'desc_wig', 'decoration', 265, 4400, 1),
+(35, 'wig_black_curly', 'paroka.jpg', 'desc_wig', 'decoration', 345, 6300, 1),
+(36, 'hair_coloring_hair_chalk_blue', 'hajkreta.jpg', 'desc_hair_coloring_h', 'decoration', 315, 1280, 1),
+(37, 'hair_coloring_hair_chalk_red', 'hajkreta.jpg', 'desc_hair_coloring_h', 'decoration', 318, 1280, 1),
+(38, 'floot_candle_white_6db', 'uszogyertya.jpg', 'desc_floot_candle', 'decoration', 625, 1618, 1),
+(39, 'floot_candle_red_6db', 'uszogyertya.jpg', 'desc_floot_candle', 'decoration', 625, 1618, 1),
+(40, 'floot_candle_silver_6db', 'uszogyertya.jpg', 'desc_floot_candle', 'decoration', 625, 1618, 1),
+(41, 'glass_footed_floating_candle_holder', 'uszogyertya.jpg', 'desc_glassFFCH', 'decoration', 158, 2200, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `rating` int(1) NOT NULL,
+  `rating_text` text DEFAULT NULL,
+  `rating_answer` text DEFAULT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `user_id`, `rating`, `rating_text`, `rating_answer`, `date`) VALUES
+(1, 1, 5, 'A PartyService mindig megmenti a napomat! A legutóbbi születésnapi bulim káprázatos volt, köszönhetően az elképesztő dekorációknak és a segítőkész csapatnak. ', 'Köszönjük szépen az értékelést!', '2022-09-08'),
+(2, 10, 4, 'Az esküvőnk a PartyService segítségével igazi álom volt. Minden részletre odafigyeltek, és a dekoráció gyönyörű volt!', NULL, '2021-05-13'),
+(3, 18, 5, 'Nagyszerű élmény volt együttműködni a PartyService csapatával a cégem éves rendezvényének szervezésekor. Profik az utolsó pillanatig!', NULL, '2023-06-06'),
+(4, 9, 5, 'Csak a PartyService-ben bízok, ha egy különleges partit szervezek. Kiváló termékek és fantasztikus szolgáltatás minden alkalomra!', NULL, '2022-08-19'),
+(5, 11, 5, 'Nem találhatnék jobb partiszervizt Magyarországon. A PartyService mindig új és izgalmas ötletekkel áll elő, és segít megvalósítani az elképzeléseimet.', NULL, '2019-10-21'),
+(6, 15, 5, 'A PartyService hűséges ügyfeleként azt kell mondanom, hogy mindig a legjobbat kapjuk. A termékeik minősége és az elképesztő kreativitásuk garantálja a sikerünket. Mindig bízom bennük, hogy minden részletre odafigyelnek, és a rendezvényünk minden elvárásunkat felülmúlja.', NULL, '2022-05-29'),
+(7, 6, 5, 'Egyszerűen nem tudom elképzelni egy rendezvényt a PartyService nélkül. Minden alkalommal meglepnek a szakértelemmel és az odaadással. A csapat mindig elérhető, hogy megoldást találjon az összes kihívásra, és garantálja, hogy a buli tökéletes legyen minden szempontból.', NULL, '2023-06-08');
 
 -- --------------------------------------------------------
 
@@ -82,9 +482,95 @@ INSERT INTO `users` (`id`, `user_role_id`, `last_name`, `first_name`, `born`, `g
 (22, 2, 'Farkas', 'Mónika', '1978-01-03', 2, NULL, NULL, 'Magyarország', '36', '203456789', 'Makó', '6900', 'Kossuth tér 8', 'farkas.monika@example.com', '$2y$10$/AYGAbH1sQoN8UJpGSJ7n.68yQO8FZz.8pY0XZtPaBrxL8pBmPgBm', '2023-09-24 15:45:08', NULL, '0000-00-00 00:00:00', 0, 1, ''),
 (23, 2, 'Balogh', 'Ferenc', '1994-06-12', 1, NULL, NULL, 'Magyarország', '36', '304567890', 'Szentes', '6600', 'Rákóczi tér 5', 'balogh.ferenc@example.com', '$2y$10$/AYGAbH1sQoN8UJpGSJ7n.68yQO8FZz.8pY0XZtPaBrxL8pBmPgBm', '2023-09-24 15:45:08', NULL, '0000-00-00 00:00:00', 0, 1, '');
 
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `user_roles`
+--
+
+CREATE TABLE `user_roles` (
+  `id` int(1) UNSIGNED NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `user_roles`
+--
+
+INSERT INTO `user_roles` (`id`, `name`) VALUES
+(1, 'administrator'),
+(2, 'user'),
+(3, 'guest');
+
 --
 -- Indexek a kiírt táblákhoz
 --
+
+--
+-- A tábla indexei `dishes`
+--
+ALTER TABLE `dishes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `dish_categories`
+--
+ALTER TABLE `dish_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `event_places`
+--
+ALTER TABLE `event_places`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `event_types`
+--
+ALTER TABLE `event_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `genders`
+--
+ALTER TABLE `genders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `menus`
+--
+ALTER TABLE `menus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `menu_dishes`
+--
+ALTER TABLE `menu_dishes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- A tábla indexei `users`
@@ -94,14 +580,92 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- A tábla indexei `user_roles`
+--
+ALTER TABLE `user_roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- A kiírt táblák AUTO_INCREMENT értéke
 --
+
+--
+-- AUTO_INCREMENT a táblához `dishes`
+--
+ALTER TABLE `dishes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT a táblához `dish_categories`
+--
+ALTER TABLE `dish_categories`
+  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT a táblához `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT a táblához `event_places`
+--
+ALTER TABLE `event_places`
+  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT a táblához `event_types`
+--
+ALTER TABLE `event_types`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT a táblához `genders`
+--
+ALTER TABLE `genders`
+  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT a táblához `menus`
+--
+ALTER TABLE `menus`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT a táblához `menu_dishes`
+--
+ALTER TABLE `menu_dishes`
+  MODIFY `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
+--
+-- AUTO_INCREMENT a táblához `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT a táblához `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT a táblához `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT a táblához `user_roles`
+--
+ALTER TABLE `user_roles`
+  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
