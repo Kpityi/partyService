@@ -478,10 +478,6 @@
                     },
                   })
                   .then((response) => {
-                    // Check success
-                    if (response == 'Succes') {
-                      alert(`Reservation succesfull PHP`);
-                    } else alert(`Reservation unsuccesfull! PHP ${response}`);
                   })
                   .catch((error) => {
                     $timeout(() => alert(error), 50);
