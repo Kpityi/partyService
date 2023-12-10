@@ -175,15 +175,9 @@
                     <input
                       id="avatar"
                       type="file"
-                      file-input
                       accept="image/*"
                       class="form-control d-none"
-                      spellcheck="false"
-                      autocomplete="off"
-                      ng-model="helper.image"
-                      ng-maxlength="60"
-                      name="img"
-                      file-input
+                      file-model="newImage"
                       ng-disabled="helper.isEdit"
                     />
                     <label for="avatar">
@@ -191,7 +185,7 @@
                                   d-flex align-items-center justify-content-center"
                             ng-class="{'cursor-pointer': !helper.isEdit}" 
                              style="width:100px;min-width:100px;height:100px;"
-                            ng-style="{'background-image':values.img_type?'url(data:'+values.img_type+';base64,'+values.img+')':(values.gender?'url('+app.commonPath+'media/image/blank/'+(model.gender==='1'?'fe':'')+'male-blank.webp)':'')}">
+                            ng-style="{'background-image': values.newImage || helper.image}">
                         <span class="text-center text-muted"
                               ng-show="!values.img && !values.gender">
                           <i class="fa-solid fa-upload"></i><br>

@@ -5,6 +5,23 @@
   angular
     .module('app', ['ui.router', 'app.common', 'app.language', 'app.form'])
 
+    //file model
+    .directive('fileModel', ['$parse', function ($parse) {
+      return {
+          restrict: 'A',
+          link: function(scope, element, attrs) {
+              const model = $parse(attrs.fileModel);
+              const modelSetter = model.assign;
+  
+              element.bind('change', function(){
+                  scope.$apply(function(){
+                      modelSetter(scope, element[0].files[0]);
+                  });
+              });
+          }
+      };
+  }])
+
     // Application config
     .config([
       '$stateProvider',
@@ -698,59 +715,14 @@
       '$state',
       function ($scope, $rootScope, util, http, user, $timeout, $state) {
         console.log('profile controller...');
-
-        // Watch user image changed
-        $scope.$watch('helper.image', (newValue, oldValue) => {
-
-          // Check is changed
-          if(!angular.equals(newValue, oldValue)) {
-
-            // Restore value, apply change, and show error when exist
-            let restore = (error=null) => {
-              $scope.helper.image = oldValue;
-              $scope.$applyAsync();
-              if (error) $timeout(() => alert(error), 50);
-            };
-
-            // Check has property
-            if (newValue) {
-
-              // Check accept file types property
-              util.fileAllowedTypes(newValue, $scope.helper.fileInput.accept).then(() => {
-
-                // File reader
-                util.fileReader(newValue, {
-                  method  : 'readAsDataURL',
-                  limit   : 64
-                }).then((data) => {
-
-                  // Set image
-                  $scope.values.img      = util.getBase64UrlData(data);
-                  $scope.values.img_type = newValue.type;
-                  $scope.$applyAsync();
-
-                // Restore
-                }).catch(error => restore(error));
-              }).catch(error => restore(error));
-            }
-          }
-        });
-
-
-        //set helper variables
-        $scope.helper = {
-          isEdit: true,
-          maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
-          minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
-          fileInput: document.querySelector('input#avatar[type="file"]'),
-          image: null
-        };
-
+          
+        
         // Form initial values
         $scope.values = {
           lastName: $rootScope.user.last_name,
           firstName: $rootScope.user.first_name,
           img: $rootScope.user.img,
+          newImage: null,
           img_type: $rootScope.user.img_type,
           dateOfBirth: null,
           gender: $rootScope.user.gender == 1 ? 'male' : 'female',
@@ -761,9 +733,18 @@
           city: '',
           address: '',
         };
+        
+        //set helper variables
+        $scope.helper = {
+          isEdit: true,
+          maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
+          minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
+          image: $scope.values.img_type ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})` : `url(${app.commonPath}media/image/blank/${($scope.values.gender==='1' ? 'fe' : '')}male-blank.webp)`,
+        };          
+        
 
         //save original user data
-        $scope.UserData={}
+        $scope.UserData = {};
 
         // Create new deffered objects
         //$scope.countries = util.deferredObj();
@@ -789,51 +770,67 @@
 
         //Http request user data
         http
-            .request({
-              url: './php/get_profile.php',
-              method: 'POST',
-              data: {id: $rootScope.user.id},
-            })
-            .then((response) => {
-              console.log(response)
-              $scope.values.dateOfBirth = moment(response.born).toDate();
+          .request({
+            url: './php/get_profile.php',
+            method: 'POST',
+            data: { id: $rootScope.user.id },
+          })
+          .then((response) => {
+            console.log(response);
+            $scope.values.dateOfBirth = moment(response.born).toDate();
 
-              $scope.values.phone = response.phone;
-              $scope.values.city = response.city;
-              $scope.values.postcode = response.postcode;
-              $scope.values.address = response.address;
-              
-              // Get user country index from contries
-              let index = util.indexByKeyValue(
-                $scope.helper.countries, 
-                'country', 
-                response.country
+            $scope.values.phone = response.phone;
+            $scope.values.city = response.city;
+            $scope.values.postcode = response.postcode;
+            $scope.values.address = response.address;
+
+            // Get user country index from contries
+            let index = util.indexByKeyValue(
+              $scope.helper.countries,
+              'country',
+              response.country
+            );
+
+            // Check exist
+            if (index !== -1) {
+              let codeIndex = $scope.helper.countries[index].code.indexOf(
+                response.country_code
               );
-
-              // Check exist
-              if (index !== -1) {
-                let codeIndex= $scope.helper.countries[index].code.indexOf(response.country_code)
-                $scope.values.country        = $scope.helper.countries[index];
-                $scope.values.country_code  = $scope.helper.countries[index].code[codeIndex];
-              }
-              $scope.userData= angular.copy($scope.values);
-              $scope.$applyAsync();
-            })
-            .catch((error) => {
-              $timeout(() => alert(error), 50);
-            });
-
-            $scope.accept= ()=>{
-              console.log($scope.values)
-              $scope.helper.isEdit=true;
-              $state.reload();
+              $scope.values.country = $scope.helper.countries[index];
+              $scope.values.country_code =
+                $scope.helper.countries[index].code[codeIndex];
             }
+            $scope.userData = angular.copy($scope.values);
+            $scope.$applyAsync();
+          })
+          .catch((error) => {
+            $timeout(() => alert(error), 50);
+          });
 
-            $scope.cancel= ()=>{
-              $scope.values=angular.copy($scope.UserData);
-              $scope.helper.isEdit=true;
-              $state.reload();
+        $scope.$watch('newImage', (newValue) =>{
+          console.log('newValue: ', newValue)
+          if(newValue){
+            const reader = new FileReader();
+            reader.onload=(event)=>{
+              console.log("event: ",event.target.result);
+              $scope.values.newImage = `url(${event.target.result})`      
+              $scope.$applyAsync();        
             }
+            reader.readAsDataURL(newValue)
+          }
+        })
+
+        $scope.accept = () => {
+          console.log($scope.values);
+          $scope.helper.isEdit = true;
+          $state.reload();
+        };
+
+        $scope.cancel = () => {
+          $scope.values = angular.copy($scope.UserData);
+          $scope.helper.isEdit = true;
+          $state.reload();
+        };
       },
     ])
 
