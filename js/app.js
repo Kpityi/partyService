@@ -252,8 +252,8 @@
       '$scope',
       'http',
       '$timeout',
-      '$state',
-      function ($scope, http, $timeout, $state) {
+      '$rootScope',
+      function ($scope, http, $timeout, $rootScope) {
         console.log('Home controller...');
 
         const myCarouselElement = document.querySelector('#homeCarousel');
@@ -264,6 +264,11 @@
 
         $scope.images = [];
         $scope.ratings = [];
+        $scope.rating = null;
+        $scope.ratingData = {
+          rating: null,
+          ratingText: '',
+        };
 
         // Http request
         http
@@ -293,6 +298,32 @@
 
             $timeout(() => alert(e));
           });
+
+        // Send Rating
+        $scope.clicked = (event) => {
+          $scope.ratingData.rating = event.currentTarget.dataset.rating;
+        };
+
+        $scope.send = () => {
+          $scope.rating_data = {
+            user_id: $rootScope.user.id,
+            rating: $scope.ratingData.rating,
+            rating_text: $scope.ratingData.ratingText,
+          };
+          http
+            .request({
+              url: './php/send_rating.php',
+              method: 'POST',
+              data: $scope.rating_data,
+            })
+            .then((response) => {})
+            .catch((e) => {
+              // Resolve completed, and show error
+
+              $timeout(() => alert(e));
+            });
+          console.log($scope.rating_data);
+        };
       },
     ])
 
@@ -311,6 +342,7 @@
         const myCarouselElement = document.querySelector('#menuCarousel');
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 2000,
+          ride: 'carousel',
         });
         carousel.to(1);
 
@@ -385,6 +417,12 @@
           placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
         };
         console.log($scope.reservDate);
+        $scope.reservDate = {
+          max: moment().add(2, 'years').format('YYYY-MM-DD'),
+          min: moment().add(1, 'days').format('YYYY-MM-DD'),
+          placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
+        };
+        console.log($scope.reservDate);
 
         $scope.checkDays = () => {
           // Http request check available days
@@ -395,10 +433,10 @@
               data: { id: $scope.reservationData.event_place.id },
             })
             .then((response) => {
-              if (response) {
-                const disabledDates = response.map((date) => date.date);
-              }
-
+              const disabledDates = response
+                ? response.map((date) => date.date)
+                : [];
+              $('#date').datepicker('destroy');
               $('#date').datepicker({
                 changeMonth: true,
                 changeYear: true,
@@ -452,6 +490,23 @@
               if (response.affectedRows) {
                 console.log(response.lastInsertId);
                 $scope.$applyAsync();
+                http
+                  .request({
+                    url: './php/reservation_email.php',
+                    method: 'POST',
+                    data: {
+                      email: $rootScope.user.email,
+                      subject: 'Sikeres foglalás',
+                      message:
+                        `<h2>Kedves ${$rootScope.user.first_name}</h2><p>Köszönjük a foglalást!</p> <p>Kollégánk hamarosan felveszi önnel a kapcsolatot.</p> <p>Amennyiben szeretné megtekinteni foglalásait azt megteheti a profiljában a foglalások menüpont alatt.</p>`,
+                    },
+                  })
+                  .then((response) => {
+
+                  })
+                  .catch((error) => {
+                    $timeout(() => alert(error), 50);
+                  });
                 alert(`Reservation succesfull,  ${response.lastInsertId}`);
                 $scope.reservationData = angular.copy(
                   $scope.originalReservationData
@@ -509,7 +564,7 @@
 
         // Set model
         $scope.model = {
-          email: 'kertesz.istvan-e2022@keri.mako.hu',
+          email: 'kertesz.istvan-e2022@keri.mako.hu', //$rootScope.user.email,
           password: '1234Aa',
         };
 

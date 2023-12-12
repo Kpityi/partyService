@@ -14,6 +14,7 @@
   <main class="container my-4 pb-2">
     <!-- Welcome Text -->
     <h1 class="text-center pt-4 mb-2">{{'welcoming' | translate:lang.data}}</h1>
+    
     <!-- Slogan -->
     <h3 class="text-center mb-4">Your Party - Your day</h3>
 
@@ -60,6 +61,29 @@
         >
           <img ng-src="{{image}}" class="d-block w-100" alt="{{image}}" />
         </div>
+
+        <!-- Buttons -->
+        <button class="carousel-control-prev" 
+                type="button" 
+                data-bs-target="#homeCarousel" 
+                data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" 
+                aria-hidden="true">
+          </span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" 
+                type="button" 
+                data-bs-target="#homeCarousel" 
+                data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" 
+                aria-hidden="true">
+          </span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
 
       <!-- Buttons -->
@@ -148,10 +172,11 @@
             <!-- Image -->
             <div
               class="bg-img bg-img-cover overflow-hidden rounded-circle card-img-top mx-auto mt-2"
-              style="width: 80px; height: 80px"
-              ng-style="{'background-image':rating.img_type?'url(data:'+rating.img_type+';base64,'+rating.img+')':'url('+app.commonPath+'media/image/blank/'+(rating.gender_id===2?'fe':'')+'male-blank.webp)'}"
-            ></div>
+              style="width: 50px; height: 50px"
+              ng-style="{'background-image':rating.img_type?'url(data:'+rating.img_type+';base64,'+rating.img+')':'url('+app.commonPath+'media/image/blank/'+(rating.gender_id===2?'fe':'')+'male-blank.webp)'}">
+            </div>
 
+            <!-- Del.Rat. from php -->
             <div class="card-body">
               <h6 class="card-title text-center text-capitalize">
                 {{'rating' | translate:lang.data}}: {{rating.rating}}/5
