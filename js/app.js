@@ -588,6 +588,10 @@
               $scope.model.email = response.email;
               user.set(response);
               $scope.$applyAsync();
+            })
+            .catch(e => {
+
+              alert(e)
             });
         };
       },
