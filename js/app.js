@@ -818,8 +818,8 @@
         })
 
         $scope.accept = () => {
-          console.log($scope.values);
           $scope.helper.isEdit = true;
+          $scope.values.img=$scope.values.img.replace('data:image/jpeg;base64,', '')
           let data={
           id: $rootScope.user.id,
           lastName: $scope.values.lastName,
@@ -828,7 +828,7 @@
           img_type: $scope.values.img_type,
           dateOfBirth: $scope.values.dateOfBirth,
           gender: $scope.values.gender == "male" ? 1 : 2,
-          country: $scope.values.country,
+          country: $scope.values.country.country,
           country_code: $scope.values.country_code,
           phone: $scope.values.phone,
           postcode: $scope.values.postcode,
@@ -836,7 +836,7 @@
           address: $scope.values.address
           }
           //$state.reload();
-
+          console.log(data)
           // Http request
           http.request({
             url   : `./php/profile.php`,
