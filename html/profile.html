@@ -36,7 +36,7 @@
 
           <!-- Reservations button -->
           <button
-            class="nav-link text-capitalize border-bottom"
+            class="nav-link letter-capitalize border-bottom"
             id="v-pills-reservations-tab"
             data-bs-toggle="pill"
             data-bs-target="#v-pills-reservations"
@@ -50,7 +50,7 @@
 
           <!-- Orders button -->
           <button
-            class="nav-link border-bottom"
+            class="nav-link text-capitalize border-bottom"
             id="v-pills-orders-tab"
             data-bs-toggle="pill"
             data-bs-target="#v-pills-orders"
@@ -91,7 +91,7 @@
                 <!-- User Name -->
                 <!-- LasttName -->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="last_name" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <i class="fa-solid fa-user fa-xl"></i>
@@ -100,7 +100,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4">
+                  <div class="col-6 col-md-7 col-lg-4">
                     <input
                       id="last_name"
                       type="text"
@@ -126,7 +126,7 @@
 
                 <!-- FirstName -->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="first_name" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <span class="text-capitalize me-2">
@@ -134,7 +134,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4">
+                  <div class="col-6 col-md-7 col-lg-4">
                     <input
                       id="first_name"
                       type="text"                      
@@ -163,7 +163,7 @@
 
                 <!-- image -->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="avatar" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <span class="text-capitalize me-2">
@@ -171,7 +171,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4 position-relative" style="height:100px;">
+                  <div class="col-6 col-md-7 col-lg-4 position-relative" style="height:100px;">
                     <input
                       id="avatar"
                       type="file"
@@ -201,7 +201,7 @@
 
                 <!-- Born -->
                 <div class="input-group justify-content-center mb-2">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="born" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <i class="fa-solid fa-calendar-days"></i>
@@ -210,7 +210,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4">
+                  <div class="col-6 col-md-7 col-lg-4">
                     <input
                       id="born"
                       type="date"
@@ -237,7 +237,7 @@
 
                 <!-- Gender -->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="gender" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <span class="text-capitalize me-2">
@@ -245,7 +245,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4">
+                  <div class="col-6 col-md-7 col-lg-4">
                     <input
                       id="gender"
                       type="text"                      
@@ -258,6 +258,14 @@
                       disabled
                     />
                   </div>
+                  <div class="col-2 col-sm-1 col-lg-2 pt-2">
+                    <span
+                      class="check-mark ms-2 fw-bold text-success"
+                      ng-show="profileForm.gender.$valid && !helper.isEdit"
+                    >
+                      &check;
+                    </span>
+                  </div>
                 </div>
 
                 <!-- Dividing line -->
@@ -265,7 +273,7 @@
 
                 <!-- Country -->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="country" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <i class="fa-solid fa-flag"></i>
@@ -274,7 +282,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4">
+                  <div class="col-6 col-md-7 col-lg-4">
                     <select
                       id="country"
                       class="form-select text-capitalize pe-4 rounded-pill shadow-sm"
@@ -298,7 +306,7 @@
 
                 <!-- Phone -->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-5 text-start text-md-end">
                     <label for="phone" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <i class="fa-solid fa-mobile-screen"></i>
@@ -307,12 +315,12 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-8 col-sm-6 d-flex">
+                  <div class="col-8 col-md-5 d-flex">
                     <span class="pt-2">+</span>
                     <select
                       id="country_code"
                       class="form-select ms-1 d-inline rounded-pill shadow-sm"
-                      style="max-width: 90px"
+                      style="width: 67px"
                       ng-model="values.country_code"
                       name="countryCode"
                       ng-options="code for code in values.country.code"
@@ -322,6 +330,7 @@
                     <input
                       id="phone"
                       type="tel"
+                      style="width: 120px"
                       ng-attr-placeholder="{{'phone' | translate:lang.data}}"
                       class="form-control rounded-pill shadow-sm d-inline"
                       spellcheck="false"
@@ -329,7 +338,6 @@
                       ng-model="values.phone"
                       ng-pattern="/^[0-9]{7,14}$/"
                       name="phone"
-                      style="max-width: 750px"
                       ng-disabled="helper.isEdit"
                       required
                     />
@@ -346,7 +354,7 @@
 
                 <!-- City -->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="city" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <span class="text-capitalize me-2">
@@ -354,7 +362,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4">
+                  <div class="col-6 col-md-7 col-lg-4">
                     <input
                       id="city"
                       type="text"
@@ -381,7 +389,7 @@
 
                 <!-- Post code-->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="postcode" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <i class="fa-solid fa-list-ol"></i>
@@ -390,7 +398,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4">
+                  <div class="col-6 col-md-7 col-lg-4">
                     <input
                       id="postcode"
                       type="text"
@@ -418,7 +426,7 @@
 
                 <!-- Address -->
                 <div class="input-group mb-2 justify-content-center">
-                  <div class="col-8 col-sm-4 text-start text-sm-end">
+                  <div class="col-8 col-md-4 text-start text-md-end">
                     <label for="address" class="col-form-label">
                       <span class="fw-bold text-danger">*</span>
                       <i class="fa-solid fa-location-dot"></i>
@@ -427,7 +435,7 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-6 col-sm-7 col-lg-4">
+                  <div class="col-6 col-md-7 col-lg-4">
                     <input
                       id="address"
                       type="text"
@@ -504,7 +512,33 @@
             role="tabpanel"
             aria-labelledby="v-pills-reservation-tab"
           >
-            ...
+            <h2 class="text-center text-capitalize mt-2 mb-4">{{'reservations' | translate:lang.data}}</h2>
+
+            <table class="table table-striped px-5 text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col" class="text-capitalize">{{'event' | translate:lang.data}}</th>
+                  <th scope="col" class="text-capitalize">{{'event_place' | translate:lang.data}}</th>
+                  <th scope="col" class="letter-capitalize">{{'event_menu' | translate:lang.data}}</th>
+                  <th scope="col" class="letter-capitalize">{{'drink_package' | translate:lang.data}}</th>
+                  <th scope="col" class="letter-capitalize">{{'number_of_guests' | translate:lang.data}}</th>
+                  <th scope="col" class="text-capitalize">{{'date' | translate:lang.data}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="reservation in reservations track by $index">
+                  <th scope="row">{{$index+1}}</th>
+                  <td>{{reservation.event_type | translate:lang.data}}</td>
+                  <td>{{reservation.event_place | translate:lang.data}}</td>
+                  <td>{{reservation.menu_package | translate:lang.data}}</td>
+                  <td>{{reservation.drink_package | translate:lang.data}}</td>
+                  <td>{{reservation.guests}}</td>
+                  <td>{{reservation.date}}</td>
+                </tr>
+              </tbody>
+            </table>
+
           </div>
 
           <!-- Orders Tab -->
@@ -514,7 +548,27 @@
             role="tabpanel"
             aria-labelledby="v-pills-orders-tab"
           >
-            ...
+          <h2 class="text-center text-capitalize mt-2 mb-4">{{'orders' | translate:lang.data}}</h2>
+
+          <table class="table table-striped px-5 text-center">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="letter-capitalize">{{'product_name' | translate:lang.data}}</th>
+                <th scope="col" class="letter-capitalize">{{'price' | translate:lang.data}}</th>
+                <th scope="col" class="text-capitalize">{{'date' | translate:lang.data}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="order in orders track by $index">
+                <th scope="row">{{$index+1}}</th>
+                <td>{{order.product_name | translate:lang.data}}</td>
+                <td>{{order.price}} Ft</td>
+                <td>{{order.order_date}}</td>
+              </tr>
+            </tbody>
+          </table>
+
           </div>
 
         </div>

@@ -612,9 +612,6 @@
           $scope.$applyAsync();
         };
 
-        // Create new deffered objects
-        //$scope.countries = util.deferredObj();
-
         //set helper
         $scope.helper = {
           maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
@@ -716,7 +713,7 @@
       function ($scope, $rootScope, util, http, user, $timeout, $state) {
         console.log('profile controller...');
           
-        
+        //Profile tab
         // Form initial values
         $scope.values = {
           lastName: $rootScope.user.last_name,
@@ -740,14 +737,10 @@
           maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
           minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
           image: $scope.values.img_type ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})` : `url(${app.commonPath}media/image/blank/${($scope.values.gender==='1' ? 'fe' : '')}male-blank.webp)`,
-        };          
-        
+        };                  
 
         //save original user data
         $scope.UserData = {};
-
-        // Create new deffered objects
-        //$scope.countries = util.deferredObj();
 
         // Http request
         http
@@ -755,8 +748,6 @@
           .then((response) => {
             $scope.helper.countries = response;
             $scope.$applyAsync();
-            //$scope.countries.promise.resolve();
-
           })
           .catch((e) => {
             // Resolve completed, reset asynchronous, and show error
@@ -807,23 +798,62 @@
             $timeout(() => alert(error), 50);
           });
 
-        $scope.$watch('newImage', (newValue) =>{
+        $scope.$watch('newImage', (newValue, oldValue) =>{
           console.log('newValue: ', newValue)
-          if(newValue){
-            const reader = new FileReader();
-            reader.onload=(event)=>{
-              console.log("event: ",event.target.result);
-              $scope.values.newImage = `url(${event.target.result})`      
-              $scope.$applyAsync();        
+          if(newValue !== oldValue){
+            if(newValue.size <= (64*1024)){
+              const reader = new FileReader();
+              reader.onload=(event)=>{
+                console.log("event: ",event.target.result);
+                $scope.values.img=event.target.result
+                $scope.values.newImage = `url(${event.target.result})`
+                $scope.values.img_type=newValue.type      
+                $scope.$applyAsync();        
+              }
+              reader.readAsDataURL(newValue)
+            }else{
+            alert('Maximális méret 64KB');
             }
-            reader.readAsDataURL(newValue)
           }
         })
 
         $scope.accept = () => {
           console.log($scope.values);
           $scope.helper.isEdit = true;
-          $state.reload();
+          let data={
+          id: $rootScope.user.id,
+          lastName: $scope.values.lastName,
+          firstName: $scope.values.firstName,
+          img: $scope.values.img,
+          img_type: $scope.values.img_type,
+          dateOfBirth: $scope.values.dateOfBirth,
+          gender: $scope.values.gender == "male" ? 1 : 2,
+          country: $scope.values.country,
+          country_code: $scope.values.country_code,
+          phone: $scope.values.phone,
+          postcode: $scope.values.postcode,
+          city: $scope.values.city,
+          address: $scope.values.address
+          }
+          //$state.reload();
+
+          // Http request
+          http.request({
+            url   : `./php/profile.php`,
+            method: 'POST',
+            data  : data
+          })
+          .then(response => {
+            if (response.affectedRows) {
+              user.set(data, false);
+      } else  alert('Modify data failed!')
+          })
+          // Error
+          .catch(e => {
+
+            // Reset asynchronous, and show error
+            $timeout(() => alert(e), 50);
+          });          
         };
 
         $scope.cancel = () => {
@@ -831,6 +861,45 @@
           $scope.helper.isEdit = true;
           $state.reload();
         };
+
+        //Reservation tab
+        $scope.reservations={}
+
+        // Http request
+        http.request({
+          url   : `./php/get_reservation.php`,
+          method: 'Get',
+          data  : {id: $rootScope.user.id}
+        })
+        .then(response => {
+          $scope.reservations=response;
+        }) 
+        // Error
+        .catch(e => {
+
+          // Reset asynchronous, and show error
+          $timeout(() => alert(e), 50);
+        });          
+
+         //Orders tab
+         $scope.orders={}
+
+         // Http request
+         http.request({
+           url   : `./php/get_orders.php`,
+           method: 'Get',
+           data  : {id: $rootScope.user.id}
+         })
+         .then(response => {
+           console.log(response)
+           $scope.orders=response;
+         }) 
+         // Error
+         .catch(e => {
+ 
+           // Reset asynchronous, and show error
+           $timeout(() => alert(e), 50);
+         });          
       },
     ])
 
