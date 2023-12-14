@@ -157,12 +157,65 @@
       <p class="p-3">{{'wcu_p3' | translate:lang.data}}</p>
     </section>
 
-    <hr class="text-muted py-2" />
-    <section>
-      <p>szoveg</p>
+    <hr class="text-muted py-1">
+<!-- repaired -->
+    <!-- Rate Us! -->
+    <section ng-if="user.id">
+      <form name="ratingForm">
+        <div class="card border-primary mt-1 mb-4 w-100">
+          <h2 class="card-header">{{'rate_us' | translate:lang.data}}</h2>
+
+          <!-- Rated Stars -->
+          <div class="row justify-content-center mt-3">
+            <ul class="list-unstiled w-auto">
+              <li data-rating="{{$index+1}}"
+                  class="d-inline-block mx-2  opacity-25"
+                  ng-repeat="x in [].constructor(5) track by $index"
+                  ng-click="clicked($event)"
+                  ng-class="{'rating-color': $index + 1 <= ratingData.rating}">
+                  <i class="fa-solid fa-star fa-2xl"></i>
+              </li>
+            </ul>
+          </div>
+
+            <!-- Description Card -->
+            <div class="card-body text-primary">
+              <p class="justify-content-center">{{'from_your_point_of_view' | translate:lang.data}}</p>
+              
+              <!-- Description Label -->
+              <div class="mb-3 row">
+                <label for="inputrating" 
+                      class="col-sm-2 col-form-label"
+                      >{{'r_u_description' | translate:lang.data}}
+                </label>
+                <div class="col-sm-10">
+                  <textarea ng-model="ratingData.ratingText"
+                        rows="4"
+                        class="form-control" 
+                        id="inputrating"
+                        name="ratingText"
+                        required
+                        >
+                    </textarea>
+                    {{test}}
+                    
+                </div>
+              </div>
+            </div>
+          
+            <!-- Send Rate Button -->
+            <button class="btn btn-primary text-capitalize mt-2 mb-1" 
+                    ng-disabled="((ratingForm.ratingText.$invalid) || (!ratingData.rating))"
+                    ng-click="send()">
+                    {{'send' | translate:lang.data}}
+            </button>
+        </div>
+      
+      </form>
     </section>
 
-    <hr class="text-muted py-2" />
+    <hr class="text-muted py-2">
+
 
     <!-- rating card with footers -->
     <section class="wrapper px-2 mb-2 pb-2">
