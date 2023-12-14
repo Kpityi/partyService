@@ -498,7 +498,9 @@
                       email: $rootScope.user.email,
                       subject: 'Sikeres foglalás',
                       message:
-                        `<h2>Kedves ${$rootScope.user.first_name}</h2><p>Köszönjük a foglalást!</p> <p>Kollégánk hamarosan felveszi önnel a kapcsolatot.</p> <p>Amennyiben szeretné megtekinteni foglalásait azt megteheti a profiljában a foglalások menüpont alatt.</p>`,
+                        `<h2>Kedves ${$rootScope.user.first_name}</h2>
+                        <p>Köszönjük a foglalást!</p> <p>Kollégánk hamarosan felveszi önnel a kapcsolatot.</p> 
+                        <p>Amennyiben szeretné megtekinteni foglalásait azt megteheti a profiljában a foglalások menüpont alatt.</p>`,
                     },
                   })
                   .then((response) => {
