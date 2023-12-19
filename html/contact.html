@@ -170,24 +170,31 @@
               </div>
 
               <!-- Email Sending in Modal -->
-              <form class="row justify-content-center mt-3">
+              <form class="row justify-content-center mt-3" 
+                    name="contactUsForm">
                 <div class="input-group">
-                  <label for="email" 
+                  <label for="contactEmail" 
                          class="col-2 text-end mb-3 me-2 col-form-label col-form-label-sm"
                          >Email:</label>
                   <input type="email" 
-                         id="email"
-                         class="col-8 mb-3 form-control form-control-sm">
+                         name="contactUsEmail"
+                         id="contactEmail"
+                         ng-model="values.userEmail"
+                         class="col-8 mb-3 form-control form-control-sm" 
+                         required
+                         >
                 </div>
                 <div class="input-group">
                   <label for="text" 
                          class="col-2 text-end mb-3 me-2 col-form-label col-form-label-sm"
                          >Text:</label>
                   <textarea name="text" 
-                            id="text" 
+                            id="text"
+                            ng-model="values.contactText" 
                             cols="30" 
                             rows="3" 
-                            class="col-8 mb-3 form-control form-control-sm"
+                            class="col-8 mb-3 form-control form-control-sm" 
+                            required
                             >
                     </textarea>
                 </div>
@@ -197,12 +204,14 @@
             <!-- Navigate in Modal Footer -->
             <div class="modal-footer">
               <button type="button" 
-                      class="btn btn-secondary" 
+                      class="btn btn-secondary"  
                       data-bs-dismiss="modal">Close
                 </button>
               <button type="button" 
                       class="btn btn-primary" 
-                      disabled>{{'send' | translate:lang.data}}
+                      ng-disabled="contactUsForm.$invalid"
+                      ng-click="send()"
+                      >{{'send' | translate:lang.data}}
                 </button>
             </div>
           </div>

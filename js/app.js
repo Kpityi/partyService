@@ -528,8 +528,34 @@
     // Contact controller
     .controller('contactController', [
       '$scope',
-      function ($scope) {
+      '$rootScope',
+      'http',
+      '$timeout',
+      function ($scope, $rootScope, util, user, http, $state) {
         console.log('contact controller...');
+        $scope.values = {
+          userEmail: $rootScope.user.email ? $rootScope.user.email : null,
+          contactText: null
+        }
+
+      $scope.send = () => {
+        console.log(`email:${$scope.values.userEmail}\n text:${$scope.values.contactText}`)
+      }
+
+        // http
+        //   .request({
+        //     url: './php/contact_email.php',
+        //     method: 'POST',
+        //     data: {
+        //       email: $rootScope.user.email,
+        //       subject: 'x',
+        //       message:
+        //         $scope.message
+        //     },
+        //   })
+        //   .then((response) => {
+
+        //   })
       },
     ])
 
@@ -962,8 +988,12 @@
     // cart controller
     .controller('cartController', [
       '$scope',
+      '$rootScope',
+      'http',
+      '$timeout',
       function ($scope) {
         console.log('cart controller...');
+
       },
     ])
 })(window, angular);
