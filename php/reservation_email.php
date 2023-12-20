@@ -7,9 +7,10 @@ use Database\Database as Database;
 use Language\Language as Language;
 use Document\Document as Document;
 use Document\Tag as Tag;
+use PHPMailer\Email as Email;
 
 // Set environment
-require_once('../../../common/php/environment.php');
+require_once('../../common/php/environment.php');
 
 
 // Get arguments
@@ -17,7 +18,7 @@ $args = Util::getArgs();
 
 
 // Create email
-$phpMailer = new Email(null, "Party Service");
+$phpMailer = new Email();
  
   
 //Add rest properties
@@ -31,3 +32,5 @@ $phpMailer->send();
 
 // Close email
 $phpMailer = null;
+
+echo 'ok';
