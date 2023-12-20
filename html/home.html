@@ -1,15 +1,17 @@
-<div class="page-container">  
-
+<div class="page-container">
   <!-- Header -->
-  <div class="header-image-container" ng-include src="'./html/headerimage.html'"></div>
+  <div
+    class="header-image-container"
+    ng-include
+    src="'./html/headerimage.html'"
+  ></div>
 
   <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
-  
+
   <div ng-include src="'./html/loginModal.html'"></div>
 
   <!-- Main Container -->
   <main class="container my-4 pb-2">
-
     <!-- Welcome Text -->
     <h1 class="text-center pt-4 mb-2">{{'welcoming' | translate:lang.data}}</h1>
     
@@ -17,49 +19,47 @@
     <h3 class="text-center mb-4">Your Party - Your day</h3>
 
     <!-- Card  (CTA)-->
-    <section class="card bg-quinary mb-3 mx-auto" >
+    <section class="card bg-quinary mb-3 mx-auto">
       <div class="row g-0">
         <div class="col-12 col-lg-5 col-xl-4 m-auto">
-          <img src="./media/image/BackGroundHdImages/pexels-photo-3171770.jpeg" 
-               class="img-fluid rounded p-2 d-md-none d-lg-block" 
-               alt="party image"
-          >
-          <img src="./media/image/pexels-photo-3171837.jpeg" 
-               class="img-fluid rounded p-2 d-none d-md-block d-lg-none" 
-               alt="party image"
-          >
+          <img
+            src="./media/image/BackGroundHdImages/pexels-photo-3171770.jpeg"
+            class="img-fluid rounded p-2 d-md-none d-lg-block"
+            alt="party image"
+          />
+          <img
+            src="./media/image/pexels-photo-3171837.jpeg"
+            class="img-fluid rounded p-2 d-none d-md-block d-lg-none"
+            alt="party image"
+          />
         </div>
         <!-- Card Titles -->
         <div class="col-12 col-lg-7 col-xl-8">
           <div class="card-body ms-3">
             <h3 class="card-title mb-4">{{'imagine' | translate:lang.data}}</h3>
             <p class="card-text fw-bold">{{'offer' | translate:lang.data}}</p>
-            <p class="card-text fw-bold">{{'offer_p2' | translate:lang.data}}</p>
+            <p class="card-text fw-bold">
+              {{'offer_p2' | translate:lang.data}}
+            </p>
 
             <!-- Lets See Button -->
-            <a ui-sref="services"  class="btn btn-primary mt-3 text-capitalize">{{'lets_see' | translate:lang.data}}!</a>
+            <a ui-sref="services" class="btn btn-primary mt-3 text-capitalize">
+              {{'lets_see' | translate:lang.data}}!
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Carousel -->
-    <section>
-      <div id="homeCarousel" 
-          class="carousel slide" 
-          data-bs-ride="carousel" 
-      >
-        <div class="carousel-inner">
-          <div 
-            class="carousel-item" 
-            ng-class= "{active: $index===0}" 
-            ng-repeat="image in images track by $index">
-            <!-- Resolution 960x720 -->
-            <img ng-src="{{image}}" 
-                class="d-block w-100" 
-                alt="{{image}}" 
-            >
-          </div>
+    <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div
+          class="carousel-item"
+          ng-class="{active: $index===0}"
+          ng-repeat="image in images track by $index"
+        >
+          <img ng-src="{{image}}" class="d-block w-100" alt="{{image}}" />
         </div>
 
         <!-- Buttons -->
@@ -85,49 +85,80 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-    </section>  
-    
+
+      <!-- Buttons -->
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#homeCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"> </span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#homeCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"> </span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
     <!-- About Us -->
     <section class="wrapper">
-      <h1 class="text-center letter-capitalize m-2">{{'about_us' | translate:lang.data}}</h1>
-      
+      <h1 class="text-center letter-capitalize m-2">
+        {{'about_us' | translate:lang.data}}
+      </h1>
+
       <div class="row mt-4">
         <div class="mt-2">
           <div class="row">
             <div class="col-12 col-md-6 col-xl-4 ps-xl-4">
-              <img class="img-fluid d-md-none d-lg-block" 
-                   src="./media/image/IPPageImages/pexels-fauxels-3184183.jpg" 
-                   alt="au_img"
-              >
-              <img class="img-fluid d-none d-md-block d-lg-none ms-2" 
-                   src="./media/image/BackGroundHdImages/pexels-taha-samet-arslan-7711150.jpg" 
-                   alt="au2_img"
-              >
+              <img
+                class="img-fluid d-md-none d-lg-block"
+                src="./media/image/IPPageImages/pexels-fauxels-3184183.jpg"
+                alt="au_img"
+              />
+              <img
+                class="img-fluid d-none d-md-block d-lg-none ms-2"
+                src="./media/image/BackGroundHdImages/pexels-taha-samet-arslan-7711150.jpg"
+                alt="au2_img"
+              />
             </div>
-            <div class="col-12 col-md-6 col-xl-8">  
-              <p class="text-justify me-3 mt-2 mt-md-0 ms-2 ms-md-0">{{'about_us_p2' | translate:lang.data}}</p>
+            <div class="col-12 col-md-6 col-xl-8">
+              <p class="text-justify me-3 mt-2 mt-md-0 ms-2 ms-md-0">
+                {{'about_us_p2' | translate:lang.data}}
+              </p>
             </div>
           </div>
           <div class="row">
             <div class="col-12">
-              <p class="text-justify m-2 me-3">{{'about_us_p1' | translate:lang.data}}</p>
+              <p class="text-justify m-2 me-3">
+                {{'about_us_p1' | translate:lang.data}}
+              </p>
             </div>
           </div>
         </div>
-      </div>        
+      </div>
     </section>
 
-    <hr class="text-muted py-2">
+    <hr class="text-muted py-2" />
 
     <!-- Why Choose Us -->
     <section class="wrapper mb-2">
-      <h1 class="text-center letter-capitalize m-2 pt-2">{{'why_choose_us' | translate:lang.data}}</h1>
-        <p class="p-1">{{'wcu_p1' | translate:lang.data}}</p>
-        <p class="p-3">{{'wcu_p3' | translate:lang.data}}</p>
+      <h1 class="text-center letter-capitalize m-2 pt-2">
+        {{'why_choose_us' | translate:lang.data}}
+      </h1>
+      <p class="p-1">{{'wcu_p1' | translate:lang.data}}</p>
+      <p class="p-3">{{'wcu_p3' | translate:lang.data}}</p>
     </section>
 
     <hr class="text-muted py-1">
-
+<!-- repaired -->
     <!-- Rate Us! -->
     <section ng-if="user.id">
       <form name="ratingForm">
@@ -185,16 +216,12 @@
 
     <hr class="text-muted py-2">
 
-    <!-- Rating Card with Footers -->
-    <section class="wrapper px-2 mb-2 pb-2"> 
+
+    <!-- rating card with footers -->
+    <section class="wrapper px-2 mb-2 pb-2">
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col" 
-             ng-repeat = "rating in ratings"
-             >
-
-          <!-- Delivered Rating -->
-          <div class="card h-80">
-
+        <div class="col" ng-repeat="rating in ratings">
+          <div class="card h-100">
             <!-- Image -->
             <div
               class="bg-img bg-img-cover overflow-hidden rounded-circle card-img-top mx-auto mt-2"
@@ -204,31 +231,36 @@
 
             <!-- Del.Rat. from php -->
             <div class="card-body">
-              <h6 class="card-title text-center text-capitalize">{{'rating' | translate:lang.data}}: {{rating.rating}}/5</h6>
+              <h6 class="card-title text-center text-capitalize">
+                {{'rating' | translate:lang.data}}: {{rating.rating}}/5
+              </h6>
 
               <!-- Rating stars -->
-                <div class="d-flex justify-content-between align-items-center" 
-                     ng-init = "stars = [1,2,3,4,5]">
-                  <div class="small-ratings mx-auto mb-2">
-                      <i class="fa fa-star" 
-                         ng-repeat="star in stars" 
-                         ng-class="{'rating-color': rating.rating >= star}"></i>
-                  </div>
+              <div
+                class="d-flex justify-content-between align-items-center"
+                ng-init="stars = [1,2,3,4,5]"
+              >
+                <div class="small-ratings mx-auto mb-2">
+                  <i
+                    class="fa fa-star"
+                    ng-repeat="star in stars"
+                    ng-class="{'rating-color': rating.rating >= star}"
+                  ></i>
                 </div>
-              
+              </div>
+
               <!-- Rating Text -->
               <p class="fw-bold mb-0">{{rating.first_name}}:</p>
               <p class="card-text ms-1">{{rating.rating_text}}</p>
               <p class="text-muted">{{rating.date}}</p>
             </div>
-            
+
             <!-- Rating Answer -->
             <div class="card-footer">
               <p class="card-text">{{rating.rating_answer}}</p>
             </div>
           </div>
         </div>
-        
       </div>
     </section>
   </main>

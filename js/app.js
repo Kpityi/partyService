@@ -5,6 +5,23 @@
   angular
     .module('app', ['ui.router', 'app.common', 'app.language', 'app.form'])
 
+    //file model
+    .directive('fileModel', ['$parse', function ($parse) {
+      return {
+          restrict: 'A',
+          link: function(scope, element, attrs) {
+              const model = $parse(attrs.fileModel);
+              const modelSetter = model.assign;
+  
+              element.bind('change', function(){
+                  scope.$apply(function(){
+                      modelSetter(scope, element[0].files[0]);
+                  });
+              });
+          }
+      };
+  }])
+
     // Application config
     .config([
       '$stateProvider',
@@ -90,12 +107,8 @@
           base: {
             id: null,
             type: null,
-            prefix_name: null,
             first_name: null,
-            middle_name: null,
             last_name: null,
-            suffix_name: null,
-            nick_name: null,
             gender: null,
             img: null,
             img_type: null,
@@ -399,6 +412,12 @@
           placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
         };
         console.log($scope.reservDate);
+        $scope.reservDate = {
+          max: moment().add(2, 'years').format('YYYY-MM-DD'),
+          min: moment().add(1, 'days').format('YYYY-MM-DD'),
+          placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
+        };
+        console.log($scope.reservDate);
 
         $scope.checkDays = () => {
           // Http request check available days
@@ -471,17 +490,16 @@
                     url: './php/reservation_email.php',
                     method: 'POST',
                     data: {
-                      email: 'kpityi83@gmail.com',
+                      email: $rootScope.user.email,
                       subject: 'Sikeres foglalás',
                       message:
-                        `<h2>Kedves ${$rootScope.user.first_name}</h2><p>Köszönjük a foglalást!</p> <p>Kollégánk hamarosan felveszi önnel a kapcsolatot.</p> <p>Amennyiben szeretné megtekinteni foglalásait azt megteheti a profiljában a foglalások menüpont alatt.</p>`,
+                        `<h2>Kedves ${$rootScope.user.first_name}</h2>
+                        <p>Köszönjük a foglalást!</p> <p>Kollégánk hamarosan felveszi önnel a kapcsolatot.</p> 
+                        <p>Amennyiben szeretné megtekinteni foglalásait azt megteheti a profiljában a foglalások menüpont alatt.</p>`,
                     },
                   })
                   .then((response) => {
-                    // Check success
-                    if (response == 'Succes') {
-                      alert(`Reservation succesfull PHP`);
-                    } else alert(`Reservation unsuccesfull! PHP ${response}`);
+
                   })
                   .catch((error) => {
                     $timeout(() => alert(error), 50);
@@ -584,6 +602,10 @@
               $scope.model.email = response.email;
               user.set(response);
               $scope.$applyAsync();
+            })
+            .catch(e => {
+
+              alert(e)
             });
         };
       },
@@ -663,9 +685,6 @@
           $scope.$applyAsync();
         };
 
-        // Create new deffered objects
-        $scope.countries = util.deferredObj();
-
         //set helper
         $scope.helper = {
           maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
@@ -680,7 +699,8 @@
           .request($rootScope.app.commonPath + `data/countries.json`)
           .then((response) => {
             $scope.helper.countries = response;
-            $scope.countries.promise.resolve();
+            //$scope.countries.promise.resolve();
+            $scope.$applyAsync();
           })
           .catch((e) => {
             // Resolve completed, reset asynchronous, and show error
@@ -757,8 +777,202 @@
     // Profile controller
     .controller('profileController', [
       '$scope',
-      function ($scope) {
+      '$rootScope',
+      'util',
+      'http',
+      'user',
+      '$timeout',
+      '$state',
+      function ($scope, $rootScope, util, http, user, $timeout, $state) {
         console.log('profile controller...');
+          
+        //Profile tab
+        // Form initial values
+        $scope.values = {
+          lastName: $rootScope.user.last_name,
+          firstName: $rootScope.user.first_name,
+          img: $rootScope.user.img,
+          newImage: null,
+          img_type: $rootScope.user.img_type,
+          dateOfBirth: null,
+          gender: $rootScope.user.gender == 1 ? 'male' : 'female',
+          country: null,
+          country_code: null,
+          phone: '',
+          postcode: '',
+          city: '',
+          address: '',
+        };
+        
+        //set helper variables
+        $scope.helper = {
+          isEdit: true,
+          maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
+          minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
+          image: $scope.values.img_type ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})` : `url(${app.commonPath}media/image/blank/${($scope.values.gender==='1' ? 'fe' : '')}male-blank.webp)`,
+        };                  
+
+        //save original user data
+        $scope.UserData = {};
+
+        // Http request
+        http
+          .request($rootScope.app.commonPath + `data/countries.json`)
+          .then((response) => {
+            $scope.helper.countries = response;
+            $scope.$applyAsync();
+          })
+          .catch((e) => {
+            // Resolve completed, reset asynchronous, and show error
+            countries.promise.resolve();
+            $timeout(() => alert(e), 50);
+          });
+
+        $scope.handleCountryChange = (country) => {
+          $scope.values.country_code = country.code?.[0] || null;
+        };
+
+        //Http request user data
+        http
+          .request({
+            url: './php/get_profile.php',
+            method: 'POST',
+            data: { id: $rootScope.user.id },
+          })
+          .then((response) => {
+            console.log(response);
+            $scope.values.dateOfBirth = moment(response.born).toDate();
+
+            $scope.values.phone = response.phone;
+            $scope.values.city = response.city;
+            $scope.values.postcode = response.postcode;
+            $scope.values.address = response.address;
+
+            // Get user country index from contries
+            let index = util.indexByKeyValue(
+              $scope.helper.countries,
+              'country',
+              response.country
+            );
+
+            // Check exist
+            if (index !== -1) {
+              let codeIndex = $scope.helper.countries[index].code.indexOf(
+                response.country_code
+              );
+              $scope.values.country = $scope.helper.countries[index];
+              $scope.values.country_code =
+                $scope.helper.countries[index].code[codeIndex];
+            }
+            $scope.userData = angular.copy($scope.values);
+            $scope.$applyAsync();
+          })
+          .catch((error) => {
+            $timeout(() => alert(error), 50);
+          });
+
+        $scope.$watch('newImage', (newValue, oldValue) =>{
+          console.log('newValue: ', newValue)
+          if(newValue !== oldValue){
+            if(newValue.size <= (64*1024)){
+              const reader = new FileReader();
+              reader.onload=(event)=>{
+                console.log("event: ",event.target.result);
+                $scope.values.img=event.target.result
+                $scope.values.newImage = `url(${event.target.result})`
+                $scope.values.img_type=newValue.type      
+                $scope.$applyAsync();        
+              }
+              reader.readAsDataURL(newValue)
+            }else{
+            alert('Maximális méret 64KB');
+            }
+          }
+        })
+
+        $scope.accept = () => {
+          $scope.helper.isEdit = true;
+          $scope.values.img=$scope.values.img.replace('data:image/jpeg;base64,', '')
+          let data={
+          id: $rootScope.user.id,
+          lastName: $scope.values.lastName,
+          firstName: $scope.values.firstName,
+          img: $scope.values.img,
+          img_type: $scope.values.img_type,
+          dateOfBirth: $scope.values.dateOfBirth,
+          gender: $scope.values.gender == "male" ? 1 : 2,
+          country: $scope.values.country.country,
+          country_code: $scope.values.country_code,
+          phone: $scope.values.phone,
+          postcode: $scope.values.postcode,
+          city: $scope.values.city,
+          address: $scope.values.address
+          }
+          //$state.reload();
+          console.log(data)
+          // Http request
+          http.request({
+            url   : `./php/profile.php`,
+            method: 'POST',
+            data  : data
+          })
+          .then(response => {
+            if (response.affectedRows) {
+              user.set(data, false);
+      } else  alert('Modify data failed!')
+          })
+          // Error
+          .catch(e => {
+
+            // Reset asynchronous, and show error
+            $timeout(() => alert(e), 50);
+          });          
+        };
+
+        $scope.cancel = () => {
+          $scope.values = angular.copy($scope.UserData);
+          $scope.helper.isEdit = true;
+          $state.reload();
+        };
+
+        //Reservation tab
+        $scope.reservations={}
+
+        // Http request
+        http.request({
+          url   : `./php/get_reservation.php`,
+          method: 'Get',
+          data  : {id: $rootScope.user.id}
+        })
+        .then(response => {
+          $scope.reservations=response;
+        }) 
+        // Error
+        .catch(e => {
+
+          // Reset asynchronous, and show error
+          $timeout(() => alert(e), 50);
+        });          
+
+         //Orders tab
+         $scope.orders={}
+
+         // Http request
+         http.request({
+           url   : `./php/get_orders.php`,
+           method: 'Get',
+           data  : {id: $rootScope.user.id}
+         })
+         .then(response => {
+           console.log(response)
+           $scope.orders=response;
+         }) 
+         // Error
+         .catch(e => {
+ 
+           // Reset asynchronous, and show error
+           $timeout(() => alert(e), 50);
+         });          
       },
     ])
 
@@ -768,5 +982,5 @@
       function ($scope) {
         console.log('cart controller...');
       },
-    ]);
+    ])
 })(window, angular);
