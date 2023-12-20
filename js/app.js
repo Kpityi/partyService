@@ -515,7 +515,7 @@
         .then((response) => {
           $scope.products = response;
           $scope.$applyAsync();
-          console.log($scope.products)
+          console.log(response)
         })
         .catch((error) => {
           $timeout(() => alert(error), 50);
