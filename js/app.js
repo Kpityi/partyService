@@ -528,8 +528,40 @@
     // Contact controller
     .controller('contactController', [
       '$scope',
-      function ($scope) {
+      'http',
+      '$rootScope',
+      function ($scope, http, $rootScope) {
         console.log('contact controller...');
+
+        // Set model
+        $scope.model = {
+          email: $rootScope.user.email ? $rootScope.user.email : null,
+          message: null,
+        };
+
+        // Message sending button.
+        $scope.send = () => {
+          // Get only necessary properties
+          let data = {
+            email: $scope.model.email,
+            message: $scope.model.message,
+          };
+
+          //Http request
+          http
+            .request({
+              url: './php/contact_email_sending.php',
+              method: 'GET',
+              data: data,
+            })
+            .then((response) => {
+              alert("message sending successful")
+            })
+            .catch(e => {
+
+              alert(e)
+            });
+        }; 
       },
     ])
 
