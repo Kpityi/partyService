@@ -792,7 +792,7 @@
           isEdit: true,
           maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
           minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
-          image: $scope.values.img_type ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})` : `url(${app.commonPath}media/image/blank/${($scope.values.gender==='1' ? 'fe' : '')}male-blank.webp)`,
+          image: $scope.values.img_type ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})` : `url(${$rootScope.app.commonPath}media/image/blank/${($rootScope.user.gender===2 ? 'fe' : '')}male-blank.webp)`,
         };                  
 
         //save original user data

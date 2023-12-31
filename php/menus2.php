@@ -1,4 +1,9 @@
 <?php
+declare(strict_types=1);
+
+// Using namespaces aliasing
+use \Util\Util as Util;
+use \Database\Database as Database;
 
 function structure_menu_items($raw_result) {
   $result= [];
@@ -39,7 +44,7 @@ function structure_menu_items($raw_result) {
 } 
 
 // Set environment
-require_once('../../../common/php/environment.php');
+require_once('../../common/php/environment.php');
 
 // Connect to database
 $db = new Database();
