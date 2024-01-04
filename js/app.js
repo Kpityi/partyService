@@ -491,11 +491,9 @@
                     method: 'POST',
                     data: {
                       email: $rootScope.user.email,
-                      subject: 'Sikeres foglalás',
-                      message:
-                        `<h2>Kedves ${$rootScope.user.first_name}</h2>
-                        <p>Köszönjük a foglalást!</p> <p>Kollégánk hamarosan felveszi önnel a kapcsolatot.</p> 
-                        <p>Amennyiben szeretné megtekinteni foglalásait azt megteheti a profiljában a foglalások menüpont alatt.</p>`,
+                      userName: $rootScope.user.first_name, 
+                      langId: $rootScope.lang.id,
+                      langType: $rootScope.lang.type                       
                     },
                   })
                   .then((response) => {
