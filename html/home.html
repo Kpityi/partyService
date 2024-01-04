@@ -52,7 +52,7 @@
     </section>
 
     <!-- Carousel -->
-    <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="homeCarousel" class="carousel slide w-75 mx-auto" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div
           class="carousel-item"
@@ -204,7 +204,7 @@
             </div>
           
             <!-- Send Rate Button -->
-            <button class="btn btn-primary text-capitalize mt-2 mb-1" 
+            <button class="btn btn-primary text-capitalize my-2 w-50 mx-auto" 
                     ng-disabled="((ratingForm.ratingText.$invalid) || (!ratingData.rating))"
                     ng-click="send()">
                     {{'send' | translate:lang.data}}
