@@ -545,6 +545,8 @@
           let data = {
             email: $scope.model.email,
             message: $scope.model.message,
+            langId: $rootScope.lang.id,
+            langType: $rootScope.lang.type
           };
 
           //Http request
