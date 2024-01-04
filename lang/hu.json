@@ -59,6 +59,8 @@
   "change_password": "jelszó módosítása",
   "under_construction": "fejlesztés alatt",
   "fill_email": "Töltse ki az email mezőt!",
+  "thanks_for_reservation": "Köszönjük a foglalást! Kollégánk hamarosan felveszi önnel a kapcsolatot. Amennyiben szeretné megtekinteni foglalásait, azt megteheti a profiljában a foglalások menüpont alatt.",
+  "succesfull_reservation": "Sikeres foglalás",
 
   "shopping_cart": "bevásárlókocsi",
   "password_incorrect": "hibás jelszó",

@@ -59,7 +59,9 @@
   "change_password": "change password",
   "under_construction": "under construction",
   "fill_email": "Fill out the email field!",
-
+  "thanks_for_reservation": "Thank you for the reservation! Our colleague will contact you soon. If you would like to view your reservations, you can do so in your profile under the reservations menu.",
+  "succesfull_reservation": "Successful reservation",
+  
   "shopping_cart": "shopping cart",
   "password_incorrect": "incorrect password",
   "logout_confirm": "are you sure you want to log out",
