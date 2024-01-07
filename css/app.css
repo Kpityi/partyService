@@ -93,6 +93,14 @@ option[disabled]{
 {
   background-color: rgba(112, 152, 181, 0.678);
 }
+
+.webshop-image{
+  height: 200px;
+  max-width: 100%;
+  object-fit: scale-down;
+}
+
+
 .background-image{
   position: fixed;
   z-index: -1;

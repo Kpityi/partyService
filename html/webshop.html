@@ -1,8 +1,7 @@
 <div class="page-container">
   <div
     class="header-image-container"
-    ng-include
-    src="'./html/headerimage.html'"
+    ng-include src="'./html/headerimage.html'"
   ></div>
 
   <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
@@ -12,16 +11,18 @@
     <h1 class="text-center py-4 text-capitalize">{{'products' | translate:lang.data}}</h1>
     
     <!-- Products card -->
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 ">
       <div class="col" ng-repeat = "product in products track by $index">
-        <div class="card h-100">
-          <img src="./media/image/products/{{product.image}}" class="card-img-top" alt="...">
+        <div class="card h-100 mx-auto" style="max-width: 400px">
+          <div class="card-image">
+            <img ng-src="./media/image/products/{{product.image}}" class="card-img-top webshop-image" alt="...">
+          </div>
           <div class="card-body">
-            <h5 class="card-title">Lufi-kék</h5>
-            <p class="card-text">Számos méretben és színben elérhető lufik, hogy tökéletesen illeszkedjenek minden alkalomhoz. Legyen szó születésnapról, esküvőről vagy bármilyen ünnepről. Válaszd a kedvenc színedet és méretedet, hogy feldobd a hangulatot!</p>
+            <h5 class="card-title letter-capitalize">{{product.product_name | translate:lang.data}}</h5>
+            <p class="card-text">{{product.description | translate:lang.data}}</p>
           </div>
           <div class="mx-auto mb-2">
-            <button class="btn btn-primary text-center" value = "{{product.id}}" ng-click = "addToCart(product)">kosárba</button>
+            <button class="btn btn-primary text-center" ng-click = "addToCart(product)">kosárba</button>
           </div>
         </div>
       </div>
