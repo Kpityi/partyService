@@ -15,16 +15,22 @@ $args = Util::getArgs();
 $db = new Database();
 
 // Set query
-$query = "INSERT INTO `events`
-					(`date`,`user_id`, `event_places_id`, `event_type_id`, `menu_id`, `drink_package_id`, `guests`) 
-					 VALUES 
-					(:date, :userId, :eventPlaceId, :eventTypeId, :menuId, :drinkPackageId, :guests);";
+$query = "SELECT `born`,
+                 `country`,
+                 `country_code`,
+                 `phone`,
+                 `city`,
+                 `postcode`,
+                 `address`	
+					FROM 	`users` 
+					WHERE `id` = :id
+					LIMIT 1;";
 
-// Execute query with arguments
+// Execute query with argument
 $result = $db->execute($query, $args);
 
 // Close connection
 $db = null;
 
 // Set response
-Util::setResponse($result);
+Util::setResponse($result[0]);

@@ -1,7 +1,12 @@
 <?php
+declare(strict_types=1);
+
+// Using namespaces aliasing
+use \Util\Util as Util;
+use \Database\Database as Database;
 
 // Set environment
-require_once('../../../common/php/environment.php');
+require_once('../../common/php/environment.php');
 
 // Get arguments
 $args = Util::getArgs();
@@ -10,18 +15,13 @@ $args = Util::getArgs();
 $db = new Database();
 
 // Set query
-$query 	= "UPDATE `user` 
-							SET `type` 					= :type,
-						 			`prefix_name` 	= :prefix_name,
-						 			`first_name` 		= :first_name,
-						 			`middle_name` 	= :middle_name,
-						 			`last_name` 		= :last_name,
-						 			`suffix_name` 	= :suffix_name,
-						 			`nick_name` 		= :nick_name,
-						 			`gender` 				= :gender,
+$query 	= "UPDATE `users` 
+							SET `first_name` 		= :firstName,
+						 			`last_name` 		= :lastName,
+						 			`gender_id`			= :gender,
 						 			`img` 					= :img,
 						 			`img_type` 			= :img_type,
-						 			`born` 					= :born,
+						 			`born` 					= :dateOfBirth,
 						 			`country` 			= :country,
 						 			`country_code`	= :country_code,
 						 			`phone` 				= :phone,
