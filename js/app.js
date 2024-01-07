@@ -57,6 +57,16 @@
             url: '/cart',
             templateUrl: './html/cart.html',
             controller: 'cartController',
+          })
+          .state('changeEmail', {
+            url: '/changeEmail',
+            templateUrl: './html/emailChanged.html',
+            controller: 'emailChangeController',
+          })
+          .state('changePassword', {
+            url: '/changePassword',
+            templateUrl: './html/passwordChanged.html',
+            controller: 'passwordChangeController',
           });
 
         $urlRouterProvider.otherwise('/');
@@ -996,6 +1006,22 @@
       '$scope',
       function ($scope) {
         console.log('cart controller...');
+      },
+    ])
+
+    //emailChange controller
+    .controller('emailChangeController', [
+      '$scope',
+      function ($scope) {
+        console.log('email Change Controller...');
+      },
+    ])
+
+    //passwordChange controller
+    .controller('passwordChangeController', [
+      '$scope',
+      function ($scope) {
+        console.log('password Change Controller...');
       },
     ])
 })(window, angular);

@@ -1,0 +1,169 @@
+<div class="page-container">
+    <div
+      class="header-image-container"
+      ng-include
+      src="'./html/headerimage.html'"
+    ></div>
+  
+    <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
+    
+  
+    <main>
+      <div class="container"
+           ng-if="user.id">
+        <!-- Profile Page navigation tab -->
+        <div class="d-flex align-items-start mt-3 p-4">
+
+          <!-- Profile Tab -->
+          <div
+            class="tab-pane fade show active"
+            id="v-pills-profile"
+            role="tabpanel"
+            aria-labelledby="v-pills-profile-tab"
+              >
+            <div class="row my-3 justify-content-center">
+              <!-- Title -->
+              <h2 class="text-center mb-4">
+                <span><i class="fas fa-users"></i></span>
+                <span class="text-capitalize ms-2">
+                  {{'email' | translate:lang.data}}
+                </span>
+              </h2>             
+            </div>
+
+             <!-- Form -->
+            <div class="row my-3 justify-content-center">
+                <form
+                  ng-if="user.id"
+                  class="col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6"
+                  name="changeEmailForm"
+                >
+  
+                <!-- Email -->
+                <div class="input-group mb-2 justify-content-center">
+                    <div class="col-8 col-sm-4 text-start text-sm-end">
+                    <label for="reg_email" class="col-form-label">
+                        <span class="fw-bold text-danger">*</span>
+                        <i class="fa-solid fa-envelope"></i>
+                        <span class="text-capitalize me-2">
+                        {{'email' | translate:lang.data}}:
+                        </span>
+                    </label>
+                    </div>
+                    <div class="col-6 col-sm-7 col-lg-4">
+                    <input
+                        id="changed_email"
+                        type="text"
+                        ng-attr-placeholder="{{'email' | translate:lang.data}}"
+                        class="form-control rounded-pill shadow-sm"
+                        spellcheck="false"
+                        autocomplete="off"
+                        ng-model="values.email"
+                        name="email"
+                        ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
+                        maxlength="50"
+                        required
+                    />
+                    </div>
+                    <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                        class="check-mark ms-2 fw-bold text-success"
+                        ng-show="changeEmailForm.email.$valid"
+                    >
+                        &check;
+                    </span>
+                    </div>
+                </div>
+
+                <!-- Email confirm -->
+                <div class="input-group mb-2 justify-content-center">
+                    <div class="col-8 col-sm-9 col-lg-4 text-start text-lg-end">
+                      <!-- changed_email label,id -->
+                    <label for="changed_email_confirm" class="col-form-label">
+                        <span class="fw-bold text-danger">*</span>
+                        <i class="fa-solid fa-envelope"></i>
+                        <span class="text-capitalize">
+                        {{'email' | translate:lang.data}}
+                        </span>
+                        <span class="me-2">
+                        {{'confirmation' | translate:lang.data}}:
+                        </span>
+                    </label>
+                    </div>
+                    <div
+                    class="col-6 col-sm-7 col-lg-4 ms-sm-5 ps-ms-5 ps-lg-0 ms-lg-0"
+                    >
+                    <input
+                        id="changed_email_confirm"
+                        type="text"
+                        ng-attr-placeholder="{{'email' | translate:lang.data + ' ' + 'confirmation' | translate:lang.data}}"
+                        class="form-control rounded-pill shadow-sm"
+                        spellcheck="false"
+                        autocomplete="off"
+                        ng-model="values.emailConfirm"
+                        ng-change="validateEmailConfirm()"
+                        name="emailConfirm"
+                        ng-pattern="/^([a-z0-9_.+-])+\@(([a-z0-9-])+\.)+([a-z0-9]{2,4})+$/"
+                        ng-maxlength="50"
+                        required
+                    />
+                    </div>
+                    <div class="col-2 col-sm-1 col-lg-2 pt-2 d-inline">
+                    <span
+                        class="check-mark ms-2 fw-bold text-success"
+                        ng-show="registerForm.emailConfirm.$valid"
+                    >
+                        &check;
+                    </span>
+                    </div>
+                </div>
+                </form>
+              </div>
+
+              <!-- Dividing line -->
+              <hr class="text-muted" />
+  
+              <!-- buttons -->
+              <div class="row my-3 justify-content-center">
+  
+                <!--Save -->
+                <button
+                  id="accept"
+                  type="button"
+                  ng-show="!helper.isEdit"
+                  class="btn btn-primary text-capitalize w-auto me-2"
+                  ng-click="accept()"
+                  ng-disabled="registerForm.$invalid"
+                >
+                  {{'save' | translate:lang.data}}
+                </button>
+  
+                <!-- Cancel -->
+                <button
+                  type="button"
+                  ng-show="!helper.isEdit"
+                  class="btn btn-secondary text-capitalize w-auto "
+                  ng-click="cancel()"
+                >
+                  {{'cancel' | translate:lang.data}}
+                </button>              
+                
+                <!--Edit -->
+                <button
+                  id="accept"
+                  type="button"
+                  ng-show="helper.isEdit"
+                  class="btn btn-primary text-capitalize w-auto"
+                  ng-click="helper.isEdit=false"
+                  ng-disabled="registerForm.$invalid"
+                >
+                  {{'edit' | translate:lang.data}}
+                </button>
+              </div> 
+        </div>
+      </div>
+    </main>
+  
+    <footer ng-include src="'./html/footer.html'"></footer>
+  </div>
+  
