@@ -15,7 +15,6 @@
 body {
     font-family: 'Open Sans', sans-serif !important;
     color: var(--color-primary) !important;
-    background-image: url(../media/image/background.jpg);
 }
 /* Header fonts (Poppins) */
 h1, h2, h3, h4, h5, h6 {
@@ -77,6 +76,9 @@ a[disabled] {
 option[disabled]{
   background-color: rgb(239, 236, 236);
 }
+.vh-100{
+  width: 100vh !important;
+}
 .content_iframe
 {
   display: flex;
@@ -91,6 +93,21 @@ option[disabled]{
 {
   background-color: rgba(112, 152, 181, 0.678);
 }
-
-
-
+.background-image{
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url(../media/image/background.jpg);
+}
+.google-map-container{
+  width: 90%;
+  height: 300px;
+  margin: 1.5rem 0;
+}
+.google-map{
+  width: 100%;
+  height: 100%;
+}
