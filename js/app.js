@@ -53,10 +53,10 @@
             templateUrl: './html/profile.html',
             controller: 'profileController',
           })
-          .state('cart', {
-            url: '/cart',
-            templateUrl: './html/cart.html',
-            controller: 'cartController',
+          .state('order', {
+            url: '/order',
+            templateUrl: './html/order.html',
+            controller: 'orderController',
           });
 
         $urlRouterProvider.otherwise('/');
@@ -64,37 +64,51 @@
     ])
 
     // Cart handle factory
-    /*
-    .factory('cartHandle', [
-      '$rootScope',
-      '$timeout',
-      'util',
-      ($rootScope, $timeout, util) => {
-        let orders = [];
-        let order = {
-          id: 15,
-          name: "Nokia",
-          price: 12323
-        };
-        order.quantity = 1;
+    
+    // .factory('cartHandle', [
+    //   '$rootScope',
+    //   '$timeout',
+    //   'util',
+    //   ($rootScope, $timeout, util) => {
+    //     let orders = [];
+    //     let order = {
+    //       id: null,
+    //       name: null,
+    //       price: null,
+    //       quantity: 1
+    //     };       
 
 
-        let service = {
-          add: (order) => {
-            service.get().add(order);
-          },
-          remove: () => {
-            service.add();
-          },
-          get: () => {
-            return order;
-          } 
-        }
+    //     let service = {
+    //       add: (product) => {
+    //         let index = orders.indexOf(product.id);
+    //         if (index = -1) 
+    //         {
+    //           order.id = product.id;
+    //           order.name = product.name;
+    //           order.price = product.price;
+    //           orders.push(order);
+    //         } else {
+    //           orders[index].quantity++
+    //         }
+    //         $rootScope.cart = orders;
+    //         return $rootScope.cart;                        
+    //       },
+    //       remove: (product) => {
+    //         let index = orders.indexOf(product.id);
+    //         orders.splice(index, 1);
+    //         $rootScope.cart = orders;
+    //         return $rootScope.cart;            
+    //       },
+    //       get: () => {
+    //         return order;
+    //       } 
+    //     }
 
-        return service;
-      }
-    ])
-    */
+    //     return service;
+    //   }
+    // ])
+    
 
     // User factory
     .factory('user', [
@@ -215,6 +229,8 @@
 
       function ($state, $rootScope, $timeout, trans, lang, user) {
         console.log('Run...');
+        $rootScope.showCart= false;
+        $rootScope.cart = [];
 
         // Transaction events
         trans.events('home,services,webshop,contact');
@@ -519,10 +535,11 @@
 
     // webshop controller
     .controller('webshopController', [
-      '$scope',
+      '$scope', 
+      '$rootScope',
       'http', 
       '$timeout',
-      function ($scope, http, $timeout ) {
+      function ($scope, $rootScope, http, $timeout ) {
         console.log('webshop controller...');
 
         $scope.products = [];
@@ -538,7 +555,25 @@
         .catch((error) => {
           $timeout(() => alert(error), 50);
         });
-
+        $scope.addToCart = (product)=> 
+        {          
+          console.log(product);
+          let index = $rootScope.cart.findIndex(x => x.id == product.id);
+            if (index == -1) 
+            {
+              let order = {
+                id: product.id, 
+                name: product.product_name,
+                price: product.price,
+                quantity: 1
+              };
+              $rootScope.cart.push(order);
+            } else {
+              $rootScope.cart[index].quantity++
+            }
+                   
+          console.log($rootScope.cart);
+        };
       },
     ])
 
@@ -976,11 +1011,25 @@
       },
     ])
 
+    // order controller
+    .controller('orderController', [
+      '$scope',
+      function ($scope) {
+        console.log('order controller...');
+      },
+    ])
+
     // cart controller
     .controller('cartController', [
       '$scope',
-      function ($scope) {
+      '$rootScope',
+      function ($scope, $rootScope) {
         console.log('cart controller...');
+        $scope.getTotalPrice = () => {
+          let sum = 0;
+          $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
+          return sum;
+        };
       },
     ])
 })(window, angular);
