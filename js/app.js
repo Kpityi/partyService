@@ -507,11 +507,9 @@
                     method: 'POST',
                     data: {
                       email: $rootScope.user.email,
-                      subject: 'Sikeres foglalás',
-                      message:
-                        `<h2>Kedves ${$rootScope.user.first_name}</h2>
-                        <p>Köszönjük a foglalást!</p> <p>Kollégánk hamarosan felveszi önnel a kapcsolatot.</p> 
-                        <p>Amennyiben szeretné megtekinteni foglalásait azt megteheti a profiljában a foglalások menüpont alatt.</p>`,
+                      userName: $rootScope.user.first_name, 
+                      langId: $rootScope.lang.id,
+                      langType: $rootScope.lang.type                       
                     },
                   })
                   .then((response) => {
@@ -580,8 +578,42 @@
     // Contact controller
     .controller('contactController', [
       '$scope',
-      function ($scope) {
+      'http',
+      '$rootScope',
+      function ($scope, http, $rootScope) {
         console.log('contact controller...');
+
+        // Set model
+        $scope.model = {
+          email: $rootScope.user.email ? $rootScope.user.email : null,
+          message: null,
+        };
+
+        // Message sending button.
+        $scope.send = () => {
+          // Get only necessary properties
+          let data = {
+            email: $scope.model.email,
+            message: $scope.model.message,
+            langId: $rootScope.lang.id,
+            langType: $rootScope.lang.type
+          };
+
+          //Http request
+          http
+            .request({
+              url: './php/contact_email_sending.php',
+              method: 'GET',
+              data: data,
+            })
+            .then((response) => {
+              alert("message sending successful")
+            })
+            .catch(e => {
+
+              alert(e)
+            });
+        }; 
       },
     ])
 
@@ -844,7 +876,7 @@
           isEdit: true,
           maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
           minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
-          image: $scope.values.img_type ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})` : `url(${app.commonPath}media/image/blank/${($scope.values.gender==='1' ? 'fe' : '')}male-blank.webp)`,
+          image: $scope.values.img_type ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})` : `url(${$rootScope.app.commonPath}media/image/blank/${($rootScope.user.gender===2 ? 'fe' : '')}male-blank.webp)`,
         };                  
 
         //save original user data

@@ -18,9 +18,6 @@ $args = Util::getArgs();
 $lang 		= new Language($args['langId'], $args['langType']);
 $language = $lang->translate(array(
   "%email_do_not_reply%" => "email_do_not_reply",
-  "%succesfull_reservation%"=>"succesfull_reservation",
-  "%dear%"=>"dear",
-  "%thanks_for_reservation%"=>"thanks_for_reservation",
   "email_send_failed" => "email_send_failed",
   "email_crete_failed" => "email_crete_failed",
 	"file_name_missing"=> "file_name_missing",
@@ -28,13 +25,14 @@ $language = $lang->translate(array(
 	"file_unable_to_read" => "file_unable_to_read"
 ));
 $language["%lang_id%"] = $args['langId'];
-$language["%user_name%"] = $args['userName'];
+$language["%user_email%"] = $args['email'];
 $language["%current_date%"] = date("Y-m-d");
 $language["%current_year%"] = date("Y");
+$language["%message%"] = $args['message'];
 $lang = null;
 
 // Create document
-$document = Document::createDocument('reservation_email.html', $language, 'html/email');
+$document = Document::createDocument('contact_email.html', $language, 'html/email');
 
 // Check has error
 if (!is_null($document["error"])) {
@@ -44,7 +42,7 @@ if (!is_null($document["error"])) {
 }
 
 // Create email
-$phpMailer = new Email();
+$phpMailer = new Email("Party Service");
 
 // // Check is not created
 // if ($phpMailer->isError()) {
@@ -65,9 +63,9 @@ try {
 
   
   //Add rest properties
-  $phpMailer->Subject = $language["%succesfull_reservation%"];   // email subject headings
+  $phpMailer->Subject = "contact";   // email subject headings
   $phpMailer->Body    = $document["content"]; //email message
-  $phpMailer->addAddress($args['email']);     //Add a recipient email  
+  $phpMailer->addAddress("info.partyservice.mako@gmail.com");     //Add a recipient email  
   
     
   // send message 
@@ -85,7 +83,3 @@ $phpMailer = null;
 
 // Set response
 Util::setResponse('email_sent_succesfull');
- 
- 
-  
-    
