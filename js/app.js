@@ -63,51 +63,6 @@
       },
     ])
 
-    // Cart handle factory
-    
-    // .factory('cartHandle', [
-    //   '$rootScope',
-    //   '$timeout',
-    //   'util',
-    //   ($rootScope, $timeout, util) => {
-    //     let orders = [];
-    //     let order = {
-    //       id: null,
-    //       name: null,
-    //       price: null,
-    //       quantity: 1
-    //     };       
-
-
-    //     let service = {
-    //       add: (product) => {
-    //         let index = orders.indexOf(product.id);
-    //         if (index = -1) 
-    //         {
-    //           order.id = product.id;
-    //           order.name = product.name;
-    //           order.price = product.price;
-    //           orders.push(order);
-    //         } else {
-    //           orders[index].quantity++
-    //         }
-    //         $rootScope.cart = orders;
-    //         return $rootScope.cart;                        
-    //       },
-    //       remove: (product) => {
-    //         let index = orders.indexOf(product.id);
-    //         orders.splice(index, 1);
-    //         $rootScope.cart = orders;
-    //         return $rootScope.cart;            
-    //       },
-    //       get: () => {
-    //         return order;
-    //       } 
-    //     }
-
-    //     return service;
-    //   }
-    // ])
     
 
     // User factory
@@ -560,7 +515,8 @@
             if (index == -1) 
             {
               let order = {
-                id: product.id, 
+                id: product.id,
+                img: product.image, 
                 name: product.product_name,
                 price: product.price,
                 quantity: 1
@@ -1057,10 +1013,40 @@
       '$rootScope',
       function ($scope, $rootScope) {
         console.log('cart controller...');
+
+        // calculate total price
         $scope.getTotalPrice = () => {
           let sum = 0;
           $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
           return sum;
+        };
+
+        // remove product from cart
+        $scope.removeFromCart = (product) => {
+          let index = $rootScope.cart.findIndex(x => x.id == product.id);
+          $rootScope.cart.splice(index, 1);
+        };
+      },
+    ])
+
+    // order controller
+    .controller('orderController', [
+      '$scope',
+      '$rootScope',
+      function ($scope, $rootScope) {
+        console.log('order controller...');
+
+        // calculate total price
+        $scope.getTotalPrice = () => {
+          let sum = 0;
+          $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
+          return sum;
+        };
+
+        // remove product from cart
+        $scope.removeFromCart = (product) => {
+          let index = $rootScope.cart.findIndex(x => x.id == product.id);
+          $rootScope.cart.splice(index, 1);
         };
       },
     ])
