@@ -999,14 +999,6 @@
       },
     ])
 
-    // order controller
-    .controller('orderController', [
-      '$scope',
-      function ($scope) {
-        console.log('order controller...');
-      },
-    ])
-
     // cart controller
     .controller('cartController', [
       '$scope',
@@ -1033,7 +1025,9 @@
     .controller('orderController', [
       '$scope',
       '$rootScope',
-      function ($scope, $rootScope) {
+      'util',
+      'http',
+      function ($scope, $rootScope, util, http) {
         console.log('order controller...');
 
         // calculate total price
@@ -1041,13 +1035,32 @@
           let sum = 0;
           $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
           return sum;
-        };
+        }
 
         // remove product from cart
         $scope.removeFromCart = (product) => {
           let index = $rootScope.cart.findIndex(x => x.id == product.id);
           $rootScope.cart.splice(index, 1);
-        };
+        }
+
+        $scope.order = () => {
+          let args = util.arrayObjFilterByKeys($rootScope.cart, 'id,quantity');
+          http.request({
+            url: './php/set_order.php',
+            method: 'POST',
+            data: {
+              userId: $rootScope.user.id,
+              cart: args
+            }
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
       },
-    ])
+    ]);
+
 })(window, angular);
