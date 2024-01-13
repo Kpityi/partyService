@@ -1,7 +1,7 @@
 <?php
 
 // Set arguments
-$_POST['data'] = '{"userId":1,"cart":[{"id":3,"quantity":1},{"id":4,"quantity":1},{"id":2,"quantity":5},{"id":10,"quantity":1}]}';
+$_POST['data'] = '{"lang":{"id":"hu","type":"east"},"email":"kertesz.istvan-e2022@keri.mako.hu","message":"xyxyxxyxyyxyx"}';
 
 // Call php file to debug
-require_once('set_order.php');
+require_once('../../common/php/common.php');

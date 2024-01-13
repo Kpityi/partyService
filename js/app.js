@@ -535,8 +535,9 @@
     .controller('contactController', [
       '$scope',
       'http',
+      'lang',
       '$rootScope',
-      function ($scope, http, $rootScope) {
+      function ($scope, http, lang, $rootScope) {
         console.log('contact controller...');
 
         // Set model
@@ -549,26 +550,41 @@
         $scope.send = () => {
           // Get only necessary properties
           let data = {
+            lang: {
+              id: $rootScope.lang.id,
+              type: $rootScope.lang.type
+            },
             email: $scope.model.email,
             message: $scope.model.message,
-            langId: $rootScope.lang.id,
-            langType: $rootScope.lang.type
+            //langId: $rootScope.lang.id,
+            //langType: $rootScope.lang.type
           };
 
-          //Http request
-          http
-            .request({
-              url: './php/contact_email_sending.php',
-              method: 'GET',
-              data: data,
-            })
-            .then((response) => {
-              alert("message sending successful")
-            })
-            .catch(e => {
+          // Http request
+           http
+             .request({
+               url: './php/contact_email_sending.php',
+               method: 'POST',
+               data: data,
+             })
+             .then((response) => {
+               alert(lang.translate(response, true));
+             })
+             .catch(e => {
+               alert(e)
+             });
 
-              alert(e)
-            });
+          //http.request({
+          //  method: 'POST',
+          //  data: {
+          //    require : "contact_email_sending.php",
+          //    params  : data
+          //  }
+          //})
+          //.then(response => {
+          //  alert(lang.translate("message sending successful", true)+'!');
+          //})
+          //.catch(e => reject(e));
         }; 
       },
     ])
