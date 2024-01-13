@@ -535,8 +535,9 @@
     .controller('contactController', [
       '$scope',
       'http',
+      'lang',
       '$rootScope',
-      function ($scope, http, $rootScope) {
+      function ($scope, http, lang, $rootScope) {
         console.log('contact controller...');
 
         // Set model
@@ -549,26 +550,41 @@
         $scope.send = () => {
           // Get only necessary properties
           let data = {
+            lang: {
+              id: $rootScope.lang.id,
+              type: $rootScope.lang.type
+            },
             email: $scope.model.email,
             message: $scope.model.message,
-            langId: $rootScope.lang.id,
-            langType: $rootScope.lang.type
+            //langId: $rootScope.lang.id,
+            //langType: $rootScope.lang.type
           };
 
-          //Http request
-          http
-            .request({
-              url: './php/contact_email_sending.php',
-              method: 'GET',
-              data: data,
-            })
-            .then((response) => {
-              alert("message sending successful")
-            })
-            .catch(e => {
+          // Http request
+           http
+             .request({
+               url: './php/contact_email_sending.php',
+               method: 'POST',
+               data: data,
+             })
+             .then((response) => {
+               alert(lang.translate(response, true));
+             })
+             .catch(e => {
+               alert(e)
+             });
 
-              alert(e)
-            });
+          //http.request({
+          //  method: 'POST',
+          //  data: {
+          //    require : "contact_email_sending.php",
+          //    params  : data
+          //  }
+          //})
+          //.then(response => {
+          //  alert(lang.translate("message sending successful", true)+'!');
+          //})
+          //.catch(e => reject(e));
         }; 
       },
     ])
@@ -625,6 +641,10 @@
               $scope.model.email = response.email;
               user.set(response);
               $scope.$applyAsync();
+              if($state.current.name == 'order'){
+                console.log("state reloed")
+                $state.reload();
+              }
             })
             .catch(e => {
 
@@ -808,6 +828,12 @@
       '$state',
       function ($scope, $rootScope, util, http, user, $timeout, $state) {
         console.log('profile controller...');
+
+        //check user 
+        if(!$rootScope.user.id){
+          $state.go('home');
+          return;
+        }
           
         //Profile tab
         // Form initial values
@@ -999,14 +1025,6 @@
       },
     ])
 
-    // order controller
-    .controller('orderController', [
-      '$scope',
-      function ($scope) {
-        console.log('order controller...');
-      },
-    ])
-
     // cart controller
     .controller('cartController', [
       '$scope',
@@ -1033,7 +1051,9 @@
     .controller('orderController', [
       '$scope',
       '$rootScope',
-      function ($scope, $rootScope) {
+      'util',
+      'http',
+      function ($scope, $rootScope, util, http) {
         console.log('order controller...');
 
         // calculate total price
@@ -1041,13 +1061,49 @@
           let sum = 0;
           $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
           return sum;
-        };
+        }
 
         // remove product from cart
         $scope.removeFromCart = (product) => {
           let index = $rootScope.cart.findIndex(x => x.id == product.id);
           $rootScope.cart.splice(index, 1);
+        }
+
+        if($rootScope.user.id){
+          http.request({
+            url: './php/get_profile_order.php',
+            method: 'Get',
+            data: {
+              userId: $rootScope.user.id,
+            }
+          })
+          .then(response => {
+            $scope.values=response;
+            console.log($scope.values)
+          })
+          .catch(error => {
+            console.log(error);
+          });
         };
+
+        $scope.order = () => {
+          let args = util.arrayObjFilterByKeys($rootScope.cart, 'id,quantity,name,price');
+          http.request({
+            url: './php/set_order.php',
+            method: 'POST',
+            data: {
+              userId: $rootScope.user.id,
+              cart: args
+            }
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
       },
-    ])
+    ]);
+
 })(window, angular);

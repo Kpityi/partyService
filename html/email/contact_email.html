@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="%lang_id%""> 
+<html lang="{{lang_id}}"> 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,14 +21,15 @@
 				<div class="card-body pb-1">
 					<p class="fs-5">
             <span>Üzenet küldő: </span>
-						<span class="fw-bold">%user_email%</span>
+						<span class="fw-bold">{{user_email}}</span>
 					</p>
+					{{table-content}}
           <p class="fs-5">
             <span>Üzenet: </span>
-            <span class="fw-bold">%message%</span>
+            <span class="fw-bold">{{message}}</span>
           </p>
 					<hr>					
-					<p class="text-start fs-sm mb-0">%current_date%</p>
+					<p class="text-start fs-sm mb-0">{{current_date}}</p>
 				</div>				
 			</div>
 		</div>

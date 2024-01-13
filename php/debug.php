@@ -1,7 +1,7 @@
 <?php
 
 // Set arguments
-$_POST['data'] = '{"name":"name","email":"kpityi83@gmail.com","subject":"subject",message":"Örülök hogy itt vagy"}';
+$_POST['data'] = '{"lang":{"id":"hu","type":"east"},"email":"kertesz.istvan-e2022@keri.mako.hu","message":"xyxyxxyxyyxyx"}';
 
 // Call php file to debug
-require_once('reservation_email.php');
+require_once('../../common/php/common.php');
