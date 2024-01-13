@@ -33,9 +33,9 @@
               <td><img ng-src="./media/image/products/{{product.img}}" class="img-thumbnail" alt="..." style = "width: 80px;" ></td>
               <td>{{product.name | translate:lang.data}}</td>
               <td>
-                <span>-</span>
+                <span class="border border-dark">-</span>
                 <span>{{product.quantity}}</span>
-                <span>+</span>
+                <span class="border border-dark">+</span>
               </td>
               <td>{{product.price*product.quantity}} Ft</td>
               <td>
