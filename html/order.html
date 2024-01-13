@@ -46,14 +46,21 @@
               </td>
             </tr>
             <tr class="pe-2">
-              <td colspan = "3" class="text-capitalize text-start">{{'shipping' | translate:lang.data}}:</td>
-              <td colspan = "2" class="text-end ">{{shipping}} Ft</td>
+              <td class="text-capitalize">{{'shipping' | translate:lang.data}}:</td>
+              <td colspan="2"></td>
+              <td>{{shipping}} Ft</td>
+              <td></td>
             </tr>
             <tr class="pe-2">
-              <td colspan="3" class="text-capitalize text-start">{{'total' |translate:lang.data}}:</td>
-              <td colspan="2" class="text-end ">{{getTotalPrice() + shipping}} Ft</td>
+              <td class="text-capitalize" >{{'total' |translate:lang.data}}:</td>
+              <td colspan="2"></td>
+              <td>{{getTotalPrice() + shipping}} Ft</td>
+              <td></td>
             </tr>
-            <tr class="pt-3">
+            <tr>
+              <td></td>
+            </tr>
+            <tr class="mt-5 pt-3">
               <td colspan= "2" class="text-capitalize text-center fw-bold">
                 {{'shipping_address' | translate:lang.data}}
               </td>
@@ -119,11 +126,11 @@
               </td>
             </tr>
             <tr>
-              <td class="text-capitalize text-end fw-bold">{{'shipping' | translate:lang.data}}</td>
+              <td class="text-capitalize text-end fw-bold">{{'shipping' | translate:lang.data}}: </td>
               <td class=" form-check text-start ms-2"
                   ng-init="shipping=1250"
               >
-                <input class="form-check-input" type="radio" name="shipping" id="shipping" checked>
+                <input class="form-check-input m-2" type="radio" name="shipping" id="shipping" checked>
                 <label class="form-check-label" for="shipping">
                 {{'gls' | translate:lang.data}} + 1250 Ft
                 </label>

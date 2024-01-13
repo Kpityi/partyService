@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Dec 19. 17:44
--- Kiszolgáló verziója: 10.4.6-MariaDB
--- PHP verzió: 7.3.8
+-- Létrehozás ideje: 2024. Jan 13. 18:35
+-- Kiszolgáló verziója: 10.4.27-MariaDB
+-- PHP verzió: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -37,7 +36,7 @@ CREATE TABLE `products` (
   `price` int(10) NOT NULL,
   `stock` int(10) NOT NULL,
   `is_stock` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `products`
@@ -56,7 +55,7 @@ INSERT INTO `products` (`id`, `product_name`, `image`, `description`, `category`
 (10, 'balloon_heart-shaped with red lettering', 'lufi_sziv_feliratos.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
 (11, 'balloon_smile', 'lufi_smile.jpg', 'desc_balloon', 'decoration', 500, 998, 1),
 (12, 'paper-plate', 'papirtanyer.jpg', 'desc_paper_plate', 'tableware', 125, 1200, 1),
-(13, 'paper_plate_blue', 'papirtanyer-kek.jpg', 'desc_paper_plate', 'tableware', 125, 1225, 1),
+(13, 'paper_plate_blue', 'papirtanyer_kek.jpg', 'desc_paper_plate', 'tableware', 125, 1225, 1),
 (14, 'straw_red', 'szivoszal_piros.jpg', 'desc_straw', 'tableware', 95, 1500, 1),
 (15, 'straw_yellow', 'szivoszal_sarga.jpg', 'desc_straw', 'tableware', 95, 1525, 1),
 (16, 'straw_pink', 'szivoszal_pink.jpg', 'desc_straw', 'tableware', 95, 1615, 1),
@@ -73,7 +72,7 @@ INSERT INTO `products` (`id`, `product_name`, `image`, `description`, `category`
 (27, 'party_glasses_gold', 'partyszemuveg_gold.jpg', 'desc_party_glasses', 'decoration', 330, 780, 1),
 (28, 'tablecloth_gold', 'asztalterito_gold.jpg', 'desc_tablecloth', 'tablecloth', 465, 1500, 1),
 (29, 'tablecloth_silver', 'asztalterito_silver.jpg', 'desc_tablecloth', 'tableware', 465, 1500, 1),
-(30, 'tablecloth_white_gold', 'asztalterito_white.jpg', 'desc_tablecloth', 'tableware', 465, 1500, 1),
+(30, 'tablecloth_white_gold', 'asztalterito_white_gold.jpg', 'desc_tablecloth', 'tableware', 465, 1500, 1),
 (31, 'tablecloth_chrome_silver', 'asztalterito_chrome_silver.jpg', 'desc_tablecloth', 'tableware', 514, 980, 1),
 (32, 'tablecloth_white', 'asztalterito_white.jpg', 'desc_tablecloth', 'tableware', 565, 950, 1),
 (33, 'wig_blue_short', 'paroka_blue.jpg', 'desc_wig', 'decoration', 265, 4400, 1),
@@ -95,6 +94,16 @@ INSERT INTO `products` (`id`, `product_name`, `image`, `description`, `category`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
+
+--
+-- A kiírt táblák AUTO_INCREMENT értéke
+--
+
+--
+-- AUTO_INCREMENT a táblához `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
