@@ -44,12 +44,12 @@ if (!is_null($document["error"])) {
 // Create email
 $phpMailer = new Email("Party Service");
 
-// // Check is not created
-// if ($phpMailer->isError()) {
+// Check is not created
+if ($phpMailer->isError()) {
 
-// 	// Set error
-// 	Util::setError("{$language['email_crete_failed']}!\n{$message}", $phpMailer);
-// }
+// Set error
+ 	Util::setError("{$language['email_crete_failed']}!\n{$message}", $phpMailer);
+ }
 
 // Get image
 $imgFile = searchForFile('logo.png', 'media/image/logo');

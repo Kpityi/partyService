@@ -625,6 +625,10 @@
               $scope.model.email = response.email;
               user.set(response);
               $scope.$applyAsync();
+              if($state.current.name == 'order'){
+                console.log("state reloed")
+                $state.reload();
+              }
             })
             .catch(e => {
 
@@ -808,6 +812,12 @@
       '$state',
       function ($scope, $rootScope, util, http, user, $timeout, $state) {
         console.log('profile controller...');
+
+        //check user 
+        if(!$rootScope.user.id){
+          $state.go('home');
+          return;
+        }
           
         //Profile tab
         // Form initial values
@@ -1043,8 +1053,25 @@
           $rootScope.cart.splice(index, 1);
         }
 
+        if($rootScope.user.id){
+          http.request({
+            url: './php/get_profile_order.php',
+            method: 'Get',
+            data: {
+              userId: $rootScope.user.id,
+            }
+          })
+          .then(response => {
+            $scope.values=response;
+            console.log($scope.values)
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        };
+
         $scope.order = () => {
-          let args = util.arrayObjFilterByKeys($rootScope.cart, 'id,quantity');
+          let args = util.arrayObjFilterByKeys($rootScope.cart, 'id,quantity,name,price');
           http.request({
             url: './php/set_order.php',
             method: 'POST',

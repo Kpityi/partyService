@@ -25,7 +25,7 @@ if (is_null($result[0]['order_id']))
 else 	$orderId = substr(('0000' . strval(intval($result[0]['order_id'])+1)), -4);
 
 // Set query
-$query = "INSERT INTO `orders` (`product_id`,`quantity`,`user_id`, `order_id`) VALUES";
+$query = "INSERT INTO `orders` (`product_id`,`product_name`,`price`,`quantity`,`user_id`, `order_id`) VALUES ";
 
 $params = array();
 foreach($args['cart'] as $item) {
@@ -36,6 +36,7 @@ foreach($args['cart'] as $item) {
 
 // Execute query with argument
 $result = $db->execute($query, $params);
+if ($result['affectedRows']>0) $result['order_id'] = date("Y/m/d") . "/" . $orderId;
 
 // Close connection
 $db = null;
