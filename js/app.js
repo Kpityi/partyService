@@ -1012,8 +1012,25 @@
     //emailChange controller
     .controller('emailChangeController', [
       '$scope',
-      function ($scope) {
+      '$rootScope',
+      'http',
+      function ($scope, $rootScope, http) {
         console.log('email Change Controller...');
+        $scope.values = {
+          oldEmail : $rootScope.user.email, 
+          newEmail : null,
+          newEmailConfirm : null
+        };
+
+        $scope.validateEmailConfirm = () => {
+          console.log( "newEmail: " + $scope.values.newEmail + " nec: " + $scope.values.newEmailConfirm);
+          const { newEmail, newEmailConfirm } = $scope.values;
+          console.log( "newEmail: " + newEmail + " nec: " + newEmailConfirm);
+          $scope.changeEmailForm.newEmailConfirm.$setValidity(
+            'emailMismatch',
+            newEmail === newEmailConfirm
+          )
+        };
       },
     ])
 
