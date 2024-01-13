@@ -53,48 +53,17 @@
             templateUrl: './html/profile.html',
             controller: 'profileController',
           })
-          .state('cart', {
-            url: '/cart',
-            templateUrl: './html/cart.html',
-            controller: 'cartController',
+          .state('order', {
+            url: '/order',
+            templateUrl: './html/order.html',
+            controller: 'orderController',
           });
 
         $urlRouterProvider.otherwise('/');
       },
     ])
 
-    // Cart handle factory
-    /*
-    .factory('cartHandle', [
-      '$rootScope',
-      '$timeout',
-      'util',
-      ($rootScope, $timeout, util) => {
-        let orders = [];
-        let order = {
-          id: 15,
-          name: "Nokia",
-          price: 12323
-        };
-        order.quantity = 1;
-
-
-        let service = {
-          add: (order) => {
-            service.get().add(order);
-          },
-          remove: () => {
-            service.add();
-          },
-          get: () => {
-            return order;
-          } 
-        }
-
-        return service;
-      }
-    ])
-    */
+    
 
     // User factory
     .factory('user', [
@@ -215,6 +184,8 @@
 
       function ($state, $rootScope, $timeout, trans, lang, user) {
         console.log('Run...');
+        $rootScope.showCart= false;
+        $rootScope.cart = [];
 
         // Transaction events
         trans.events('home,services,webshop,contact');
@@ -517,10 +488,11 @@
 
     // webshop controller
     .controller('webshopController', [
-      '$scope',
+      '$scope', 
+      '$rootScope',
       'http', 
       '$timeout',
-      function ($scope, http, $timeout ) {
+      function ($scope, $rootScope, http, $timeout ) {
         console.log('webshop controller...');
 
         $scope.products = [];
@@ -536,7 +508,26 @@
         .catch((error) => {
           $timeout(() => alert(error), 50);
         });
-
+        $scope.addToCart = (product)=> 
+        {          
+          console.log(product);
+          let index = $rootScope.cart.findIndex(x => x.id == product.id);
+            if (index == -1) 
+            {
+              let order = {
+                id: product.id,
+                img: product.image, 
+                name: product.product_name,
+                price: product.price,
+                quantity: 1
+              };
+              $rootScope.cart.push(order);
+            } else {
+              $rootScope.cart[index].quantity++
+            }
+                   
+          console.log($rootScope.cart);
+        };
       },
     ])
 
@@ -1011,8 +1002,65 @@
     // cart controller
     .controller('cartController', [
       '$scope',
-      function ($scope) {
+      '$rootScope',
+      function ($scope, $rootScope) {
         console.log('cart controller...');
+
+        // calculate total price
+        $scope.getTotalPrice = () => {
+          let sum = 0;
+          $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
+          return sum;
+        };
+
+        // remove product from cart
+        $scope.removeFromCart = (product) => {
+          let index = $rootScope.cart.findIndex(x => x.id == product.id);
+          $rootScope.cart.splice(index, 1);
+        };
       },
     ])
+
+    // order controller
+    .controller('orderController', [
+      '$scope',
+      '$rootScope',
+      'util',
+      'http',
+      function ($scope, $rootScope, util, http) {
+        console.log('order controller...');
+
+        // calculate total price
+        $scope.getTotalPrice = () => {
+          let sum = 0;
+          $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
+          return sum;
+        }
+
+        // remove product from cart
+        $scope.removeFromCart = (product) => {
+          let index = $rootScope.cart.findIndex(x => x.id == product.id);
+          $rootScope.cart.splice(index, 1);
+        }
+
+        $scope.order = () => {
+          let args = util.arrayObjFilterByKeys($rootScope.cart, 'id,quantity');
+          http.request({
+            url: './php/set_order.php',
+            method: 'POST',
+            data: {
+              userId: $rootScope.user.id,
+              cart: args
+            }
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
+      },
+    ]);
+
 })(window, angular);

@@ -1,3 +1,4 @@
+<div ng-include src="'./html/cart.html'"></div>
 <!-- Navbar -->
 <nav 
   class="navbar navbar-expand-md navbar-dark bg-dark sticky"
@@ -195,9 +196,10 @@
 
         <!-- Cart -->
         <li class="nav-item">
-          <a class="nav-link" ui-sref="cart" ui-sref-active="active"
+          <a class="nav-link position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" ui-sref="cart" ui-sref-active="active"
             ><span class="fas fa-cart-shopping"></span
-          ></a>
+          ><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-2">{{cart.length}}</span>
+          </a>       
         </li>
 
         <!-- Language -->
