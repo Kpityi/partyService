@@ -6,11 +6,12 @@ use Util\Util as Util;
 use Language\Language as Language;
 use PHPMailer\Email as Email;
 
-require_once('crete_html_table.php');
 
 // Set environment
 if (!isset($GLOBALS['___app___'])) 
   require_once('../../common/php/environment.php');
+
+require_once('crete_html_table.php');
 
 // Get arguments
 $args = Util::getArgs();
