@@ -562,7 +562,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="order in orders track by $index">                  
-                <td>{{order.order_number}}{{order.order_id}}</td>
+                <td>{{order.date}}/{{order.order_id}}</td>
                 <td>{{order.product_name | translate:lang.data}}</td>
                 <td>x {{order.quantity}}</td>
                 <td>{{order.price}} Ft</td>
