@@ -66,9 +66,11 @@ $langData = $lang->translate(array(
 	"{{shipping_cost}}"				=> $args['shipping'],
 	"{{total_prise}}"					=> $args['total']
 ));
-$langData = Util::objMerge($langData, $constants);
+
 
 createTable($result['order_id'], $args["cart"], $constants["{{table-content}}"]);
+
+$langData = Util::objMerge($langData, $constants);
 
 // Create email
 $phpMailer = new Email($lang);
