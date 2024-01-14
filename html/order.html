@@ -1,0 +1,163 @@
+<div class="page-container">
+  <div
+    class="header-image-container"
+    ng-include src="'./html/headerimage.html'"
+  >
+  </div>
+
+  <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
+  <div ng-include src="'./html/loginModal.html'"></div>
+
+  <main class="container">
+
+    <h1 class="text-center py-4 text-capitalize">{{'cart' | translate:lang.data}}</h1>
+    <div ng-if = "!user.id" 
+         class = "text-center letter-capitalize">
+      {{'please_login' | translate:lang.data}}     
+    </div>
+    <div ng-if = "user.id" 
+         class = "text-center letter-capitalize"
+    >  
+         <table class="table table-striped">
+          <thead>
+            <tr>
+              <td colspan="5">
+                <h4 class="text-center text-capitalize">
+                  {{'your_cart' | translate:lang.data}}
+                </h4>
+              </td>
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <tr ng-repeat = "product in cart">
+              <td><img ng-src="./media/image/products/{{product.img}}" class="img-thumbnail" alt="..." style = "width: 80px;" ></td>
+              <td>{{product.name | translate:lang.data}}</td>
+              <td>
+                <span class="border border-dark custom-btn " 
+                      ng-click="decrease(product.id)"
+                >
+                  <i class="fa-solid fa-minus m-1 me-0"></i>
+                </span>
+                <span class="m-1 p-1 fw-bold">{{product.quantity}}</span>
+                <span class="border border-dark custom-btn "
+                      ng-click="increase(product.id)"
+                >
+                  <i class="fa-solid fa-plus m-1"></i>
+                </span>
+              </td>
+              <td>{{product.price*product.quantity}} Ft</td>
+              <td>
+                <i class ="fa-regular fa-thin fa-trash-can"
+                   ng-click = "removeFromCart(product)"
+                >
+                </i>
+              </td>
+            </tr>
+            <tr class="pe-2">
+              <td class="text-capitalize">{{'shipping' | translate:lang.data}}:</td>
+              <td colspan="2"></td>
+              <td>{{shipping}} Ft</td>
+              <td></td>
+            </tr>
+            <tr class="pe-2">
+              <td class="text-capitalize" >{{'total' |translate:lang.data}}:</td>
+              <td colspan="2"></td>
+              <td>{{getTotalPrice() + shipping}} Ft</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr class="mt-5 pt-3">
+              <td colspan= "2" class="text-capitalize text-center fw-bold">
+                {{'shipping_address' | translate:lang.data}}
+              </td>
+            </tr>
+            <tr>
+              <td class="text-end text-capitalize fw-bold">
+                {{'name' | translate:lang.data}}:
+              </td>
+              <td class="text-start ms-2">
+                <span class="text-capitalize"
+                      ng-repeat="k in lang.rule[lang.type]"
+                >
+                {{user[k]}}
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-end text-capitalize fw-bold">
+                {{'email' | translate:lang.data}}:
+              </td>
+              <td class=" text-start ms-2">
+               {{user.email}}
+              </td>
+            </tr>
+            <tr>
+              <td class="text-end text-capitalize fw-bold">
+                {{'address' | translate:lang.data}}:
+              </td>
+              <td class="text-start ms-2">
+               {{values.address}}
+              </td>
+            </tr>
+            <tr>
+              <td class="text-end text-capitalize fw-bold">
+                {{'country' | translate:lang.data}}:
+              </td>
+              <td class="text-capitalize text-start ms-2"">
+               {{values.country}}
+              </td>
+            </tr>
+            <tr>
+              <td class="text-end text-capitalize fw-bold">
+                {{'city' | translate:lang.data}}:
+              </td>
+              <td class="text-start ms-2">
+               {{values.city}}
+              </td>
+            </tr>
+            <tr>
+              <td class="text-end text-capitalize fw-bold">
+                {{'postcode' | translate:lang.data}}:
+              </td>
+              <td class="text-start ms-2">
+               {{values.postcode}}
+              </td>
+            </tr>
+            <tr>
+              <td class="text-end text-capitalize fw-bold">
+                {{'phone' | translate:lang.data}}:
+              </td>
+              <td class="text-start ms-2">
+               +{{values.country_code}}-{{values.phone}}
+              </td>
+            </tr>
+            <tr>
+              <td class="text-capitalize text-end fw-bold">{{'shipping' | translate:lang.data}}: </td>
+              <td class=" form-check text-start ms-2"
+                  ng-init="shipping=1250"
+              >
+                <input class="form-check-input m-2" type="radio" name="shipping" id="shipping" checked>
+                <label class="form-check-label" for="shipping">
+                {{'gls' | translate:lang.data}} + 1250 Ft
+                </label>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5">
+                <button type="button" 
+                        class="btn btn-success rounded-pill shadow mt-3 px-5 py-2" 
+                        ng-click="order()">Order</button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>          
+    </div>
+
+  </main>
+
+  <footer ng-include src="'./html/footer.html'"></footer>
+</div>
