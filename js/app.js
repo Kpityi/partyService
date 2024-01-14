@@ -557,22 +557,20 @@
             },
             email: $scope.model.email,
             message: $scope.model.message,
-            
-          };
-
+          };          
           // Http request
-           http
-             .request({
-               url: './php/contact_email_sending.php',
-               method: 'POST',
-               data: data,
-             })
-             .then((response) => {
-               alert(lang.translate(response, true));
-             })
-             .catch(e => {
-               alert(e)
-             });
+         http
+         .request({
+           url: './php/contact_email_sending.php',
+           method: 'POST',
+           data: data,
+         })
+         .then((response) => {
+           alert(lang.translate(response, true));
+         })
+         .catch(e => {
+           alert(e)
+         });
         }; 
       },
     ])

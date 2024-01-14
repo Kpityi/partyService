@@ -29,7 +29,7 @@ $constants = array(
 
 // Merge language with constants
 $langData = $lang->translate(array(
-  "{{succesfull_reservation}}"			=> "succesfull_reservation",
+  "{{succesful_reservation}}"			=> "succesful_reservation",
   "{{username}}"                    => $args['userName']
 ));
 $langData = Util::objMerge($langData, $constants);
@@ -63,7 +63,7 @@ $lang = null;
 try {
 
 	// Add rest properties
-  $phpMailer->Subject = $langData["{{succesfull_reservation}}"];
+  $phpMailer->Subject = $langData["{{succesful_reservation}}"];
   $phpMailer->Body 		= $phpMailer->getDocument();
   $phpMailer->addAddress($args['email'], 
                          $langData["{{user_name}}"]);
