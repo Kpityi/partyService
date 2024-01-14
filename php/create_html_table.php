@@ -1,22 +1,22 @@
 <?php
 
-function createTable($order, &$html, $message=null) {
+function createTable($orderNumber, $order, &$html, $message=null) {
 
 	if (!is_string($message) || empty(($message = trim($message))))
 		$message = "A tábla üres";
 
   if (count($order) > 0) {
     $html = 
-      "<table style=\"border:1px solid black;\">
+      "<table>
         <thead>
           <tr>
-            <td style=\"border:1px solid black;\">
-              {{order_number}}: 0000
+            <td>
+              {{order_number}}: $orderNumber
           <tr>";
             foreach(array_keys($order[0]) as $key) {
               if($key !=='id'){
                 $html .= 
-                  "<th style=\"border:1px solid black;\">{$key}</th>";
+                  "<th>{$key}</th>";
               }
             }
     $html .= 
@@ -28,7 +28,7 @@ function createTable($order, &$html, $message=null) {
         foreach(array_keys($item) as $key) {
           if($key !=='id'){
             $html .= 
-              "<td style=\"border:1px solid black;\">{$item[$key]}</td>";
+              "<td>{$item[$key]}</td>";
           }
         }
         $html .= "</tr>";        

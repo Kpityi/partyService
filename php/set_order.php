@@ -62,11 +62,13 @@ $constants = array(
 // Merge language with constants
 $langData = $lang->translate(array(
   "{{succesful_order}}"			=> "succesful_order",
-  "{{username}}"                    => $args['userName']
+  "{{username}}"            => $args['userName'],
+	"{{shipping_cost}}"				=> $args['shipping'],
+	"{{total_prise}}"					=> $args['total']
 ));
 $langData = Util::objMerge($langData, $constants);
 
-createTable($args["cart"], $constants["{{table-content}}"]);
+createTable($result['order_id'], $args["cart"], $constants["{{table-content}}"]);
 
 // Create email
 $phpMailer = new Email($lang);
@@ -100,7 +102,7 @@ try {
   $phpMailer->Subject = $langData["{{succesful_order}}"];
   $phpMailer->Body 		= $phpMailer->getDocument();
   $phpMailer->addAddress($args['email'], 
-                         $langData["{{user_name}}"]);
+                         $langData["{{username}}"]);
 
 	// Send email
   $phpMailer->send();

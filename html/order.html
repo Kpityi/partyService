@@ -135,10 +135,14 @@
             </tr>
             <tr>
               <td class="text-capitalize text-end fw-bold">{{'shipping' | translate:lang.data}}: </td>
-              <td class=" form-check text-start ms-2"
-                  ng-init="shipping=1250"
-              >
-                <input class="form-check-input m-2" type="radio" name="shipping" id="shipping" checked>
+              <td class=" form-check text-start ms-2">
+                <input class="form-check-input m-2" 
+                       type="radio" 
+                       name="shipping" 
+                       id="shipping"
+                       ng-model="shipping"
+                       ng-value="1250"
+                       checked>
                 <label class="form-check-label" for="shipping">
                 {{'gls' | translate:lang.data}} + 1250 Ft
                 </label>

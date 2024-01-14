@@ -6,21 +6,24 @@
     .module('app', ['ui.router', 'app.common', 'app.language', 'app.form'])
 
     //file model
-    .directive('fileModel', ['$parse', function ($parse) {
-      return {
+    .directive('fileModel', [
+      '$parse',
+      function ($parse) {
+        return {
           restrict: 'A',
-          link: function(scope, element, attrs) {
-              const model = $parse(attrs.fileModel);
-              const modelSetter = model.assign;
-  
-              element.bind('change', function(){
-                  scope.$apply(function(){
-                      modelSetter(scope, element[0].files[0]);
-                  });
+          link: function (scope, element, attrs) {
+            const model = $parse(attrs.fileModel);
+            const modelSetter = model.assign;
+
+            element.bind('change', function () {
+              scope.$apply(function () {
+                modelSetter(scope, element[0].files[0]);
               });
-          }
-      };
-  }])
+            });
+          },
+        };
+      },
+    ])
 
     // Application config
     .config([
@@ -62,8 +65,6 @@
         $urlRouterProvider.otherwise('/');
       },
     ])
-
-    
 
     // User factory
     .factory('user', [
@@ -184,7 +185,7 @@
 
       function ($state, $rootScope, $timeout, trans, lang, user) {
         console.log('Run...');
-        $rootScope.showCart= false;
+        $rootScope.showCart = false;
         $rootScope.cart = [];
 
         // Transaction events
@@ -443,7 +444,6 @@
             drinkPackageId: $scope.reservationData.drink_package.id,
             guests: $scope.reservationData.guests,
           };
-          
 
           // Http request reservation
           http
@@ -457,20 +457,18 @@
               if (response.affectedRows) {
                 console.log(response.lastInsertId);
                 $scope.$applyAsync();
-                let {id, type} = $rootScope.lang;
+                let { id, type } = $rootScope.lang;
                 http
                   .request({
                     url: './php/reservation_email.php',
                     method: 'POST',
                     data: {
                       email: $rootScope.user.email,
-                      userName: $rootScope.user.first_name, 
-                      lang: {id, type}                      
+                      userName: $rootScope.user.first_name,
+                      lang: { id, type },
                     },
                   })
-                  .then((response) => {
-
-                  })
+                  .then((response) => {})
                   .catch((error) => {
                     $timeout(() => alert(error), 50);
                   });
@@ -489,44 +487,42 @@
 
     // webshop controller
     .controller('webshopController', [
-      '$scope', 
+      '$scope',
       '$rootScope',
-      'http', 
+      'http',
       '$timeout',
-      function ($scope, $rootScope, http, $timeout ) {
+      function ($scope, $rootScope, http, $timeout) {
         console.log('webshop controller...');
 
         $scope.products = [];
 
         // Http request products
         http
-        .request("./php/products.php")
-        .then((response) => {
-          $scope.products = response;
-          $scope.$applyAsync();
-          console.log(response)
-        })
-        .catch((error) => {
-          $timeout(() => alert(error), 50);
-        });
-        $scope.addToCart = (product)=> 
-        {          
+          .request('./php/products.php')
+          .then((response) => {
+            $scope.products = response;
+            $scope.$applyAsync();
+            console.log(response);
+          })
+          .catch((error) => {
+            $timeout(() => alert(error), 50);
+          });
+        $scope.addToCart = (product) => {
           console.log(product);
-          let index = $rootScope.cart.findIndex(x => x.id == product.id);
-            if (index == -1) 
-            {
-              let order = {
-                id: product.id,
-                img: product.image, 
-                name: product.product_name,
-                price: product.price,
-                quantity: 1
-              };
-              $rootScope.cart.push(order);
-            } else {
-              $rootScope.cart[index].quantity++
-            }
-                   
+          let index = $rootScope.cart.findIndex((x) => x.id == product.id);
+          if (index == -1) {
+            let order = {
+              id: product.id,
+              img: product.image,
+              name: product.product_name,
+              price: product.price,
+              quantity: 1,
+            };
+            $rootScope.cart.push(order);
+          } else {
+            $rootScope.cart[index].quantity++;
+          }
+
           console.log($rootScope.cart);
         };
       },
@@ -553,25 +549,25 @@
           let data = {
             lang: {
               id: $rootScope.lang.id,
-              type: $rootScope.lang.type
+              type: $rootScope.lang.type,
             },
             email: $scope.model.email,
             message: $scope.model.message,
-          };          
+          };
           // Http request
-         http
-         .request({
-           url: './php/contact_email_sending.php',
-           method: 'POST',
-           data: data,
-         })
-         .then((response) => {
-           alert(lang.translate(response, true));
-         })
-         .catch(e => {
-           alert(e)
-         });
-        }; 
+          http
+            .request({
+              url: './php/contact_email_sending.php',
+              method: 'POST',
+              data: data,
+            })
+            .then((response) => {
+              alert(lang.translate(response, true));
+            })
+            .catch((e) => {
+              alert(e);
+            });
+        };
       },
     ])
 
@@ -627,14 +623,13 @@
               $scope.model.email = response.email;
               user.set(response);
               $scope.$applyAsync();
-              if($state.current.name == 'order'){
-                console.log("state reloed")
+              if ($state.current.name == 'order') {
+                console.log('state reloed');
                 $state.reload();
               }
             })
-            .catch(e => {
-
-              alert(e)
+            .catch((e) => {
+              alert(e);
             });
         };
       },
@@ -815,12 +810,12 @@
       function ($scope, $rootScope, util, http, user, $timeout, $state) {
         console.log('profile controller...');
 
-        //check user 
-        if(!$rootScope.user.id){
+        //check user
+        if (!$rootScope.user.id) {
           $state.go('home');
           return;
         }
-          
+
         //Profile tab
         // Form initial values
         $scope.values = {
@@ -838,14 +833,18 @@
           city: '',
           address: '',
         };
-        
+
         //set helper variables
         $scope.helper = {
           isEdit: true,
           maxBorn: moment().subtract(18, 'years').format('YYYY-MM-DD'),
           minBorn: moment().subtract(120, 'years').format('YYYY-MM-DD'),
-          image: $scope.values.img_type ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})` : `url(${$rootScope.app.commonPath}media/image/blank/${($rootScope.user.gender===2 ? 'fe' : '')}male-blank.webp)`,
-        };                  
+          image: $scope.values.img_type
+            ? `url(data:${$scope.values.img_type};base64,${$scope.values.img})`
+            : `url(${$rootScope.app.commonPath}media/image/blank/${
+                $rootScope.user.gender === 2 ? 'fe' : ''
+              }male-blank.webp)`,
+        };
 
         //save original user data
         $scope.UserData = {};
@@ -906,62 +905,65 @@
             $timeout(() => alert(error), 50);
           });
 
-        $scope.$watch('newImage', (newValue, oldValue) =>{
-          console.log('newValue: ', newValue)
-          if(newValue !== oldValue){
-            if(newValue.size <= (64*1024)){
+        $scope.$watch('newImage', (newValue, oldValue) => {
+          console.log('newValue: ', newValue);
+          if (newValue !== oldValue) {
+            if (newValue.size <= 64 * 1024) {
               const reader = new FileReader();
-              reader.onload=(event)=>{
-                console.log("event: ",event.target.result);
-                $scope.values.img=event.target.result
-                $scope.values.newImage = `url(${event.target.result})`
-                $scope.values.img_type=newValue.type      
-                $scope.$applyAsync();        
-              }
-              reader.readAsDataURL(newValue)
-            }else{
-            alert('Maximális méret 64KB');
+              reader.onload = (event) => {
+                console.log('event: ', event.target.result);
+                $scope.values.img = event.target.result;
+                $scope.values.newImage = `url(${event.target.result})`;
+                $scope.values.img_type = newValue.type;
+                $scope.$applyAsync();
+              };
+              reader.readAsDataURL(newValue);
+            } else {
+              alert('Maximális méret 64KB');
             }
           }
-        })
+        });
 
         $scope.accept = () => {
           $scope.helper.isEdit = true;
-          $scope.values.img=$scope.values.img.replace('data:image/jpeg;base64,', '')
-          let data={
-          id: $rootScope.user.id,
-          lastName: $scope.values.lastName,
-          firstName: $scope.values.firstName,
-          img: $scope.values.img,
-          img_type: $scope.values.img_type,
-          dateOfBirth: $scope.values.dateOfBirth,
-          gender: $scope.values.gender == "male" ? 1 : 2,
-          country: $scope.values.country.country,
-          country_code: $scope.values.country_code,
-          phone: $scope.values.phone,
-          postcode: $scope.values.postcode,
-          city: $scope.values.city,
-          address: $scope.values.address
-          }
+          $scope.values.img = $scope.values.img.replace(
+            'data:image/jpeg;base64,',
+            ''
+          );
+          let data = {
+            id: $rootScope.user.id,
+            lastName: $scope.values.lastName,
+            firstName: $scope.values.firstName,
+            img: $scope.values.img,
+            img_type: $scope.values.img_type,
+            dateOfBirth: $scope.values.dateOfBirth,
+            gender: $scope.values.gender == 'male' ? 1 : 2,
+            country: $scope.values.country.country,
+            country_code: $scope.values.country_code,
+            phone: $scope.values.phone,
+            postcode: $scope.values.postcode,
+            city: $scope.values.city,
+            address: $scope.values.address,
+          };
           //$state.reload();
-          console.log(data)
+          console.log(data);
           // Http request
-          http.request({
-            url   : `./php/profile.php`,
-            method: 'POST',
-            data  : data
-          })
-          .then(response => {
-            if (response.affectedRows) {
-              user.set(data, false);
-      } else  alert('Modify data failed!')
-          })
-          // Error
-          .catch(e => {
-
-            // Reset asynchronous, and show error
-            $timeout(() => alert(e), 50);
-          });          
+          http
+            .request({
+              url: `./php/profile.php`,
+              method: 'POST',
+              data: data,
+            })
+            .then((response) => {
+              if (response.affectedRows) {
+                user.set(data, false);
+              } else alert('Modify data failed!');
+            })
+            // Error
+            .catch((e) => {
+              // Reset asynchronous, and show error
+              $timeout(() => alert(e), 50);
+            });
         };
 
         $scope.cancel = () => {
@@ -971,43 +973,43 @@
         };
 
         //Reservation tab
-        $scope.reservations={}
+        $scope.reservations = {};
 
         // Http request
-        http.request({
-          url   : `./php/get_reservation.php`,
-          method: 'Get',
-          data  : {id: $rootScope.user.id}
-        })
-        .then(response => {
-          $scope.reservations=response;
-        }) 
-        // Error
-        .catch(e => {
+        http
+          .request({
+            url: `./php/get_reservation.php`,
+            method: 'Get',
+            data: { id: $rootScope.user.id },
+          })
+          .then((response) => {
+            $scope.reservations = response;
+          })
+          // Error
+          .catch((e) => {
+            // Reset asynchronous, and show error
+            $timeout(() => alert(e), 50);
+          });
 
-          // Reset asynchronous, and show error
-          $timeout(() => alert(e), 50);
-        });          
+        //Orders tab
+        $scope.orders = {};
 
-         //Orders tab
-         $scope.orders={}
-
-         // Http request
-         http.request({
-           url   : `./php/get_orders.php`,
-           method: 'Get',
-           data  : {id: $rootScope.user.id}
-         })
-         .then(response => {
-           console.log(response)
-           $scope.orders=response;
-         }) 
-         // Error
-         .catch(e => {
- 
-           // Reset asynchronous, and show error
-           $timeout(() => alert(e), 50);
-         });          
+        // Http request
+        http
+          .request({
+            url: `./php/get_orders.php`,
+            method: 'Get',
+            data: { id: $rootScope.user.id },
+          })
+          .then((response) => {
+            console.log(response);
+            $scope.orders = response;
+          })
+          // Error
+          .catch((e) => {
+            // Reset asynchronous, and show error
+            $timeout(() => alert(e), 50);
+          });
       },
     ])
 
@@ -1021,13 +1023,15 @@
         // calculate total price
         $scope.getTotalPrice = () => {
           let sum = 0;
-          $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
+          $rootScope.cart.forEach((x) => {
+            sum += x.price * x.quantity;
+          });
           return sum;
         };
 
         // remove product from cart
         $scope.removeFromCart = (product) => {
-          let index = $rootScope.cart.findIndex(x => x.id == product.id);
+          let index = $rootScope.cart.findIndex((x) => x.id == product.id);
           $rootScope.cart.splice(index, 1);
         };
       },
@@ -1041,73 +1045,81 @@
       'http',
       function ($scope, $rootScope, util, http) {
         console.log('order controller...');
-        
-        let {id, type} = $rootScope.lang;
-        let lang= {id, type}
+        $scope.shipping = 1250;
+        let { id, type } = $rootScope.lang;
+        let lang = { id, type };
 
         // calculate total price
         $scope.getTotalPrice = () => {
           let sum = 0;
-          $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
+          $rootScope.cart.forEach((x) => {
+            sum += x.price * x.quantity;
+          });
           return sum;
-        }
+        };
         $scope.increase = (id) => {
-          let index = $rootScope.cart.findIndex(x => x.id == id);
+          let index = $rootScope.cart.findIndex((x) => x.id == id);
           $rootScope.cart[index].quantity++;
-        }
+        };
         $scope.decrease = (id) => {
-          let index = $rootScope.cart.findIndex(x => x.id == id);
+          let index = $rootScope.cart.findIndex((x) => x.id == id);
           $rootScope.cart[index].quantity--;
-          if($rootScope.cart[index].quantity === 0) $rootScope.cart.splice(index, 1);
-        }
+          if ($rootScope.cart[index].quantity === 0)
+            $rootScope.cart.splice(index, 1);
+        };
 
         // remove product from cart
         $scope.removeFromCart = (product) => {
-          let index = $rootScope.cart.findIndex(x => x.id == product.id);
+          let index = $rootScope.cart.findIndex((x) => x.id == product.id);
           $rootScope.cart.splice(index, 1);
-        }
-
-        if($rootScope.user.id){
-          http.request({
-            url: './php/get_profile_order.php',
-            method: 'Get',
-            data: {
-              userId: $rootScope.user.id,
-            }
-          })
-          .then(response => {
-            $scope.values=response;
-            console.log($scope.values)
-          })
-          .catch(error => {
-            console.log(error);
-          });
         };
 
-        $scope.order = () => {
-          let args = util.arrayObjFilterByKeys($rootScope.cart, 'id,quantity,name,price');
-          let { id, type } = $rootScope.lang;
-          http.request({
-            url: './php/set_order.php',
-            method: 'POST',
-            data: {
-              userId: $rootScope.user.id,
-              email: $rootScope.user.email,
-              cart: args,
-              shipping: $scope.shipping,
-              total: $scope.getTotalPrice(),
-              lang:{ id, type },
-              userName:$rootScope.user.first_name
-            }
-          })
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+        if ($rootScope.user.id) {
+          http
+            .request({
+              url: './php/get_profile_order.php',
+              method: 'Get',
+              data: {
+                userId: $rootScope.user.id,
+              },
+            })
+            .then((response) => {
+              $scope.values = response;
+              console.log($scope.values);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }
+
+        $scope.order = () => {
+          console.log($scope.shipping);
+          let args = util.arrayObjFilterByKeys(
+            $rootScope.cart,
+            'id,quantity,name,price'
+          );
+          let { id, type } = $rootScope.lang;
+          http
+            .request({
+              url: './php/set_order.php',
+              method: 'POST',
+              data: {
+                userId: $rootScope.user.id,
+                email: $rootScope.user.email,
+                cart: args,
+                shipping: $scope.shipping,
+                total: $scope.getTotalPrice(),
+                lang: { id, type },
+                userName: $rootScope.user.first_name,
+              },
+            })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        };
       },
     ]);
-
 })(window, angular);
