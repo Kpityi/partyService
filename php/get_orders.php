@@ -15,18 +15,22 @@ $args = Util::getArgs();
 $db = new Database();
 
 // Set query
-$query = "SELECT `products`.`product_name`, 
-                 `products`.`price`, 
-                 `orders`.`order_date` 
-          FROM `products` 
-          JOIN `orders` ON `product_id` = `products`.`id` 
-          WHERE `orders`.`user_id` = :id";
+$query = "SELECT `product_name`, 
+                 `price`, 
+                 `quantity`, 
+                 `order_date`,
+                 `order_id`
+          FROM `orders`  
+          WHERE `user_id` = :id";
 
 // Execute query with argument
 $result = $db->execute($query, $args);
 
 // Close connection
 $db = null;
+
+//add order number
+$result['order_number'] = date("Y/m/d") . "/";
 
 // Set response
 Util::setResponse($result);

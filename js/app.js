@@ -1108,13 +1108,19 @@
                 email: $rootScope.user.email,
                 cart: args,
                 shipping: $scope.shipping,
-                total: $scope.getTotalPrice(),
+                total: $scope.getTotalPrice() + $scope.shipping,
                 lang: { id, type },
                 userName: $rootScope.user.first_name,
               },
             })
             .then((response) => {
-              console.log(response);
+              if(response=="email_sent_succesfull")
+              {
+                alert(lang.translate("succesful_order", true));
+                $rootScope.cart=[];
+                $state.go('webshop');
+              }
+
             })
             .catch((error) => {
               console.log(error);

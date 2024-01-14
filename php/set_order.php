@@ -54,7 +54,8 @@ $errorMsg = $lang->translate(Email::$errorMessages);
 // Set constants data
 $constants = array(
 	"{{lang_id}}" 					=> $args['lang']['id'],
-  "{{user_name}}"        => $args['userName'],
+  "{{user_name}}"        	=> $args['userName'],
+	"{{order_number}}"			=> "order_number",
 	"{{current_date}}" 			=> date("Y-m-d"),
 	"{{table-content}}"     => ""
 );
@@ -63,8 +64,8 @@ $constants = array(
 $langData = $lang->translate(array(
   "{{succesful_order}}"			=> "succesful_order",
   "{{username}}"            => $args['userName'],
-	"{{shipping_cost}}"				=> $args['shipping'],
-	"{{total_prise}}"					=> $args['total']
+	"{{shipping_cost}}"				=> strval($args['shipping']) ,
+	"{{total_price}}"					=> strval($args['total'])
 ));
 
 

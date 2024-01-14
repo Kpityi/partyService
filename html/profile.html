@@ -553,24 +553,24 @@
           <table class="table table-striped px-5 text-center">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">{{'order_number' | translate:lang.data}}</th>
                 <th scope="col" class="letter-capitalize">{{'product_name' | translate:lang.data}}</th>
+                <th scope="col" class="text-capitalize">db</th>
                 <th scope="col" class="letter-capitalize">{{'price' | translate:lang.data}}</th>
-                <th scope="col" class="text-capitalize">{{'date' | translate:lang.data}}</th>
+                <th scope="col" class="letter-capitalize">{{'date' | translate:lang.data}}</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="order in orders track by $index">
-                <th scope="row">{{$index+1}}</th>
+              <tr ng-repeat="order in orders track by $index">                  
+                <td>{{order.order_number}}{{order.order_id}}</td>
                 <td>{{order.product_name | translate:lang.data}}</td>
+                <td>x {{order.quantity}}</td>
                 <td>{{order.price}} Ft</td>
                 <td>{{order.order_date}}</td>
               </tr>
             </tbody>
           </table>
-
           </div>
-
         </div>
       </div>
     </div>

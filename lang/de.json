@@ -63,6 +63,7 @@
   "succesful_reservation": "Erfolgreiche Reservierung",
   "succesful_order":"Erfolgreiche Bestellung",
   "thank_order":"Vielen Dank für die Bestellung",
+  "order_number": "bestellnummer",
 
   "shopping_cart": "einkaufswagen",
   "password_incorrect": "falsches passwort",

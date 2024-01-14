@@ -11,12 +11,12 @@ function createTable($orderNumber, $order, &$html, $message=null) {
         <thead>
           <tr>
             <td>
-              {{order_number}}: $orderNumber
+  }{order_number}}: $orderNumber
           <tr>";
             foreach(array_keys($order[0]) as $key) {
               if($key !=='id'){
                 $html .= 
-                  "<th>{$key}</th>";
+                  "<th>$key</th>";
               }
             }
     $html .= 
@@ -28,7 +28,7 @@ function createTable($orderNumber, $order, &$html, $message=null) {
         foreach(array_keys($item) as $key) {
           if($key !=='id'){
             $html .= 
-              "<td>{$item[$key]}</td>";
+              "<td>$item[$key]</td>";
           }
         }
         $html .= "</tr>";        
