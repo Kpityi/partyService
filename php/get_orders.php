@@ -29,8 +29,7 @@ $result = $db->execute($query, $args);
 // Close connection
 $db = null;
 
-//add order number
-$result['order_number'] = date("Y/m/d") . "/";
+
 
 // Set response
 Util::setResponse($result);
