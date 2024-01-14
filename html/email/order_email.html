@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{thanks_for_reservation}}</title>
+    <title>{{thank_order}}</title>
   </head>
   <body>
     <div>
@@ -13,18 +13,17 @@
         src="cid:logoimg"
         style="display: inline; vertical-align: middle"
       />
-      <h3 class="d-inline-block ms-4 mb-0">
-        <span>{{dear}}</span>
-        <span>{{user_name}}</span>
-        <span>!</span>
-      </h3>
+      <h3>{{dear}} {{user_name}}!</h3>
     </div>
     <div>
       <p>
-        <span>{{thanks_for_reservation}}</span>
+        <span>{{thank_order}}</span>
       </p>
+      <div>
+        {{table-content}}
+      </div>
       <hr />
       <p class="text-start fs-sm mb-0">{{current_date}}</p>
-    </div>
+    </div>       
   </body>
 </html>

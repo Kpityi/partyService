@@ -1,6 +1,6 @@
 <?php
 
-function creteTable($order, &$html, $message=null) {
+function createTable($order, &$html, $message=null) {
 
 	if (!is_string($message) || empty(($message = trim($message))))
 		$message = "A tábla üres";
@@ -9,10 +9,15 @@ function creteTable($order, &$html, $message=null) {
     $html = 
       "<table style=\"border:1px solid black;\">
         <thead>
+          <tr>
+            <td style=\"border:1px solid black;\">
+              {{order_number}}: 0000
           <tr>";
             foreach(array_keys($order[0]) as $key) {
-              $html .= 
-                "<th style=\"border:1px solid black;\">{$key}</th>";
+              if($key !=='id'){
+                $html .= 
+                  "<th style=\"border:1px solid black;\">{$key}</th>";
+              }
             }
     $html .= 
          "</tr>
@@ -21,10 +26,12 @@ function creteTable($order, &$html, $message=null) {
       foreach($order as $item) {
         $html .= "<tr>";
         foreach(array_keys($item) as $key) {
-          $html .= 
-            "<td style=\"border:1px solid black;\">{$item[$key]}</td>";
+          if($key !=='id'){
+            $html .= 
+              "<td style=\"border:1px solid black;\">{$item[$key]}</td>";
+          }
         }
-        $html .= "</tr>";
+        $html .= "</tr>";        
       }
       $html .=  
         "</tbody>

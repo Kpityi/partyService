@@ -11,7 +11,7 @@ use PHPMailer\Email as Email;
 if (!isset($GLOBALS['___app___'])) 
   require_once('../../common/php/environment.php');
 
-require_once('crete_html_table.php');
+
 
 // Get arguments
 $args = Util::getArgs();
@@ -28,16 +28,8 @@ $constants = array(
   "{{user_email}}"        => $args['email'],
 	"{{message}}" 				  => $args['message'],
 	"{{current_date}}" 			=> date("Y-m-d"),
-  "{{table-content}}"     => ""
+  
 );
-
-$args["order"] = array(
-  array('id'=>1, 'name'=>'Alma'),
-  array('id'=>2, 'name'=>'Körte')
-);
-
-creteTable($args["order"], $constants["{{table-content}}"]);
-
 
 // Merge language with constants
 $langData = array();

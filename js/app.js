@@ -443,6 +443,7 @@
             drinkPackageId: $scope.reservationData.drink_package.id,
             guests: $scope.reservationData.guests,
           };
+          
 
           // Http request reservation
           http
@@ -456,6 +457,7 @@
               if (response.affectedRows) {
                 console.log(response.lastInsertId);
                 $scope.$applyAsync();
+                let {id, type} = $rootScope.lang;
                 http
                   .request({
                     url: './php/reservation_email.php',
@@ -463,8 +465,7 @@
                     data: {
                       email: $rootScope.user.email,
                       userName: $rootScope.user.first_name, 
-                      langId: $rootScope.lang.id,
-                      langType: $rootScope.lang.type                       
+                      lang: {id, type}                      
                     },
                   })
                   .then((response) => {
@@ -556,8 +557,7 @@
             },
             email: $scope.model.email,
             message: $scope.model.message,
-            //langId: $rootScope.lang.id,
-            //langType: $rootScope.lang.type
+            
           };
 
           // Http request
@@ -573,18 +573,6 @@
              .catch(e => {
                alert(e)
              });
-
-          //http.request({
-          //  method: 'POST',
-          //  data: {
-          //    require : "contact_email_sending.php",
-          //    params  : data
-          //  }
-          //})
-          //.then(response => {
-          //  alert(lang.translate("message sending successful", true)+'!');
-          //})
-          //.catch(e => reject(e));
         }; 
       },
     ])
@@ -1055,12 +1043,24 @@
       'http',
       function ($scope, $rootScope, util, http) {
         console.log('order controller...');
+        
+        let {id, type} = $rootScope.lang;
+        let lang= {id, type}
 
         // calculate total price
         $scope.getTotalPrice = () => {
           let sum = 0;
           $rootScope.cart.forEach(x=>{sum += x.price*x.quantity});
           return sum;
+        }
+        $scope.increase = (id) => {
+          let index = $rootScope.cart.findIndex(x => x.id == id);
+          $rootScope.cart[index].quantity++;
+        }
+        $scope.decrease = (id) => {
+          let index = $rootScope.cart.findIndex(x => x.id == id);
+          $rootScope.cart[index].quantity--;
+          if($rootScope.cart[index].quantity === 0) $rootScope.cart.splice(index, 1);
         }
 
         // remove product from cart
@@ -1088,12 +1088,18 @@
 
         $scope.order = () => {
           let args = util.arrayObjFilterByKeys($rootScope.cart, 'id,quantity,name,price');
+          let { id, type } = $rootScope.lang;
           http.request({
             url: './php/set_order.php',
             method: 'POST',
             data: {
               userId: $rootScope.user.id,
-              cart: args
+              email: $rootScope.user.email,
+              cart: args,
+              shipping: $scope.shipping,
+              total: $scope.getTotalPrice(),
+              lang:{ id, type },
+              userName:$rootScope.user.first_name
             }
           })
           .then(response => {
