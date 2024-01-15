@@ -1014,30 +1014,61 @@
       '$scope',
       '$rootScope',
       'http',
-      function ($scope, $rootScope, http) {
+      '$state',
+      function ($scope, $rootScope, http, $state) {
         console.log('email Change Controller...');
+        if (!$rootScope.user.id)
+        {
+          $state.go('home');
+        }
         $scope.values = {
           oldEmail : $rootScope.user.email, 
           newEmail : null,
           newEmailConfirm : null
         };
 
-        $scope.validateEmailConfirm = () => {
-          console.log( "newEmail: " + $scope.values.newEmail + " nec: " + $scope.values.newEmailConfirm);
-          const { newEmail, newEmailConfirm } = $scope.values;
-          console.log( "newEmail: " + newEmail + " nec: " + newEmailConfirm);
+      // Validate new email confirm  
+        $scope.validateEmailConfirm = () => {          
+          const { oldEmail, newEmail, newEmailConfirm } = $scope.values;          
           $scope.changeEmailForm.newEmailConfirm.$setValidity(
             'emailMismatch',
-            newEmail === newEmailConfirm
+            newEmail === newEmailConfirm && oldEmail !== newEmail && newEmailConfirm !== oldEmail
           )
         };
+        //Scope accept
+        $scope.accept = () => {
+          let {id, type} = $rootScope.lang;
+          
+          // Http request
+          http.request({
+            url   : `./php/email_change.php`,
+            method: 'POST',
+            data  : {
+              userId: $rootScope.user.id,
+              lang: {id, type},
+              email: $scope.values.newEmail
+            },
+          })
+          .then(response => {
+            alert(lang.translate(response.success, true));            
+          }) 
+          // Error
+          .catch(e => {
+  
+            // Reset asynchronous, and show error
+            alert(e);
+          });  
+        }
       },
     ])
 
     //passwordChange controller
     .controller('passwordChangeController', [
       '$scope',
-      function ($scope) {
+      '$rootScope',
+      'http',
+      '$state',
+      function ($scope, $rootScope, http, $state) {
         console.log('password Change Controller...');
       },
     ])
