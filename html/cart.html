@@ -1,21 +1,37 @@
-<div class="page-container"  ng-controller="cartController">
-  <div class="offcanvas offcanvas-end" style="width: 40%;" tabindex="-3" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+<div class="page-container"  
+     ng-controller="cartController">
+  <div class="offcanvas offcanvas-end" 
+       style="width: 40%;" 
+       tabindex="-3" 
+       id="offcanvasRight" 
+       aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-      <h2 class="offcanvas-title mx-auto text-capitalize" id="offcanvasRightLabel">{{'cart' | translate:lang.data}}</h2>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <h2 class="offcanvas-title mx-auto text-capitalize"         
+          id="offcanvasRightLabel">
+        {{'cart' | translate:lang.data}}
+      </h2>
+      <button type="button" 
+              class="btn-close" 
+              data-bs-dismiss="offcanvas" 
+              aria-label="Close">
+      </button>
     </div>
     <div class ="offcanvas-body"
          ng-if = "cart.length > 0">
-      <div class ="row text-center" ng-repeat="product in cart track by $index">
+      <div class ="row text-center" 
+           ng-repeat="product in cart track by $index">
         <div class ="col-1">{{$index+1}}</div>
         <div class ="col-4 text-start">{{product.name | translate:lang.data}}</div>
         <div class ="col-2">{{product.price}} Ft/db</div>
         <div class ="col-2">{{product.quantity}}</div>
-        <div class ="col-2 text-end" ng-init="sum=sum+(product.price*product.quantity)">{{product.price*product.quantity}} Ft</div>
+        <div class ="col-2 text-end" 
+             ng-init="sum=sum+(product.price*product.quantity)">
+          {{product.price*product.quantity}} Ft
+        </div>
         <div class ="col-1">
           <i class ="fa-regular fa-thin fa-trash-can"
-             ng-click = "removeFromCart(product)"
-          ></i>
+             ng-click = "removeFromCart(product)">
+          </i>
         </div>
         <hr>
       </div>
@@ -32,8 +48,7 @@
           <button type="button" 
                   class="btn btn-success rounded-pill shadow px-5 py-2"
                   ui-sref = "order"
-                  data-bs-dismiss="offcanvas"
-          >
+                  data-bs-dismiss="offcanvas">
             {{'cart_contents' | translate:lang.data}}
           </button>
         </div>

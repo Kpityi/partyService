@@ -65,7 +65,6 @@
   "thank_order":"Thank you for the order",
   "order_number": "order number",
   "purchase":"purchase",
-
   "shopping_cart": "shopping cart",
   "password_incorrect": "incorrect password",
   "logout_confirm": "are you sure you want to log out",
@@ -111,7 +110,6 @@
   "login_details_keep_save": "keep your login information in a safe place",
   "id": "id",
   "view": "view",
-
   "imagine": "Imagine - we make it happen!",
   "offer": "Because you deserve a day that's all about you too, don't let the complexities of planning spoil the most important moments of your life! Entrust us with the organization, and we'll take the burden off your shoulders, so you can turn your biggest dreams into reality!",
   "lets_see": "let's see!",
@@ -240,14 +238,12 @@
   "promo_code": "Promo code",
   "total": "Total",
   "reedem": "Reedem",
-
   "decoration": "decoration",
   "tableware": "tableware",
   "balloon_red": "balloon (red)",
   "balloon_blue": "balloon (blue)",
   "balloon_green": "balloon (green)",
   "balloon_yellow": "balloon (yellow)",
-
   "balloon_bd_red": "balloon (bd red)",
   "balloon_birthday_blue": "balloon (birthday blue)",
   "ballon_birtday_yellow": "balloon (birtday yellow)",
@@ -285,7 +281,6 @@
   "floot_candle_red_6db": "floot candle 6 pcs (red)",
   "floot_candle_silver_6db": "floot candle 6 pcs (silver)",
   "glass_footed_floating_candle_holder": "glass footed floating candle holder",
-
   "desc_balloon": "Balloons available in various sizes and colors to suit every occasion. Whether it's a birthday, wedding, or any other celebration, choose your favorite color and size to elevate the mood!",
   "balloon_birthday_with_message": "birthday balloon with a message",
   "desc_paper_plate": "A paper plate is a light, flat and circular object, typically made of paper. it is best enjoyed as a plate for storing various foods and drinks during meals. Paper plates are easy to carry and throw away, making them convenient for activities such as picnics or parties.",
@@ -302,5 +297,6 @@
   "desc_hair_coloring_h": "Hair chalk is a special cosmetic product that contains colored pigments that provide temporary coloring to the hair. It usually comes in chalk or wax form and is used for casual or creative purposes as it is easy to apply and wash out of the hair.",
   "desc_floot_candle": "A floating candle is a special candle designed for use in water, such as in pools or hot tubs. Their design allows them to float on the surface of the water and provide ambient lighting in various water conditions.",
   "desc_glassFFCH": "A floating candle holder is an object or device designed and used to hold floating candles on the surface of water. Typically designed to hold the float candle securely in place, ensuring its position and safety during use.",
-  "products": "products"
+  "products": "products",
+  "your_party_your_day": "Your party, your day"
 }

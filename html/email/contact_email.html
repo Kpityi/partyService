@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="{{lang_id}}"> 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Kapcsolat felvétel az oldalról</title>
-</head>
-<body>
-	<div>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Kapcsolat felvétel az oldalról</title>
+	</head>
+	<body>
 		<div>
 			<div>
 				<div>
-					<img height="60" alt="logo" src="cid:logoimg" style="display:inline;vertical-align:middle;">
-					<h3 >Party Service</h3>
+					<div>
+						<img height="60" 
+								alt="logo" 
+								src="cid:logoimg" 
+								style="display:inline;vertical-align:middle;">
+						<h3 >Party Service</h3>
+					</div>
+					<div>
+						<p>
+							<span style="font-weight: bold;">Üzenet küldő: </span>
+							<span style="margin-left: 1rem;">{{user_email}}</span>
+						</p>
+						<p>
+							<span style="font-weight: bold;">Üzenet: </span>
+							<span style="margin-left: 1rem;">{{message}}</span>
+						</p>
+						<hr>					
+						<p>{{current_date}}</p>
+					</div>				
 				</div>
-				<div>
-					<p>
-            <span style="font-weight: bold;">Üzenet küldő: </span>
-						<span style="margin-left: 1rem;">{{user_email}}</span>
-					</p>
-          <p>
-            <span style="font-weight: bold;">Üzenet: </span>
-            <span style="margin-left: 1rem;">{{message}}</span>
-          </p>
-					<hr>					
-					<p class="text-start fs-sm mb-0">{{current_date}}</p>
-				</div>				
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>

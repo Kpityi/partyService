@@ -1,64 +1,65 @@
 <div class="page-container">
+  <!-- header image -->
   <div
     class="header-image-container"
     ng-include
-    src="'./html/headerimage.html'"
-  ></div>
+    src="'./html/headerimage.html'"  >
+  </div>
 
-  <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
-  
+  <!-- navigation bar -->
+  <header class="sticky-top" 
+          ng-include src="'./html/navigate.html'">
+  </header>
 
+  <!-- login modal page -->
+  <div ng-include src="'./html/loginModal.html'"></div>
+
+  <!-- Main content -->
   <main>
     <div class="container">
+      
       <!-- Profile Page navigation tab -->
       <div class="d-flex align-items-start mt-3 p-4">
 
         <!-- Navigaation buttons -->
-        <div
-          class="nav flex-column nav-pills me-3"
-          id="v-pills-tab"
-          role="tablist"
-          aria-orientation="vertical"
-        >
+        <div class="nav flex-column nav-pills me-3"
+             id="v-pills-tab"
+             role="tablist"
+             aria-orientation="vertical">
+
           <!-- Profile button -->
-          <button
-            class="nav-link active text-capitalize border-bottom"
-            id="v-pills-profile-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#v-pills-profile"
-            type="button"
-            role="tab"
-            aria-controls="v-pills-profile"
-            aria-selected="true"
-          >
+          <button class="nav-link active text-capitalize border-bottom"
+                  id="v-pills-profile-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-profile"
+                  aria-selected="true">
             {{'profile' | translate:lang.data}}
           </button>
 
           <!-- Reservations button -->
-          <button
-            class="nav-link letter-capitalize border-bottom"
-            id="v-pills-reservations-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#v-pills-reservations"
-            type="button"
-            role="tab"
-            aria-controls="v-pills-reservations"
-            aria-selected="false"
-          >
+          <button class="nav-link letter-capitalize border-bottom"
+                  id="v-pills-reservations-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-reservations"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-reservations"
+                  aria-selected="false">
             {{'reservations' | translate:lang.data}}
           </button>
 
           <!-- Orders button -->
-          <button
-            class="nav-link text-capitalize border-bottom"
-            id="v-pills-orders-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#v-pills-orders"
-            type="button"
-            role="tab"
-            aria-controls="v-pills-orders"
-            aria-selected="false"
-          >
+          <button class="nav-link text-capitalize border-bottom"
+                  id="v-pills-orders-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#v-pills-orders"
+                  type="button"
+                  role="tab"
+                  aria-controls="v-pills-orders"
+                  aria-selected="false">
             {{'orders' | translate:lang.data}}
           </button>
         </div>
@@ -67,13 +68,12 @@
         <div class="tab-content w-100" id="v-pills-tabContent">
 
           <!-- Profile Tab -->
-          <div
-            class="tab-pane fade show active"
-            id="v-pills-profile"
-            role="tabpanel"
-            aria-labelledby="v-pills-profile-tab"
-          >
+          <div class="tab-pane fade show active"
+               id="v-pills-profile"
+               role="tabpanel"
+               aria-labelledby="v-pills-profile-tab">
             <div class="row my-3 justify-content-center">
+
               <!-- Title -->
               <h2 class="text-center mb-4">
                 <span><i class="fas fa-users"></i></span>
@@ -84,10 +84,9 @@
             </div>
              <!-- Form -->
             <div class="row my-3 justify-content-center">
-              <form
-                class="col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6"
-                name="profileForm"
-              >
+              <form class="col-11 col-md-11 col-lg-8 col-xl-7 col-xxl-6"
+                    name="profileForm">
+                    
                 <!-- User Name -->
                 <!-- LasttName -->
                 <div class="input-group mb-2 justify-content-center">

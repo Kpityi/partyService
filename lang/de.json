@@ -65,7 +65,6 @@
   "thank_order":"Vielen Dank für die Bestellung",
   "order_number": "bestellnummer",
   "purchase":"Einkauf",
-
   "shopping_cart": "einkaufswagen",
   "password_incorrect": "falsches passwort",
   "logout_confirm": "möchten sie sich wirklich abmelden",
@@ -111,7 +110,6 @@
   "login_details_keep_save": "bewahren sie ihre anmeldeinformationen an einem sicheren ort auf",
   "id": "id",
   "view": "sicht",
-
   "imagine": "Stell es dir vor - wir setzen es um!",
   "offer": "Weil auch dir ein Tag gebührt, der nur dir gewidmet ist. Lass nicht zu, dass die Komplikationen der Planung die wichtigsten Momente deines Lebens verderben! Vertrau uns die Organisation an, und wir nehmen dir die Last von den Schultern, damit du deine größten Träume in die Realität umsetzen kannst!",
   "lets_see": "lass uns sehen!",
@@ -240,14 +238,12 @@
   "promo_code": "Angebotscode",
   "total": "Insgesamt",
   "reedem": "Es bestätigt",
-
   "decoration": "dekoration",
   "tableware": "Tischdecke",
   "balloon_red" : "luftballon (rot)",
   "balloon_blue" : "luftballon (blue)",
   "balloon_green" : "luftballon (green)",
   "balloon_yellow" : "luftballon (yellow)",
-
   "balloon_bd_red": "Ballon (Geburtstag rot)",
   "balloon_birthday_blue": "Ballon (Geburtstag blau)",
   "ballon_birtday_yellow": "Ballon (Geburtstag gelb)",
@@ -285,7 +281,6 @@
   "floot_candle_red_6db": "Schwimmkerze 6 Stk (rot)",
   "floot_candle_silver_6db": "Schwimmkerze 6 Stk (silber)",
   "glass_footed_floating_candle_holder": "schwimmender Kerzenhalter",
-
   "desc_balloon": "Luftballons in verschiedenen Größen und Farben, perfekt für jede Gelegenheit. Ob Geburtstag, Hochzeit oder jedes andere Fest, wähle deine Lieblingsfarbe und Größe, um die Stimmung zu heben!",
   "balloon_birthday_with_message" : "Geburtstagsluftballon mit Nachricht",
   "desc_paper_plate": "Ein Pappteller ist ein leichtes, flaches, kreisförmiges Objekt, das in der Regel aus Papier hergestellt wird. Er wird häufig während Mahlzeiten verwendet, um Speisen einfach zu transportieren und zu verzehren. Sie sind normalerweise Einwegprodukte und daher praktisch für Picknicks, Partys oder den täglichen Gebrauch zu Hause.",
@@ -302,5 +297,6 @@
   "desc_hair_coloring_h": "Haarkreide ist ein spezielles Kosmetikprodukt, das farbige Pigmente enthält und dem Haar eine temporäre Färbung verleiht. Es ist normalerweise in Form von Kreide oder Wachs erhältlich und wird für gelegentliche oder kreative Zwecke verwendet, da es sich einfach auftragen und auswaschen lässt.",
   "desc_floot_candle": "Eine Schwimmkerze ist eine spezielle Art von Kerze, die dazu konzipiert ist, in Wasser verwendet zu werden, zum Beispiel in Schwimmbecken oder Badewannen. Ihr Design ermöglicht es ihnen, auf der Wasseroberfläche zu schwimmen und eine stimmungsvolle Beleuchtung in verschiedenen Wasserumgebungen zu bieten.",
   "desc_glassFFCH": "Ein Schwimmkerzenhalter ist ein Gegenstand oder Gerät, das entwickelt wurde, um Schwimmkerzen auf der Wasseroberfläche zu halten. In der Regel so konstruiert, dass sie die Schwimmkerze sicher an Ort und Stelle hält, gewährleistet er deren Position und Sicherheit während der Verwendung.",
-  "products": "Produkte"
+  "products": "Produkte",
+  "your_party_your_day": "Deine Party, dein Tag"
 }

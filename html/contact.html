@@ -1,13 +1,21 @@
 <div class="page-container">
+  
+  <!-- header image -->
   <div
     class="header-image-container"
     ng-include
-    src="'./html/headerimage.html'"
-  ></div>
+    src="'./html/headerimage.html'"  >
+  </div>
 
-  <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
+  <!-- navigation bar -->
+  <header class="sticky-top" 
+          ng-include src="'./html/navigate.html'">
+  </header>
+
+  <!-- login modal page -->
   <div ng-include src="'./html/loginModal.html'"></div>
 
+  <!-- Main content -->
   <main>
     <h1 class="text-center py-3 text-capitalize">
       {{'contact' | translate:lang.data}}
@@ -23,32 +31,19 @@
               <!-- Nav Item #1 Contact -->
               <li class="nav-item text-capitalize">
                 <a class="nav-link active" 
-                   aria-current="true"
-                   >{{'contact' | translate:lang.data}}</a>
+                   aria-current="true">
+                  {{'contact' | translate:lang.data}}
+                </a>
               </li>
-                <!-- Nav Item #2 Team -->
-              <!--<li class="nav-item">
-                <a class="nav-link"
-                   href="https://www.keri.mako.hu/""
-                   title="web" 
-                   target="_blank"
-                   >{{'contact_team' | translate:lang.data}}</a>
-              </li>-->
-               <!-- Nav Item #3 Droplinks -->
+            
+              <!-- Nav Item #2 GoogleMap -->
               <li class="nav-item">
                 <a class="nav-link"
-                   href="https://www.keri.mako.hu/" 
-                   title="web" 
-                   target="_blank"
-                   >Link</a>
-              </li>
-              <!-- Nav Item #4 GoogleMap -->
-              <li class="nav-item">
-                <a class="nav-link"
-                  href="https://www.google.com/maps/place/HSZC+Mak%C3%B3i+N%C3%A1vay+Lajos+Technikum+%C3%A9s+Koll%C3%A9gium/@46.2136337,20.4733232,17z/data=!3m1!4b1!4m5!3m4!1s0x4744f602b445c0b9:0x6ecc2b88ac500ef!8m2!3d46.21363!4d20.4755119"
-                  title="google maps" 
-                  target="_blank"
-                  >{{'contact_map' | translate:lang.data}}</a>
+                   href="https://www.google.com/maps/place/HSZC+Mak%C3%B3i+N%C3%A1vay+Lajos+Technikum+%C3%A9s+Koll%C3%A9gium/@46.2137058,20.4731388,17z/data=!3m1!4b1!4m6!3m5!1s0x4744f602b445c0b9:0x6ecc2b88ac500ef!8m2!3d46.2137058!4d20.4757137!16s%2Fg%2F1tfn1j04?entry=ttu"
+                   title="google maps" 
+                   target="_blank">
+                  {{'contact_map' | translate:lang.data}}
+                </a>
               </li>
             </ul>
           </div>
@@ -56,27 +51,29 @@
           <!--  Address  -->
           <div class="card-body">
             <h4 class="card-title mt-0">{{'contact_address' | translate:lang.data}}</h4>
-            <div class="col col-12 col-md-6 col-xl-3 ps-5 ps-md-0 text-lg-start mt-3 mt-xl-0">
+            <div class="col col-12 col-md-6 col-xl-3 
+                        ps-5 ps-md-0 text-lg-start mt-3 mt-xl-0">
               <ul class="text-start list-unstyled mb-0 ms-md-5">
                 <li>
                   <a class="text-decoration-none m-auto" 
-                      target="_blank" title="google maps"
-                      href="https://www.google.com/maps/place/HSZC+Mak%C3%B3i+N%C3%A1vay+Lajos+Technikum+%C3%A9s+Koll%C3%A9gium/@46.2136337,20.4733232,17z/data=!3m1!4b1!4m5!3m4!1s0x4744f602b445c0b9:0x6ecc2b88ac500ef!8m2!3d46.21363!4d20.4755119">
+                     target="_blank" title="google maps"
+                     href="https://www.google.com/maps/place/HSZC+Mak%C3%B3i+N%C3%A1vay+Lajos+Technikum+%C3%A9s+Koll%C3%A9gium/@46.2137058,20.4731388,17z/data=!3m1!4b1!4m6!3m5!1s0x4744f602b445c0b9:0x6ecc2b88ac500ef!8m2!3d46.2137058!4d20.4757137!16s%2Fg%2F1tfn1j04?entry=ttu">
                     <i class="fas fa-location-arrow me-2"></i>
                     <span>6900 Makó, Posta u. 4-6</span>
                   </a>
                 </li>
               </ul>
             </div>
-           </div>
+          </div>
            
           <!-- Button trigger modal -->
           <div class="text-justify ms-md-5 ms-3"> 
-          <a href="contact_button" 
-             class="btn btn-primary" 
-             data-bs-toggle="modal" 
-             data-bs-target="#staticBackdrop"
-             >{{'contact_us' | translate:lang.data}}</a>
+            <a href="contact_button" 
+               class="btn btn-primary" 
+               data-bs-toggle="modal" 
+               data-bs-target="#staticBackdrop">
+              {{'contact_us' | translate:lang.data}}
+            </a>
           </div>
       
           <!-- Contact Nav Image -->
@@ -94,24 +91,23 @@
               data-bs-keyboard="false" 
               tabindex="-1" 
               aria-labelledby="staticBackdropLabel" 
-              aria-hidden="true"
-              >
+              aria-hidden="true">
 
         <!-- Contact Modal Dialog -->
         <div class="modal-dialog">
           <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" 
-                  id="staticBackdropLabel"
-                  >{{'contact_us' | translate:lang.data}}:
-                </h1>
-                <!-- Close Button -->
-                <button type="button" 
-                        class="btn-close" 
-                        data-bs-dismiss="modal" 
-                        aria-label="Close">
-                  </button>
-              </div>
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" 
+                  id="staticBackdropLabel">
+                {{'contact_us' | translate:lang.data}}:
+              </h1>
+              <!-- Close Button -->
+              <button type="button" 
+                      class="btn-close" 
+                      data-bs-dismiss="modal" 
+                      aria-label="Close">
+              </button>
+            </div>
 
             <!-- Contact Card Group -->
             <div class="modal-body">
@@ -119,52 +115,57 @@
 
                 <!-- Email Card -->
                 <div class="card">
-                  <img src="../partyService/media/image/Contact_Imgs/contact_email_card.jpg" class="card-img-top" alt="...">
+                  <img src="./media/image/Contact_Imgs/contact_email_card.jpg" 
+                       class="card-img-top" 
+                       alt="contact email card">
                   <div class="card-body">
                     <h5 class="card-title">Email</h5>
                     <div>
-                     <div>
-                      <a class="text-decoration-none text-muted" 
-                         href="https://www.keri.mako.hu/" 
-                         title="web" 
-                         target="_blank">
-                         <i class="fas fa-globe me-2"></i>
-                        <span>www.keri.mako.hu</span>
-                        </a>
-                       </div>
                       <div>
-                       <a class="text-decoration-none text-muted" 
-                          target="_blank" 
-                          title="email" 
-                          href="mailto:kerititkarsag@gmail.com">
-                          <i class="fas fa-envelope me-2"></i>
-                          <span>kerititkarsag@gmail.com</span>
-                       </a>
-                     </div>
+                        <a class="text-decoration-none text-muted" 
+                            href="https://www.keri.mako.hu/" 
+                            title="web" 
+                            target="_blank">
+                          <i class="fas fa-globe me-2"></i>
+                          <span>www.partyservice.hu</span>
+                        </a>
+                      </div>
+                      <div>
+                        <a class="text-decoration-none text-muted" 
+                            target="_blank" 
+                            title="email" 
+                            href="mailto:info.partyservice.mako@gmail.com">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span>info.partyservice.mako@gmail.com</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- Phone Card -->
                 <div class="card">
-                  <img src="../partyService/media/image/Contact_Imgs/contact_phone_card.jpg" 
-                       class="card-img-top" 
-                       alt="contact_phone_card">
+                  <img src="./media/image/Contact_Imgs/contact_phone_card.jpg" 
+                       class="card-img-top text-capitalize" 
+                       alt="contact phone card">
                   <div class="card-body">
-                    <h5 class="card-title">Phone</h5>
-                      <div>
-                        <a class="text-decoration-none text-muted" 
-                           title="phone">
-                           <h5 class="mb-1">
-                            Hódmezővásárhelyi SZC
-                          </h5> 
-                          <h6 class="mb-1">
-                            Makói Návay Lajos Technikum és Kollégium
-                          </h6>
-                          <i class="fas fa-phone me-2"></i>
-                          <span>(+36 62) 510-917</span>
-                        </a>
-                      </div>
+                    <h5 class="card-title text-capitalize">
+                      {{'phone' | translate:lang.data}}
+                    </h5>
+                    <div>
+                      <a class="text-decoration-none text-muted" 
+                          title="phone">
+                        <h5 class="mb-1 d-lg-inline">
+                          Party Service                             
+                        </h5> 
+                        <span class="fw-6"> {{'your_party_your_day' | translate:lang.data}}!</span>
+                        <h6 class="my-1">
+                          Makó Posta u. 4-6.
+                        </h6>
+                        <i class="fas fa-phone me-2"></i>
+                        <span>(+36-62)/510-917</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -174,8 +175,9 @@
                     name="contactForm">
                 <div class="input-group">
                   <label for="contactEmail" 
-                         class="col-2 text-end mb-3 me-2 col-form-label col-form-label-sm"
-                         >Email:</label>
+                         class="col-2 text-end mb-3 me-2 col-form-label col-form-label-sm">
+                    Email:
+                  </label>
                   <input type="email" 
                          id="contactEmail"
                          class="col-8 mb-3 form-control form-control-sm"
@@ -186,17 +188,17 @@
                 </div>
                 <div class="input-group">
                   <label for="text" 
-                         class="col-2 text-end mb-3 me-2 col-form-label col-form-label-sm"
-                         >Text:</label>
+                         class="col-2 text-end mb-3 me-2 col-form-label col-form-label-sm">
+                    Text:
+                  </label>
                   <textarea name="text" 
                             id="text" 
                             cols="30" 
                             rows="3" 
                             class="col-8 mb-3 form-control form-control-sm"
                             required
-                            ng-model="model.message"
-                            >
-                    </textarea>
+                            ng-model="model.message">
+                  </textarea>
                 </div>
               </form>
             </div>
@@ -205,16 +207,18 @@
             <div class="modal-footer">
               <button type="button" 
                       class="btn btn-secondary" 
-                      data-bs-dismiss="modal">Close
-                </button>
+                      data-bs-dismiss="modal">
+                Close
+              </button>
 
-                <!-- Send Button -->
+              <!-- Send Button -->
               <button type="button" 
                       ng-click="send()"
                       class="btn btn-primary"
                       data-bs-dismiss="modal" 
-                      ng-disabled="contactForm.$invalid">{{'send' | translate:lang.data}}
-                </button>
+                      ng-disabled="contactForm.$invalid">
+                {{'send' | translate:lang.data}}
+              </button>
             </div>
           </div>
         </div>
@@ -223,64 +227,64 @@
       <!-- Google Map -->
       <section class="card mt-3">
         <div class="content_iframe text-center google-map-container mx-auto">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2760.8365828424653!2d20.473138776184843!3d46.21370577109606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4744f602b445c0b9%3A0x6ecc2b88ac500ef!2sHSZC%20Mak%C3%B3i%20N%C3%A1vay%20Lajos%20Technikum%20%C3%A9s%20Koll%C3%A9gium!5e0!3m2!1shu!2shu!4v1700420242175!5m2!1shu!2shu"
-          class="google-map"  
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2760.8365828424617!2d20.473138775053215!3d46.21370577109613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4744f602b445c0b9%3A0x6ecc2b88ac500ef!2sHSZC%20Mak%C3%B3i%20N%C3%A1vay%20Lajos%20Technikum%20%C3%A9s%20Koll%C3%A9gium!5e0!3m2!1shu!2shu!4v1705330547001!5m2!1shu!2shu" 
+                  width="600" 
+                  height="450" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </section>
 
       <!-- Team Heading Checkout -->
-      <section>
- 
-          <div class="justify-content-center">
-            <h2 class="text-center py-3"> {{'contact_team' | translate:lang.data}} </h2>
-            <div class="d-flex text-center justify-content-center">
+      <section> 
+        <div class="justify-content-center">
+          <h2 class="text-center py-3"> 
+            {{'contact_team' | translate:lang.data}} 
+          </h2>
+          <div class="d-flex text-center justify-content-center">
 
-              <!-- Heading 1 -->
-              <div class="col-lg-4 col-md-6">
-                <div>
-                  <img src="./media/image/contact_team/szabii.jpg" 
-                       alt="head1" class="bg-img bg-img-cover overflow-hidden rounded-circle card-img-top mx-auto mt-2"
-                       style="width: 120px; height: 120px" >
-                </div>
-                <h2>Szabolcs</h2>
-                <p>{{'s_d' | translate:lang.data}}</p>
-                <!--<p><a class="btn btn-secondary" href="#">View details »</a></p>-->
+            <!-- Heading 1 -->
+            <div class="col-lg-4 col-md-6">
+              <div>
+                <img src="./media/image/contact_team/szabii.jpg" 
+                      alt="head1" class="bg-img bg-img-cover overflow-hidden 
+                          rounded-circle card-img-top mx-auto mt-2"
+                      style="width: 120px; height: 120px">
               </div>
+              <h2>Szabolcs</h2>
+              <p>{{'s_d' | translate:lang.data}}</p>
+            </div>
 
-              <!-- Heading 2 -->
-              <div class="col-lg-4 col-md-6">
-                <div>
-                  <img src="./media/image/contact_team/pityi.jpg" 
-                       alt="head1" class="bg-img bg-img-cover overflow-hidden rounded-circle card-img-top mx-auto mt-2"
-                       style="width: 120px; height: 120px" >
-                </div>
-                <h2>István</h2>
-                <p>{{'p_m' | translate:lang.data}}</p>
-                <!--<p><a class="btn btn-secondary" href="#">View details »</a></p>-->
+            <!-- Heading 2 -->
+            <div class="col-lg-4 col-md-6">
+              <div>
+                <img src="./media/image/contact_team/pityi.jpg" 
+                      alt="head1" class="bg-img bg-img-cover overflow-hidden 
+                          rounded-circle card-img-top mx-auto mt-2"
+                      style="width: 120px; height: 120px">
               </div>
+              <h2>István</h2>
+              <p>{{'p_m' | translate:lang.data}}</p>
+            </div>
 
-              <!-- Heading 3 -->
-              <div class="col-lg-4 col-md-6">
-                <div>
-                  <img src="./media/image/contact_team/maria.jpg" 
-                       alt="head1" class="bg-img bg-img-cover overflow-hidden rounded-circle card-img-top mx-auto mt-2"
-                       style="width: 120px; height: 120px" >
-                </div>
-                <h2>Mária</h2>
-                <p>{{'s_d' | translate:lang.data}}</p>
-                <p></p>
-                <!--<p><a class="btn btn-secondary" href="#">View details »</a></p>-->
+            <!-- Heading 3 -->
+            <div class="col-lg-4 col-md-6">
+              <div>
+                <img src="./media/image/contact_team/maria.jpg" 
+                      alt="head1" class="bg-img bg-img-cover overflow-hidden 
+                          rounded-circle card-img-top mx-auto mt-2"
+                      style="width: 120px; height: 120px">
               </div>
-
-            </div>  
-          </div>
-
+              <h2>Mária</h2>
+              <p>{{'s_d' | translate:lang.data}}</p>
+            </div>
+          </div>  
+        </div>
       </section>
-
   </main>
   
+  <!-- Footer section -->
   <footer ng-include src="'./html/footer.html'"></footer>
 </div>
