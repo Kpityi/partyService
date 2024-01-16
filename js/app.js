@@ -1039,8 +1039,6 @@
         console.log('order controller...');
 
         $scope.shipping = 1250;
-        let { id, type } = $rootScope.lang;
-        let lang = { id, type };
 
         // calculate total price
         $scope.getTotalPrice = () => {
