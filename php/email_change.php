@@ -22,7 +22,9 @@ $query = "SELECT `id`
           WHERE  `email` = :email;";
 
 // Execute query with argument
-$result = $db->execute($query, $args);
+$result = $db->execute($query, array(
+              'email' => $args['email']
+          ));
 //Check email exist  
 // if (!is_null($result))
 // {
