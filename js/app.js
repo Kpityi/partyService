@@ -1015,7 +1015,8 @@
       '$rootScope',
       'http',
       '$state',
-      function ($scope, $rootScope, http, $state) {
+      'lang',
+      function ($scope, $rootScope, http, $state, lang) {
         console.log('email Change Controller...');
         if (!$rootScope.user.id)
         {
@@ -1033,6 +1034,10 @@
           $scope.changeEmailForm.newEmailConfirm.$setValidity(
             'emailMismatch',
             newEmail === newEmailConfirm && oldEmail !== newEmail && newEmailConfirm !== oldEmail
+          )
+          $scope.changeEmailForm.newEmail.$setValidity(
+            'emailMismatch',
+           oldEmail !== newEmail 
           )
         };
         //Scope accept
@@ -1056,8 +1061,18 @@
           .catch(e => {
   
             // Reset asynchronous, and show error
-            alert(e);
+            alert(lang.translate(e, true));
           });  
+        }
+
+        //scope cancel
+        $scope.cancel=()=>{
+          $scope.values = {
+            oldEmail : $rootScope.user.email, 
+            newEmail : null,
+            newEmailConfirm : null
+          };
+          $state.go('home');
         }
       },
     ])
