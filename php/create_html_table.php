@@ -10,9 +10,9 @@ function createTable($orderNumber, $order, &$html, $message=null) {
       "<table>
         <thead>
           <tr>
-            <td>
-  }{order_number}}: $orderNumber
-          <tr>";
+            <th>
+             {{order_number}}: $orderNumber
+            </th>";
             foreach(array_keys($order[0]) as $key) {
               if($key !=='id'){
                 $html .= 

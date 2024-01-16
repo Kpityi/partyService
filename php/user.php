@@ -15,19 +15,18 @@ $args = Util::getArgs();
 $db = new Database();
 
 // Set query
-$query 	= "SELECT `type`.`name` AS `typeName`,
-									`user`.`born`, 
-                	`user`.`country`,
-									`user`.`country_code`,
-									`user`.`phone`,
-									`user`.`city`,
-									`user`.`postcode`,
+$query 	= "SELECT 	`type`.`name` AS `typeName`,
+					`user`.`born`, 
+					`user`.`country`,
+					`user`.`country_code`,
+					`user`.`phone`,
+					`user`.`city`,
+					`user`.`postcode`,
                 	`user`.`address`
-						 FROM `user`
-				LEFT JOIN `type`
-							 ON `type`.`id` = `user`.`type` 
-						WHERE `user`.`id` = :id
-						LIMIT 1;";
+				FROM `user`
+				LEFT JOIN `type` ON `type`.`id` = `user`.`type` 
+				WHERE `user`.`id` = :id
+				LIMIT 1;";
 
 // Execute query with argument
 $result = $db->execute($query, $args);

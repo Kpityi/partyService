@@ -22,15 +22,15 @@ $errorMsg = $lang->translate(Email::$errorMessages);
 
 // Set constants data
 $constants = array(
-	"{{lang_id}}" 					=> $args['lang']['id'],
-  "{{user_name}}"        => $args['userName'],
-	"{{current_date}}" 			=> date("Y-m-d"),
+	"{{lang_id}}" 		=> $args['lang']['id'],
+ 	 "{{user_name}}"    => $args['userName'],
+	"{{current_date}}" 	=> date("Y-m-d"),
 );
 
 // Merge language with constants
 $langData = $lang->translate(array(
-  "{{succesful_reservation}}"			=> "succesful_reservation",
-  "{{username}}"                    => $args['userName']
+  "{{succesful_reservation}}"	=> "succesful_reservation",
+  "{{username}}"                => $args['userName']
 ));
 $langData = Util::objMerge($langData, $constants);
 
@@ -63,7 +63,7 @@ $lang = null;
 try {
 
 	// Add rest properties
-  $phpMailer->Subject = $langData["{{succesful_reservation}}"];
+  $phpMailer->Subject 	= $langData["{{succesful_reservation}}"];
   $phpMailer->Body 		= $phpMailer->getDocument();
   $phpMailer->addAddress($args['email'], 
                          $langData["{{user_name}}"]);

@@ -1,10 +1,8 @@
 <div class="page-container">
   
   <!-- header image -->
-  <div
-    class="header-image-container"
-    ng-include
-    src="'./html/headerimage.html'"  >
+  <div class="header-image-container"
+       ng-include src="'./html/headerimage.html'" >
   </div>
 
   <!-- navigation bar -->
@@ -28,14 +26,14 @@
     <section class="card bg-quinary mb-3 mx-auto">
       <div class="row g-0">
         <div class="col-12 col-lg-5 col-xl-4 m-auto">
-          <img
-            src="./media/image/BackGroundImages/pexels-photo-3171770.jpeg"
-            class="img-fluid rounded p-2 d-md-none d-lg-block"
-            alt="party image">
-          <img
-            src="./media/image/pexels-photo-3171837.jpeg"
-            class="img-fluid rounded p-2 d-none d-md-block d-lg-none"
-            alt="party image">
+
+          <img src="./media/image/BackGroundImages/pexels-photo-3171770.jpeg"
+               class="img-fluid rounded p-2 d-md-none d-lg-block"
+               alt="party image">
+
+          <img src="./media/image/pexels-photo-3171837.jpeg"
+               class="img-fluid rounded p-2 d-none d-md-block d-lg-none"
+               alt="party image">
         </div>
 
         <!-- Card Titles -->
@@ -60,10 +58,9 @@
          class="carousel slide w-75 mx-auto" 
          data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div
-          class="carousel-item"
-          ng-class="{active: $index===0}"
-          ng-repeat="image in images track by $index">
+        <div class="carousel-item"
+             ng-class="{active: $index===0}"
+             ng-repeat="image in images track by $index">
           <img ng-src="{{image}}" 
                class="d-block w-100" 
                alt="{{image}}">
@@ -92,22 +89,20 @@
       </div>
 
       <!-- Buttons -->
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#homeCarousel"
-        data-bs-slide="prev">
+      <button class="carousel-control-prev"
+              type="button"
+              data-bs-target="#homeCarousel"
+              data-bs-slide="prev">
         <span class="carousel-control-prev-icon" 
               aria-hidden="true"> 
         </span>
         <span class="visually-hidden">Previous</span>
       </button>
 
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#homeCarousel"
-        data-bs-slide="next">
+      <button class="carousel-control-next"
+              type="button"
+              data-bs-target="#homeCarousel"
+              data-bs-slide="next">
         <span class="carousel-control-next-icon" 
               aria-hidden="true"> 
         </span>
@@ -125,14 +120,14 @@
         <div class="mt-2">
           <div class="row">
             <div class="col-12 col-md-6 col-xl-4 ps-xl-4">
-              <img
-                class="img-fluid d-md-none d-lg-block"
-                src="./media/image/PageImages/pexels-fauxels-3184183.jpg"
-                alt="au_img">
-              <img
-                class="img-fluid d-none d-md-block d-lg-none ms-2"
-                src="./media/image/BackGroundImages/pexels-taha-samet-arslan-7711150.jpg"
-                alt="au2_img">
+              
+              <img class="img-fluid d-md-none d-lg-block"
+                   src="./media/image/PageImages/pexels-fauxels-3184183.jpg"
+                   alt="au_img">
+
+              <img class="img-fluid d-none d-md-block d-lg-none ms-2"
+                   src="./media/image/BackGroundImages/pexels-taha-samet-arslan-7711150.jpg"
+                   alt="au2_img">
             </div>
             <div class="col-12 col-md-6 col-xl-8">
               <p class="text-justify me-3 mt-2 mt-md-0 ms-2 ms-md-0">
@@ -244,16 +239,13 @@
               </h6>
 
               <!-- Rating stars -->
-              <div
-                class="d-flex justify-content-between align-items-center"
-                ng-init="stars = [1,2,3,4,5]"
-              >
+              <div class="d-flex justify-content-between align-items-center"
+                   ng-init="stars = [1,2,3,4,5]">
                 <div class="small-ratings mx-auto mb-2">
-                  <i
-                    class="fa fa-star"
-                    ng-repeat="star in stars"
-                    ng-class="{'rating-color': rating.rating >= star}"
-                  ></i>
+                  <i class="fa fa-star"
+                     ng-repeat="star in stars"
+                     ng-class="{'rating-color': rating.rating >= star}">
+                  </i>
                 </div>
               </div>
 

@@ -196,7 +196,7 @@
 
         // Initialize user
         user.init();
-        console.log('user.id ' + $rootScope.user.id);
+
         // Get current date
         $rootScope.currentDay = new Date();
 
@@ -223,12 +223,14 @@
       function ($scope, http, $timeout, $rootScope) {
         console.log('Home controller...');
 
+        // Set carousel element
         const myCarouselElement = document.querySelector('#homeCarousel');
         const carousel = new bootstrap.Carousel(myCarouselElement, {
           interval: 4000,
         });
         carousel.to(1);
 
+        // initialize necessary variable
         $scope.images = [];
         $scope.ratings = [];
         $scope.rating = null;
@@ -248,9 +250,9 @@
             });
           })
           .catch((e) => {
-            // Resolve completed, and show error
 
-            $timeout(() => alert(e));
+            // Resolve completed, and show error
+            $timeout(() => alert(lang.translate(e, true)));
           });
 
         // Http request
@@ -258,12 +260,11 @@
           .request('./php/ratings.php')
           .then((response) => {
             $scope.ratings = response;
-            console.log(response);
           })
           .catch((e) => {
             // Resolve completed, and show error
 
-            $timeout(() => alert(e));
+            $timeout(() => alert(lang.translate(e, true)));
           });
 
         // Send Rating
@@ -285,9 +286,9 @@
             })
             .then((response) => {})
             .catch((e) => {
-              // Resolve completed, and show error
 
-              $timeout(() => alert(e));
+              // Resolve completed, and show error
+              $timeout(() => alert(lang.translate(e, true)));
             });
           console.log($scope.rating_data);
         };
@@ -322,6 +323,8 @@
           drinkPackage: null,
           guests: null,
         };
+
+        //save the empty reservation data
         $scope.originalReservationData = angular.copy($scope.reservationData);
 
         $scope.menus = [];
@@ -332,7 +335,7 @@
 
         // Http request menus
         http
-          .request('./php/menus2.php')
+          .request('./php/menus.php')
           .then((response) => {
             $scope.menus = response;
             $scope.eventMenus = response.slice(0, -3);
@@ -341,9 +344,9 @@
             $scope.drinkPackages.push({ menu_name: 'none', id: null });
           })
           .catch((e) => {
-            // Resolve completed, and show error
 
-            $timeout(() => alert(e));
+            // Resolve completed, and show error
+            $timeout(() => alert(lang.translate(e, true)));
           });
 
         // Http request carousel food pictures
@@ -357,9 +360,9 @@
             });
           })
           .catch((e) => {
-            // Resolve completed, and show error
 
-            $timeout(() => alert(e));
+            // Resolve completed, and show error
+            $timeout(() => alert(lang.translate(e, true)));
           });
 
         // reservation tab
@@ -369,12 +372,11 @@
           .request('./php/services.php')
           .then((response) => {
             $scope.eventsData = response;
-            console.log($scope.eventsData);
           })
           .catch((e) => {
-            // Resolve completed, and show error
 
-            $timeout(() => alert(e));
+            // Resolve completed, and show error
+            $timeout(() => alert(lang.translate(e, true)));
           });
 
         //set min & max data
@@ -383,14 +385,8 @@
           min: moment().add(1, 'days').format('YYYY-MM-DD'),
           placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
         };
-        console.log($scope.reservDate);
-        $scope.reservDate = {
-          max: moment().add(2, 'years').format('YYYY-MM-DD'),
-          min: moment().add(1, 'days').format('YYYY-MM-DD'),
-          placeholder: moment().add(1, 'days').format('YYYY-MM-DD'),
-        };
-        console.log($scope.reservDate);
 
+        //check reserved day and set to inactive
         $scope.checkDays = () => {
           // Http request check available days
           http
@@ -427,14 +423,13 @@
               });
             })
             .catch((e) => {
-              // Resolve completed, and show error
 
-              $timeout(() => alert(e));
+              // Resolve completed, and show error
+              $timeout(() => alert(lang.translate(e, true)));
             });
         };
 
         $scope.dayReservation = () => {
-          alert('sikeres foglalás');
           $scope.reservation = {
             userId: $rootScope.user.id,
             date: moment($scope.reservationData.date).format('YYYY-MM-DD'),
@@ -444,47 +439,50 @@
             drinkPackageId: $scope.reservationData.drink_package.id,
             guests: $scope.reservationData.guests,
           };
-
+          
           // Http request reservation
           http
-            .request({
-              url: './php/reservation.php',
-              method: 'POST',
-              data: $scope.reservation,
+          .request({
+            url: './php/reservation.php',
+            method: 'POST',
+            data: $scope.reservation,
             })
             .then((response) => {
+
               // Check success
               if (response.affectedRows) {
                 console.log(response.lastInsertId);
                 $scope.$applyAsync();
                 let { id, type } = $rootScope.lang;
                 http
-                  .request({
-                    url: './php/reservation_email.php',
-                    method: 'POST',
-                    data: {
-                      email: $rootScope.user.email,
-                      userName: $rootScope.user.first_name,
-                      lang: { id, type },
-                    },
-                  })
-                  .then((response) => {})
-                  .catch((error) => {
-                    $timeout(() => alert(error), 50);
-                  });
+                .request({
+                  url: './php/reservation_email.php',
+                  method: 'POST',
+                  data: {
+                    email: $rootScope.user.email,
+                    userName: $rootScope.user.first_name,
+                    lang: { id, type },
+                  },
+                })
+                .then((response) => {
+                  alert(lang.translate("succesful_reservation", true));
+                })
+                .catch((error) => {
+                  $timeout(() => alert(lang.translate(error, true)), 50);
+                });
                 alert(`Reservation succesfull,  ${response.lastInsertId}`);
                 $scope.reservationData = angular.copy(
                   $scope.originalReservationData
-                );
-              } else alert(`Reservation unsuccesfull!  ${response}`);
-            })
-            .catch((error) => {
-              $timeout(() => alert(error), 50);
-            });
-        };
-      },
-    ])
-
+                  );
+                } else alert(lang.translate('Reservation unsuccesfull!', true));
+              })
+              .catch((error) => {
+                $timeout(() => alert(lang.translate(error, true)), 50);
+              });
+            };
+          },
+        ])
+        
     // webshop controller
     .controller('webshopController', [
       '$scope',
@@ -502,13 +500,13 @@
           .then((response) => {
             $scope.products = response;
             $scope.$applyAsync();
-            console.log(response);
-          })
+            })
           .catch((error) => {
-            $timeout(() => alert(error), 50);
+            $timeout(() => alert(lang.translate(error, true)), 50);
           });
+
+          //Add to cart event
         $scope.addToCart = (product) => {
-          console.log(product);
           let index = $rootScope.cart.findIndex((x) => x.id == product.id);
           if (index == -1) {
             let order = {
@@ -522,8 +520,6 @@
           } else {
             $rootScope.cart[index].quantity++;
           }
-
-          console.log($rootScope.cart);
         };
       },
     ])
@@ -565,7 +561,7 @@
               alert(lang.translate(response, true));
             })
             .catch((e) => {
-              alert(e);
+              alert(lang.translate(e, true));
             });
         };
       },
@@ -580,6 +576,7 @@
       'http',
       '$state',
       function ($scope, $rootScope, util, user, http, $state) {
+       
         // handling modal windows
         $rootScope.loginModal = new bootstrap.Modal(
           document.getElementById('loginModal'),
@@ -599,8 +596,8 @@
 
         // Set model
         $scope.model = {
-          email: 'kertesz.istvan-e2022@keri.mako.hu', //$rootScope.user.email,
-          password: '1234Aa',
+          email: null, 
+          password: null
         };
 
         // Add event listener accept button.
@@ -624,12 +621,15 @@
               user.set(response);
               $scope.$applyAsync();
               if ($state.current.name == 'order') {
-                console.log('state reloed');
                 $state.reload();
               }
             })
             .catch((e) => {
-              alert(e);
+              alert(lang.translate(e, true));
+              $scope.model = {
+                email: null, 
+                password: null
+              };
             });
         };
       },
@@ -723,13 +723,12 @@
           .request($rootScope.app.commonPath + `data/countries.json`)
           .then((response) => {
             $scope.helper.countries = response;
-            //$scope.countries.promise.resolve();
             $scope.$applyAsync();
           })
           .catch((e) => {
             // Resolve completed, reset asynchronous, and show error
             countries.promise.resolve();
-            $timeout(() => alert(e), 50);
+            $timeout(() => alert(lang.translate(e,true)), 50);
           });
 
         // Initialize testcode
@@ -773,7 +772,7 @@
             email: $scope.values.email,
             password: $scope.values.password,
           };
-          console.log($scope.userData);
+
           // Http request for registration
           http
             .request({
@@ -784,15 +783,12 @@
             .then((response) => {
               // Check success
               if (response.affectedRows) {
-                console.log(response.lastInsertId);
                 $scope.$applyAsync();
-                alert(
-                  `Registration succesfull, new User identifier: ${response.lastInsertId}`
-                );
-              } else alert(`Registration unsuccesfull!  ${response}`);
+                alert(lang.translate('Registration_succesfull', true))
+              } else alert(lang.translate('registration_failed', true));
             })
             .catch((error) => {
-              $timeout(() => alert(error), 50);
+              $timeout(() => alert(lang.translate(error,true)), 50);
             });
         };
       },
@@ -859,7 +855,7 @@
           .catch((e) => {
             // Resolve completed, reset asynchronous, and show error
             countries.promise.resolve();
-            $timeout(() => alert(e), 50);
+            $timeout(() => alert(lang.translate(e,true)), 50);
           });
 
         $scope.handleCountryChange = (country) => {
@@ -874,9 +870,7 @@
             data: { id: $rootScope.user.id },
           })
           .then((response) => {
-            console.log(response);
             $scope.values.dateOfBirth = moment(response.born).toDate();
-
             $scope.values.phone = response.phone;
             $scope.values.city = response.city;
             $scope.values.postcode = response.postcode;
@@ -891,18 +885,15 @@
 
             // Check exist
             if (index !== -1) {
-              let codeIndex = $scope.helper.countries[index].code.indexOf(
-                response.country_code
-              );
+              let codeIndex = $scope.helper.countries[index].code.indexOf(response.country_code);
               $scope.values.country = $scope.helper.countries[index];
-              $scope.values.country_code =
-                $scope.helper.countries[index].code[codeIndex];
+              $scope.values.country_code = $scope.helper.countries[index].code[codeIndex];
             }
             $scope.userData = angular.copy($scope.values);
             $scope.$applyAsync();
           })
           .catch((error) => {
-            $timeout(() => alert(error), 50);
+            $timeout(() => alert(lang.translate(error, true)), 50);
           });
 
         $scope.$watch('newImage', (newValue, oldValue) => {
@@ -919,7 +910,7 @@
               };
               reader.readAsDataURL(newValue);
             } else {
-              alert('Maximális méret 64KB');
+              alert('Max 64KB');
             }
           }
         });
@@ -945,8 +936,7 @@
             city: $scope.values.city,
             address: $scope.values.address,
           };
-          //$state.reload();
-          console.log(data);
+
           // Http request
           http
             .request({
@@ -962,7 +952,7 @@
             // Error
             .catch((e) => {
               // Reset asynchronous, and show error
-              $timeout(() => alert(e), 50);
+              $timeout(() => alert(lang.translate(e, true)), 50);
             });
         };
 
@@ -988,7 +978,7 @@
           // Error
           .catch((e) => {
             // Reset asynchronous, and show error
-            $timeout(() => alert(e), 50);
+            $timeout(() => alert(lang.translate(e, true)), 50);
           });
 
         //Orders tab
@@ -1002,13 +992,12 @@
             data: { id: $rootScope.user.id },
           })
           .then((response) => {
-            console.log(response);
             $scope.orders = response;
           })
           // Error
           .catch((e) => {
             // Reset asynchronous, and show error
-            $timeout(() => alert(e), 50);
+            $timeout(() => alert(lang.translate(e, true)), 50);
           });
       },
     ])
@@ -1045,6 +1034,7 @@
       'http',
       function ($scope, $rootScope, util, http) {
         console.log('order controller...');
+
         $scope.shipping = 1250;
         let { id, type } = $rootScope.lang;
         let lang = { id, type };
@@ -1057,13 +1047,19 @@
           });
           return sum;
         };
+
+         // increase product quantity
         $scope.increase = (id) => {
           let index = $rootScope.cart.findIndex((x) => x.id == id);
           $rootScope.cart[index].quantity++;
         };
+
+        //decrease pruduct quantity
         $scope.decrease = (id) => {
           let index = $rootScope.cart.findIndex((x) => x.id == id);
           $rootScope.cart[index].quantity--;
+          
+          // if product quantity equal 0 remove from cart
           if ($rootScope.cart[index].quantity === 0)
             $rootScope.cart.splice(index, 1);
         };
@@ -1085,15 +1081,13 @@
             })
             .then((response) => {
               $scope.values = response;
-              console.log($scope.values);
             })
             .catch((error) => {
-              console.log(error);
+              alert(lang.translate(error, true));
             });
         }
 
         $scope.order = () => {
-          console.log($scope.shipping);
           let args = util.arrayObjFilterByKeys(
             $rootScope.cart,
             'id,quantity,name,price'
@@ -1123,7 +1117,7 @@
 
             })
             .catch((error) => {
-              console.log(error);
+              console.log(lang.translate(error, true));
             });
         };
       },

@@ -1,10 +1,9 @@
 <div class="page-container">
+  
   <!-- header image -->
-  <div
-    class="header-image-container"
-    ng-include
-    src="'./html/headerimage.html'"
-  ></div>
+  <div class="header-image-container"
+       ng-include src="'./html/headerimage.html'">
+  </div>
 
   <!-- menu -->
   <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
@@ -12,6 +11,7 @@
   <!-- include login page -->
   <div ng-include src="'./html/loginModal.html'"></div>
 
+  <!-- Main -->
   <main class="container">
     <!-- Row -->
     <div class="row mt-3">
@@ -27,16 +27,14 @@
         <li class="nav-item nav-item-pills" role="presentation">
 
           <!-- Button -->
-          <button
-            id="tab-1-tab"
-            class="btn btn-outline-secondary active ms-2 mb-2 btn-pills-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#tab-1"
-            role="tab"
-            type="button"
-            aria-controls="tab-1"
-            aria-selected="true"
-          >
+          <button id="tab-1-tab"
+                  class="btn btn-outline-secondary active ms-2 mb-2 btn-pills-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#tab-1"
+                  role="tab"
+                  type="button"
+                  aria-controls="tab-1"
+                  aria-selected="true">
             {{'basic_menu' | translate:lang.data}}
           </button>
         </li>
@@ -45,16 +43,14 @@
         <li class="nav-item nav-item-pills" role="presentation">
 
           <!-- Button -->
-          <button
-            id="tab-2-tab"
-            class="btn btn-outline-secondary ms-2 mb-2 btn-pills-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#tab-2"
-            role="tab"
-            type="button"
-            aria-controls="tab-1"
-            aria-selected="true"
-          >
+          <button id="tab-2-tab"
+                  class="btn btn-outline-secondary ms-2 mb-2 btn-pills-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#tab-2"
+                  role="tab"
+                  type="button"
+                  aria-controls="tab-1"
+                  aria-selected="true">
             {{'reservation' | translate:lang.data}}
           </button>
         </li>
@@ -67,12 +63,10 @@
       <div class="tab-content">
         
         <!-- Tab1 panel -->
-        <div
-          id="tab-1"
-          class="tab-pane fade show active p-3 text-center"
-          role="tabpanel"
-          aria-labelledby="tab-1-tab"
-        >
+        <div id="tab-1"
+             class="tab-pane fade show active p-3 text-center"
+             role="tabpanel"
+             aria-labelledby="tab-1-tab">
           <div class="p-52 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
               <h2 class="display-3 letter-capitalize fw-bold">
@@ -89,46 +83,35 @@
 
               <!-- carousel -->
               <div class="carousel-container overflow-hidden w-75 mx-auto">
-                <div
-                  id="menuCarousel"
-                  class="carousel slide"
-                  data-bs-ride="carousel"
-                >
+                <div id="menuCarousel"
+                     class="carousel slide"
+                     data-bs-ride="carousel">
                   <div class="carousel-inner">
-                    <div
-                      class="carousel-item"
-                      ng-class="{active: $index===0}"
-                      ng-repeat="image in images track by $index"
-                    >
-                    <!-- Resolution 960x720 -->
-                      <img
-                        ng-src="{{image}}"
-                        class="d-block w-100"
-                        alt="{{image}}"
-                       
-                      />
+                    <div class="carousel-item"
+                         ng-class="{active: $index===0}"
+                         ng-repeat="image in images track by $index">
+                    
+                      <!-- Resolution 960x720 -->
+                      <img ng-src="{{image}}"
+                           class="d-block w-100"
+                           alt="{{image}}">
                     </div>
                   </div>
-                  <button
-                    class="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#menuCarousel"
-                    data-bs-slide="prev"
-                  >
+                  <button class="carousel-control-prev"
+                          type="button"
+                          data-bs-target="#menuCarousel"
+                          data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true">
                     </span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button
-                    class="carousel-control-next"
-                    type="button"
-                    data-bs-target="#menuCarousel"
-                    data-bs-slide="next"
-                  >
-                    <span
-                      class="carousel-control-next-icon"
-                      aria-hidden="true"
-                    ></span>
+                  <button class="carousel-control-next"
+                          type="button"
+                          data-bs-target="#menuCarousel"
+                          data-bs-slide="next">
+                    <span class="carousel-control-next-icon"
+                          aria-hidden="true">
+                    </span>
                     <span class="visually-hidden">Next</span>
                   </button>
                 </div>
@@ -140,53 +123,42 @@
 
           <!-- menus card -->
           <div class="card-container">
-            <div
-              class="col-12 py-2 my-3"
-              ng-repeat="menu in menus track by $index"
-              ng-class="{'bg-light': $index % 2 === 1, 'evens': $index % 2 === 0}"
-            >
+            <div class="col-12 py-2 my-3"
+                  ng-repeat="menu in menus track by $index"
+                  ng-class="{'bg-light': $index % 2 === 1, 'evens': $index % 2 === 0}">
               <div class="card w-75 mx-auto">
                 <div class="card-header fw-bold letter-capitalize fluss_head_col">
                   {{ menu.menu_name | translate:lang.data}}
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li
-                    class="list-group-item fw-bold text-start"
-                    ng-repeat="items in menu.menu_items track by $index"
-                  >
+                  <li class="list-group-item fw-bold text-start"
+                      ng-repeat="items in menu.menu_items track by $index">
+                    
                     <!-- accordion of menus -->
-                    <div
-                      class="accordion"
-                      id="accordionMenu{{$parent.$index}}_{{$index}}"
-                    >
+                    <div class="accordion"
+                         id="accordionMenu{{$parent.$index}}_{{$index}}">
                       <div class="accordion-item">
-                        <h2
-                          class="accordion-header"
-                          id="heading{{$parent.$index}}_{{$index}}"
-                        >
-                          <button
-                            class="accordion-button collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#collapse{{$parent.$index}}_{{$index}}"
-                            aria-expanded="false"
-                            aria-controls="collapse{{$parent.$index}}_{{$index}}"
-                          >
-                            <span class="col-5 ms-1 fw-bold"
-                              >{{ items.category | translate:lang.data}}:</span
-                            >
-                            <span class="col-5 text-end"
-                              >{{ items.name | translate:lang.data}}</span
-                            >
+                        <h2 class="accordion-header"
+                            id="heading{{$parent.$index}}_{{$index}}">
+                          <button class="accordion-button collapsed"
+                                  type="button"
+                                  data-bs-toggle="collapse"
+                                  data-bs-target="#collapse{{$parent.$index}}_{{$index}}"
+                                  aria-expanded="false"
+                                  aria-controls="collapse{{$parent.$index}}_{{$index}}">
+                            <span class="col-5 ms-1 fw-bold">
+                              {{ items.category | translate:lang.data}}:
+                            </span>
+                            <span class="col-5 text-end">
+                              {{ items.name | translate:lang.data}}
+                            </span>
                           </button>
                         </h2>
-                        <div
-                          id="collapse{{$parent.$index}}_{{$index}}"
-                          class="accordion-collapse collapse fluss_span"
-                          ng-class="{show: $index===-1}"
-                          aria-labelledby="heading{{$parent.$index}}_{{$index}}"
-                          data-bs-parent="#accordionMenu{{$parent.$index}}_{{$index}}"
-                        >
+                        <div id="collapse{{$parent.$index}}_{{$index}}"
+                             class="accordion-collapse collapse fluss_span"
+                             ng-class="{show: $index===-1}"
+                             aria-labelledby="heading{{$parent.$index}}_{{$index}}"
+                             data-bs-parent="#accordionMenu{{$parent.$index}}_{{$index}}">
                           <div class="accordion-body">
                             {{ items.description | translate:lang.data}}
                           </div>
@@ -196,9 +168,7 @@
                   </li>
                 </ul>
                 <ul>
-                  <li
-                    class="list-group-item card-footer d-flex justify-content-around mt-2"
-                  >
+                  <li class="list-group-item card-footer d-flex justify-content-around mt-2">
                     <span class="col-6 text-start"> Ár: </span>
                     <span class="col-6 text-end pe-4">
                       {{menu.total_price}}Ft
@@ -211,14 +181,13 @@
         </div>
 
         <!-- Tab2 panel -->
-        <div
-          id="tab-2"
-          class="tab-pane fade p-3 text-center"
-          role="tabpanel"
-          aria-labelledby="tab-1-tab"
-        >
+        <div id="tab-2"
+             class="tab-pane fade p-3 text-center"
+             role="tabpanel"
+             aria-labelledby="tab-1-tab">
           <div class="p-52 mb-4 bg-light rounded-3">
             <div class="container-fluid py-5">
+              
               <!-- if user not logged in -->
               <h3 class="text-center letter-capitalize" ng-if="!user.id">
                 {{'please_login' | translate:lang.data}}!
@@ -235,71 +204,60 @@
                     {{'name' | translate:lang.data}}:
                   </div>
                   <div class="col-6 text-start">
-                    <span
-                      class="text-capitalize"
-                      ng-repeat="k in lang.rule[lang.type]"
-                    >
+                    <span class="text-capitalize"
+                          ng-repeat="k in lang.rule[lang.type]">
                       {{user[k]}}
                     </span>
                   </div>
                 </div>
 
                 <!-- reservation form -->
-                <form
-                  class="mt-2 text-center justify-content-center"
-                  name="reservationForm"
-                >
+                <form class="mt-2 text-center justify-content-center"
+                      name="reservationForm">
+                  
                   <!-- Number of guests -->
                   <div class="row iunput-group mb-2 justify-content-center">
                     <div class="col-8 col-sm-6 text-start text-sm-end">
-                      <label
-                        for="guests"
-                        class="col-form-label letter-capitalize ms-1 ms-sm-0"
-                      >
+                      <label for="guests"
+                             class="col-form-label letter-capitalize ms-1 ms-sm-0">
                         <span class="text-nowrap">
                           {{'number_of_guests' | translate:lang.data}}:
                         </span>
                       </label>
                     </div>
                     <div class="col-8 col-sm-6 letter-capitalize">
-                      <input
-                        type="number"
-                        name="guests"
-                        id="guests"
-                        class="form-control rounded-pill shadow-sm"
-                        placeholder="{{'number_of_guests' | translate:lang.data}}"
-                        spellcheck="false"
-                        autocomplete="off"
-                        ng-model="reservationData.guests"
-                        maxlength="10"
-                        style="width: 200px"
-                        required
-                      >
+                      <input type="number"
+                             name="guests"
+                             id="guests"
+                             class="form-control rounded-pill shadow-sm"
+                             placeholder="{{'number_of_guests' | translate:lang.data}}"
+                             spellcheck="false"
+                             autocomplete="off"
+                             ng-model="reservationData.guests"
+                             maxlength="10"
+                             style="width: 200px"
+                             required>
                     </div>
                   </div>
 
                   <!-- Event -->
                   <div class="row iunput-group mb-2 justify-content-center">
                     <div class="col-8 col-sm-6 text-start text-sm-end">
-                      <label
-                        for="event"
-                        class="col-form-label letter-capitalize ms-1 ms-sm-0"
-                      >
+                      <label for="event"
+                             class="col-form-label letter-capitalize ms-1 ms-sm-0">
                         <span> {{'event' | translate:lang.data}}: </span>
                       </label>
                     </div>
                     <div class="col-8 col-sm-6 letter-capitalize">
-                      <select
-                        ng-model="reservationData.event"
-                        name="event"
-                        id="event"
-                        class="form-select rounded-pill shadow-sm"
-                        spellcheck="false"
-                        ng-options="event.event_types | translate:lang.data  for event in eventsData.eventTypes"
-                        style="width: 200px"
-                        ng-disabled="reservationForm.guests.$invalid"
-                        required
-                      >
+                      <select ng-model="reservationData.event"
+                              name="event"
+                              id="event"
+                              class="form-select rounded-pill shadow-sm"
+                              spellcheck="false"
+                              ng-options="event.event_types | translate:lang.data  for event in eventsData.eventTypes"
+                              style="width: 200px"
+                              ng-disabled="reservationForm.guests.$invalid"
+                              required>
                         <option value="" class="text-capitalize">
                           -- {{'select' | translate:lang.data}} --
                         </option>
@@ -310,26 +268,24 @@
                   <!-- Event place -->
                   <div class="row iunput-group mb-2 justify-content-center">
                     <div class="col-8 col-sm-6 text-start text-sm-end">
-                      <label
-                        for="event_place"
-                        class="col-form-label letter-capitalize ms-1 ms-sm-0"
-                      >
+                      <label for="event_place"
+                             class="col-form-label letter-capitalize ms-1 ms-sm-0">
                         <span> {{'event_place' | translate:lang.data}}: </span>
                       </label>
                     </div>
                     <div class="col-8 col-sm-6 letter-capitalize">
-                      <select
-                        ng-model="reservationData.event_place"
-                        name="event_place"
-                        id="event_place"
-                        class="form-select rounded-pill shadow-sm"
-                        spellcheck="false"
-                        ng-options="(place.place_name | translate:lang.data) +' (max.: '+ place.capacity +' '+ ('person' | translate:lang.data) + ')' disable when place.capacity < reservationData.guests  for place in eventsData.eventPlaces"
-                        ng-change="checkDays()"
-                        style="width: 200px"
-                        ng-disabled="reservationForm.event.$invalid"
-                        required
-                      >
+                      <select ng-model="reservationData.event_place"
+                              name="event_place"
+                              id="event_place"
+                              class="form-select rounded-pill shadow-sm"
+                              spellcheck="false"
+                              ng-options="(place.place_name | translate:lang.data) +' (max.: '+ place.capacity +' '
+                                           + ('person' | translate:lang.data) + ')' disable when place.capacity &lt;
+                                            reservationData.guests  for place in eventsData.eventPlaces"
+                              ng-change="checkDays()"
+                              style="width: 200px"
+                              ng-disabled="reservationForm.event.$invalid"
+                              required>
                         <option value="" 
                                 class="text-capitalize">
                           -- {{'select' | translate:lang.data}} --
@@ -341,27 +297,23 @@
                   <!-- Date of event -->
                   <div class="row iunput-group mb-2 justify-content-center">
                     <div class="col-8 col-sm-6 text-start text-sm-end">
-                      <label
-                        for="date"
-                        class="col-form-label letter-capitalize ms-1 ms-sm-0"
-                      >
+                      <label for="date"
+                             class="col-form-label letter-capitalize ms-1 ms-sm-0">
                         <span> {{'date' | translate:lang.data}}: </span>
                       </label>
                     </div>
                     <div class="col-8 col-sm-6 letter-capitalize position-relative">
-                      <input
-                        type="text"
-                        name="date"
-                        id="date"
-                        placeholder="{{reservDate.placeholder}}"
-                        class="form-control rounded-pill shadow-sm text-center"
-                        spellcheck="false"
-                        autocomplete="off"
-                        ng-model="reservationData.date"
-                        style="width: 200px"
-                        ng-disabled="reservationForm.event_place.$invalid "
-                        required
-                      >
+                      <input type="text"
+                             name="date"
+                             id="date"
+                             placeholder="{{reservDate.placeholder}}"
+                             class="form-control rounded-pill shadow-sm text-center"
+                             spellcheck="false"
+                             autocomplete="off"
+                             ng-model="reservationData.date"
+                             style="width: 200px"
+                             ng-disabled="reservationForm.event_place.$invalid "
+                             required>
                       <span class="fa-regular fa-calendar-days position-absolute top-50 start-0 translate-middle-y ms-4" ></span>
                     </div>
                   </div>
@@ -369,25 +321,21 @@
                   <!-- Event menu-->
                   <div class="row iunput-group mb-2 justify-content-center">
                     <div class="col-8 col-sm-6 text-start text-sm-end">
-                      <label
-                        for="event_menu"
-                        class="col-form-label letter-capitalize ms-1 ms-sm-0"
-                      >
+                      <label for="event_menu"
+                             class="col-form-label letter-capitalize ms-1 ms-sm-0">
                         <span> {{'event_menu' | translate:lang.data}}: </span>
                       </label>
                     </div>
                     <div class="col-8 col-sm-6 letter-capitalize">
-                      <select
-                        ng-model="reservationData.event_menu"
-                        name="event_menu"
-                        id="event_menu"
-                        class="form-select rounded-pill shadow-sm"
-                        spellcheck="false"
-                        ng-options="menu.menu_name | translate:lang.data  for menu in eventMenus"
-                        style="width: 200px"
-                        ng-disabled="reservationForm.date.$invalid"
-                        required
-                      >
+                      <select ng-model="reservationData.event_menu"
+                              name="event_menu"
+                              id="event_menu"
+                              class="form-select rounded-pill shadow-sm"
+                              spellcheck="false"
+                              ng-options="menu.menu_name | translate:lang.data  for menu in eventMenus"
+                              style="width: 200px"
+                              ng-disabled="reservationForm.date.$invalid"
+                              required>
                         <option value="" class="text-capitalize">
                           -- {{'select' | translate:lang.data}} --
                         </option>
@@ -398,27 +346,23 @@
                   <!-- drink package-->
                   <div class="row iunput-group mb-2 justify-content-center">
                     <div class="col-8 col-sm-6 text-start text-sm-end">
-                      <label
-                        for="event_menu"
-                        class="col-form-label letter-capitalize ms-1 ms-sm-0"
-                      >
+                      <label for="event_menu"
+                             class="col-form-label letter-capitalize ms-1 ms-sm-0">
                         <span>
                           {{'drink_package' | translate:lang.data}}:
                         </span>
                       </label>
                     </div>
                     <div class="col-8 col-sm-6 letter-capitalize">
-                      <select
-                        ng-model="reservationData.drink_package"
-                        name="drink_package"
-                        id="drink_package"
-                        class="form-select rounded-pill shadow-sm"
-                        spellcheck="false"
-                        ng-options="drink.menu_name | translate:lang.data  for drink in drinkPackages"
-                        style="width: 200px"
-                        ng-disabled="reservationForm.date.$invalid"
-                        required
-                      >
+                      <select ng-model="reservationData.drink_package"
+                              name="drink_package"
+                              id="drink_package"
+                              class="form-select rounded-pill shadow-sm"
+                              spellcheck="false"
+                              ng-options="drink.menu_name | translate:lang.data  for drink in drinkPackages"
+                              style="width: 200px"
+                              ng-disabled="reservationForm.date.$invalid"
+                              required>
                         <option value="" class="text-capitalize">
                           -- {{'select' | translate:lang.data}} --
                         </option>
@@ -428,12 +372,10 @@
 
                   <div class="row">
                     <div class="col-auto mx-auto my-3">
-                      <button
-                        type="submit"
-                        class="btn btn-primary"
-                        ng-click="dayReservation()"
-                        ng-disabled="reservationForm.$invalid"
-                      >
+                      <button type="submit"
+                              class="btn btn-primary"
+                              ng-click="dayReservation()"
+                              ng-disabled="reservationForm.$invalid">
                         {{'send' | translate:lang.data}}
                       </button>
                     </div>
@@ -447,5 +389,6 @@
     </div>
   </main>
 
+  <!-- Footer section -->
   <footer ng-include src="'./html/footer.html'"></footer>
 </div>

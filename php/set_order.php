@@ -21,7 +21,9 @@ $args = Util::getArgs();
 $db = new Database();
 
 // Set query
-$query = "SELECT MAX(`order_id`) as `order_id` FROM `orders` LIMIT 1;";
+$query = "SELECT MAX(`order_id`) AS `order_id` 
+			FROM `orders` 
+			LIMIT 1;";
 
 // Execute query with argument
 $result = $db->execute($query);
@@ -53,19 +55,19 @@ $errorMsg = $lang->translate(Email::$errorMessages);
 
 // Set constants data
 $constants = array(
-	"{{lang_id}}" 					=> $args['lang']['id'],
-  "{{user_name}}"        	=> $args['userName'],
-	"{{order_number}}"			=> "order_number",
-	"{{current_date}}" 			=> date("Y-m-d"),
+	"{{lang_id}}" 			=> $args['lang']['id'],
+  	"{{user_name}}"        	=> $args['userName'],
+	"{{order_number}}"		=> "order_number",
+	"{{current_date}}" 		=> date("Y-m-d"),
 	"{{table-content}}"     => ""
 );
 
 // Merge language with constants
 $langData = $lang->translate(array(
-  "{{succesful_order}}"			=> "succesful_order",
-  "{{username}}"            => $args['userName'],
-	"{{shipping_cost}}"				=> strval($args['shipping']) ,
-	"{{total_price}}"					=> strval($args['total'])
+  	"{{succesful_order}}"	  => "succesful_order",
+  	"{{username}}"            => $args['userName'],
+	"{{shipping_cost}}"		  => strval($args['shipping']) ,
+	"{{total_price}}"		  => strval($args['total'])
 ));
 
 
@@ -102,7 +104,7 @@ $lang = null;
 try {
 
 	// Add rest properties
-  $phpMailer->Subject = $langData["{{succesful_order}}"];
+  $phpMailer->Subject 	= $langData["{{succesful_order}}"];
   $phpMailer->Body 		= $phpMailer->getDocument();
   $phpMailer->addAddress($args['email'], 
                          $langData["{{username}}"]);

@@ -24,10 +24,10 @@ $errorMsg = $lang->translate(Email::$errorMessages);
 
 // Set constants data
 $constants = array(
-	"{{lang_id}}" 					=> $args['lang']['id'],
-  "{{user_email}}"        => $args['email'],
-	"{{message}}" 				  => $args['message'],
-	"{{current_date}}" 			=> date("Y-m-d"),
+	"{{lang_id}}" 			=> $args['lang']['id'],
+  	"{{user_email}}"        => $args['email'],
+	"{{message}}" 			=> $args['message'],
+	"{{current_date}}" 		=> date("Y-m-d"),
   
 );
 
@@ -65,7 +65,7 @@ try {
 
 	// Add rest properties
   $phpMailer->Subject = "Kapcsolatfelvétel";
-  $phpMailer->Body 		= $phpMailer->getDocument();
+  $phpMailer->Body 	  = $phpMailer->getDocument();
   $phpMailer->addAddress("info.partyservice.mako@gmail.com");
 
 	// Send email
