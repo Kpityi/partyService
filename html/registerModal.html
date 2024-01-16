@@ -462,7 +462,8 @@
               <input id="reg_password_confirm"
                      type="{{inputType}}"
                      class="form-control rounded-pill shadow-sm"
-                     ng-attr-placeholder="{{'password' | translate:lang.data  + ' ' + 'confirmation' | translate:lang.data }}"
+                     ng-attr-placeholder="{{'password' | translate:lang.data  + 
+                                            ' ' + 'confirmation' | translate:lang.data }}"
                      spellcheck="false"
                      autocomplete="off"
                      ng-model="values.passwordConfirm"
@@ -542,7 +543,8 @@
                          ng-clear-icon='{"left":"150px"}'
                          required>
                   <div class="input-group-append">
-                    <button class="btn btn-sm btn-light text-capitalize text-small-caps btnClickEffect"
+                    <button class="btn btn-sm btn-light text-capitalize 
+                                   text-small-caps btnClickEffect"
                             ng-click="testcodeRefresh($event)">
                       <i class="fas fa-sync-alt"></i>
                       <span class="ms-1">

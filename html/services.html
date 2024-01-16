@@ -314,7 +314,9 @@
                              style="width: 200px"
                              ng-disabled="reservationForm.event_place.$invalid "
                              required>
-                      <span class="fa-regular fa-calendar-days position-absolute top-50 start-0 translate-middle-y ms-4" ></span>
+                      <span class="fa-regular fa-calendar-days position-absolute 
+                                   top-50 start-0 translate-middle-y ms-4">
+                      </span>
                     </div>
                   </div>
 
@@ -332,7 +334,8 @@
                               id="event_menu"
                               class="form-select rounded-pill shadow-sm"
                               spellcheck="false"
-                              ng-options="menu.menu_name | translate:lang.data  for menu in eventMenus"
+                              ng-options="menu.menu_name | 
+                                          translate:lang.data for menu in eventMenus"
                               style="width: 200px"
                               ng-disabled="reservationForm.date.$invalid"
                               required>
@@ -359,7 +362,8 @@
                               id="drink_package"
                               class="form-select rounded-pill shadow-sm"
                               spellcheck="false"
-                              ng-options="drink.menu_name | translate:lang.data  for drink in drinkPackages"
+                              ng-options="drink.menu_name | 
+                                          translate:lang.data  for drink in drinkPackages"
                               style="width: 200px"
                               ng-disabled="reservationForm.date.$invalid"
                               required>

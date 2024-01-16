@@ -13,7 +13,6 @@ if (!isset($GLOBALS['___app___']))
 
 require_once('create_html_table.php');
 
-
 // Get arguments
 $args = Util::getArgs();
 
@@ -55,25 +54,31 @@ $errorMsg = $lang->translate(Email::$errorMessages);
 
 // Set constants data
 $constants = array(
-	"{{lang_id}}" 			=> $args['lang']['id'],
-  	"{{user_name}}"        	=> $args['userName'],
-	"{{order_number}}"		=> "order_number",
-	"{{current_date}}" 		=> date("Y-m-d"),
-	"{{table-content}}"     => ""
+	"{{lang_id}}"				=> $args['lang']['id'],
+  "{{user_name}}"			=> $args['userName'],
+	"{{current_date}}"	=> date("Y-m-d"),
+	"{{shipping_cost}}"	=> strval($args['shipping']) ,
+	"{{total_price}}"		=> strval($args['total']),
+	"{{table-content}}"	=> ""
 );
 
-// Merge language with constants
-$langData = $lang->translate(array(
-  	"{{succesful_order}}"	  => "succesful_order",
-  	"{{username}}"            => $args['userName'],
-	"{{shipping_cost}}"		  => strval($args['shipping']) ,
-	"{{total_price}}"		  => strval($args['total'])
-));
+if (count($args["cart"])) {
+	foreach(array_keys($args["cart"][0]) as $key) {
+		$langData["{{".$key."}}"] = $key;
+	}
+}
+$langData["{{succesful_order}}"] = "succesful_order";
+$langData["{{order_number}}"] = "order_number";
 
+// Merge language with constants
+$langData = $lang->translate($langData);
 
 createTable($result['order_id'], $args["cart"], $constants["{{table-content}}"]);
 
 $langData = Util::objMerge($langData, $constants);
+
+$constants["{{table-content}}"] = 
+	strtr($constants["{{table-content}}"], $langData);
 
 // Create email
 $phpMailer = new Email($lang);

@@ -37,7 +37,7 @@ $result = $db->execute($query, array($args['email']));
 if (is_null($result)) {
 
 	// Set error
-	Util::setError('the user does not exist', $db);
+	Util::setError('user_not_exist', $db);
 }
 
 // Simplify result

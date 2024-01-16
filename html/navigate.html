@@ -97,8 +97,10 @@
             <div class="bg-img bg-img-cover overflow-hidden 
                         rounded-circle d-inline-block float-start me-2"
                   style="width: 32px; height: 32px"
-                  ng-style="{'background-image':user.img_type?'url(data:'+user.img_type+';base64,'+user.img+')':
-                              'url('+app.commonPath+'media/image/blank/'+(user.gender===2?'fe':'')+'male-blank.webp)'}"
+                  ng-style="{'background-image':user.img_type?
+                              'url(data:'+user.img_type+';base64,'+user.img+')':
+                              'url('+app.commonPath+'media/image/blank/'+
+                              (user.gender===2?'fe':'')+'male-blank.webp)'}"
                   ng-show="user.img || user.gender">
             </div>
 
