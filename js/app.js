@@ -178,12 +178,10 @@
     .run([
       '$state',
       '$rootScope',
-      '$timeout',
       'trans',
       'lang',
       'user',
-
-      function ($state, $rootScope, $timeout, trans, lang, user) {
+      function ($state, $rootScope, trans, lang, user) {
         console.log('Run...');
         $rootScope.showCart = false;
         $rootScope.cart = [];
@@ -220,7 +218,8 @@
       'http',
       '$timeout',
       '$rootScope',
-      function ($scope, http, $timeout, $rootScope) {
+      'lang',
+      function ($scope, http, $timeout, $rootScope, lang) {
         console.log('Home controller...');
 
         // Set carousel element
@@ -301,7 +300,8 @@
       '$rootScope',
       'http',
       '$timeout',
-      function ($scope, $rootScope, http, $timeout) {
+      'lang',
+      function ($scope, $rootScope, http, $timeout, lang) {
         console.log('Service controller...');
 
         // Menues tab
@@ -489,7 +489,8 @@
       '$rootScope',
       'http',
       '$timeout',
-      function ($scope, $rootScope, http, $timeout) {
+      'lang',
+      function ($scope, $rootScope, http, $timeout, lang) {
         console.log('webshop controller...');
 
         $scope.products = [];
@@ -571,11 +572,11 @@
     .controller('loginController', [
       '$scope',
       '$rootScope',
-      'util',
       'user',
       'http',
       '$state',
-      function ($scope, $rootScope, util, user, http, $state) {
+      'lang',
+      function ($scope, $rootScope, user, http, $state, lang) {
        
         // handling modal windows
         $rootScope.loginModal = new bootstrap.Modal(
@@ -641,9 +642,9 @@
       '$rootScope',
       'util',
       'http',
-      'user',
       '$timeout',
-      function ($scope, $rootScope, util, http, user, $timeout) {
+      'lang',
+      function ($scope, $rootScope, util, http, $timeout, lang) {
         // handling modal windows
         $rootScope.registerModal = new bootstrap.Modal(
           document.getElementById('registerModal'),
@@ -803,7 +804,8 @@
       'user',
       '$timeout',
       '$state',
-      function ($scope, $rootScope, util, http, user, $timeout, $state) {
+      'lang',
+      function ($scope, $rootScope, util, http, user, $timeout, $state, lang) {
         console.log('profile controller...');
 
         //check user
@@ -1032,7 +1034,8 @@
       '$rootScope',
       'util',
       'http',
-      function ($scope, $rootScope, util, http) {
+      'lang',
+      function ($scope, $rootScope, util, http, lang) {
         console.log('order controller...');
 
         $scope.shipping = 1250;
