@@ -60,6 +60,7 @@
             url: '/order',
             templateUrl: './html/order.html',
             controller: 'orderController',
+          })
           .state('cart', {
             url: '/cart',
             templateUrl: './html/cart.html',
@@ -631,7 +632,6 @@
               data: data,
             })
             .then((response) => {
-              console.log(response);
               $scope.model.email = response.email;
               user.set(response);
               $scope.$applyAsync();
@@ -1136,7 +1136,7 @@
             });
         };
       },
-    ]);
+    ])
 
     //emailChange controller
     .controller('emailChangeController', [
@@ -1215,5 +1215,5 @@
       function ($scope, $rootScope, http, $state) {
         console.log('password Change Controller...');
       },
-    ])
+    ]);
 })(window, angular);
