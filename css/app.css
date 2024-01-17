@@ -11,15 +11,16 @@
   --color-quinary: #D1D1FF;
 }
 
-/* Basic fonts (Open Sans) body bg image */
+/* Basic fonts (Open Sans) body bg color */
 body {
-    font-family: 'Open Sans', sans-serif !important;
-    color: var(--color-primary) !important;
+  font-family: 'Open Sans', sans-serif !important;
+  color: var(--color-primary) !important;
 }
+
 /* Header fonts (Poppins) */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif !important;
-    color: var(--color-primary);
+  font-family: 'Poppins', sans-serif !important;
+  color: var(--color-primary);
 }
 .bg-quinary{
   background-color:  var(--color-quinary);
@@ -45,7 +46,10 @@ main {
   margin: 80px 70px;
   background-color: rgba(255, 255, 255, .4);
 }
-a, input::-webkit-calendar-picker-indicator, #date, select {
+a, 
+input::-webkit-calendar-picker-indicator, 
+#date, select,
+.custom-btn {
   cursor: pointer;
 }
 a[disabled] {
@@ -65,9 +69,7 @@ a[disabled] {
   background-color:white;
 }
 .small-ratings{
-    
   color:#cecece;
-  
 }
 .rating-color{
   color:#fbc634 !important;
@@ -92,6 +94,11 @@ option[disabled]{
 .fluss_span
 {
   background-color: rgba(112, 152, 181, 0.678);
+}
+.webshop-image{
+  height: 200px;
+  max-width: 100%;
+  object-fit: scale-down;
 }
 .background-image{
   position: fixed;

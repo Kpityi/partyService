@@ -19,7 +19,7 @@ $query = "SELECT 	`id`,
 									`user_role_id`,
 									`first_name`,
 									`last_name`,
-									`gender_id` As `gender`, 
+									`gender_id` 		 As `gender`, 
 									BASE64_ENCODE(`img`) AS `img`,
 									`img_type`,
 									`email`,
@@ -37,7 +37,7 @@ $result = $db->execute($query, array($args['email']));
 if (is_null($result)) {
 
 	// Set error
-	Util::setError('the user does not exist', $db);
+	Util::setError('user_not_exist', $db);
 }
 
 // Simplify result
@@ -63,7 +63,7 @@ if (!password_verify($args['password'], $result['password'])) {
 	// Set query
 	$query = 	"UPDATE `users` 
 								SET `wrong_attempts` = `wrong_attempts` + 1
-							WHERE `id` = ?;";
+								WHERE `id` = ?;";
 
 	// Execute query with arguments
 	$success = $db->execute($query, array($result['id']));
@@ -71,7 +71,7 @@ if (!password_verify($args['password'], $result['password'])) {
 	// Set error
 	if ($success['affectedRows'])
 				Util::setError('incorrect password', $db);
-	else	Util::setError('failed to increase retries', $db);
+	else		Util::setError('failed to increase retries', $db);
 }
 
 // Unset not necessary key(s)
@@ -85,11 +85,11 @@ unset(
 $query = 	"UPDATE `users` 
 							SET `last_login` = :dateNow,
 									`wrong_attempts` = 0
-						WHERE `id` = :id;";
+							WHERE `id` = :id;";
 
 // Execute query with arguments
 $success = $db->execute($query, array(
-	"dateNow" => date("Y-m-d H:i:s"), 
+	"dateNow" 		=> date("Y-m-d H:i:s"), 
 	"id" 			=> $result['id']
 ));
 

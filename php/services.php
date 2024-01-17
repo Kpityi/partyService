@@ -31,7 +31,7 @@ $eventPlaces= $db->execute($query);
 $db = null;
 
 $result =array(
-      'eventTypes' => $eventTypes,
+      'eventTypes'  => $eventTypes,
       'eventPlaces' => $eventPlaces);
 
 // Set response

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{lang_id}}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{thank_order}}</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      td {
+        padding: 0.2rem 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <img height="60"
+           alt="logo"
+           src="cid:logoimg"
+           style="display: inline; vertical-align: middle">
+      <h3>{{dear}} {{user_name}}!</h3>
+    </div>
+    <div>
+      <p>
+        <span>{{thank_order}}</span>
+      </p>
+      <div style="margin-bottom: 5px">{{table-content}}</div>
+      <table>
+        <tr>
+          <td style="text-transform: capitalize; font-weight: bold">
+            {{shipping}}:
+          </td>
+          <td>{{shipping_cost}}</td>
+        </tr>
+        <tr>
+          <td style="text-transform: capitalize; font-weight: bold">
+            {{total}}:
+          </td>
+          <td>{{total_price}}</td>
+        </tr>
+      </table>
+      <hr>
+      <p>{{current_date}}</p>
+    </div>
+  </body>
+</html>
