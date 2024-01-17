@@ -20,8 +20,8 @@ $query = "SELECT `product_name`,
                  `quantity`, 
                  `order_date`,
                  `order_id`
-          FROM `orders`  
-          WHERE `user_id` = :id";
+          FROM   `orders`  
+          WHERE  `user_id` = :id";
 
 // Execute query with argument
 $result = $db->execute($query, $args);

@@ -66,9 +66,19 @@ if (count($args["cart"])) {
 	foreach(array_keys($args["cart"][0]) as $key) {
 		$langData["{{".$key."}}"] = $key;
 	}
+	foreach($args["cart"] as $item){
+		foreach(array_keys($item) as $key){
+			$langData["{{".$item[$key]."}}"] = $item[$key];
+		}
+	}
 }
-$langData["{{succesful_order}}"] = "succesful_order";
-$langData["{{order_number}}"] = "order_number";
+
+$langData["{{succesful_order}}"] 	= "succesful_order";
+$langData["{{order_number}}"] 		= "order_number";
+$langData["{{dear}}"] 						= "dear";
+$langData["{{thank_order}}"] 			= "thank_order";
+$langData["{{shipping}}"] 				= "shipping";
+$langData["{{total}}"] 						= "total";
 
 // Merge language with constants
 $langData = $lang->translate($langData);
@@ -112,7 +122,7 @@ try {
   $phpMailer->Subject 	= $langData["{{succesful_order}}"];
   $phpMailer->Body 		= $phpMailer->getDocument();
   $phpMailer->addAddress($args['email'], 
-                         $langData["{{username}}"]);
+                         $langData["{{user_name}}"]);
 
 	// Send email
   $phpMailer->send();

@@ -28,7 +28,7 @@ function createTable($orderNumber, $order, &$html, $message=null) {
         foreach(array_keys($item) as $key) {
           if($key !=='id'){
             $html .= 
-              "<td>$item[$key]</td>";
+              ("<td>{{".$item[$key]."}}</td>");
           }
         }
         $html .= "</tr>";        

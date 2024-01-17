@@ -24,10 +24,10 @@ $errorMsg = $lang->translate(Email::$errorMessages);
 
 // Set constants data
 $constants = array(
-	"{{lang_id}}" 			=> $args['lang']['id'],
-  	"{{user_email}}"        => $args['email'],
-	"{{message}}" 			=> $args['message'],
-	"{{current_date}}" 		=> date("Y-m-d"),
+	"{{lang_id}}"					=> $args['lang']['id'],
+  "{{user_email}}"			=> $args['email'],
+	"{{message}}"					=> $args['message'],
+	"{{current_date}}"		=> date("Y-m-d"),
   
 );
 

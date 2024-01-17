@@ -64,7 +64,7 @@ try {
 
 	// Add rest properties
   $phpMailer->Subject 	= $langData["{{succesful_reservation}}"];
-  $phpMailer->Body 		= $phpMailer->getDocument();
+  $phpMailer->Body 			= $phpMailer->getDocument();
   $phpMailer->addAddress($args['email'], 
                          $langData["{{user_name}}"]);
 
