@@ -47,7 +47,7 @@ $result = $result[0];
 if (!$result['valid']) {
 
 	// Set error
-	Util::setError('the user is disabled', $db);
+	Util::setError('the_user_is_disabled', $db);
 }
 
 // Check the number of attempts
@@ -70,8 +70,8 @@ if (!password_verify($args['password'], $result['password'])) {
 
 	// Set error
 	if ($success['affectedRows'])
-				Util::setError('incorrect password', $db);
-	else		Util::setError('failed to increase retries', $db);
+				Util::setError('password_incorrect', $db);
+	else		Util::setError('failed_to_increase_retries', $db);
 }
 
 // Unset not necessary key(s)
@@ -90,7 +90,7 @@ $query = 	"UPDATE `users`
 // Execute query with arguments
 $success = $db->execute($query, array(
 	"dateNow" 		=> date("Y-m-d H:i:s"), 
-	"id" 			=> $result['id']
+	"id" 					=> $result['id']
 ));
 
 // Close connection
@@ -100,7 +100,7 @@ $db = null;
 if (!$success['affectedRows']) {
 
 	// Set error
-	Util::setError('failed to administer login');
+	Util::setError('failed_to_administer_login');
 }
 
 // Set response
