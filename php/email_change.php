@@ -26,11 +26,11 @@ $result = $db->execute($query, array(
               'email' => $args['email']
           ));
 //Check email exist  
-// if (!is_null($result))
-// {
-//     //Set error
-//     Util::setError("user_email_already_exists");
-// }
+if (!is_null($result))
+{
+    //Set error
+    Util::setError("user_email_already_exists");
+}
 
 // Set query
 $query = "UPDATE `users`
@@ -42,7 +42,11 @@ $query = "UPDATE `users`
 $args['modified'] = date("Y-m-d H:i:s");
 
 // Execute query with argument
-$result = $db->execute($query, $args);
+$result = $db->execute($query, array(
+       'email'       => $args['email'],
+       'modified'    =>$args['modified'],
+       'userId'      =>$args['userId']
+   ));
 $result['success'] = "email_changed"; 
 
 // Close connection

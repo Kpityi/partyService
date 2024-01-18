@@ -144,7 +144,6 @@
                 <!--Save -->
                 <button id="accept"
                         type="button"
-                        ng-show="!helper.isEdit"
                         class="btn btn-primary text-capitalize w-auto me-2"
                         ng-click="accept()"
                         ng-disabled="changeEmailForm.$invalid">
@@ -153,7 +152,6 @@
   
                 <!-- Cancel -->
                 <button type="button"
-                        ng-show="!helper.isEdit"
                         class="btn btn-secondary text-capitalize w-auto "
                         ng-click="cancel()">
                   {{'cancel' | translate:lang.data}}

@@ -1269,11 +1269,11 @@
             },
           })
           .then(response => {
-            alert(lang.translate(response.success, true));            
+            alert(lang.translate(response.success, true)); 
+            $state.go('profie')           
           }) 
           // Error
-          .catch(e => {
-  
+          .catch(e => {  
             // Reset asynchronous, and show error
             alert(lang.translate(e, true));
           });  
@@ -1297,8 +1297,69 @@
       '$rootScope',
       'http',
       '$state',
-      function ($scope, $rootScope, http, $state) {
+      'lang',
+      function ($scope, $rootScope, http, $state, lang) {
         console.log('password Change Controller...');
+
+        if (!$rootScope.user.id)
+        {
+          $state.go('home');
+        }
+        $scope.values = {
+          oldPassword : null, 
+          newPassword : null,
+          newPasswordConfirm : null
+        };
+
+        $scope.validatePasswordConfirm = () => {
+          const { newPassword , newPasswordConfirm } = $scope.values;
+          $scope.changePasswordForm.newPasswordConfirm.$setValidity(
+            'passwordMismatch',
+            newPassword === newPasswordConfirm
+          );
+        };
+
+        $scope.inputType = 'password';
+
+        $scope.showHide = () => {
+          $scope.inputType =
+            $scope.showHidePassword == true ? 'password' : 'text';
+          $scope.$applyAsync();
+        };
+        //Scope accept
+        $scope.accept = () => {
+          let {id, type} = $rootScope.lang;
+          
+          // Http request
+          http.request({
+            url   : `./php/password_change.php`,
+            method: 'POST',
+            data  : {
+              userId: $rootScope.user.id,
+              oldPassword: $scope.values.oldPassword,
+              newPassword: $scope.values.newPassword
+            },
+          })
+          .then(response => {
+            alert(lang.translate(response.success, true)); 
+            $state.go('profie')           
+          }) 
+          // Error
+          .catch(e => {  
+            // Reset asynchronous, and show error
+            alert(lang.translate(e, true));
+          });  
+        }
+
+        //scope cancel
+        $scope.cancel=()=>{
+          $scope.values = {
+            oldPassword : null,
+            newPassword : null,
+            newPasswordConfirm : null
+          };
+          $state.go('home');
+        }
       },
     ]);
 })(window, angular);
