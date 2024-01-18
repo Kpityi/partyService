@@ -5,6 +5,15 @@
   angular
     .module('app', ['ui.router', 'app.common', 'app.language', 'app.form'])
 
+    .filter('orderNumber', [
+      () => {
+        return (str) => {
+          return str.replaceAll('-', '/') + '/';
+        }
+      }
+    ])
+
+
     //file model
     .directive('fileModel', [
       '$parse',
