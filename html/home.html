@@ -1,17 +1,21 @@
 <div class="page-container">
-  <!-- Header -->
-  <div
-    class="header-image-container"
-    ng-include
-    src="'./html/headerimage.html'"
-  ></div>
+  
+  <!-- header image -->
+  <div class="header-image-container"
+       ng-include src="'./html/headerimage.html'" >
+  </div>
 
-  <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
+  <!-- navigation bar -->
+  <header class="sticky-top" 
+          ng-include src="'./html/navigate.html'">
+  </header>
 
+  <!-- login modal page -->
   <div ng-include src="'./html/loginModal.html'"></div>
 
   <!-- Main Container -->
   <main class="container my-4 pb-2">
+
     <!-- Welcome Text -->
     <h1 class="text-center pt-4 mb-2">{{'welcoming' | translate:lang.data}}</h1>
     
@@ -22,28 +26,26 @@
     <section class="card bg-quinary mb-3 mx-auto">
       <div class="row g-0">
         <div class="col-12 col-lg-5 col-xl-4 m-auto">
-          <img
-            src="./media/image/BackGroundImages/pexels-photo-3171770.jpeg"
-            class="img-fluid rounded p-2 d-md-none d-lg-block"
-            alt="party image"
-          />
-          <img
-            src="./media/image/pexels-photo-3171837.jpeg"
-            class="img-fluid rounded p-2 d-none d-md-block d-lg-none"
-            alt="party image"
-          />
+
+          <img src="./media/image/BackGroundImages/pexels-photo-3171770.jpeg"
+               class="img-fluid rounded p-2 d-md-none d-lg-block"
+               alt="party image">
+
+          <img src="./media/image/pexels-photo-3171837.jpeg"
+               class="img-fluid rounded p-2 d-none d-md-block d-lg-none"
+               alt="party image">
         </div>
+
         <!-- Card Titles -->
         <div class="col-12 col-lg-7 col-xl-8">
           <div class="card-body ms-3">
             <h3 class="card-title mb-4">{{'imagine' | translate:lang.data}}</h3>
             <p class="card-text fw-bold">{{'offer' | translate:lang.data}}</p>
-            <p class="card-text fw-bold">
-              {{'offer_p2' | translate:lang.data}}
-            </p>
+            <p class="card-text fw-bold">{{'offer_p2' | translate:lang.data}}</p>
 
             <!-- Lets See Button -->
-            <a ui-sref="services" class="btn btn-primary mt-3 text-capitalize">
+            <a ui-sref="services" 
+               class="btn btn-primary mt-3 text-capitalize">
               {{'lets_see' | translate:lang.data}}!
             </a>
           </div>
@@ -52,22 +54,23 @@
     </section>
 
     <!-- Carousel -->
-    <div id="homeCarousel" class="carousel slide w-75 mx-auto" data-bs-ride="carousel">
+    <div id="homeCarousel" 
+         class="carousel slide w-75 mx-auto" 
+         data-bs-ride="carousel">
       <div class="carousel-inner">
-        <div
-          class="carousel-item"
-          ng-class="{active: $index===0}"
-          ng-repeat="image in images track by $index"
-        >
-          <img ng-src="{{image}}" class="d-block w-100" alt="{{image}}" />
+        <div class="carousel-item"
+             ng-class="{active: $index===0}"
+             ng-repeat="image in images track by $index">
+          <img ng-src="{{image}}" 
+               class="d-block w-100" 
+               alt="{{image}}">
         </div>
 
         <!-- Buttons -->
         <button class="carousel-control-prev" 
                 type="button" 
                 data-bs-target="#homeCarousel" 
-                data-bs-slide="prev"
-        >
+                data-bs-slide="prev">
           <span class="carousel-control-prev-icon" 
                 aria-hidden="true">
           </span>
@@ -77,8 +80,7 @@
         <button class="carousel-control-next" 
                 type="button" 
                 data-bs-target="#homeCarousel" 
-                data-bs-slide="next"
-        >
+                data-bs-slide="next">
           <span class="carousel-control-next-icon" 
                 aria-hidden="true">
           </span>
@@ -87,23 +89,23 @@
       </div>
 
       <!-- Buttons -->
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#homeCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"> </span>
+      <button class="carousel-control-prev"
+              type="button"
+              data-bs-target="#homeCarousel"
+              data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" 
+              aria-hidden="true"> 
+        </span>
         <span class="visually-hidden">Previous</span>
       </button>
 
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#homeCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"> </span>
+      <button class="carousel-control-next"
+              type="button"
+              data-bs-target="#homeCarousel"
+              data-bs-slide="next">
+        <span class="carousel-control-next-icon" 
+              aria-hidden="true"> 
+        </span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
@@ -118,16 +120,14 @@
         <div class="mt-2">
           <div class="row">
             <div class="col-12 col-md-6 col-xl-4 ps-xl-4">
-              <img
-                class="img-fluid d-md-none d-lg-block"
-                src="./media/image/PageImages/pexels-fauxels-3184183.jpg"
-                alt="au_img"
-              />
-              <img
-                class="img-fluid d-none d-md-block d-lg-none ms-2"
-                src="./media/image/BackGroundImages/pexels-taha-samet-arslan-7711150.jpg"
-                alt="au2_img"
-              />
+              
+              <img class="img-fluid d-md-none d-lg-block"
+                   src="./media/image/PageImages/pexels-fauxels-3184183.jpg"
+                   alt="au_img">
+
+              <img class="img-fluid d-none d-md-block d-lg-none ms-2"
+                   src="./media/image/BackGroundImages/pexels-taha-samet-arslan-7711150.jpg"
+                   alt="au2_img">
             </div>
             <div class="col-12 col-md-6 col-xl-8">
               <p class="text-justify me-3 mt-2 mt-md-0 ms-2 ms-md-0">
@@ -146,7 +146,7 @@
       </div>
     </section>
 
-    <hr class="text-muted py-2" />
+    <hr class="text-muted py-2">
 
     <!-- Why Choose Us -->
     <section class="wrapper mb-2">
@@ -172,7 +172,7 @@
                   class="d-inline-block mx-2  opacity-25"
                   ng-repeat="x in [].constructor(5) track by $index"
                   ng-click="clicked($event)"
-                  ng-class="{'rating-color': $index + 1 <= ratingData.rating}">
+                  ng-class="{'rating-color': $index + 1 &lt;= ratingData.rating}">
                   <i class="fa-solid fa-star fa-2xl"></i>
               </li>
             </ul>
@@ -180,53 +180,56 @@
 
             <!-- Description Card -->
             <div class="card-body text-primary">
-              <p class="justify-content-center">{{'from_your_point_of_view' | translate:lang.data}}</p>
+              <p class="justify-content-center">
+                {{'from_your_point_of_view' | translate:lang.data}}
+              </p>
               
               <!-- Description Label -->
               <div class="mb-3 row">
                 <label for="inputrating" 
-                      class="col-sm-2 col-form-label"
-                      >{{'r_u_description' | translate:lang.data}}
+                       class="col-sm-2 col-form-label">
+                  {{'r_u_description' | translate:lang.data}}
                 </label>
                 <div class="col-sm-10">
                   <textarea ng-model="ratingData.ratingText"
-                        rows="4"
-                        class="form-control" 
-                        id="inputrating"
-                        name="ratingText"
-                        required
-                        >
-                    </textarea>
-                    {{test}}
-                    
+                            rows="4"
+                            class="form-control" 
+                            id="inputrating"
+                            name="ratingText"
+                            required>
+                  </textarea>                  
                 </div>
               </div>
             </div>
           
             <!-- Send Rate Button -->
             <button class="btn btn-primary text-capitalize my-2 w-50 mx-auto" 
-                    ng-disabled="((ratingForm.ratingText.$invalid) || (!ratingData.rating))"
+                    ng-disabled="((ratingForm.ratingText.$invalid) || 
+                                  (!ratingData.rating))"
                     ng-click="send()">
-                    {{'send' | translate:lang.data}}
+              {{'send' | translate:lang.data}}
             </button>
-        </div>
-      
+        </div>      
       </form>
     </section>
 
     <hr class="text-muted py-2">
 
-
     <!-- rating card with footers -->
     <section class="wrapper px-2 mb-2 pb-2">
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col" ng-repeat="rating in ratings">
+        <div class="col" 
+             ng-repeat="rating in ratings">
           <div class="card h-100">
+            
             <!-- Image -->
             <div
-              class="bg-img bg-img-cover overflow-hidden rounded-circle card-img-top mx-auto mt-2"
+              class="bg-img bg-img-cover overflow-hidden 
+                     rounded-circle card-img-top mx-auto mt-2"
               style="width: 50px; height: 50px"
-              ng-style="{'background-image':rating.img_type?'url(data:'+rating.img_type+';base64,'+rating.img+')':'url('+app.commonPath+'media/image/blank/'+(rating.gender_id===2?'fe':'')+'male-blank.webp)'}">
+              ng-style="{'background-image':rating.img_type?
+                          'url(data:'+rating.img_type+';base64,'+rating.img+')':
+                          'url('+app.commonPath+'media/image/blank/'+(rating.gender_id===2?'fe':'')+'male-blank.webp)'}">
             </div>
 
             <!-- Del.Rat. from php -->
@@ -236,16 +239,13 @@
               </h6>
 
               <!-- Rating stars -->
-              <div
-                class="d-flex justify-content-between align-items-center"
-                ng-init="stars = [1,2,3,4,5]"
-              >
+              <div class="d-flex justify-content-between align-items-center"
+                   ng-init="stars = [1,2,3,4,5]">
                 <div class="small-ratings mx-auto mb-2">
-                  <i
-                    class="fa fa-star"
-                    ng-repeat="star in stars"
-                    ng-class="{'rating-color': rating.rating >= star}"
-                  ></i>
+                  <i class="fa fa-star"
+                     ng-repeat="star in stars"
+                     ng-class="{'rating-color': rating.rating >= star}">
+                  </i>
                 </div>
               </div>
 
@@ -264,6 +264,7 @@
       </div>
     </section>
   </main>
-
+  
+  <!-- Footer section -->
   <footer ng-include src="'./html/footer.html'"></footer>
 </div>

@@ -1,17 +1,49 @@
 <div class="page-container">
-  <div
-    class="header-image-container"
-    ng-include
-    src="'./html/headerimage.html'"
-  ></div>
+  <!-- header image -->
+  <div class="header-image-container"
+       ng-include src="'./html/headerimage.html'">
+  </div>
 
+  <!-- menu -->
   <header class="sticky-top" ng-include src="'./html/navigate.html'"></header>
+
+  <!-- include login page -->
   <div ng-include src="'./html/loginModal.html'"></div>
 
+  <!-- Main -->
   <main>
-    <h1 class="text-center py-4">Webshop</h1>
-    <body class="bg-light"> 
+    <h1 class="text-center py-4 text-capitalize">{{'products' | translate:lang.data}}</h1>
+    
+    <!-- Products card -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 mx-2">
+      <div class="col" ng-repeat = "product in products track by $index">
+        <div class="card h-100 mx-auto shadow rounded" style="max-width: 400px">
+          <div class="card-image m-2">
+            <img ng-src="./media/image/products/{{product.image}}" 
+                 class="card-img-top webshop-image" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title letter-capitalize">
+              {{product.product_name | translate:lang.data}}
+            </h5>
+            <p class="card-text">{{product.description | translate:lang.data}}</p>
+            <p class="card-text d-flex justify-content-between me-2">
+              <span class="text-capitalize fw-bold">
+                {{'price' | translate:lang.data}}:
+              </span>
+              <span class="fw-bold text-danger">{{product.price}} Ft/db</span>
+            </p>
+          </div>
+          <div class="mx-auto mb-2">
+            <button class="btn btn-primary text-center" 
+                    ng-click = "addToCart(product)">kosárba</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
   </main>
 
+  <!-- Footer section -->
   <footer ng-include src="'./html/footer.html'"></footer>
 </div>

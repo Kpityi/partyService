@@ -29,7 +29,7 @@ $query 	= "UPDATE `users`
 						 			`postcode` 			= :postcode,
 						 			`address` 			= :address,
 						 			`modified`			= :modified
-						WHERE `id` = :id";
+							WHERE `id` = :id";
 
 // Check image exist
 if ($args['img']) {

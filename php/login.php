@@ -19,7 +19,7 @@ $query = "SELECT 	`id`,
 									`user_role_id`,
 									`first_name`,
 									`last_name`,
-									`gender_id` As `gender`, 
+									`gender_id` 		 As `gender`, 
 									BASE64_ENCODE(`img`) AS `img`,
 									`img_type`,
 									`email`,
@@ -37,7 +37,7 @@ $result = $db->execute($query, array($args['email']));
 if (is_null($result)) {
 
 	// Set error
-	Util::setError('the user does not exist', $db);
+	Util::setError('user_not_exist', $db);
 }
 
 // Simplify result
@@ -47,7 +47,7 @@ $result = $result[0];
 if (!$result['valid']) {
 
 	// Set error
-	Util::setError('the user is disabled', $db);
+	Util::setError('the_user_is_disabled', $db);
 }
 
 // Check the number of attempts
@@ -63,15 +63,15 @@ if (!password_verify($args['password'], $result['password'])) {
 	// Set query
 	$query = 	"UPDATE `users` 
 								SET `wrong_attempts` = `wrong_attempts` + 1
-							WHERE `id` = ?;";
+								WHERE `id` = ?;";
 
 	// Execute query with arguments
 	$success = $db->execute($query, array($result['id']));
 
 	// Set error
 	if ($success['affectedRows'])
-				Util::setError('incorrect password', $db);
-	else	Util::setError('failed to increase retries', $db);
+				Util::setError('password_incorrect', $db);
+	else		Util::setError('failed_to_increase_retries', $db);
 }
 
 // Unset not necessary key(s)
@@ -85,12 +85,12 @@ unset(
 $query = 	"UPDATE `users` 
 							SET `last_login` = :dateNow,
 									`wrong_attempts` = 0
-						WHERE `id` = :id;";
+							WHERE `id` = :id;";
 
 // Execute query with arguments
 $success = $db->execute($query, array(
-	"dateNow" => date("Y-m-d H:i:s"), 
-	"id" 			=> $result['id']
+	"dateNow" 		=> date("Y-m-d H:i:s"), 
+	"id" 					=> $result['id']
 ));
 
 // Close connection
@@ -100,7 +100,7 @@ $db = null;
 if (!$success['affectedRows']) {
 
 	// Set error
-	Util::setError('failed to administer login');
+	Util::setError('failed_to_administer_login');
 }
 
 // Set response
