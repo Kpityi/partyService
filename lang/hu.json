@@ -80,7 +80,7 @@
   "password_change_it_soon": "kérjük, a lehető leghamarabb változtassa meg jelszavát",
   "email_do_not_reply": "ez egy automatikus e-mail, kérem, ne válaszoljon",
   "email_send_failed": "email küldése sikertelen",
-  "email_sent_succesfull": "email küldése sikeres",
+  "email_sent_succesful": "email küldése sikeres",
   "email_crete_failed": "email létrehozása sikertelen",
   "user_id_email_not_match": "a felhasználói azonosító nem egyezik az email címmel",
   "user_email_already_exist": "már van egy felhasználó ezzel az email címmel",

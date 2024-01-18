@@ -75,5 +75,5 @@ $db = null;
 // Set response
 Util::setResponse($result);
 
-//echo  $result;
+
 

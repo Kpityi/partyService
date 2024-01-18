@@ -80,7 +80,7 @@
   "password_change_it_soon": "please change your password as soon as possible",
   "email_do_not_reply": "this is an automatic email, please do not reply",
   "email_send_failed": "sending email failed",
-  "email_sent_succesfull": "email sent successful",
+  "email_sent_succesful": "email sent successful",
   "email_crete_failed": "email create failed",
   "user_id_email_not_match": "the user identifier does not match the email address",
   "user_email_already_exist": "there is already a user with this email address",

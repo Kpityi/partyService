@@ -263,7 +263,6 @@
           })
           .catch((e) => {
             // Resolve completed, and show error
-
             $timeout(() => alert(lang.translate(e, true)));
           });
 
@@ -452,7 +451,6 @@
 
               // Check success
               if (response.affectedRows) {
-                console.log(response.lastInsertId);
                 $scope.$applyAsync();
                 let { id, type } = $rootScope.lang;
                 http
@@ -471,7 +469,6 @@
                 .catch((error) => {
                   $timeout(() => alert(lang.translate(error, true)), 50);
                 });
-                alert(`Reservation succesfull,  ${response.lastInsertId}`);
                 $scope.reservationData = angular.copy(
                   $scope.originalReservationData
                   );
@@ -1109,7 +1106,7 @@
               },
             })
             .then((response) => {
-              if(response=="email_sent_succesfull")
+              if(response=="email_sent_succesful")
               {
                 alert(lang.translate("succesful_order", true));
                 $rootScope.cart=[];

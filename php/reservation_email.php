@@ -82,7 +82,7 @@ try {
 $phpMailer = null;
 
 // Set response
-Util::setResponse('email_sent_succesfull');
+Util::setResponse('email_sent_succesful');
 
  
  
