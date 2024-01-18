@@ -1221,5 +1221,84 @@
             });
         };
       },
+    ])
+
+    //emailChange controller
+    .controller('emailChangeController', [
+      '$scope',
+      '$rootScope',
+      'http',
+      '$state',
+      'lang',
+      function ($scope, $rootScope, http, $state, lang) {
+        console.log('email Change Controller...');
+        if (!$rootScope.user.id)
+        {
+          $state.go('home');
+        }
+        $scope.values = {
+          oldEmail : $rootScope.user.email, 
+          newEmail : null,
+          newEmailConfirm : null
+        };
+
+      // Validate new email confirm  
+        $scope.validateEmailConfirm = () => {          
+          const { oldEmail, newEmail, newEmailConfirm } = $scope.values;          
+          $scope.changeEmailForm.newEmailConfirm.$setValidity(
+            'emailMismatch',
+            newEmail === newEmailConfirm && oldEmail !== newEmail && newEmailConfirm !== oldEmail
+          )
+          $scope.changeEmailForm.newEmail.$setValidity(
+            'emailMismatch',
+           oldEmail !== newEmail 
+          )
+        };
+        //Scope accept
+        $scope.accept = () => {
+          let {id, type} = $rootScope.lang;
+          
+          // Http request
+          http.request({
+            url   : `./php/email_change.php`,
+            method: 'POST',
+            data  : {
+              userId: $rootScope.user.id,
+              lang: {id, type},
+              email: $scope.values.newEmail
+            },
+          })
+          .then(response => {
+            alert(lang.translate(response.success, true));            
+          }) 
+          // Error
+          .catch(e => {
+  
+            // Reset asynchronous, and show error
+            alert(lang.translate(e, true));
+          });  
+        }
+
+        //scope cancel
+        $scope.cancel=()=>{
+          $scope.values = {
+            oldEmail : $rootScope.user.email, 
+            newEmail : null,
+            newEmailConfirm : null
+          };
+          $state.go('home');
+        }
+      },
+    ])
+
+    //passwordChange controller
+    .controller('passwordChangeController', [
+      '$scope',
+      '$rootScope',
+      'http',
+      '$state',
+      function ($scope, $rootScope, http, $state) {
+        console.log('password Change Controller...');
+      },
     ]);
 })(window, angular);
