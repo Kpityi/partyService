@@ -215,6 +215,7 @@
   "p_m": "Project Manager",
   "cart": "Cart",
   "price": "price",
+  "quantity": "quantity",
   "cart_contents": "cart contents",
   "billing_address": "Billing address",
   "user_name": "User name",

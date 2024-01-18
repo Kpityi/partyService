@@ -85,10 +85,10 @@ $langData = $lang->translate($langData);
 
 createTable($result['order_id'], $args["cart"], $constants["{{table-content}}"]);
 
-$langData = Util::objMerge($langData, $constants);
-
 $constants["{{table-content}}"] = 
-	strtr($constants["{{table-content}}"], $langData);
+strtr($constants["{{table-content}}"], $langData);
+
+$langData = Util::objMerge($langData, $constants);
 
 // Create email
 $phpMailer = new Email($lang);

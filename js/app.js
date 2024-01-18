@@ -151,7 +151,7 @@
           reset: () => {
             return new Promise((resolve) => {
               Object.keys(user.base).forEach((k) => {
-                if (k !== 'email') $rootScope.user[k] = null;
+                $rootScope.user[k] = null;
               });
               $timeout(() => {
                 $rootScope.$applyAsync();
@@ -204,6 +204,7 @@
           if (confirm('Biztosan kijelentkezik?')) {
             // Reset user
             user.reset().then(() => {
+              console.log ($rootScope.user.email)
               // Go to login
               $state.go('home');
             });
@@ -617,7 +618,6 @@
               data: data,
             })
             .then((response) => {
-              console.log(response);
               $scope.model.email = response.email;
               user.set(response);
               $scope.$applyAsync();

@@ -10,13 +10,15 @@ function createTable($orderNumber, $order, &$html, $message=null) {
       "<table>
         <thead>
           <tr>
-            <th>
+            <th colspan='3' style='background: black; color: white'>
              {{order_number}}: $orderNumber
-            </th>";
+            </th>
+          </tr>
+          <tr>";
             foreach(array_keys($order[0]) as $key) {
               if($key !=='id'){
                 $html .= 
-                  ("<th>{{".$key."}}</th>");
+                  "<th>{{".$key."}}</th>";
               }
             }
     $html .= 
@@ -27,8 +29,24 @@ function createTable($orderNumber, $order, &$html, $message=null) {
         $html .= "<tr>";
         foreach(array_keys($item) as $key) {
           if($key !=='id'){
-            $html .= 
-              ("<td>{{".$item[$key]."}}</td>");
+            switch ($key){
+              case 'ár':
+              case 'price':
+              case 'Preis':
+                $html .= 
+              "<td>{{".$item[$key]."}} Ft</td>";
+                break;
+                case 'mennyiség':
+                case 'quantity':
+                case 'Menge':
+                  $html .= 
+                "<td style='text-align: right;'>{{".$item[$key]."}} db</td>";
+                  break;
+                  default:
+                    $html .= 
+                      "<td>{{".$item[$key]."}}</td>";
+                    break;
+            }
           }
         }
         $html .= "</tr>";        
