@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Jan 17. 20:56
--- Kiszolgáló verziója: 10.4.27-MariaDB
--- PHP verzió: 8.1.12
+-- Létrehozás ideje: 2024. Jan 18. 17:02
+-- Kiszolgáló verziója: 10.4.6-MariaDB
+-- PHP verzió: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +26,8 @@ DELIMITER $$
 --
 -- Függvények
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `BASE64_ENCODE` (`textIn` LONGBLOB) RETURNS LONGTEXT CHARSET utf8mb4 COLLATE utf8mb4_general_ci NO SQL BEGIN
+CREATE DEFINER=`root`@`localhost` FUNCTION `BASE64_ENCODE` (`textIn` LONGBLOB) RETURNS LONGTEXT CHARSET utf8mb4 NO SQL
+BEGIN
 /*
 	Convert blob to base64 text, remove start, end spaces,
 	newline, carriage return, and tab characters from text 
@@ -57,7 +59,7 @@ CREATE TABLE `dishes` (
   `description` varchar(20) NOT NULL,
   `dish_category_id` int(11) NOT NULL,
   `price` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `dishes`
@@ -93,7 +95,7 @@ INSERT INTO `dishes` (`id`, `name`, `description`, `dish_category_id`, `price`) 
 CREATE TABLE `dish_categories` (
   `id` int(1) UNSIGNED NOT NULL,
   `type` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `dish_categories`
@@ -126,7 +128,7 @@ CREATE TABLE `events` (
   `menu_id` int(11) DEFAULT NULL,
   `drink_package_id` int(1) DEFAULT NULL,
   `guests` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `events`
@@ -189,7 +191,7 @@ CREATE TABLE `event_places` (
   `id` int(1) UNSIGNED NOT NULL,
   `place_name` varchar(50) NOT NULL,
   `capacity` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `event_places`
@@ -210,7 +212,7 @@ INSERT INTO `event_places` (`id`, `place_name`, `capacity`) VALUES
 CREATE TABLE `event_types` (
   `id` int(10) NOT NULL,
   `name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `event_types`
@@ -235,7 +237,7 @@ INSERT INTO `event_types` (`id`, `name`) VALUES
 CREATE TABLE `genders` (
   `id` int(1) UNSIGNED NOT NULL,
   `name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `genders`
@@ -255,7 +257,7 @@ CREATE TABLE `menus` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(50) NOT NULL,
   `event_type_id` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `menus`
@@ -288,7 +290,7 @@ CREATE TABLE `menu_dishes` (
   `id` int(3) UNSIGNED NOT NULL,
   `menu_id` int(3) NOT NULL,
   `dish_id` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `menu_dishes`
@@ -354,7 +356,7 @@ CREATE TABLE `orders` (
   `price` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `orders`
@@ -465,7 +467,7 @@ CREATE TABLE `products` (
   `price` int(10) NOT NULL,
   `stock` int(10) NOT NULL,
   `is_stock` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `products`
@@ -527,7 +529,7 @@ CREATE TABLE `ratings` (
   `rating_text` text DEFAULT NULL,
   `rating_answer` text DEFAULT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `ratings`
@@ -571,7 +573,7 @@ CREATE TABLE `users` (
   `wrong_attempts` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
   `valid` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
   `verification_code` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `users`
@@ -617,7 +619,7 @@ INSERT INTO `users` (`id`, `user_role_id`, `last_name`, `first_name`, `born`, `g
 CREATE TABLE `user_roles` (
   `id` int(1) UNSIGNED NOT NULL,
   `name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- A tábla adatainak kiíratása `user_roles`
@@ -735,16 +737,64 @@ ALTER TABLE `events`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
+-- AUTO_INCREMENT a táblához `event_places`
+--
+ALTER TABLE `event_places`
+  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT a táblához `event_types`
+--
+ALTER TABLE `event_types`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT a táblához `genders`
+--
+ALTER TABLE `genders`
+  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT a táblához `menus`
+--
+ALTER TABLE `menus`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT a táblához `menu_dishes`
+--
+ALTER TABLE `menu_dishes`
+  MODIFY `id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
+--
 -- AUTO_INCREMENT a táblához `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
+-- AUTO_INCREMENT a táblához `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT a táblához `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT a táblához `user_roles`
+--
+ALTER TABLE `user_roles`
+  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
