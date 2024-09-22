@@ -44,7 +44,7 @@ function structure_menu_items($raw_result) {
 } 
 
 // Set environment
-require_once('../../common/php/environment.php');
+require_once('../common/php/environment.php');
 
 // Connect to database
 $db = new Database();

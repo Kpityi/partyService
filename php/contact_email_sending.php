@@ -9,7 +9,7 @@ use PHPMailer\Email as Email;
 
 // Set environment
 if (!isset($GLOBALS['___app___'])) 
-  require_once('../../common/php/environment.php');
+  require_once('../common/php/environment.php');
 
 
 
